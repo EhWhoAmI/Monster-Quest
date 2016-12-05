@@ -118,7 +118,9 @@ package Zyun.Lam.Game.MonsterQuest;
  *      playing this game.
  *      You have the right to distrubute this software, for free, and not 
  *      for personal profit.
- * 
+ *
+ * Other notes:
+ * Estimated finish date: March 2016, we will have something playable
  * Done!!!!!
  */ 
 
@@ -183,7 +185,7 @@ public class WindowMain extends JFrame implements WindowListener{
         window = new JFrame("Monster Quest");
         setLookAndFeel();
         //Read from startup setting file
-            File startupSettings = new File ("D:\\Zyun's Coding\\My Coding\\Monster Quest\\src\\Zyun\\Lam\\Game\\MonsterQuest\\resources\\Startup-Settings.xml");
+            File startupSettings = new File ("/resources/Startup-Settings.xml");
             if (!startupSettings.exists()){
                 new SystemLog("Startup settings does not exist");
                 //Do a patch for it
@@ -203,7 +205,9 @@ public class WindowMain extends JFrame implements WindowListener{
                 root.appendChild(fullscreen);
                 Element firstTimeSetupElement = new Element("firsttimesetup");
                 root.appendChild(firstTimeSetupElement);
-                
+                Element javaVersion = new Element ("java-version");
+                Attribute javaVersionValue = new Attribute ("value", System.getProperty ("java.version"));
+                javaVersion.addAttribute (javaVersionalue);
                 Document startupDocument = new Document(root);
                 try (FileWriter stupdoc = new FileWriter(startupSettings);
                     BufferedWriter out = new BufferedWriter(stupdoc);){

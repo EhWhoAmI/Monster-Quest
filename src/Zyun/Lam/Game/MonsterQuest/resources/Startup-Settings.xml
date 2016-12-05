@@ -10,4 +10,6 @@ and open the template in the editor.
    <fullscreen value="false"/>
    <firsttimesetup/>
    <version value="indev 1.0"/>
+   <!-- This will be checked every time the app starts, if it is out dated, an alert will show up.-->
+   <java-version value="1.8.0_111"/>
 </root>
