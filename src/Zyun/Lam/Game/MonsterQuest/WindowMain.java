@@ -207,7 +207,8 @@ public class WindowMain extends JFrame implements WindowListener{
                 root.appendChild(firstTimeSetupElement);
                 Element javaVersion = new Element ("java-version");
                 Attribute javaVersionValue = new Attribute ("value", System.getProperty ("java.version"));
-                javaVersion.addAttribute (javaVersionalue);
+                javaVersion.addAttribute (javaVersionValue);
+                root.appendChild (javaVersion);
                 Document startupDocument = new Document(root);
                 try (FileWriter stupdoc = new FileWriter(startupSettings);
                     BufferedWriter out = new BufferedWriter(stupdoc);){
