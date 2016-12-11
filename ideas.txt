@@ -2,6 +2,6 @@ Please write your ideas here, if they are good enough, it may be used for the ga
 Example:
 
 How about a exploding monster?
-Bob
+-Bob
 
 ~~~~~~~
