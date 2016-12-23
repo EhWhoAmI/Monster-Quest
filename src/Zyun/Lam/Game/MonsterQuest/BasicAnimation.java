@@ -26,10 +26,6 @@ class BasicAnimation {
     
     static void initImages () {
         loadImages();
-        //Dimension windowSize = getToolkit().getScreenSize();
-        //int w = startScreen.getWidth(windowSize.width);
-        //int h =  startScreen.getHeight(windowSize.height);
-        //setPreferredSize(getToolkit().getScreenSize());  
     }
     
     static void loadingBar (java.awt.Graphics comp, float percentage) {
@@ -62,8 +58,6 @@ class BasicAnimation {
         else {
             loadingBar(comp, 100);
         }
-        //Rectangle2D.Float loading = new Rectangle2D.Float(450, 680, 500, 30);
-        //comp2D.fill(loading);
         comp2D.setColor(Color.white);
         if (percnt < 100){
             comp2D.drawString(Text[alpha%4], 625, 702);
@@ -96,11 +90,10 @@ class BasicAnimation {
             comp2D.setFont(fontForMenu);
             comp2D.setColor (new Color (240, 248, 255));
             comp2D.drawString ("Start Game", startButtonX + 20, startButtonY + 60);
-            //End of start Button (untested)
+            //End of start Button
         }
         {
             //Start of option button
-            //x and y positions unknown 
             float optionButtonX = 1000F;
             float optionButtonY = 350F;
             float optionButtonWidth = 200F;
@@ -151,8 +144,6 @@ class BasicAnimation {
         int textWidth = metrics.stringWidth(Graphics.quote);
         comp2D.setColor(Color.BLACK);
         comp2D.setFont(font);
-        System.out.println("Window width: " + windowWidth);
-        System.out.println("Text width: " + textWidth);
         comp2D.drawString(Graphics.quote, (windowWidth / 2) - (textWidth / 2), 650);
     }
     
@@ -189,7 +180,7 @@ class BasicAnimation {
             float EULAButtonY = 200F;
             float EULAButtonWidth = 300F;
             float EULAButtonLength = 150F;
-            //For back "Shadow"/outline
+            //For back "Shadow" outline
             RoundRectangle2D.Float EULAButtonBack = new RoundRectangle2D.Float (EULAButtonX, EULAButtonY, EULAButtonWidth + 5, EULAButtonLength + 5, 30, 30);
             //Actual Button
             RoundRectangle2D.Float EULAButtonFront = new RoundRectangle2D.Float (EULAButtonX + 2.5F, EULAButtonY + 2.5F, EULAButtonWidth, EULAButtonLength, 30, 30);
@@ -201,7 +192,7 @@ class BasicAnimation {
             comp2D.setFont(fontForMenubigga);
             comp2D.setColor (new Color (240, 248, 255));
             comp2D.drawString ("EULA", EULAButtonX + (EULAButtonLength / 2), EULAButtonY + 90);
-            //End of options Button (untested)
+            //End of terms and conditions Button
         }
         {
             //Start of credits button
@@ -210,7 +201,7 @@ class BasicAnimation {
             float creditsButtonY = 400F;
             float creditsButtonWidth = 300F;
             float creditsButtonLength = 150F;
-            //For back "Shadow"/outline
+            //For back "Shadow" outline
             RoundRectangle2D.Float creditsButtonBack = new RoundRectangle2D.Float (creditsButtonX, creditsButtonY, creditsButtonWidth + 5, creditsButtonLength + 5, 30, 30);
             //Actual Button
             RoundRectangle2D.Float creditsButtonFront = new RoundRectangle2D.Float (creditsButtonX + 2.5F, creditsButtonY + 2.5F, creditsButtonWidth, creditsButtonLength, 30, 30);
@@ -222,7 +213,7 @@ class BasicAnimation {
             comp2D.setFont(fontForMenubigga);
             comp2D.setColor (new Color (240, 248, 255));
             comp2D.drawString ("Credits", creditsButtonX + (creditsButtonLength / 2), creditsButtonY + 90);
-            //End of credits Button (untested)
+            //End of credits Button
         }
         {
             //Exit button
@@ -234,12 +225,6 @@ class BasicAnimation {
             comp2D.fill(exitButton);
             comp2D.setColor(Color.WHITE);
             GeneralPath exitSign = new GeneralPath();
-            //exitSign.moveTo(1080, 35);
-            //exitSign.lineTo(1095, 50);
-            //exitSign.lineTo(1110, 35);
-            //exitSign.lineTo(1111, 35);
-            //exitSign.closePath();
-            //comp2D.fill(exitSign);
         }
     }
     
@@ -252,13 +237,11 @@ class BasicAnimation {
         comp2D.setFont(fontForMenubigga);
         FontMetrics fnt = comp2D.getFontMetrics(fontForMenubigga);
         comp2D.drawString("By : Zyun", (WindowMain.window.getWidth()/ 2) - (fnt.stringWidth("By : Zyun") / 2), (WindowMain.window.getHeight() / 2) - (fnt.stringWidth("By : Zyun") / 2));
+        comp2D.drawString("Press any key to exit.", 10, 500);
         System.out.println("Zyun.Lam.Game.MonsterQuest.BasicAnimation.showCredits()");
-        try {
-            Thread.sleep(5000);
-        } catch (InterruptedException e) {
-        }
-        ControlUnit.credits = false;
-        ControlUnit.othersScreen = true;
+        ControlUnit.othersScreen = false;
+        ControlUnit.credits = true;
         WindowMain.frameRepaint();
+        
     }
 }

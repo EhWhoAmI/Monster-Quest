@@ -3,6 +3,7 @@ package Zyun.Lam.Game.MonsterQuest;
 /**
  * Graphics part. 
  */
+
 import javax.swing.JPanel;
 
 class Graphics extends JPanel{
@@ -19,8 +20,11 @@ class Graphics extends JPanel{
         else if (ControlUnit.othersScreen) {
             BasicAnimation.others(comp);
         }
-        else if (ControlUnit.credits) {
+        if (ControlUnit.credits) {
             BasicAnimation.showCredits(comp);
+        }
+        if (ControlUnit.tutorial) {
+            gamePart1__Tutorial.drawImage(comp);
         }
     }
 }
