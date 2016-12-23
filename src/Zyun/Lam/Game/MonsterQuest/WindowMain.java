@@ -118,82 +118,49 @@ package Zyun.Lam.Game.MonsterQuest;
  *      playing this game.
  *      You have the right to distrubute this software, for free, and not 
  *      for personal profit.
- *
- * Other notes:
- * Estimated finish date: March 2016, we will have something playable
+ * 
  * Done!!!!!
  */ 
 
 //Imports
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
-import java.io.BufferedInputStream;
 import java.io.BufferedWriter;
 import javax.swing.JFrame;
 import nu.xom.*;
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
 import javax.swing.JOptionPane;
 import javax.swing.UIManager;
 
-public class WindowMain extends JFrame implements WindowListener{
+public class WindowMain extends JFrame implements WindowListener {
     public static JFrame window;
     public static String version = "";
     public static boolean firstTimeSetup = false;
     public static String user_dir = System.getProperty("user.dir");
-    public static File logFile;
-    public static FileOutputStream logFileOutput;
     public WindowMain (int nothing) {
         //Do nothing -- empty constructor for you know what...
     }
+    
     public WindowMain() {
         //Open log file
-        logFile = new File ("system.log");
-        if (!logFile.exists()){
-            //Create File
-            try {
-                if (!logFile.createNewFile()) {
-                    //Do nothing. Cannot write to log file.
-                    System.out.println ("Cannot open log file!");
-                } else {
-                    logFileOutput = new FileOutputStream(logFile, true);
-                    System.out.println("logFileOutput equals " + logFileOutput);
-                    if (logFileOutput.equals(null)) {
-                        System.err.println("logFileOutput equals null");
-                    }
-                }
-            } catch (IOException ioe) {
-                System.out.println("Unable to open file");
-            }
-        } else {
-            try {
-            logFileOutput = new FileOutputStream(logFile, true);
-            System.out.println("logFileOutput equals " + logFileOutput);
-            if (logFileOutput.equals(null)) {
-                System.err.println("logFileOutput equals null");
-            }
-            } catch (FileNotFoundException fnfe) {
-                System.err.println("File not found.");
-            }
-        }
-        new SystemLog ("Opened log file: Hello, world");
-        new SystemLog("Opening window");
+        SystemLog logger = new SystemLog();
+        SystemLog.log("Test log");
+        SystemLog.log("Application opened");
+        //Test logs...
+        SystemLog.log("Open window...");
         window = new JFrame("Monster Quest");
         setLookAndFeel();
         //Read from startup setting file
-            File startupSettings = new File ("/resources/Startup-Settings.xml");
+            File startupSettings = new File ("D:\\Zyun's Coding\\My Coding\\Monster Quest\\src\\Zyun\\Lam\\Game\\MonsterQuest\\resources\\Startup-Settings.xml");
             if (!startupSettings.exists()){
-                new SystemLog("Startup settings does not exist");
                 //Do a patch for it
+                SystemLog.log("Startup settings does not exist -- Creating new file");
                 try {
                     startupSettings.createNewFile();
                 } catch (IOException file){
-                    //Somehow, we cannot do it...
-                    new SystemLog("Failed to open file with a IOException: " + file.getMessage() + ", Because" + file.getCause());
+                    //Somehow, we cannot do it.
                     JOptionPane.showMessageDialog(null, "Error, unable to open the file " + startupSettings.getName() + "\nError: " + file.getMessage()+", in class" + file.getClass() + "\nReason"+ file.getCause() + "\nExiting the program now...", "Unable to open file", JOptionPane.ERROR_MESSAGE);
                     System.exit(1);
                 }
@@ -205,29 +172,27 @@ public class WindowMain extends JFrame implements WindowListener{
                 root.appendChild(fullscreen);
                 Element firstTimeSetupElement = new Element("firsttimesetup");
                 root.appendChild(firstTimeSetupElement);
-                Element javaVersion = new Element ("java-version");
-                Attribute javaVersionValue = new Attribute ("value", System.getProperty ("java.version"));
-                javaVersion.addAttribute (javaVersionValue);
-                root.appendChild (javaVersion);
+                
                 Document startupDocument = new Document(root);
                 try (FileWriter stupdoc = new FileWriter(startupSettings);
                     BufferedWriter out = new BufferedWriter(stupdoc);){
                     out.write(startupDocument.toXML());
                 } catch (IOException e) {
                     JOptionPane.showMessageDialog(null, "Sorry, we really tried, and it could not do make it work.\nPlease uninstall this again", "Error making file", JOptionPane.ERROR_MESSAGE);
+                    SystemLog.log("Failed with an error: " + e.getClass() + " Cause " + e.getCause());
                 }
                 //That would do!
             }
             else {
                 //file exists
+                SystemLog.log("Startup file exists");
                 System.out.println("Startup File exists");
                 //Read from xml document
-                //JOptionPane.showMessageDialog(null, "Hello!", "Hello", JOptionPane.INFORMATION_MESSAGE);
+                SystemLog.log("Reading from XML document");
                 Builder document = new Builder ();
                 try{
                     Document startDocument = document.build(startupSettings);
                     Element root = startDocument.getRootElement();
-                    window.setSize(getToolkit().getScreenSize());
                     System.out.println("Read From document");
                     {
                         Element irsttimesetup = null;
@@ -246,22 +211,31 @@ public class WindowMain extends JFrame implements WindowListener{
                     }
                 } catch (ParsingException ioe) {
                     JOptionPane.showMessageDialog(null, "Parsing Error!", "Error", JOptionPane.ERROR_MESSAGE);
+                    SystemLog.log("Parsing Error: " + ioe.getCause());
                     System.exit(1);
                 } catch (IOException ioe) {
                     JOptionPane.showMessageDialog(null, "I/O Error", "Error", JOptionPane.ERROR_MESSAGE);
+                    SystemLog.log("IO Error!" + ioe.getCause());
                     System.exit(1);
                 } catch (Exception ioe) {
                     JOptionPane.showMessageDialog(null, "Unknown Error!\nValue :" + ioe.getMessage() + "\nInfo :" + ioe.getCause() + "\nIn class: " + ioe.getClass() + "\nStack Trace: " + ioe.getStackTrace() + "\n@ line" + ioe.getStackTrace()[1].getLineNumber(), "Error", JOptionPane.ERROR_MESSAGE);
+                    if (ioe instanceof NullPointerException) {
+                        SystemLog.log("Failed because of null pointer exception");
+                    }
+                    SystemLog.log("Exception: " + ioe.getClass());
                     System.exit(1);
                 }finally {
                     System.gc();
                 }
+                window.setSize(1366, 748);
                 System.out.println("Open window");
+                SystemLog.log("Show window");
                 window.setVisible(true);
                 window.addWindowListener(this);
                 Graphics g = new Graphics();
                 window.add(g);
                 window.setResizable(false);
+                SystemLog.log("Game start");
                 System.out.println("Game start!!!!!!!! YAY!!!!!!!!");
                 ControlUnit controlUnit = new ControlUnit();   
             }
@@ -275,11 +249,12 @@ public class WindowMain extends JFrame implements WindowListener{
     
     private void setLookAndFeel (){
         try {
-            
+            SystemLog.log("Set look and feel");
             UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
         } catch (Exception e) {
             //Do nothing
             System.err.println("Unable to set look and feel");
+            SystemLog.log("Unable to set look and feel");
         }
     }
     
@@ -287,13 +262,21 @@ public class WindowMain extends JFrame implements WindowListener{
     @Override
     public void windowActivated(WindowEvent e) {
         System.out.println("Zyun.Lam.Game.MonsterQuest.WindowMain.windowActivated()");
-        
+        SystemLog.log("Zyun.Lam.Game.MonsterQuest.WindowMain.windowActivated()");
     }
 
     @Override
-    public void windowClosed(WindowEvent e) {
-        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void windowClosed(WindowEvent e) {  
         System.out.println("Zyun.Lam.Game.MonsterQuest.WindowMain.windowClosed()");
+        SystemLog.log("Zyun.Lam.Game.MonsterQuest.WindowMain.windowClosed()");
+        try {
+        } catch (Exception ioe) {
+            //Unable to close files?
+            System.err.println("Unable to close files!! " + ioe.getLocalizedMessage());
+            SystemLog.log("Unable to close files: " + ioe.getMessage());
+        }
+        System.out.println("Exiting program...");
+        System.exit(0);
     }
 
     @Override
@@ -301,28 +284,47 @@ public class WindowMain extends JFrame implements WindowListener{
         //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
         //Prevent close window, and ask user for verfication
         System.out.println("Zyun.Lam.Game.MonsterQuest.WindowMain.windowClosing()");
+        SystemLog.log("Zyun.Lam.Game.MonsterQuest.WindowMain.windowClosing()");
         setVisible(false);
+        SystemLog.log("Closing Program");
+        SystemLog.log("Run finishing: closing streams...");
+        //Before closing, close all files
+        /*try {
+            SystemLog.logFileOutput.flush();
+            SystemLog.logFileOutput.close();
+            SystemLog.log("Closed streams");
+        } catch (IOException ioe) {
+            //Unable to close files?
+            System.err.println("Unable to close files!! " + ioe.getLocalizedMessage());
+            SystemLog.log("Unable to close files: " + ioe.getMessage());
+        }
+        System.out.println("Exiting program...");
         System.exit(0);
+*/
     }
 
     @Override
     public void windowDeactivated(WindowEvent e) {
         System.out.println("Zyun.Lam.Game.MonsterQuest.WindowMain.windowDeactivated()");
+        SystemLog.log("Zyun.Lam.Game.MonsterQuest.WindowMain.windowDeactivated()");
     }
 
     @Override
     public void windowDeiconified(WindowEvent e) {
         System.out.println("Zyun.Lam.Game.MonsterQuest.WindowMain.windowDeiconified()");
+        SystemLog.log("Zyun.Lam.Game.MonsterQuest.WindowMain.windowDeiconified()");
     }
 
     @Override
     public void windowIconified(WindowEvent e) {
         System.out.println("Zyun.Lam.Game.MonsterQuest.WindowMain.windowIconified()");
+        SystemLog.log("Zyun.Lam.Game.MonsterQuest.WindowMain.windowIconified()");
     }
 
     @Override
     public void windowOpened(WindowEvent e) {
         System.out.println("Zyun.Lam.Game.MonsterQuest.WindowMain.windowOpened()");
+        SystemLog.log("Zyun.Lam.Game.MonsterQuest.WindowMain.windowOpened()");
     }
     
     public static void frameRepaint () {
