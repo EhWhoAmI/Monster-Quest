@@ -144,16 +144,15 @@ public class WindowMain extends JFrame implements WindowListener {
     }
     
     public WindowMain() {
-        //Open log file
-        SystemLog logger = new SystemLog();
-        SystemLog.log("Test log");
+        //Deal with log file issue
+        SystemLog.clearFile();
+        SystemLog.startNewLog();
         SystemLog.log("Application opened");
-        //Test logs...
         SystemLog.log("Open window...");
         window = new JFrame("Monster Quest");
         setLookAndFeel();
         //Read from startup setting file
-            File startupSettings = new File ("D:\\Zyun's Coding\\My Coding\\Monster Quest\\src\\Zyun\\Lam\\Game\\MonsterQuest\\resources\\Startup-Settings.xml");
+            File startupSettings = new File (user_dir + "/resources/Startup-Settings.xml");
             if (!startupSettings.exists()){
                 //Do a patch for it
                 SystemLog.log("Startup settings does not exist -- Creating new file");
@@ -203,9 +202,10 @@ public class WindowMain extends JFrame implements WindowListener {
                         }
                         Element versionElement = root.getFirstChildElement("version");
                         if (versionElement == null){
-                            System.out.println("Version element is null");
+                            System.out.println("Version element is null");  
+                        } else { 
+                            version = versionElement.getAttributeValue("value").toString();
                         }
-                        version = versionElement.getAttributeValue("value").toString();
                         //version = verElement.toString();
                         System.out.println("Version: " + version);
                     }
@@ -223,6 +223,7 @@ public class WindowMain extends JFrame implements WindowListener {
                         SystemLog.log("Failed because of null pointer exception");
                     }
                     SystemLog.log("Exception: " + ioe.getClass());
+                    ioe.printStackTrace();
                     System.exit(1);
                 }finally {
                     System.gc();
@@ -269,6 +270,7 @@ public class WindowMain extends JFrame implements WindowListener {
     public void windowClosed(WindowEvent e) {  
         System.out.println("Zyun.Lam.Game.MonsterQuest.WindowMain.windowClosed()");
         SystemLog.log("Zyun.Lam.Game.MonsterQuest.WindowMain.windowClosed()");
+        //The files were already closed
         try {
         } catch (Exception ioe) {
             //Unable to close files?
@@ -301,6 +303,7 @@ public class WindowMain extends JFrame implements WindowListener {
         System.out.println("Exiting program...");
         System.exit(0);
 */
+        window.dispose();
     }
 
     @Override
