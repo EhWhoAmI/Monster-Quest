@@ -8,18 +8,38 @@ import java.io.File;
 import javax.imageio.ImageIO;
 import java.awt.Graphics2D;
 import java.awt.geom.GeneralPath;
+import java.io.IOException;
 
 class gamePart1__Tutorial {
-    static String textsStrings [] = {"Press Space to continue...", "Hello, I am a villager from Newbies Town!", "Welcome to Monster Quest.", "We live, in a beautiful place.", "But, monsters have come out from nowhere,", "Killing us all.", "Many brave souls ventured out to rid the monsters,", "But none came back.", "Help us all, my dear friend", "And save us all!"};
+    //The strings of what the villager is about to say
+    static String textsStrings [] = {"Press Space to continue...", 
+        "Hello, I am a villager from Newbies Town!", 
+        "Welcome to Monster Quest.", 
+        "We live, in a beautiful place.", 
+        "But, monsters have come out from nowhere,", 
+        "Killing us all.", 
+        "Many brave souls ventured out to rid the monsters,", 
+        "But none came back.", 
+        "Help us all, my dear friend", 
+        "And save us all!", 
+        "Let's get into some important things.", 
+        "What is your name?"};
+    //The word to show -- Will be used in the textsStrings array
     static int wordToShow = 0;
     static void drawImage (java.awt.Graphics g) {
+        //The image variable
         BufferedImage villagerImage = null;
         try {
-            villagerImage = ImageIO.read(new File ("D:\\Zyun's Coding\\My Coding\\Monster Quest\\src\\Zyun\\Lam\\Game\\MonsterQuest\\resources\\villagerimg.png"));
+            //Retrive Image from hash map
+            //TODO
+            //show image
+            villagerImage = ImageIO.read(new File (WindowMain.user_dir + "/resources/villagerimg.png"));
             g.drawImage(villagerImage, 0, 0, null);
             textBox(g);
             drawWords(g, wordToShow);
-        } catch (Exception e) {
+        } catch (IOException e) {
+            System.err.println("Unable to open image: " + e.getMessage());
+            SystemLog.log("Unable to open Image: " + e.getMessage());
         }
     }
     static void textBox (java.awt.Graphics g) {
@@ -48,6 +68,10 @@ class gamePart1__Tutorial {
         g2d.setFont(fontToShow);
         g2d.setColor(Color.BLACK);
         g2d.drawString(textsStrings[textToShow], 350, 100);
-        System.out.println("Showing font...");
+        System.out.println("Showing text for villager speech...");
+    }
+    
+    static void getName (java.awt.Graphics g) {
+        
     }
 }
