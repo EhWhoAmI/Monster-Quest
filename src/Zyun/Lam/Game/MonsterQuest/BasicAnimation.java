@@ -20,7 +20,7 @@ class BasicAnimation {
     public static float percnt = 0;
     
     static void loadImages () {
-        ImageIcon ii = new ImageIcon("D:\\Zyun's Coding\\My Coding\\Monster Quest\\src\\Zyun\\Lam\\Game\\MonsterQuest\\resources\\Monster Quest Splash Screen 6.png");
+        ImageIcon ii = new ImageIcon(WindowMain.user_dir + "/resources/Monster Quest Splash Screen 6.png");
         startScreen = ii.getImage();
     }
     
@@ -150,6 +150,7 @@ class BasicAnimation {
     static String createNewTip () {
         String[] Tipandquotelist = {"Tip: Tips go here :P", "This game is the best game in the world. Tell your mom that.", "Kill monsters to get rewards!(I know you know this. Just killing time)", "Filling the world with monsters... Bwuwahahaha..."};
         int tipToPrint = ((int)(Math.random() * 1000) % Tipandquotelist.length);
+        System.out.print("Zyun.Lam.Game.MonsterQuest.BasicAnimation.createNewTip(): ");
         System.out.println("Quote: " + Tipandquotelist[tipToPrint]);
         return Tipandquotelist[tipToPrint];
     }
