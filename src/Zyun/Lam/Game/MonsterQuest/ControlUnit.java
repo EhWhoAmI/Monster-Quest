@@ -14,6 +14,8 @@ import javax.swing.JOptionPane;
 import nu.xom.*;
 
 public class ControlUnit implements MouseListener, KeyListener{
+    //Remember to turn this into false when testing is over
+    final public static boolean DEBUG = true;
     static boolean loadingfinished = false;
     static boolean startScreen = false;
     static boolean othersScreen = false;
@@ -28,7 +30,7 @@ public class ControlUnit implements MouseListener, KeyListener{
         WindowMain.window.addKeyListener(this);
         ///Loading part
         System.out.println("Window height: " + WindowMain.window.getHeight());
-        File resources = new File ("D:\\Zyun's Coding\\My Coding\\Monster Quest\\src\\Zyun\\Lam\\Game\\MonsterQuest\\resources\\resources.xml");
+        File resources = new File (WindowMain.user_dir + "/resources/resources.xml");
         if (!resources.exists()){
             JOptionPane.showMessageDialog(thing, "Resources does not exist! Program must Exit", "File not found", JOptionPane.ERROR_MESSAGE);
             SystemLog.log("Resources does not exist");
@@ -201,23 +203,30 @@ public class ControlUnit implements MouseListener, KeyListener{
                 System.out.println("Pressed space character");
                 //Deal with showing next text...
                 //Do we need a try...catch thing to stop it?
-                if (gamePart1__Tutorial.wordToShow <= gamePart1__Tutorial.textsStrings.length) {
+                if (gamePart1__Tutorial.wordToShow < gamePart1__Tutorial.textsStrings.length) {
                     try {
+                        if (gamePart1__Tutorial.textsStrings[gamePart1__Tutorial.wordToShow].equals("What is your name?")){
+                            //get name.
+                            
+                        }
                         gamePart1__Tutorial.wordToShow++;
                         WindowMain.frameRepaint();
-                        System.out.println("Next text: value, " + gamePart1__Tutorial.textsStrings[gamePart1__Tutorial.wordToShow]);
-                        SystemLog.log("Next text: value, " + gamePart1__Tutorial.textsStrings[gamePart1__Tutorial.wordToShow]);
+                        System.out.println("Villager next text: value, " + gamePart1__Tutorial.textsStrings[gamePart1__Tutorial.wordToShow]);
+                        SystemLog.log("Villager next text: value, " + gamePart1__Tutorial.textsStrings[gamePart1__Tutorial.wordToShow]);
                     } catch (ArrayIndexOutOfBoundsException aioobe) {
                          //Exit...
                          //The text has finished
-                         System.out.println("Text finished");
+                         System.out.println("Text for villager talk finished");
                     }
                 }
             }    
         }
-        if (e.getKeyChar() == 'p') {
-                //Exit game...
-                WindowMain.window.dispose();
+        //Debug keys
+        if (DEBUG) {
+            if (e.getKeyChar() == 'p') {
+                    //Exit game...
+                    WindowMain.window.dispose();
+            }
         }
     }
 
