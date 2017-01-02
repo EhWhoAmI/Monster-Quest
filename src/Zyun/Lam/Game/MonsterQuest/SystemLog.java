@@ -22,52 +22,63 @@ public class SystemLog {
     private static String log = "No Problem";
     static FileWriter logFileOutput = null;
     static BufferedWriter logFileWriter = null;
+    //Seceptions that we will need
+    public static final int UNKNOWN_EXCEPTION = 0;
+    public static final int FILE_NOT_FOUND = 1;
+    public static final int PARSING_EXCEPTION = 2;
+    public static final int IOEXCEPTION = 3;
 
     public static void log (String text) {
         //Create Time Stamp
-        Date timeStamp = new Date();
-        String content = ("[" + timeStamp + "] " + text);
-        try {
-            logFileOutput = new FileWriter("system.log", true);
-            logFileWriter = new BufferedWriter(logFileOutput);
-            logFileWriter.write(content);
-            logFileWriter.newLine();
-        } catch (IOException e) {
-            e.printStackTrace();
-        } finally {
+        //Put it into a thread for speed issues. Doesn't affect anything yrt, but it may.
+        Runnable thread = () -> {
+            Date timeStamp = new Date();
+            String content = ("[" + timeStamp + "] " + text);
             try {
-                if (logFileWriter != null)
-                    logFileWriter.close();
-                if (logFileOutput != null)
-                    logFileOutput.close();
-            } catch (IOException ex) {
-                ex.printStackTrace();
+                logFileOutput = new FileWriter("system.log", true);
+                logFileWriter = new BufferedWriter(logFileOutput);
+                logFileWriter.write(content);
+                logFileWriter.newLine();
+            } catch (IOException e) {
+                e.printStackTrace();
+            } finally {
+                try {
+                    if (logFileWriter != null)
+                        logFileWriter.close();
+                    if (logFileOutput != null)
+                        logFileOutput.close();
+                } catch (IOException ex) {
+                    ex.printStackTrace();
+                }
             }
-        }
+        };
+        Thread print = new Thread (thread);
+        print.start();
     }
     
-        public static void startNewLog () {
-        //Create Time Stamp
-        Date timeStamp = new Date();
-        String content = (" --- NEW LOG STARTED [" + timeStamp + "] ---");
-        try {
-            logFileOutput = new FileWriter("system.log", true);
-            logFileWriter = new BufferedWriter(logFileOutput);
-            logFileWriter.newLine();
-            logFileWriter.write(content);
-            logFileWriter.newLine();
-        } catch (IOException e) {
-            e.printStackTrace();
-        } finally {
+    public static void startNewLog () {
+            //Create Time Stamp
+            Date timeStamp = new Date();
+            String content = (" --- NEW LOG STARTED [" + timeStamp + "] ---");
             try {
-                if (logFileWriter != null)
-                    logFileWriter.close();
-                if (logFileOutput != null)
-                    logFileOutput.close();
-            } catch (IOException ex) {
-                ex.printStackTrace();
+                logFileOutput = new FileWriter("system.log", true);
+                logFileWriter = new BufferedWriter(logFileOutput);
+                logFileWriter.newLine();
+                logFileWriter.write(content);
+                logFileWriter.newLine();
+            } catch (IOException e) {
+                //As the file is probally going to fail to do do anything to the file
+                e.printStackTrace();
+            } finally {
+                try {
+                    if (logFileWriter != null)
+                        logFileWriter.close();
+                    if (logFileOutput != null)
+                        logFileOutput.close();
+                } catch (IOException ex) {
+                    ex.printStackTrace();
+                }
             }
-        }
     }
         
         static void clearFile () {
@@ -92,4 +103,30 @@ public class SystemLog {
                 }
             }
         }
+    public static void log (String text, int errorNumber) {
+        Runnable thread = () -> {
+            //Create Time Stamp
+            Date timeStamp = new Date();
+            String content = ("[" + timeStamp + "] (" + errorNumber + "): " + text);
+            try {
+                logFileOutput = new FileWriter("system.log", true);
+                logFileWriter = new BufferedWriter(logFileOutput);
+                logFileWriter.write(content);
+                logFileWriter.newLine();
+            } catch (IOException e) {
+                e.printStackTrace();
+            } finally {
+                try {
+                    if (logFileWriter != null)
+                        logFileWriter.close();
+                    if (logFileOutput != null)
+                        logFileOutput.close();
+                } catch (IOException ex) {
+                    ex.printStackTrace();
+                }
+            }
+        };
+        Thread print = new Thread (thread);
+        print.start();
+    }
 }
