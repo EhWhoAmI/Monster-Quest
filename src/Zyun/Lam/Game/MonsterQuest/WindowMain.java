@@ -1,6 +1,6 @@
 package Zyun.Lam.Game.MonsterQuest;
 
-/*Some art to liven up this bunch of boring code...
+/**Some art to liven up this bunch of boring code...
  *                     _____________          _    ___________    ______________    _____________    ____________
  * |\            /|    |  _______  |  |\     | |   | _________|   |_____  _____|   |  ___________|   | _______  |
  * | \          / |    |  |     |  |  | \    | |   | |                 |  |        |  |              | |      | |
@@ -52,7 +52,7 @@ package Zyun.Lam.Game.MonsterQuest;
  *      terms and conditions.
  * 3. Licensing of use
  *      This software, is open source, and a source of this software can 
- *      be found at this address: https://github.com/EhWhoAmI/Monster-Quest. You 
+ *      be found at this address: <a href="https://github.com/EhWhoAmI/Monster-Quest">https://github.com/EhWhoAmI/Monster-Quest</a>. You 
  *      are allowed to edit, alter and change the software any way you want, for 
  *      example: Creating a mod, extending the game, or anything you can think of. 
  *      But, you must follow these guidelines:
@@ -133,16 +133,45 @@ import java.io.FileWriter;
 import java.io.IOException;
 import javax.swing.JOptionPane;
 import javax.swing.UIManager;
+import javax.swing.UnsupportedLookAndFeelException;
 
+/**
+ *
+ * @author Zyun
+ */
 public class WindowMain extends JFrame implements WindowListener {
+
+    /**
+     *
+     */
     public static JFrame window;
+
+    /**
+     *
+     */
     public static String version = "";
+
+    /**
+     *
+     */
     public static boolean firstTimeSetup = false;
+
+    /**
+     *
+     */
     public static String user_dir = System.getProperty("user.dir");
+
+    /**
+     *
+     * @param nothing
+     */
     public WindowMain (int nothing) {
         //Do nothing -- empty constructor for you know what...
     }
     
+    /**
+     *
+     */
     public WindowMain() {
         //Deal with log file issue
         SystemLog.clearFile();
@@ -151,7 +180,11 @@ public class WindowMain extends JFrame implements WindowListener {
         SystemLog.log("Open window...");
         window = new JFrame("Monster Quest");
         setLookAndFeel();
-        //Read from startup setting file
+            window.setSize(1366, 748);
+            System.out.println("Open window");
+            SystemLog.log("Show window");
+            window.setVisible(true);
+            //Read from startup setting file
             File startupSettings = new File (user_dir + "/resources/Startup-Settings.xml");
             if (!startupSettings.exists()){
                 //Do a patch for it
@@ -228,20 +261,20 @@ public class WindowMain extends JFrame implements WindowListener {
                 }finally {
                     System.gc();
                 }
-                window.setSize(1366, 748);
-                System.out.println("Open window");
-                SystemLog.log("Show window");
-                window.setVisible(true);
-                window.addWindowListener(this);
-                Graphics g = new Graphics();
-                window.add(g);
-                window.setResizable(false);
-                SystemLog.log("Game start");
-                System.out.println("Game start!!!!!!!! YAY!!!!!!!!");
-                ControlUnit controlUnit = new ControlUnit();   
             }
+            window.addWindowListener(this);
+            Graphics g = new Graphics();
+            window.add(g);
+            window.setResizable(false);
+            SystemLog.log("Game start");
+            System.out.println("Game start!!!!!!!! YAY!!!!!!!!");
+            new ControlUnit();   
     }
     
+    /**
+     *
+     * @param args
+     */
     public static void main(String[] args) {
         //Screw this...
         //termsAndConditions tmcds = new termsAndConditions();
@@ -252,10 +285,10 @@ public class WindowMain extends JFrame implements WindowListener {
         try {
             SystemLog.log("Set look and feel");
             UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-        } catch (Exception e) {
+        } catch (ClassNotFoundException | IllegalAccessException | InstantiationException | UnsupportedLookAndFeelException e) {
             //Do nothing
             System.err.println("Unable to set look and feel");
-            SystemLog.log("Unable to set look and feel");
+            SystemLog.log("Unable to set look and feel: " + e.getMessage());
         }
     }
     
@@ -271,12 +304,6 @@ public class WindowMain extends JFrame implements WindowListener {
         System.out.println("Zyun.Lam.Game.MonsterQuest.WindowMain.windowClosed()");
         SystemLog.log("Zyun.Lam.Game.MonsterQuest.WindowMain.windowClosed()");
         //The files were already closed
-        try {
-        } catch (Exception ioe) {
-            //Unable to close files?
-            System.err.println("Unable to close files!! " + ioe.getLocalizedMessage());
-            SystemLog.log("Unable to close files: " + ioe.getMessage());
-        }
         System.out.println("Exiting program...");
         System.exit(0);
     }
@@ -330,6 +357,9 @@ public class WindowMain extends JFrame implements WindowListener {
         SystemLog.log("Zyun.Lam.Game.MonsterQuest.WindowMain.windowOpened()");
     }
     
+    /**
+     *
+     */
     public static void frameRepaint () {
         window.repaint();
     }
