@@ -26,5 +26,8 @@ class Graphics extends JPanel{
         if (ControlUnit.tutorial) {
             gamePart1__Tutorial.drawImage(comp);
         }
+        if (gamePart1__Tutorial.nameWrite) {
+            gamePart1__Tutorial.getName(comp);
+        }
     }
 }
