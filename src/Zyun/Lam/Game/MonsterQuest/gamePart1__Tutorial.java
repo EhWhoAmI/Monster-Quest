@@ -11,6 +11,7 @@ import java.awt.geom.GeneralPath;
 import java.io.IOException;
 
 class gamePart1__Tutorial {
+    static boolean nameWrite = false; 
     //The strings of what the villager is about to say
     static String textsStrings [] = {"Press Space to continue...", 
         "Hello, I am a villager from Newbies Town!", 
@@ -39,7 +40,7 @@ class gamePart1__Tutorial {
             drawWords(g, wordToShow);
         } catch (IOException e) {
             System.err.println("Unable to open image: " + e.getMessage());
-            SystemLog.log("Unable to open Image: " + e.getMessage());
+            SystemLog.log("Unable to open Image: " + e.getMessage(), SystemLog.IOEXCEPTION);
         }
     }
     static void textBox (java.awt.Graphics g) {
@@ -64,7 +65,7 @@ class gamePart1__Tutorial {
     
     static void drawWords (java.awt.Graphics g, int textToShow) {
         Graphics2D g2d = (Graphics2D) g;
-        Font fontToShow = new Font ("Curlz MT", Font.PLAIN, 30);
+        Font fontToShow = new Font ("Arial", Font.PLAIN, 30);
         g2d.setFont(fontToShow);
         g2d.setColor(Color.BLACK);
         g2d.drawString(textsStrings[textToShow], 350, 100);
@@ -72,6 +73,25 @@ class gamePart1__Tutorial {
     }
     
     static void getName (java.awt.Graphics g) {
-        
+        Graphics2D g2d = (Graphics2D) g;
+        //The image variable
+        BufferedImage villagerImage = null;
+        try {
+            //Retrive Image from hash map
+            //TODO
+            //show image
+            villagerImage = ImageIO.read(new File (WindowMain.user_dir + "/resources/villagerimg.png"));
+            g.drawImage(villagerImage, 0, 0, null);
+            textBox(g);
+            Font fontToShow = new Font ("Arial", Font.PLAIN, 30);
+            g2d.setFont(fontToShow);
+            g2d.setColor(Color.BLACK);
+            g2d.drawString("What is your name?", 350, 100);
+            g2d.drawString(ControlUnit.playerNameBuilder.toString(), 350, 150);
+            g2d.drawString("Characters Left: " + (ControlUnit.nameMaxSize - ControlUnit.playerNameBuilder.length()), 350, 250);
+        } catch (IOException e) {
+            System.err.println("Unable to open image: " + e.getMessage());
+            SystemLog.log("Unable to open Image: " + e.getMessage(), SystemLog.IOEXCEPTION);
+        }
     }
 }
