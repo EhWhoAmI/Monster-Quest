@@ -23,6 +23,9 @@ public class ControlUnit implements MouseListener, KeyListener{
     static boolean tutorial = false;
     public static HashMap imageresourcesMap;
     public static HashMap textFileResourceMap;
+    static String playerName;
+    static StringBuilder playerNameBuilder;
+    static int nameMaxSize = 15;
     public ControlUnit() {
         boolean loading = false;
         WindowMain thing = new WindowMain(0);
@@ -44,7 +47,8 @@ public class ControlUnit implements MouseListener, KeyListener{
             //Get root element
             Element root = fileDocument.getRootElement();
             Elements eleme = root.getChildElements();
-            
+            BasicAnimation.percnt ++;
+            WindowMain.frameRepaint();
             //Sort out the different types of elements for the sake of the hash map
             //Variables
             int textFiles = 0;
@@ -61,6 +65,8 @@ public class ControlUnit implements MouseListener, KeyListener{
                 }
             }
             
+            BasicAnimation.percnt ++;
+            WindowMain.frameRepaint();
             //Initiliaze hash maps
             SystemLog.log("Files: " + eleme.size());
             System.out.println("Files: " + eleme.size());
@@ -197,17 +203,29 @@ public class ControlUnit implements MouseListener, KeyListener{
 
     @Override
     public void keyReleased(KeyEvent e) {
+        System.out.println("Zyun.Lam.Game.MonsterQuest.ControlUnit.keyReleased() Key showed: " + e.getKeyChar());
+        SystemLog.log("Key typed : " + e.getKeyChar());
         //Deal with all the commands
+        if (credits) {
+            credits = false;
+            othersScreen = true;
+            System.out.println ("Getting out of credits");
+        }
         if (tutorial) {
+            System.out.println("Tutorial is true");
             if (e.getKeyChar() == 32) {
                 System.out.println("Pressed space character");
                 //Deal with showing next text...
                 //Do we need a try...catch thing to stop it?
                 if (gamePart1__Tutorial.wordToShow < gamePart1__Tutorial.textsStrings.length) {
                     try {
-                        if (gamePart1__Tutorial.textsStrings[gamePart1__Tutorial.wordToShow].equals("What is your name?")){
+                        if (gamePart1__Tutorial.textsStrings[gamePart1__Tutorial.wordToShow].equals("What is your name?") | gamePart1__Tutorial.wordToShow == 10){
                             //get name.
-                            
+                            gamePart1__Tutorial.nameWrite = true;
+                            tutorial = false;
+                            //Clear the string builder, as in tests, there is always an extra space
+                            playerNameBuilder = new StringBuilder();
+                            System.out.println("Getting player name");
                         }
                         gamePart1__Tutorial.wordToShow++;
                         WindowMain.frameRepaint();
@@ -219,11 +237,39 @@ public class ControlUnit implements MouseListener, KeyListener{
                          System.out.println("Text for villager talk finished");
                     }
                 }
-            }    
+            }
+        }    
+        if (gamePart1__Tutorial.nameWrite) {
+               System.out.println("Getting Player Name");
+               if (playerNameBuilder.length() <= nameMaxSize) {
+                   if (e.getKeyChar() == '\n') {
+                       //Exit this place
+                       //Save name
+                       playerName = playerNameBuilder.toString();
+                   }
+                   else {
+                       if (e.getKeyChar() == 8 | e.getKeyChar() == 127) {
+                           //If it is, delete
+                           int ln = playerNameBuilder.length();
+                           ln--;
+                           System.out.println("Deleting character " + playerNameBuilder.charAt(ln) + "Which has ASCII of " + e.getKeyCode());
+                           playerNameBuilder.deleteCharAt(ln);
+                           WindowMain.frameRepaint();
+                       } else {
+                            if(!e.isActionKey()){
+                               System.out.println("Appending character " + e.getKeyChar() + " to player name , which has ASCII of " + e.getKeyCode() );
+                               playerNameBuilder.append(e.getKeyChar());
+                               WindowMain.frameRepaint();
+                               System.out.println("Name length: " + playerNameBuilder.length());
+                            }
+                       }
+                    }
+           }
+           
         }
         //Debug keys
         if (DEBUG) {
-            if (e.getKeyChar() == 'p') {
+            if (e.getKeyChar() == 123) {
                     //Exit game...
                     WindowMain.window.dispose();
             }
