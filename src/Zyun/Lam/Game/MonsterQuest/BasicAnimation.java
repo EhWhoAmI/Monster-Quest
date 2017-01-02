@@ -47,7 +47,7 @@ class BasicAnimation {
         //Rectangle2D.Float newRect = new Rectangle2D.Float(100, 100, 100, 100);
         //comp2D.fill(newRect);
         comp2D.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-        Font font = new Font ("Curlz MT", Font.PLAIN, 25);
+        Font font = new Font ("Arial", Font.PLAIN, 20);
         comp2D.setFont(font);
         Color reddishKindaofColor = new Color(153, 0, 0);
         alpha++;
@@ -86,7 +86,7 @@ class BasicAnimation {
             comp2D.fill (startButtonBack);
             comp2D.setColor (Color.RED);
             comp2D.fill (startButtonFront);
-            Font fontForMenu = new Font ("Curlz MT", Font.PLAIN, 37);
+            Font fontForMenu = new Font ("Arial", Font.PLAIN, 30);
             comp2D.setFont(fontForMenu);
             comp2D.setColor (new Color (240, 248, 255));
             comp2D.drawString ("Start Game", startButtonX + 20, startButtonY + 60);
@@ -106,7 +106,7 @@ class BasicAnimation {
             comp2D.fill (optionButtonBack);
             comp2D.setColor (Color.BLUE);
             comp2D.fill (optionButtonFront);
-            Font fontForMenu = new Font ("Curlz MT", Font.PLAIN, 37);
+            Font fontForMenu = new Font ("Arial", Font.PLAIN, 30);
             comp2D.setFont(fontForMenu);
             comp2D.setColor (new Color (240, 248, 255));
             comp2D.drawString ("Options", optionButtonX + 20, optionButtonY + 60);
@@ -127,7 +127,7 @@ class BasicAnimation {
             comp2D.fill (othersButtonBack);
             comp2D.setColor (Color.GREEN);
             comp2D.fill (othersButtonFront);
-            Font fontForMenu = new Font ("Curlz MT", Font.PLAIN, 37);
+            Font fontForMenu = new Font ("Arial", Font.PLAIN, 30);
             comp2D.setFont(fontForMenu);
             comp2D.setColor (new Color (240, 248, 255));
             comp2D.drawString ("Others", othersButtonX + 20, othersButtonY + 60);
@@ -138,7 +138,7 @@ class BasicAnimation {
     static void Tips (java.awt.Graphics comp) {
         Graphics2D comp2D = (Graphics2D) comp;
         comp2D.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-        Font font = new Font ("Curlz MT", Font.PLAIN, 20);     
+        Font font = new Font ("Arial", Font.PLAIN, 20);     
         FontMetrics metrics = comp.getFontMetrics(font);
         int windowWidth = WindowMain.window.getWidth();
         int textWidth = metrics.stringWidth(Graphics.quote);
@@ -163,7 +163,7 @@ class BasicAnimation {
         Graphics2D comp2D = (Graphics2D) comp;
         comp2D.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
         comp.drawImage(startScreen, 175, 0, null);
-        Font fontForMenu = new Font ("Curlz MT", Font.PLAIN, 100);
+        Font fontForMenu = new Font ("Arial", Font.PLAIN, 100);
         comp2D.setFont(fontForMenu);
         RoundRectangle2D.Float WindowPopup = new RoundRectangle2D.Float ((WindowMain.window.getWidth() / 2)- 450, 10, 900, 700, 10, 10);
         RoundRectangle2D.Float WindowPopupBack = new RoundRectangle2D.Float((WindowMain.window.getWidth() / 2) - 452.5F, 7.5F, 905, 705, 10, 10);
@@ -189,7 +189,7 @@ class BasicAnimation {
             comp2D.fill (EULAButtonBack);
             comp2D.setColor (Color.RED);
             comp2D.fill (EULAButtonFront);
-            Font fontForMenubigga = new Font ("Curlz MT", Font.PLAIN, 50);
+            Font fontForMenubigga = new Font ("Arial", Font.PLAIN, 50);
             comp2D.setFont(fontForMenubigga);
             comp2D.setColor (new Color (240, 248, 255));
             comp2D.drawString ("EULA", EULAButtonX + (EULAButtonLength / 2), EULAButtonY + 90);
@@ -210,7 +210,7 @@ class BasicAnimation {
             comp2D.fill (creditsButtonBack);
             comp2D.setColor (Color.BLUE);
             comp2D.fill (creditsButtonFront); 
-            Font fontForMenubigga = new Font ("Curlz MT", Font.PLAIN, 50);
+            Font fontForMenubigga = new Font ("Arial", Font.PLAIN, 50);
             comp2D.setFont(fontForMenubigga);
             comp2D.setColor (new Color (240, 248, 255));
             comp2D.drawString ("Credits", creditsButtonX + (creditsButtonLength / 2), creditsButtonY + 90);
@@ -234,7 +234,7 @@ class BasicAnimation {
         Rectangle2D.Float bg = new Rectangle2D.Float(0, 0, (float)WindowMain.window.getWidth(), (float)WindowMain.window.getHeight());
         comp2D.fill(bg);
         comp2D.setColor(Color.WHITE);
-        Font fontForMenubigga = new Font ("Curlz MT", Font.PLAIN, 50);
+        Font fontForMenubigga = new Font ("Arial", Font.PLAIN, 50);
         comp2D.setFont(fontForMenubigga);
         FontMetrics fnt = comp2D.getFontMetrics(fontForMenubigga);
         comp2D.drawString("By : Zyun", (WindowMain.window.getWidth()/ 2) - (fnt.stringWidth("By : Zyun") / 2), (WindowMain.window.getHeight() / 2) - (fnt.stringWidth("By : Zyun") / 2));
