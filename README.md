@@ -14,3 +14,6 @@ Please help, as it is only me, a middle schooler who is doing it. Please see in 
 
 ### Website
 The website is here, at [https://ehwhoami.github.io/Monster-Quest/] (https://ehwhoami.github.io/Monster-Quest/) Its quite basic, but I will update it oftenly.
+
+### Splash Screen Image
+![Splash screen Image](https://raw.githubusercontent.com/EhWhoAmI/Monster-Quest/master/src/Zyun/Lam/Game/MonsterQuest/resources/Monster%20quest%20symbol.gif)
