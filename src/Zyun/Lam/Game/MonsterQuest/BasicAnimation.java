@@ -147,6 +147,7 @@ class BasicAnimation {
         comp2D.drawString(Graphics.quote, (windowWidth / 2) - (textWidth / 2), 650);
     }
     
+    
     static String createNewTip () {
         String[] Tipandquotelist = {"Tip: Tips go here :P", "This game is the best game in the world. Tell your mom that.", "Kill monsters to get rewards!(I know you know this. Just killing time)", "Filling the world with monsters... Bwuwahahaha..."};
         int tipToPrint = ((int)(Math.random() * 1000) % Tipandquotelist.length);
