@@ -40,16 +40,20 @@ public class SystemLog {
                 logFileWriter.write(content);
                 logFileWriter.newLine();
             } catch (IOException e) {
+                //No point killing the whole program for the sake of a logging problem...
                 e.printStackTrace();
+            }
+            try {
+                if (logFileWriter != null)
+                    logFileWriter.close();
+                if (logFileOutput != null)
+                    logFileOutput.close();
+            } catch (IOException ex) {
+                ex.printStackTrace();
             } finally {
-                try {
-                    if (logFileWriter != null)
-                        logFileWriter.close();
-                    if (logFileOutput != null)
-                        logFileOutput.close();
-                } catch (IOException ex) {
-                    ex.printStackTrace();
-                }
+                //Clear these variables, just in case
+                logFileOutput = null;
+                logFileWriter = null;
             }
         };
         Thread print = new Thread (thread);
@@ -67,7 +71,7 @@ public class SystemLog {
                 logFileWriter.write(content);
                 logFileWriter.newLine();
             } catch (IOException e) {
-                //As the file is probally going to fail to do do anything to the file
+                //As the file is probally going to fail to do do anything to the file, no writing to file...
                 e.printStackTrace();
             } finally {
                 try {
@@ -77,6 +81,10 @@ public class SystemLog {
                         logFileOutput.close();
                 } catch (IOException ex) {
                     ex.printStackTrace();
+                } finally {
+                    //Clear these variables, just in case
+                    logFileOutput = null;
+                    logFileWriter = null;
                 }
             }
     }

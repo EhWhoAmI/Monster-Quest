@@ -29,5 +29,8 @@ class Graphics extends JPanel{
         if (gamePart1__Tutorial.nameWrite) {
             gamePart1__Tutorial.getName(comp);
         }
+        if (gamePart1__Tutorial.genderChoose) {
+            gamePart1__Tutorial.genderChoose(comp);
+        }
     }
 }
