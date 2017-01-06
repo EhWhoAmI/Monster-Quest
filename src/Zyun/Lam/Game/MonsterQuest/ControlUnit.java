@@ -298,7 +298,7 @@ public class ControlUnit implements MouseListener, KeyListener{
         }
         //Debug keys
         if (DEBUG) {
-            if (e.getKeyChar() == 123) {
+            if (e.getKeyChar() == VK_F12) {
                     //Exit game...
                     WindowMain.window.dispose();
             }
