@@ -23,9 +23,11 @@ public class ControlUnit implements MouseListener, KeyListener{
     static boolean tutorial = false;
     public static HashMap imageresourcesMap;
     public static HashMap textFileResourceMap;
-    static String playerName;
     static StringBuilder playerNameBuilder;
-    static int nameMaxSize = 15;
+    static int nameMaxSize = 16;
+    //IMPORTANT: player stats: level, name and stuff
+    public static String playerName;
+    public static boolean playerGender; //true is boy, false is girl
     public ControlUnit() {
         boolean loading = false;
         WindowMain thing = new WindowMain(0);
@@ -203,8 +205,11 @@ public class ControlUnit implements MouseListener, KeyListener{
 
     @Override
     public void keyReleased(KeyEvent e) {
-        System.out.println("Zyun.Lam.Game.MonsterQuest.ControlUnit.keyReleased() Key showed: " + e.getKeyChar());
-        SystemLog.log("Key typed : " + e.getKeyChar());
+        System.out.println("Zyun.Lam.Game.MonsterQuest.ControlUnit.keyReleased() Key pressed: " + e.getKeyChar());
+        if (e.getKeyChar() == '\n')
+            SystemLog.log("Key typed ASCII: " + e.getExtendedKeyCode());
+        else 
+            SystemLog.log("Key Pressed: " + e.getKeyChar() + "ASCII: " + e.getExtendedKeyCode());
         //Deal with all the commands
         if (credits) {
             credits = false;
@@ -240,32 +245,56 @@ public class ControlUnit implements MouseListener, KeyListener{
             }
         }    
         if (gamePart1__Tutorial.nameWrite) {
-               System.out.println("Getting Player Name");
-               if (playerNameBuilder.length() <= nameMaxSize) {
-                   if (e.getKeyChar() == '\n') {
-                       //Exit this place
-                       //Save name
-                       playerName = playerNameBuilder.toString();
-                   }
-                   else {
-                       if (e.getKeyChar() == 8 | e.getKeyChar() == 127) {
-                           //If it is, delete
-                           int ln = playerNameBuilder.length();
-                           ln--;
-                           System.out.println("Deleting character " + playerNameBuilder.charAt(ln) + "Which has ASCII of " + e.getKeyCode());
-                           playerNameBuilder.deleteCharAt(ln);
-                           WindowMain.frameRepaint();
-                       } else {
-                            if(!e.isActionKey()){
-                               System.out.println("Appending character " + e.getKeyChar() + " to player name , which has ASCII of " + e.getKeyCode() );
-                               playerNameBuilder.append(e.getKeyChar());
-                               WindowMain.frameRepaint();
-                               System.out.println("Name length: " + playerNameBuilder.length());
-                            }
-                       }
+            System.out.println("Getting Player Name");
+            if (playerNameBuilder.length() <= nameMaxSize) {
+                System.out.println("Write to player name");
+                if (e.getKeyChar() == '\n') {
+                   //Exit this place
+                   //Save name
+                    System.out.println("Enter pressed: exit");
+                   playerName = playerNameBuilder.toString();
+                   //Clear up things...
+                   playerNameBuilder = null;
+                   //Exit place
+                   gamePart1__Tutorial.nameWrite = false;
+                   gamePart1__Tutorial.wordToShow ++;
+                   gamePart1__Tutorial.genderChoose = true;
+                   //WILL DO GENDER PART SOON...
+                   WindowMain.frameRepaint();
+                }
+                else {
+                   if (e.getKeyChar() == 8 | e.getKeyChar() == 127) {
+                       //If it is, delete
+                       int ln = playerNameBuilder.length();
+                       ln--;
+                       System.out.println("Deleting character " + playerNameBuilder.charAt(ln) + "Which has ASCII of " + e.getKeyCode());
+                       playerNameBuilder.deleteCharAt(ln);
+                       WindowMain.frameRepaint();
+                    } 
+                    else {
+                        int keyChar = e.getExtendedKeyCode();
+                        if(!(keyChar >= 0 & keyChar <= 31 | keyChar == 127)){
+                            System.out.println("Appending character " + e.getKeyChar() + " to player name , which has ASCII of " + e.getKeyCode() );
+                            playerNameBuilder.append(e.getKeyChar());
+                            WindowMain.frameRepaint();
+                             System.out.println("Name length: " + playerNameBuilder.length());
+                        } else {
+                           //Do nothing
+                            System.out.println("Control character pressed: ASCII of " + e.getKeyCode());
+                        }
                     }
-           }
-           
+                }
+            }
+            else {
+                //Allow deletion, but do not allow anything elseif (e.getKeyChar() == 8 | e.getKeyChar() == 127) {
+               //If it is delete key, delete
+               int ln = playerNameBuilder.length();
+               ln--;
+               System.out.println("Deleting character " + playerNameBuilder.charAt(ln) + "Which has ASCII of " + e.getKeyCode());
+               //Delete the thing...
+               playerNameBuilder.deleteCharAt(ln);
+               WindowMain.frameRepaint(); 
+            }
         }
         //Debug keys
         if (DEBUG) {

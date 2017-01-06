@@ -123,6 +123,7 @@ package Zyun.Lam.Game.MonsterQuest;
  */ 
 
 //Imports
+import java.awt.Cursor;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 import java.io.BufferedWriter;
@@ -183,7 +184,14 @@ public class WindowMain extends JFrame implements WindowListener {
             window.setSize(1366, 748);
             System.out.println("Open window");
             SystemLog.log("Show window");
+            //Do all the necessary window initalitaion part
             window.setVisible(true);
+            window.setResizable(false);
+            window.setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
+            window.addWindowListener(this);
+            Graphics g = new Graphics();
+            window.add(g);
+
             //Read from startup setting file
             File startupSettings = new File (user_dir + "/resources/Startup-Settings.xml");
             if (!startupSettings.exists()){
@@ -225,7 +233,7 @@ public class WindowMain extends JFrame implements WindowListener {
                 try{
                     Document startDocument = document.build(startupSettings);
                     Element root = startDocument.getRootElement();
-                    System.out.println("Read From document");
+                    System.out.println("Read From startup file");
                     {
                         Element irsttimesetup = null;
                         irsttimesetup = root.getFirstChildElement("firsttimesetup");
@@ -262,10 +270,6 @@ public class WindowMain extends JFrame implements WindowListener {
                     System.gc();
                 }
             }
-            window.addWindowListener(this);
-            Graphics g = new Graphics();
-            window.add(g);
-            window.setResizable(false);
             SystemLog.log("Game start");
             System.out.println("Game start!!!!!!!! YAY!!!!!!!!");
             new ControlUnit();   
@@ -293,6 +297,8 @@ public class WindowMain extends JFrame implements WindowListener {
     }
     
     //Window listeners
+
+    //Window in the front resume.
     @Override
     public void windowActivated(WindowEvent e) {
         System.out.println("Zyun.Lam.Game.MonsterQuest.WindowMain.windowActivated()");
@@ -303,7 +309,7 @@ public class WindowMain extends JFrame implements WindowListener {
     public void windowClosed(WindowEvent e) {  
         System.out.println("Zyun.Lam.Game.MonsterQuest.WindowMain.windowClosed()");
         SystemLog.log("Zyun.Lam.Game.MonsterQuest.WindowMain.windowClosed()");
-        //The files were already closed
+        //The files were already closed, so no need th closed
         System.out.println("Exiting program...");
         System.exit(0);
     }
@@ -317,40 +323,30 @@ public class WindowMain extends JFrame implements WindowListener {
         setVisible(false);
         SystemLog.log("Closing Program");
         SystemLog.log("Run finishing: closing streams...");
-        //Before closing, close all files
-        /*try {
-            SystemLog.logFileOutput.flush();
-            SystemLog.logFileOutput.close();
-            SystemLog.log("Closed streams");
-        } catch (IOException ioe) {
-            //Unable to close files?
-            System.err.println("Unable to close files!! " + ioe.getLocalizedMessage());
-            SystemLog.log("Unable to close files: " + ioe.getMessage());
-        }
-        System.out.println("Exiting program...");
-        System.exit(0);
-*/
         window.dispose();
     }
-
+    //Pause game. The user may be on the toilet or something
     @Override
     public void windowDeactivated(WindowEvent e) {
         System.out.println("Zyun.Lam.Game.MonsterQuest.WindowMain.windowDeactivated()");
         SystemLog.log("Zyun.Lam.Game.MonsterQuest.WindowMain.windowDeactivated()");
     }
 
+    //Continue, unless the user has already paused it
     @Override
     public void windowDeiconified(WindowEvent e) {
         System.out.println("Zyun.Lam.Game.MonsterQuest.WindowMain.windowDeiconified()");
         SystemLog.log("Zyun.Lam.Game.MonsterQuest.WindowMain.windowDeiconified()");
     }
 
+    //Pause game.
     @Override
     public void windowIconified(WindowEvent e) {
         System.out.println("Zyun.Lam.Game.MonsterQuest.WindowMain.windowIconified()");
         SystemLog.log("Zyun.Lam.Game.MonsterQuest.WindowMain.windowIconified()");
     }
 
+    //When window is opened. What should we do. Find on use for it.
     @Override
     public void windowOpened(WindowEvent e) {
         System.out.println("Zyun.Lam.Game.MonsterQuest.WindowMain.windowOpened()");
@@ -358,7 +354,8 @@ public class WindowMain extends JFrame implements WindowListener {
     }
     
     /**
-     *
+     * For repainting the window. Might do a separate one for the game, because it doesn't have a way to measure time. 
+     * THis one is just for the menu parts.
      */
     public static void frameRepaint () {
         window.repaint();
