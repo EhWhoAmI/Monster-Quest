@@ -298,8 +298,9 @@ public class ControlUnit implements MouseListener, KeyListener{
         }
         //Debug keys
         if (DEBUG) {
-            if (e.getKeyChar() == VK_F12) {
+            if (e.getKeyChar() == KeyEvent.VK_F12) {
                     //Exit game...
+                    //This is for quick exits...
                     WindowMain.window.dispose();
             }
         }
