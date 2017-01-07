@@ -189,9 +189,19 @@ public class WindowMain extends JFrame implements WindowListener {
             window.setResizable(false);
             window.setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
             window.addWindowListener(this);
+            
             Graphics g = new Graphics();
             window.add(g);
-
+            try {
+                Thread.sleep(6000);
+            } catch (InterruptedException ie) {
+                //Ignore
+                System.out.println("Interrupted sleep...");
+            }
+            System.out.println("Done with music");
+            ControlUnit.loadingfinished = false;
+            ControlUnit.startScreenSplash = false;
+            frameRepaint();
             //Read from startup setting file
             File startupSettings = new File (user_dir + "/resources/Startup-Settings.xml");
             if (!startupSettings.exists()){

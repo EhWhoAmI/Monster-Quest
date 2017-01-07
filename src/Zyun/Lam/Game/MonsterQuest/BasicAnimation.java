@@ -149,7 +149,12 @@ class BasicAnimation {
     
     
     static String createNewTip () {
-        String[] Tipandquotelist = {"Tip: Tips go here :P", "This game is the best game in the world. Tell your mom that.", "Kill monsters to get rewards!(I know you know this. Just killing time)", "Filling the world with monsters... Bwuwahahaha..."};
+        String[] Tipandquotelist = {"Tip: Tips go here :P", 
+            "This game is the best game in the world. Tell your mom that.",
+            "Kill monsters to get rewards!(I know you know this. Just killing time)", 
+            "Filling the world with monsters... Bwuwahahaha...",
+            "Please buy a beginner's handbook from the shop. It's free."};
+            
         int tipToPrint = ((int)(Math.random() * 1000) % Tipandquotelist.length);
         System.out.print("Zyun.Lam.Game.MonsterQuest.BasicAnimation.createNewTip(): ");
         System.out.println("Quote: " + Tipandquotelist[tipToPrint]);

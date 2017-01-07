@@ -123,7 +123,9 @@ class gamePart1__Tutorial {
                 g2d.fill(boy);
                 g2d.setColor (Color.black);
                 g2d.drawString("Boy", 390, 250);
-                //Image will come soon
+                //Symbol...
+                BufferedImage boySymbol = ImageIO.read(new File (WindowMain.user_dir + "/resources/boysymbol.png"));
+                g.drawImage(boySymbol, 460, 210, null);
             }
             {
             	//Girl box...
@@ -136,6 +138,8 @@ class gamePart1__Tutorial {
                 g2d.setColor(Color.black);
                 g2d.drawString("Girl", 610, 250);
                 //Image will come soon
+                BufferedImage girlSymbol = ImageIO.read(new File (WindowMain.user_dir + "/resources/Girlsymbol.png"));
+                g.drawImage(girlSymbol, 680, 210, null);
             }
         } catch (IOException e) {
             System.err.println("Unable to open image: " + e.getMessage());

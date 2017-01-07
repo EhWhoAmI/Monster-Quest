@@ -16,7 +16,8 @@ import nu.xom.*;
 public class ControlUnit implements MouseListener, KeyListener{
     //Remember to turn this into false when testing is over
     final public static boolean DEBUG = true;
-    static boolean loadingfinished = false;
+    static boolean startScreenSplash = true;
+    static boolean loadingfinished = true;
     static boolean startScreen = false;
     static boolean othersScreen = false;
     static boolean credits = false;
@@ -205,11 +206,11 @@ public class ControlUnit implements MouseListener, KeyListener{
 
     @Override
     public void keyReleased(KeyEvent e) {
-        System.out.println("Zyun.Lam.Game.MonsterQuest.ControlUnit.keyReleased() Key pressed: " + e.getKeyChar());
+        System.out.println("Zyun.Lam.Game.MonsterQuest.ControlUnit.keyReleased() Key pressed: " + e.getKeyChar() + " ASCII: " + e.getExtendedKeyCode());
         if (e.getKeyChar() == '\n')
             SystemLog.log("Key typed ASCII: " + e.getExtendedKeyCode());
         else 
-            SystemLog.log("Key Pressed: " + e.getKeyChar() + "ASCII: " + e.getExtendedKeyCode());
+            SystemLog.log("Key Pressed: " + e.getKeyChar() + " ASCII: " + e.getExtendedKeyCode());
         //Deal with all the commands
         if (credits) {
             credits = false;
@@ -298,9 +299,8 @@ public class ControlUnit implements MouseListener, KeyListener{
         }
         //Debug keys
         if (DEBUG) {
-            if (e.getKeyChar() == KeyEvent.VK_F12) {
+            if (e.getExtendedKeyCode() == 123) {
                     //Exit game...
-                    //This is for quick exits...
                     WindowMain.window.dispose();
             }
         }

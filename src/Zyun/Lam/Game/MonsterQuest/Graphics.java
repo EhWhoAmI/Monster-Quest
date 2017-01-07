@@ -10,6 +10,9 @@ class Graphics extends JPanel{
     static String quote = BasicAnimation.createNewTip();
     @Override
     public void paintComponent(java.awt.Graphics comp) {
+        if (ControlUnit.startScreenSplash) {
+            StartScreen.stcs(comp);
+        }
         if (!ControlUnit.loadingfinished){
             BasicAnimation.loadingBars(comp);
             BasicAnimation.Tips(comp);

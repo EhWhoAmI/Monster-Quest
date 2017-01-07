@@ -43,6 +43,7 @@ public class SystemLog {
                 //No point killing the whole program for the sake of a logging problem...
                 e.printStackTrace();
             }
+            
             try {
                 if (logFileWriter != null)
                     logFileWriter.close();
@@ -50,11 +51,11 @@ public class SystemLog {
                     logFileOutput.close();
             } catch (IOException ex) {
                 ex.printStackTrace();
-            } finally {
-                //Clear these variables, just in case
-                logFileOutput = null;
-                logFileWriter = null;
             }
+            //Clear these variables, just in case
+            logFileOutput = null;
+            logFileWriter = null;
+            
         };
         Thread print = new Thread (thread);
         print.start();
@@ -81,11 +82,11 @@ public class SystemLog {
                         logFileOutput.close();
                 } catch (IOException ex) {
                     ex.printStackTrace();
-                } finally {
-                    //Clear these variables, just in case
-                    logFileOutput = null;
-                    logFileWriter = null;
                 }
+                //Clear these variables, just in case
+                logFileOutput = null;
+                logFileWriter = null;
+                
             }
     }
         
@@ -123,16 +124,16 @@ public class SystemLog {
                 logFileWriter.newLine();
             } catch (IOException e) {
                 e.printStackTrace();
-            } finally {
-                try {
-                    if (logFileWriter != null)
-                        logFileWriter.close();
-                    if (logFileOutput != null)
-                        logFileOutput.close();
-                } catch (IOException ex) {
-                    ex.printStackTrace();
-                }
             }
+            try {
+                if (logFileWriter != null)
+                    logFileWriter.close();
+                if (logFileOutput != null)
+                    logFileOutput.close();
+            } catch (IOException ex) {
+                ex.printStackTrace();
+            }
+            
         };
         Thread print = new Thread (thread);
         print.start();
