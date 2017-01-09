@@ -10,10 +10,14 @@ The first version, or the pre-alpha, or indev, or whatever you want to call it, 
 You are supposed to fight these monsters that are fighting innocent villagers. We are planning to have quite a big map and stuff. Well, you get to explore caves, mountains and stuff.
 
 ### How to help
-Please help, as it is only me, a middle schooler who is doing it. Please see in the TODO section in projects.
+Please help, it takes quite a bunch of time to make it... If you want, you can just test it, and I'll be happy. Please see in the TODO section in projects if you want to code the thing.
 
 ### Website
 The website is here, at [https://ehwhoami.github.io/Monster-Quest/] (https://ehwhoami.github.io/Monster-Quest/) Its quite basic, but I will update it oftenly.
 
 ### Splash Screen Image
 ![Splash screen Image](https://raw.githubusercontent.com/EhWhoAmI/Monster-Quest/master/src/Zyun/Lam/Game/MonsterQuest/resources/Monster%20Quest%20Splash%20Screen%206.png)
+
+### Notes
+  - We use the xom.nu library for XML parsing. The website can be found [here](http://xom.nu)
+  - This game is still in development
