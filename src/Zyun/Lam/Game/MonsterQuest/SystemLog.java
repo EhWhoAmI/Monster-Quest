@@ -20,8 +20,6 @@ import java.util.Date;
 //This is just a basic one... Will 
 public class SystemLog {
     private static String log = "No Problem";
-    static FileWriter logFileOutput = null;
-    static BufferedWriter logFileWriter = null;
     //Seceptions that we will need
     public static final int UNKNOWN_EXCEPTION = 0;
     public static final int FILE_NOT_FOUND = 1;
@@ -29,9 +27,12 @@ public class SystemLog {
     public static final int IOEXCEPTION = 3;
 
     public static void log (String text) {
+        
         //Create Time Stamp
         //Put it into a thread for speed issues. Doesn't affect anything yrt, but it may.
         Runnable thread = () -> {
+            FileWriter logFileOutput = null;
+            BufferedWriter logFileWriter = null;
             Date timeStamp = new Date();
             String content = ("[" + timeStamp + "] " + text);
             try {
@@ -62,6 +63,8 @@ public class SystemLog {
     }
     
     public static void startNewLog () {
+            FileWriter logFileOutput = null;
+            BufferedWriter logFileWriter = null;
             //Create Time Stamp
             Date timeStamp = new Date();
             String content = (" --- NEW LOG STARTED [" + timeStamp + "] ---");
@@ -114,6 +117,8 @@ public class SystemLog {
         }
     public static void log (String text, int errorNumber) {
         Runnable thread = () -> {
+            FileWriter logFileOutput = null;
+            BufferedWriter logFileWriter = null;
             //Create Time Stamp
             Date timeStamp = new Date();
             String content = ("[" + timeStamp + "] (" + errorNumber + "): " + text);
