@@ -8,10 +8,15 @@ import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.HashMap;
 import javax.swing.JOptionPane;
 import nu.xom.*;
+import sun.audio.AudioPlayer;
+import sun.audio.AudioStream;
 
 public class ControlUnit implements MouseListener, KeyListener{
     //Remember to turn this into false when testing is over
@@ -25,7 +30,10 @@ public class ControlUnit implements MouseListener, KeyListener{
     public static HashMap imageresourcesMap;
     public static HashMap textFileResourceMap;
     static StringBuilder playerNameBuilder;
-    static int nameMaxSize = 16;
+    //A few constants...
+    final static int NAME_MAX_SIZE = 16;
+    final static boolean BOY_GENDER = true;
+    final static boolean GIRL_GENDER = false;
     //IMPORTANT: player stats: level, name and stuff
     public static String playerName;
     public static boolean playerGender; //true is boy, false is girl
@@ -86,11 +94,16 @@ public class ControlUnit implements MouseListener, KeyListener{
                 Element toLoad = eleme.get(i);
                 Attribute type = toLoad.getAttribute("type");
                 Attribute name = toLoad.getAttribute("name");
-                if (type.getValue().equals("text-file")) {
-                    textFileResourceMap.put(name, toLoad.getValue());
-                }
-                else if (type.getValue().equals("image")){
-                    imageresourcesMap.put(name, toLoad.getValue());
+                if (toLoad == null) {
+                    System.out.println("The element " + i + " is empty");
+                }  else {
+                    //Get first child element
+                    Text thingy = (Text) toLoad.getChild(0);
+                    String toAdd = thingy.toString();
+                    if (name.toString().equals("text-file")) {
+                        
+                    } if (name.toString().equals("image"))
+                        imageresourcesMap.put(name, toAdd);
                 }
             }
         } catch (ParsingException e) {
@@ -121,6 +134,7 @@ public class ControlUnit implements MouseListener, KeyListener{
         //Start screen open...
         loadingfinished = true; 
         startScreen = true;
+        
         
     }
 
@@ -162,20 +176,23 @@ public class ControlUnit implements MouseListener, KeyListener{
                 SystemLog.log("Start game button pressed -- Start game");
                 tutorial = true;
                 startScreen = false;
+                
                 WindowMain.frameRepaint();
             }
             if ((e.getX() > 1000 & e.getX() < 1200 ) & (e.getY() > 375 & e.getY() < 480)) {
                 //Show Options
                 System.out.println("Zyun.Lam.Game.MonsterQuest.ControlUnit.mouseClicked(), clicked Option button");
                 SystemLog.log("Clicked option button");
+                
             }
-           if ((e.getX() > 1000 & e.getX() < 1200 ) & (e.getY() > 525 & e.getY() < 630)) {
+            if ((e.getX() > 1000 & e.getX() < 1200 ) & (e.getY() > 525 & e.getY() < 630)) {
                 System.out.println("Zyun.Lam.Game.MonsterQuest.ControlUnit.mouseClicked(), clicked others button");
                 SystemLog.log("Clicked others button");
                 othersScreen = true;
                 startScreen = false;
                 WindowMain.frameRepaint();
            }    
+           
         }
         if (othersScreen) {
             //if pressed credits button
@@ -185,6 +202,7 @@ public class ControlUnit implements MouseListener, KeyListener{
                 credits = true;
                 othersScreen = false;
                 startScreen = false;
+                
                 WindowMain.frameRepaint();
                 //Wait till enter pressed
                 //TODO
@@ -194,13 +212,33 @@ public class ControlUnit implements MouseListener, KeyListener{
                 SystemLog.log("Pressed exit button");
                 othersScreen = false;
                 startScreen = true;
+                
                 WindowMain.frameRepaint();
+            }
+        }
+        if (gamePart1__Tutorial.genderChoose) {
+            if ((e.getX() > 378 & e.getX() < 530 ) & (e.getY() > 198 & e.getY() < 273)) {
+                //Pressed boy button
+                System.out.println("Pressed girl button");
+                SystemLog.log ("The player is a boy");
+                gamePart1__Tutorial.genderChoose = false;
+                WindowMain.frameRepaint();
+            }
+            if ((e.getX() > 598 & e.getX() <  748) & (e.getY() > 198 & e.getY() < 273)) {
+                //Pressed girl button
+                System.out.println("Pressed girl button");
+                SystemLog.log("The player is a girl");
+                gamePart1__Tutorial.genderChoose = false;
+                ControlUnit.tutorial = true;
+                WindowMain.frameRepaint();
+                
             }
         }
     }
 
     @Override
     public void keyPressed(KeyEvent e) {
+        //Audio every time the mouse is pressed.
         
     }
 
@@ -246,8 +284,9 @@ public class ControlUnit implements MouseListener, KeyListener{
             }
         }    
         if (gamePart1__Tutorial.nameWrite) {
+            
             System.out.println("Getting Player Name");
-            if (playerNameBuilder.length() <= nameMaxSize) {
+            if (playerNameBuilder.length() <= NAME_MAX_SIZE) {
                 System.out.println("Write to player name");
                 if (e.getKeyChar() == '\n') {
                    //Exit this place
@@ -304,11 +343,13 @@ public class ControlUnit implements MouseListener, KeyListener{
                     WindowMain.window.dispose();
             }
         }
+        
     }
 
     @Override
     public void keyTyped(KeyEvent e) {
         
     }
+    
     
 }

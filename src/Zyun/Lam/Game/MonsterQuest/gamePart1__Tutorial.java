@@ -37,7 +37,7 @@ class gamePart1__Tutorial {
             //Retrive Image from hash map
             //TODO
             //show image
-            villagerImage = ImageIO.read(new File (WindowMain.user_dir + "/resources/villagerimg.png"));
+            villagerImage = ImageIO.read(new File (WindowMain.user_dir + "/resources/images/tutorial/villagerimg.png"));
             g.drawImage(villagerImage, 0, 0, null);
             textBox(g);
             drawWords(g, wordToShow);
@@ -83,7 +83,7 @@ class gamePart1__Tutorial {
             //Retrive Image from hash map
             //TODO
             //show image
-            villagerImage = ImageIO.read(new File (WindowMain.user_dir + "/resources/villagerimg.png"));
+            villagerImage = ImageIO.read(new File (WindowMain.user_dir + "/resources/images/tutorial/villagerimg.png"));
             g.drawImage(villagerImage, 0, 0, null);
             textBox(g);
             Font fontToShow = new Font ("Arial", Font.PLAIN, 30);
@@ -91,7 +91,7 @@ class gamePart1__Tutorial {
             g2d.setColor(Color.BLACK);
             g2d.drawString("What is your name?", 350, 100);
             g2d.drawString(ControlUnit.playerNameBuilder.toString(), 350, 150);
-            g2d.drawString("Characters Left: " + (ControlUnit.nameMaxSize - ControlUnit.playerNameBuilder.length()), 350, 250);
+            g2d.drawString("Characters Left: " + (ControlUnit.NAME_MAX_SIZE - ControlUnit.playerNameBuilder.length()), 350, 250);
         } catch (IOException e) {
             System.err.println("Unable to open image: " + e.getMessage());
             SystemLog.log("Unable to open Image: " + e.getMessage(), SystemLog.IOEXCEPTION);
@@ -106,7 +106,7 @@ class gamePart1__Tutorial {
             //Retrive Image from hash map
             //TODO
             //show image
-            villagerImage = ImageIO.read(new File (WindowMain.user_dir + "/resources/villagerimg.png"));
+            villagerImage = ImageIO.read(new File (WindowMain.user_dir + "/resources/images/tutorial/villagerimg.png"));
             g.drawImage(villagerImage, 0, 0, null);
             Font fontToShow = new Font ("Arial", Font.PLAIN, 30);
             g2d.setFont(fontToShow);
@@ -124,7 +124,7 @@ class gamePart1__Tutorial {
                 g2d.setColor (Color.black);
                 g2d.drawString("Boy", 390, 250);
                 //Symbol...
-                BufferedImage boySymbol = ImageIO.read(new File (WindowMain.user_dir + "/resources/boysymbol.png"));
+                BufferedImage boySymbol = ImageIO.read(new File (WindowMain.user_dir + "/resources/images/tutorial/boysymbol.png"));
                 g.drawImage(boySymbol, 460, 210, null);
             }
             {
@@ -138,12 +138,19 @@ class gamePart1__Tutorial {
                 g2d.setColor(Color.black);
                 g2d.drawString("Girl", 610, 250);
                 //Image will come soon
-                BufferedImage girlSymbol = ImageIO.read(new File (WindowMain.user_dir + "/resources/Girlsymbol.png"));
+                BufferedImage girlSymbol = ImageIO.read(new File (WindowMain.user_dir + "/resources/images/tutorial/Girlsymbol.png"));
                 g.drawImage(girlSymbol, 680, 210, null);
             }
         } catch (IOException e) {
             System.err.println("Unable to open image: " + e.getMessage());
             SystemLog.log("Unable to open Image: " + e.getMessage(), SystemLog.IOEXCEPTION);
         }
+    }
+    
+    static void playerChoose (java.awt.Graphics g){
+        Graphics2D g2d = (Graphics2D) g;
+        Rectangle2D.Float bg = new Rectangle2D.Float(0, 0, WindowMain.window.getWidth(), WindowMain.window.getWidth());
+        g2d.setColor(Color.blue);
+        g2d.fill(bg);
     }
 }
