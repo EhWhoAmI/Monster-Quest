@@ -77,7 +77,7 @@ public class WindowMain extends JFrame implements WindowListener {
     public WindowMain (int nothing) {
         //Do nothing -- empty constructor for you know what...
     }
-    
+
     /**
      *
      */
@@ -88,7 +88,6 @@ public class WindowMain extends JFrame implements WindowListener {
         SystemLog.log("Application opened");
         SystemLog.log("Open window...");
         window = new JFrame("Monster Quest");
-        setLookAndFeel();
             window.setSize(1366, 748);
             System.out.println("Open window");
             SystemLog.log("Show window");
@@ -97,7 +96,7 @@ public class WindowMain extends JFrame implements WindowListener {
             window.setResizable(false);
             window.setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
             window.addWindowListener(this);
-            
+
             Graphics g = new Graphics();
             window.add(g);
             try {
@@ -111,7 +110,7 @@ public class WindowMain extends JFrame implements WindowListener {
             ControlUnit.startScreenSplash = false;
             frameRepaint();
             //Read from startup setting file
-            File startupSettings = new File (user_dir + "/resources/Startup-Settings.xml");
+            File startupSettings = new File (user_dir + "/data/settings/Startup-Settings.xml");
             if (!startupSettings.exists()){
                 //Do a patch for it
                 SystemLog.log("Startup settings does not exist -- Creating new file");
@@ -130,7 +129,7 @@ public class WindowMain extends JFrame implements WindowListener {
                 root.appendChild(fullscreen);
                 Element firstTimeSetupElement = new Element("firsttimesetup");
                 root.appendChild(firstTimeSetupElement);
-                
+
                 Document startupDocument = new Document(root);
                 try (FileWriter stupdoc = new FileWriter(startupSettings);
                     BufferedWriter out = new BufferedWriter(stupdoc);){
@@ -192,7 +191,7 @@ public class WindowMain extends JFrame implements WindowListener {
             System.out.println("Game start!!!!!!!! YAY!!!!!!!!");
             new ControlUnit();   
     }
-    
+
     /**
      *
      * @param args
@@ -202,18 +201,7 @@ public class WindowMain extends JFrame implements WindowListener {
         //termsAndConditions tmcds = new termsAndConditions();
         new WindowMain();
     }
-    
-    private void setLookAndFeel (){
-        try {
-            SystemLog.log("Set look and feel");
-            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-        } catch (ClassNotFoundException | IllegalAccessException | InstantiationException | UnsupportedLookAndFeelException e) {
-            //Do nothing
-            System.err.println("Unable to set look and feel");
-            SystemLog.log("Unable to set look and feel: " + e.getMessage());
-        }
-    }
-    
+
     //Window listeners
 
     //Window in the front resume.
@@ -270,7 +258,7 @@ public class WindowMain extends JFrame implements WindowListener {
         System.out.println("Zyun.Lam.Game.MonsterQuest.WindowMain.windowOpened()");
         SystemLog.log("Zyun.Lam.Game.MonsterQuest.WindowMain.windowOpened()");
     }
-    
+
     /**
      * For repainting the window. Might do a separate one for the game, because it doesn't have a way to measure time. 
      * THis one is just for the menu parts.

@@ -31,7 +31,7 @@ class StartScreen extends JPanel{
             //Retrive Image from hash map
             //TODO
             //show image
-            splashScreen = ImageIO.read(new File (WindowMain.user_dir + "/resources/titlepageSplash.png"));
+            splashScreen = ImageIO.read(new File (WindowMain.user_dir + "/resources/images/start/titlepageSplash.png"));
             g2d.setColor(Color.white);
             Rectangle2D.Float bg = new Rectangle2D.Float (0,0,WindowMain.window.getWidth(),WindowMain.window.getHeight());
             g2d.fill(bg);
@@ -47,7 +47,7 @@ class StartScreen extends JPanel{
     
     static private void playSound () {
             try {
-                String gongFile = (WindowMain.user_dir + "/resources/start.wav");
+                String gongFile = (WindowMain.user_dir + "/resources/audio/start.wav");
                 InputStream in = new FileInputStream(gongFile);
 
                 // create an audiostream from the inputstream
@@ -56,10 +56,10 @@ class StartScreen extends JPanel{
                 // play the audio clip with the audioplayer class
                 AudioPlayer.player.start(audioStream);
             } catch (FileNotFoundException fnfe) {
-                System.out.println("Sound not found!!" + fnfe.getMessage());
+                System.err.println("Sound not found!!" + fnfe.getMessage());
                 SystemLog.log("File not found: " + fnfe.getMessage(), SystemLog.FILE_NOT_FOUND);
             } catch (IOException ioe) {
-                System.out.println("IO Exception: " + ioe.getCause() + " Message: " + ioe.getMessage());
+                System.err.println("IO Exception: " + ioe.getCause() + " Message: " + ioe.getMessage());
                 SystemLog.log("IOException: " + ioe.getMessage(), SystemLog.IOEXCEPTION);
             }
     }

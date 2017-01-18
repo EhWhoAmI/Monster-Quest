@@ -20,7 +20,7 @@ class BasicAnimation {
     public static float percnt = 0;
     
     static void loadImages () {
-        ImageIcon ii = new ImageIcon(WindowMain.user_dir + "/resources/Monster Quest Splash Screen 6.png");
+        ImageIcon ii = new ImageIcon(WindowMain.user_dir + "/resources/images/start/SplashScreen.png");
         startScreen = ii.getImage();
     }
     
