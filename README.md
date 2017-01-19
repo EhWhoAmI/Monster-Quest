@@ -1,4 +1,5 @@
-# Monster Quest
+Monster Quest
+===============
 ### A fun RPG game
 
 This is RPG game made by me. Please try it out when it is ready.
@@ -18,6 +19,19 @@ The website is here, at [https://ehwhoami.github.io/Monster-Quest/] (https://ehw
 ### Splash Screen Image
 ![Splash screen Image](https://raw.githubusercontent.com/EhWhoAmI/Monster-Quest/master/src/Zyun/Lam/Game/MonsterQuest/resources/Monster%20Quest%20Splash%20Screen%206.png)
 
+
+
+### Classes
+
+Not much has been done about character classes. The concepts have come out though,
+ 
+ - Swordsman/Swordswoman - They carry swords, and deal great damage over places. They are fast, and have good armour
+
+ - Warrior - Big, strong, they are powerful. They have high damage, 
+and bash everyhing in their paths. But, they have ZERO armour
+ - Wizard/Witch - These guys do magic, and their spells are feared from around the land. They have improved effect dealing, and medium range.
+ - Archer - They pick off enemies from afar. They have the best range, and can fire fire arrows, and poison arrows. They have higher speed, but lower armour and health.
 ### Notes
-  - We use the xom.nu library for XML parsing. The website can be found [here](http://xom.nu)
+  - We use the xom library for XML parsing. The website can be found [here](http://xom.nu)
   - This game is still in development
+  - We are coming up with the images for the classes!
