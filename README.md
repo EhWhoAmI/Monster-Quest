@@ -17,7 +17,7 @@ Please help, it takes quite a bunch of time to make it... If you want, you can j
 The website is here, at [https://ehwhoami.github.io/Monster-Quest/] (https://ehwhoami.github.io/Monster-Quest/) Its quite basic, but I will update it oftenly.
 
 ### Splash Screen Image
-![Splash screen Image](https://raw.githubusercontent.com/EhWhoAmI/Monster-Quest/master/src/Zyun/Lam/Game/MonsterQuest/resources/Monster%20Quest%20Splash%20Screen%206.png)
+![Splash screen Image](https://raw.githubusercontent.com/EhWhoAmI/Monster-Quest/master/resources/images/start/SplashScreen.png)
 
 
 
