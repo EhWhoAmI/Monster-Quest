@@ -27,7 +27,12 @@ class gamePart1__Tutorial {
         "And save us all!", 
         "Let's get into some important things.", 
         "What is your name?",
-        "Are you a boy or a girl?"};
+        "Are you a boy or a girl?",
+        "Now, it is an import thing you are choosing.",
+        "Your class is very important, ", 
+        "because it chooses what you do in the future.",
+        ""
+        };
     //The word to show -- Will be used in the textsStrings array
     static int wordToShow = 0;
     static void drawImage (java.awt.Graphics g) {
@@ -152,5 +157,25 @@ class gamePart1__Tutorial {
         Rectangle2D.Float bg = new Rectangle2D.Float(0, 0, WindowMain.window.getWidth(), WindowMain.window.getWidth());
         g2d.setColor(Color.blue);
         g2d.fill(bg);
+        g2d.setColor(Color.green);
+        {
+            //Button for Swordsman/woman class
+            Rectangle2D.Float button = new Rectangle2D.Float(100, 100, 175, 75);
+        }
+        {
+            //Button for Warrior class
+            Rectangle2D.Float button = new Rectangle2D.Float(100, 250, 175, 75);
+            
+        }
+        {
+            //Button for Wizard class
+            Rectangle2D.Float button = new Rectangle2D.Float(100, 500, 175, 75);
+            
+        }
+        {
+            //Button for archer class
+            Rectangle2D.Float button = new Rectangle2D.Float(100, 650, 175, 75);
+            
+        }
     }
 }

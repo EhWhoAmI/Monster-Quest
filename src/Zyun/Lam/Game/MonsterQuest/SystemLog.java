@@ -199,8 +199,8 @@ public class SystemLog {
                     logFileWriter.close();
                 if (logFileOutput != null)
                     logFileOutput.close();
-            } catch (IOException ex) {
-                ex.printStackTrace();
+            } catch (IOException exc) {
+                exc.printStackTrace();
             }
             
         };
