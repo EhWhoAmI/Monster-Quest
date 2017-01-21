@@ -26,7 +26,6 @@ The website is here, at [https://ehwhoami.github.io/Monster-Quest/] (https://ehw
 Not much has been done about character classes. The concepts have come out though,
  
  - Swordsman/Swordswoman - They carry swords, and deal great damage over places. They are fast, and have good armour
-
  - Warrior - Big, strong, they are powerful. They have high damage, 
 and bash everyhing in their paths. But, they have ZERO armour
  - Wizard/Witch - These guys do magic, and their spells are feared from around the land. They have improved effect dealing, and medium range.

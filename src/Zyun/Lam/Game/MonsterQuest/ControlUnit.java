@@ -222,6 +222,7 @@ public class ControlUnit implements MouseListener, KeyListener{
                 System.out.println("Pressed girl button");
                 SystemLog.log ("The player is a boy");
                 gamePart1__Tutorial.genderChoose = false;
+                gamePart1__Tutorial.wordToShow++;
                 WindowMain.frameRepaint();
             }
             if ((e.getX() > 598 & e.getX() <  748) & (e.getY() > 198 & e.getY() < 273)) {
@@ -230,6 +231,7 @@ public class ControlUnit implements MouseListener, KeyListener{
                 SystemLog.log("The player is a girl");
                 gamePart1__Tutorial.genderChoose = false;
                 ControlUnit.tutorial = true;
+                gamePart1__Tutorial.wordToShow++;
                 WindowMain.frameRepaint();
                 
             }

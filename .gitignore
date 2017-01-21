@@ -13,6 +13,7 @@ $RECYCLE.BIN/
 *.msi
 *.msm
 *.msp
+*.exe
 
 # Windows shortcuts
 *.lnk
@@ -57,5 +58,10 @@ Temporary Items
 *.mf
 *.zip
 
+# log files
+*.log
+# Keychain for encryption
+KEYCHAIN
 # Stuff used for archives: 
 archived/
+raw/
