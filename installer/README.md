@@ -8,11 +8,11 @@ So far, we only have the windows version. The mac and linux version will come so
 
 To compile the Windows version, you will need a gcc or g++ compiler (a C compiler)
 open a command prompt window, and enter:
-'gcc -o MonsterQuest Monster_Quest.c'
+`gcc -o MonsterQuest Monster_Quest.c`
 or 
-'g++ -o MonsterQuest Monster_Quest.c'
+`g++ -o MonsterQuest Monster_Quest.c`
 ,whichever your compiler is. 
 Then enter, 
-'MonsterQuest'
+`MonsterQuest`
 It should execute, a file system check, which should take a bit of time.
 Then, it will run the Monster Quest game.
