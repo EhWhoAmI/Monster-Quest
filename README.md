@@ -1,6 +1,6 @@
-Monster Quest
+Monster Quest 
 ===============
-### A fun RPG game
+### A fun RPG game :octocat:
 
 This is RPG game made by me. Please try it out when it is ready.
 
@@ -32,5 +32,5 @@ The images will come out soon.
 
 ### Notes
   - We use the xom library for XML parsing. The website can be found [here](http://xom.nu)
-  - This game is still in development
+  - This game is still in development :wink:
   - We are coming up with the images for the classes!
