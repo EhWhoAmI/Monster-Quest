@@ -31,7 +31,7 @@ class gamePart1__Tutorial {
         "Now, it is an import thing you are choosing.",
         "Your class is very important, ", 
         "because it chooses what you do in the future.",
-        ""
+        "You CANNOT change it. So, choose carefully."
         };
     //The word to show -- Will be used in the textsStrings array
     static int wordToShow = 0;

@@ -285,8 +285,7 @@ public class ControlUnit implements MouseListener, KeyListener{
                 }
             }
         }    
-        if (gamePart1__Tutorial.nameWrite) {
-            
+        else if (gamePart1__Tutorial.nameWrite) { 
             System.out.println("Getting Player Name");
             if (playerNameBuilder.length() <= NAME_MAX_SIZE) {
                 System.out.println("Write to player name");
@@ -315,7 +314,7 @@ public class ControlUnit implements MouseListener, KeyListener{
                     } 
                     else {
                         int keyChar = e.getExtendedKeyCode();
-                        if(!(keyChar >= 0 & keyChar <= 31 | keyChar == 127)){
+                        if(!(keyChar >= 0 & keyChar <= 32 | keyChar == 127)){
                             System.out.println("Appending character " + e.getKeyChar() + " to player name , which has ASCII of " + e.getKeyCode() );
                             playerNameBuilder.append(e.getKeyChar());
                             WindowMain.frameRepaint();
