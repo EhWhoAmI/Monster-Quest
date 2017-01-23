@@ -1,0 +1,10 @@
+\\resources\\images\\tutorial\\villagerimg.png
+\\resources\\images\\tutorial\\boysymbol.png
+\\resources\\images\\tutorial\\Girlsymbol.png
+\\resources\\audio\\start.wav
+\\resources\\images\\tutorial\\SwordImage.png
+\\resources\\images\\start\\SplashScreen.png
+\\resources\\images\\start\\titlepageSplash.png
+\\resources\\resources.xml
+\\data\\settings\\Startup-Settings.xml
+\\data\\settings\\settings.xml

@@ -14,6 +14,7 @@ import java.io.IOException;
 class gamePart1__Tutorial {
     static boolean nameWrite = false; 
     static boolean genderChoose = false;
+    static boolean characterChoose = false;
     //The strings of what the villager is about to say
     static String textsStrings [] = {"Press Space to continue...", 
         "Hello, I am a villager from Newbies Town!", 
@@ -28,7 +29,7 @@ class gamePart1__Tutorial {
         "Let's get into some important things.", 
         "What is your name?",
         "Are you a boy or a girl?",
-        "Now, it is an import thing you are choosing.",
+        "Now, it is an important thing you are choosing.",
         "Your class is very important, ", 
         "because it chooses what you do in the future.",
         "You CANNOT change it. So, choose carefully."
@@ -158,24 +159,51 @@ class gamePart1__Tutorial {
         g2d.setColor(Color.blue);
         g2d.fill(bg);
         g2d.setColor(Color.green);
+        Font fontToShow = new Font ("Arial", Font.PLAIN, 30);
+        g2d.setFont(fontToShow);
         {
             //Button for Swordsman/woman class
+            g2d.setColor(Color.green);
             Rectangle2D.Float button = new Rectangle2D.Float(100, 100, 175, 75);
+            g2d.fill(button);
+            g2d.setColor(Color.black);
+            String character = (ControlUnit.playerGender)?"Swordswoman":"Swordsman";
+            g2d.drawString(character, 110, 140);
+            //Draw the image.
+            BufferedImage swordImage;
+            swordImage = Graphics.loadImage("/images/tutorial/SwordImage");
+            g2d.drawImage(swordImage, 100, 100, null);
         }
         {
             //Button for Warrior class
+            g2d.setColor(Color.green);
             Rectangle2D.Float button = new Rectangle2D.Float(100, 250, 175, 75);
+            g2d.fill(button);
+            g2d.setColor(Color.black);
+            String character = "Warrior";
+            g2d.drawString(character, 110, 290);
             
         }
         {
             //Button for Wizard class
-            Rectangle2D.Float button = new Rectangle2D.Float(100, 500, 175, 75);
+            g2d.setColor(Color.green);
+            Rectangle2D.Float button = new Rectangle2D.Float(100, 400, 175, 75);
+            g2d.fill(button);
+            g2d.setColor(Color.black);
+            String character = (ControlUnit.playerGender)?"Witch":"Wizard";
+            g2d.drawString(character, 110, 440);
             
         }
         {
             //Button for archer class
-            Rectangle2D.Float button = new Rectangle2D.Float(100, 650, 175, 75);
-            
+            g2d.setColor(Color.green);
+            Rectangle2D.Float button = new Rectangle2D.Float(100, 550, 175, 75);
+            g2d.fill(button);
+            g2d.setColor(Color.black);
+            String character = "Archer";
+            g2d.drawString(character, 110, 590);
         }
+        //Area for the character choose
+        Rectangle2D.Float showCharacterArea = new Rectangle2D.Float (100, 210, 500, 500);
     }
 }

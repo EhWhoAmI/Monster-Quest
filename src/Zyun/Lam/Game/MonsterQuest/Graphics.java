@@ -4,6 +4,10 @@ package Zyun.Lam.Game.MonsterQuest;
  * Graphics part. 
  */
 
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 
 class Graphics extends JPanel{
@@ -35,5 +39,20 @@ class Graphics extends JPanel{
         if (gamePart1__Tutorial.genderChoose) {
             gamePart1__Tutorial.genderChoose(comp);
         }
+        if (gamePart1__Tutorial.characterChoose) {
+            gamePart1__Tutorial.playerChoose(comp);
+        }
+    }
+    
+    //For loading images...
+    static BufferedImage loadImage (String file) {
+        BufferedImage image = null;
+        try {
+            image = ImageIO.read(new File (WindowMain.user_dir + file));
+        } catch (IOException ioe) {
+            System.err.println("Unable to open image!" + ioe.getMessage());
+            return null;
+        }
+        return image;
     }
 }
