@@ -171,7 +171,7 @@ class gamePart1__Tutorial {
             g2d.drawString(character, 110, 140);
             //Draw the image.
             BufferedImage swordImage;
-            swordImage = Graphics.loadImage("/images/tutorial/SwordImage");
+            swordImage = Graphics.loadImage("/resources/images/tutorial/SwordImage.png");
             g2d.drawImage(swordImage, 100, 100, null);
         }
         {
@@ -204,6 +204,8 @@ class gamePart1__Tutorial {
             g2d.drawString(character, 110, 590);
         }
         //Area for the character choose
-        Rectangle2D.Float showCharacterArea = new Rectangle2D.Float (100, 210, 500, 500);
+        Rectangle2D.Float showCharacterArea = new Rectangle2D.Float (500, 100, 500, 500);
+        g2d.setColor(Color.green);
+        g2d.fill(showCharacterArea);
     }
 }

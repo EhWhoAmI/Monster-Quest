@@ -296,17 +296,20 @@ public class ControlUnit implements MouseListener, KeyListener{
                 System.out.println("Write to player name");
                 if (e.getKeyChar() == '\n') {
                    //Exit this place
-                   //Save name
-                    System.out.println("Enter pressed: exit");
-                   playerName = playerNameBuilder.toString();
-                   //Clear up things...
-                   playerNameBuilder = null;
-                   //Exit place
-                   gamePart1__Tutorial.nameWrite = false;
-                   gamePart1__Tutorial.wordToShow ++;
-                   gamePart1__Tutorial.genderChoose = true;
-                   //WILL DO GENDER PART SOON...
-                   WindowMain.frameRepaint();
+                   //Check if name is empty.
+                    if (!playerNameBuilder.toString().equals("")){
+                       //Save name
+                       System.out.println("Enter pressed: exit");
+                       playerName = playerNameBuilder.toString();
+                       //Clear up things...
+                       playerNameBuilder = null;
+                       //Exit place
+                       gamePart1__Tutorial.nameWrite = false;
+                       gamePart1__Tutorial.wordToShow ++;
+                       gamePart1__Tutorial.genderChoose = true;
+                       //WILL DO GENDER PART SOON...
+                       WindowMain.frameRepaint();
+                   }
                 }
                 else {
                    if (e.getKeyChar() == 8 | e.getKeyChar() == 127) {
