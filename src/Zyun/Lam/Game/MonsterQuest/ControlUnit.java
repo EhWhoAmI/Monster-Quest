@@ -219,9 +219,10 @@ public class ControlUnit implements MouseListener, KeyListener{
         if (gamePart1__Tutorial.genderChoose) {
             if ((e.getX() > 378 & e.getX() < 530 ) & (e.getY() > 198 & e.getY() < 273)) {
                 //Pressed boy button
-                System.out.println("Pressed girl button");
+                System.out.println("Pressed boy button");
                 SystemLog.log ("The player is a boy");
                 gamePart1__Tutorial.genderChoose = false;
+                ControlUnit.tutorial = true;
                 gamePart1__Tutorial.wordToShow++;
                 WindowMain.frameRepaint();
             }
@@ -281,6 +282,10 @@ public class ControlUnit implements MouseListener, KeyListener{
                          //Exit...
                          //The text has finished
                          System.out.println("Text for villager talk finished");
+                         //Do the character choose bit...
+                         gamePart1__Tutorial.characterChoose = true;
+                         tutorial = false;
+                         WindowMain.frameRepaint();
                     }
                 }
             }

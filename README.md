@@ -10,7 +10,7 @@ The first version, or the pre-alpha, or indev, or whatever you want to call it, 
 
 You are supposed to fight these monsters that are fighting innocent villagers. We are planning to have quite a big map and stuff. Well, you get to explore caves, mountains and stuff.
 
-### How to help
+### How to help :wrench:
 Please help, it takes quite a bunch of time to make it... If you want, you can just test it, and I'll be happy. Please see in the TODO section in projects if you want to code the thing.
 
 ### Website
@@ -18,8 +18,6 @@ The website is here, at [https://ehwhoami.github.io/Monster-Quest/] (https://ehw
 
 ### Splash Screen Image
 ![Splash screen Image](https://raw.githubusercontent.com/EhWhoAmI/Monster-Quest/master/resources/images/start/SplashScreen.png)
-
-
 
 ### Classes
 
@@ -30,6 +28,7 @@ Not much has been done about character classes. The concepts have come out thoug
 and bash everyhing in their paths. But, they have ZERO armour
  - Wizard/Witch - These guys do magic, and their spells are feared from around the land. They have improved effect dealing, and medium range.
  - Archer - They pick off enemies from afar. They have the best range, and can fire fire arrows, and poison arrows. They have higher speed, but lower armour and health.
+The images will come out soon.
 ### Notes
   - We use the xom library for XML parsing. The website can be found [here](http://xom.nu)
   - This game is still in development
