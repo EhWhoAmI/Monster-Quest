@@ -49,8 +49,8 @@ class Graphics extends JPanel{
         BufferedImage image = null;
         try {
             image = ImageIO.read(new File (WindowMain.user_dir + file));
-        } catch (IOException ioe) {
-            System.err.println("Unable to open image!" + ioe.getMessage());
+        } catch (final IOException ioe) {
+            System.err.println("Unable to open image " + file + ": " + ioe.getMessage());
             return null;
         }
         return image;
