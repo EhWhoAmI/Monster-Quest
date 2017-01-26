@@ -164,7 +164,7 @@ class gamePart1__Tutorial {
         {
             //Button for Swordsman/woman class
             g2d.setColor(Color.green);
-            Rectangle2D.Float button = new Rectangle2D.Float(100, 100, 175, 75);
+            Rectangle2D.Float button = new Rectangle2D.Float(100, 100, 250, 75);
             g2d.fill(button);
             g2d.setColor(Color.black);
             String character = (ControlUnit.playerGender)?"Swordswoman":"Swordsman";
@@ -172,36 +172,50 @@ class gamePart1__Tutorial {
             //Draw the image.
             BufferedImage swordImage;
             swordImage = Graphics.loadImage("/resources/images/tutorial/SwordImage.png");
-            g2d.drawImage(swordImage, 100, 100, null);
+            g2d.drawImage(swordImage, 275, 100, null);
         }
         {
             //Button for Warrior class
             g2d.setColor(Color.green);
-            Rectangle2D.Float button = new Rectangle2D.Float(100, 250, 175, 75);
+            Rectangle2D.Float button = new Rectangle2D.Float(100, 250, 250, 75);
             g2d.fill(button);
             g2d.setColor(Color.black);
             String character = "Warrior";
             g2d.drawString(character, 110, 290);
+            //Draw the axe image
+            BufferedImage AxeImage;
+            AxeImage = Graphics.loadImage("/resources/images/tutorial/AxeImage.png");
+            g2d.drawImage(AxeImage, 275, 250, null);
             
         }
         {
             //Button for Wizard class
             g2d.setColor(Color.green);
-            Rectangle2D.Float button = new Rectangle2D.Float(100, 400, 175, 75);
+            Rectangle2D.Float button = new Rectangle2D.Float(100, 400, 250, 75);
             g2d.fill(button);
             g2d.setColor(Color.black);
             String character = (ControlUnit.playerGender)?"Witch":"Wizard";
             g2d.drawString(character, 110, 440);
+            //Magician wand image
+            BufferedImage WandImage;
+            WandImage = Graphics.loadImage("/resources/images/tutorial/WandImage.png");
+            g2d.drawImage(WandImage, 275, 402, null);
+            
+            
             
         }
         {
             //Button for archer class
             g2d.setColor(Color.green);
-            Rectangle2D.Float button = new Rectangle2D.Float(100, 550, 175, 75);
+            Rectangle2D.Float button = new Rectangle2D.Float(100, 550, 250, 75);
             g2d.fill(button);
             g2d.setColor(Color.black);
             String character = "Archer";
             g2d.drawString(character, 110, 590);
+            
+            BufferedImage BowImage;
+            BowImage = Graphics.loadImage("/resources/images/tutorial/WandImage.png");
+            g2d.drawImage(BowImage, 275, 402, null);
         }
         //Area for the character choose
         Rectangle2D.Float showCharacterArea = new Rectangle2D.Float (500, 100, 500, 500);
