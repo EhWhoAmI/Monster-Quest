@@ -27,7 +27,6 @@ Not much has been done about character classes. The concepts have come out thoug
  - Warrior - Big, strong, they are powerful. They have high damage, and bash everyhing in their paths. But, they have ZERO armour. ![Axe Image](https://raw.githubusercontent.com/EhWhoAmI/Monster-Quest/master/resources/images/tutorial/AxeImage.png)
  - Wizard/Witch - These guys do magic, and their spells are feared from around the land. They have improved effect dealing, and medium range. ![Wand Image](https://raw.githubusercontent.com/EhWhoAmI/Monster-Quest/master/resources/images/tutorial/WandImage.png)
  - Archer - They pick off enemies from afar. They have the best range, and can fire fire arrows, and poison arrows. They have higher speed, but lower armour and health. ![Bow Image](https://raw.githubusercontent.com/EhWhoAmI/Monster-Quest/master/resources/images/tutorial/BowImage.png)
-The images will come out soon.
 
 ### Notes
   - We use the xom library for XML parsing. The website can be found [here](http://xom.nu)
