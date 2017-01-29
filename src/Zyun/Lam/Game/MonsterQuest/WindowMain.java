@@ -47,38 +47,11 @@ import javax.swing.JOptionPane;
  * @author Zyun
  */
 public class WindowMain extends JFrame implements WindowListener {
-
-    /**
-     *
-     */
     public static JFrame window;
-
-    /**
-     *
-     */
     public static String version = "";
-
-    /**
-     *
-     */
     public static boolean firstTimeSetup = false;
-
-    /**
-     *
-     */
     public static String user_dir = System.getProperty("user.dir");
-
-    /**
-     *
-     * @param nothing
-     */
-    public WindowMain (int nothing) {
-        //Do nothing -- empty constructor for you know what...
-    }
-
-    /**
-     *
-     */
+    
     public WindowMain() {
         //Deal with log file issue
         SystemLog.clearFile();
