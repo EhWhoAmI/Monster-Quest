@@ -13,6 +13,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.HashMap;
+import java.util.Stack;
 import javax.swing.JOptionPane;
 import nu.xom.*;
 import sun.audio.AudioPlayer;
@@ -29,6 +30,7 @@ public class ControlUnit implements MouseListener, KeyListener{
     static boolean tutorial = false;
     public static HashMap imageresourcesMap;
     public static HashMap textFileResourceMap;
+    public static Stack fileHashMap;
     static StringBuilder playerNameBuilder;
     //A few constants...
     final static int NAME_MAX_SIZE = 16;
@@ -39,14 +41,13 @@ public class ControlUnit implements MouseListener, KeyListener{
     public static boolean playerGender; //true is boy, false is girl
     public ControlUnit() {
         boolean loading = false;
-        WindowMain thing = new WindowMain(0);
         WindowMain.window.addMouseListener(this);
         WindowMain.window.addKeyListener(this);
         ///Loading part
         System.out.println("Window height: " + WindowMain.window.getHeight());
         File resources = new File (WindowMain.user_dir + "/resources/resources.xml");
         if (!resources.exists()){
-            JOptionPane.showMessageDialog(thing, "Resources does not exist! Program must Exit", "File not found", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(WindowMain.window, "Resources does not exist! Program must Exit", "File not found", JOptionPane.ERROR_MESSAGE);
             SystemLog.log("Resources does not exist");
             System.exit(1);
         }
@@ -89,6 +90,8 @@ public class ControlUnit implements MouseListener, KeyListener{
             imageresourcesMap = new HashMap(images, 0.75F);
             //We dont have much of these, so...
             textFileResourceMap = new HashMap(textFiles, 1);
+            //List of all the files for verfying
+            fileHashMap = new Stack();
             for (int i = 1; i < eleme.size(); i++) {
                 //TODO...
                 Element toLoad = eleme.get(i);
@@ -100,21 +103,34 @@ public class ControlUnit implements MouseListener, KeyListener{
                     //Get first child element
                     Text thingy = (Text) toLoad.getChild(0);
                     String toAdd = thingy.toString();
-                    if (name.toString().equals("text-file")) {
-                        
-                    } if (name.toString().equals("image"))
-                        imageresourcesMap.put(name, toAdd);
+                    if (name.toString().equals("text-file"))
+                        textFileResourceMap.put (name.toString(), toAdd);
+                    if (name.toString().equals("image"))
+                        imageresourcesMap.put(name.toString(), toAdd);
+                    
+                    fileHashMap.add(toAdd);
                 }
             }
+            //Experimental features, to verify files.
+            /*for (int i = 0; i < eleme.size(); i++) {
+                String fileToLoad = (String) fileHashMap.pop();
+                File fileName = new File (fileToLoad);
+                if (!fileName.exists()){
+                    System.err.println("File does not exist: " + fileName.getName());
+                    SystemLog.log("File " + fileName.getName() + "Does Not Exist!! Please fix!", SystemLog.FILE_NOT_FOUND);
+                    JOptionPane.showMessageDialog(WindowMain.window, "This File, " + fileName.getName() + "does not exist. Please reinstall this game.", "File not Found", JOptionPane.ERROR_MESSAGE);
+                }
+            }*/
         } catch (ParsingException e) {
-            JOptionPane.showMessageDialog(thing, "Parsing error!\nReason: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(WindowMain.window, "Parsing error!\nReason: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
             SystemLog.log("Parsing error! " + e.getLocalizedMessage());
             System.exit(1);
         } catch (IOException e) {
-            JOptionPane.showMessageDialog(thing, "I/O Error!\nReason" + e.getMessage(), "I/O Error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(WindowMain.window, "I/O Error!\nReason" + e.getMessage(), "I/O Error", JOptionPane.ERROR_MESSAGE);
             SystemLog.log("IO Error: " + e.getLocalizedMessage());
             System.exit(1);
         }
+        BasicAnimation.percnt ++;
         while (!loading) {
             WindowMain.frameRepaint();
             

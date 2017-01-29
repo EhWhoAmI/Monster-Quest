@@ -214,12 +214,39 @@ class gamePart1__Tutorial {
             g2d.drawString(character, 110, 590);
             
             BufferedImage BowImage;
-            BowImage = Graphics.loadImage("/resources/images/tutorial/WandImage.png");
-            g2d.drawImage(BowImage, 275, 402, null);
+            BowImage = Graphics.loadImage("/resources/images/tutorial/BowImage.png");
+            g2d.drawImage(BowImage, 275, 550, null);
         }
         //Area for the character choose
-        Rectangle2D.Float showCharacterArea = new Rectangle2D.Float (500, 100, 500, 500);
+        Rectangle2D.Float showCharacterArea = new Rectangle2D.Float (500, 100, 500, 400);
         g2d.setColor(Color.green);
         g2d.fill(showCharacterArea);
     }
+    
+    static void showCharacter ( CharacterType character, java.awt.Graphics g) {
+        Graphics2D g2d = (Graphics2D) g;
+        String fileName = new String(WindowMain.user_dir);
+        switch (character) {
+            case swords:
+                if (ControlUnit.playerGender) {
+                    //Boy
+                    
+                }
+                else {
+                    //Girl
+                }
+                break;
+            case warrior:
+                break;
+            case magician:
+                break;
+            case archer:
+                break;
+            default:
+        }
+    }
+}
+
+enum CharacterType {
+    swords, warrior, magician, archer; 
 }
