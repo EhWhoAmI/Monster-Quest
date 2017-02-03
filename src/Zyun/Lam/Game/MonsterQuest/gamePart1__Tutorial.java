@@ -225,18 +225,16 @@ class gamePart1__Tutorial {
     
     static void showCharacter ( CharacterType character, java.awt.Graphics g) {
         Graphics2D g2d = (Graphics2D) g;
-        String fileName = new String(WindowMain.user_dir);
+        String fileName = new String(WindowMain.user_dir + "/resources/images/tutorial/");
+        int imgX, imgY;
+        String explanation;
         switch (character) {
             case swords:
-                if (ControlUnit.playerGender) {
-                    //Boy
-                    
-                }
-                else {
-                    //Girl
-                }
+                fileName += (ControlUnit.playerGender)?"SwordsManImageMale":"SwordsManImageWoman";
+                //Add the stuff..
                 break;
             case warrior:
+                fileName += (ControlUnit.playerGender)?"WarriorImageMale":"WarriorImageWoman";
                 break;
             case magician:
                 break;
@@ -244,6 +242,7 @@ class gamePart1__Tutorial {
                 break;
             default:
         }
+        fileName += ".png";
     }
 }
 
