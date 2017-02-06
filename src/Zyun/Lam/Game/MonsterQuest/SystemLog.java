@@ -93,7 +93,7 @@ public class SystemLog {
             }
     }
         
-        static void clearFile () {
+    static void clearFile () {
             File logFile = new File ("system.log");
             //If log file does not exist, who cares, as we will make it later
             if (logFile.exists()) {
@@ -122,6 +122,7 @@ public class SystemLog {
                 }                
             }
         }
+    
     public static void log (String text, int errorNumber) {
         Runnable thread = () -> {
             FileWriter logFileOutput = null;
@@ -150,7 +151,8 @@ public class SystemLog {
         Thread print = new Thread (thread);
         print.start();
     }
-        public static void log (String text, int errorNumber, long threadID) {
+    
+    public static void log (String text, int errorNumber, long threadID) {
         Runnable thread = () -> {
             FileWriter logFileOutput = null;
             BufferedWriter logFileWriter = null;

@@ -14,6 +14,7 @@ import javax.swing.ImageIcon;
  * The animation for all the Menus when you start the game. Should change name, though, but I'm too lazy...
  * @author Zyun
  */
+
 class BasicAnimation {
     static public Image startScreen;
     static public int alpha = 0;
@@ -147,13 +148,17 @@ class BasicAnimation {
         comp2D.drawString(Graphics.quote, (windowWidth / 2) - (textWidth / 2), 650);
     }
     
-    
     static String createNewTip () {
         String[] Tipandquotelist = {"Tip: Tips go here :P", 
             "This game is the best game in the world. Tell your mom that.",
             "Kill monsters to get rewards!(I know you know this. Just killing time)", 
             "Filling the world with monsters... Bwuwahahaha...",
-            "Please buy a beginner's handbook from the shop. It's free."};
+            "Please buy a beginner's handbook from the shop. It's free.",
+            "Welcome back to Monster Quest!",
+            "Monster Quest is in constant development! Yay!!",
+            "Always remember that you are absolutely unique. Just like everyone else.",
+            "Monsters are real. Or are they?"
+            };
             
         int tipToPrint = ((int)(Math.random() * 1000) % Tipandquotelist.length);
         System.out.print("Zyun.Lam.Game.MonsterQuest.BasicAnimation.createNewTip(): ");

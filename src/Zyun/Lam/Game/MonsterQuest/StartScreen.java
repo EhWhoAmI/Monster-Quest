@@ -44,7 +44,6 @@ class StartScreen extends JPanel{
         
     }
     
-    
     static private void playSound () {
             try {
                 String gongFile = (WindowMain.user_dir + "/resources/audio/start.wav");

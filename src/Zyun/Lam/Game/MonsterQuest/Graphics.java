@@ -12,6 +12,7 @@ import javax.swing.JPanel;
 
 class Graphics extends JPanel{
     static String quote = BasicAnimation.createNewTip();
+    
     @Override
     public void paintComponent(java.awt.Graphics comp) {
         if (ControlUnit.startScreenSplash) {
@@ -50,7 +51,7 @@ class Graphics extends JPanel{
         try {
             image = ImageIO.read(new File (WindowMain.user_dir + file));
         } catch (final IOException ioe) {
-            System.err.println("Unable to open image " + file + ": " + ioe.getMessage());
+            System.err.println("Unable to open image " + file + ": " + ioe.getMessage() + " and " + ioe.getLocalizedMessage());
             return null;
         }
         return image;
