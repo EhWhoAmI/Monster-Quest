@@ -7,6 +7,7 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import javax.imageio.ImageIO;
 import java.awt.Graphics2D;
+import java.awt.Point;
 import java.awt.geom.GeneralPath;
 import java.awt.geom.Rectangle2D;
 import java.io.IOException;
@@ -15,6 +16,7 @@ class gamePart1__Tutorial {
     static boolean nameWrite = false; 
     static boolean genderChoose = false;
     static boolean characterChoose = false;
+    static CharacterType characterShow = CharacterType.nothing;
     //The strings of what the villager is about to say
     static String textsStrings [] = {"Press Space to continue...", 
         "Hello, I am a villager from Newbies Town!", 
@@ -52,6 +54,7 @@ class gamePart1__Tutorial {
             SystemLog.log("Unable to open Image: " + e.getMessage(), SystemLog.IOEXCEPTION);
         }
     }
+    
     static void textBox (java.awt.Graphics g) {
         Graphics2D g2d = (java.awt.Graphics2D) g;
         GeneralPath txtbox = new GeneralPath();
@@ -167,7 +170,7 @@ class gamePart1__Tutorial {
             Rectangle2D.Float button = new Rectangle2D.Float(100, 100, 250, 75);
             g2d.fill(button);
             g2d.setColor(Color.black);
-            String character = (ControlUnit.playerGender)?"Swordswoman":"Swordsman";
+            String character = (!ControlUnit.playerGender)?"Swordswoman":"Swordsman";
             g2d.drawString(character, 110, 140);
             //Draw the image.
             BufferedImage swordImage;
@@ -194,7 +197,7 @@ class gamePart1__Tutorial {
             Rectangle2D.Float button = new Rectangle2D.Float(100, 400, 250, 75);
             g2d.fill(button);
             g2d.setColor(Color.black);
-            String character = (ControlUnit.playerGender)?"Witch":"Wizard";
+            String character = (!ControlUnit.playerGender)?"Witch":"Wizard";
             g2d.drawString(character, 110, 440);
             //Magician wand image
             BufferedImage WandImage;
@@ -212,40 +215,123 @@ class gamePart1__Tutorial {
             g2d.setColor(Color.black);
             String character = "Archer";
             g2d.drawString(character, 110, 590);
-            
             BufferedImage BowImage;
             BowImage = Graphics.loadImage("/resources/images/tutorial/BowImage.png");
             g2d.drawImage(BowImage, 275, 550, null);
         }
         //Area for the character choose
-        Rectangle2D.Float showCharacterArea = new Rectangle2D.Float (500, 100, 500, 400);
+        Rectangle2D.Float showCharacterArea = new Rectangle2D.Float (500, 75, 650, 550);
         g2d.setColor(Color.green);
         g2d.fill(showCharacterArea);
+        showCharacter(characterShow ,g);
+        //Button for selection.
+        if (characterShow != CharacterType.nothing) {
+            Rectangle2D.Float button = new Rectangle2D.Float(950, 550, 150, 45);
+            g2d.setColor(Color.orange);
+            g2d.fill(button);
+            g2d.setColor(Color.black);
+            g2d.setFont(new Font("Arial", Font.PLAIN, 25));
+            g2d.drawString("Select", 953, 575);
+        }
     }
     
     static void showCharacter ( CharacterType character, java.awt.Graphics g) {
         Graphics2D g2d = (Graphics2D) g;
-        String fileName = new String(WindowMain.user_dir + "/resources/images/tutorial/");
-        int imgX, imgY;
+        String fileName = new String("/resources/images/tutorial/");
+        Point pos;
         String explanation;
         switch (character) {
             case swords:
                 fileName += (ControlUnit.playerGender)?"SwordsManImageMale":"SwordsManImageWoman";
-                //Add the stuff..
+                //Deal with the point...
+                //                                  Boy,                             Girl...
+                pos = (ControlUnit.playerGender)? new Point(500, 75): new Point(500, 75);
                 break;
             case warrior:
                 fileName += (ControlUnit.playerGender)?"WarriorImageMale":"WarriorImageWoman";
+                pos = (ControlUnit.playerGender)? new Point(500, 75): new Point(500, 75);
                 break;
             case magician:
+                fileName += (ControlUnit.playerGender)?"WizardImage":"WitchImage";
+                pos = (ControlUnit.playerGender)? new Point(500, 75): new Point(500, 75);
                 break;
             case archer:
+                fileName += (ControlUnit.playerGender)?"ArcherMaleImage":"ArcherFemaleImage";
+                pos = (ControlUnit.playerGender)? new Point(500, 75): new Point(480, 75);
                 break;
             default:
+                pos = new Point(0, 0);
+                //Show nothing
         }
         fileName += ".png";
+        //Draw image to the place...
+        BufferedImage img = Graphics.loadImage(fileName);
+        g2d.drawImage(img, pos.x, pos.y, null);
+        //And the text will be put here.
+        String [] swordsText = {"These people are well known throughout",
+                                "the land. They are powerful, and have ",
+                                "decent damage, decent armour and a",
+                                "short range, that can prove devasting",
+                                "to anybody.. "};
+        String [] warriorText = {"They are strong, and powerful, their",
+                                 "axes cutting through anything. They ",
+                                 "have massive damage and good range, ",
+                                 "but they lack any armour."};
+        String [] WizardText = {"Well known for their magic, they are", 
+                                "powerful, from afar. They have good", 
+                                "damage, good range, and lower armour. ",
+                                "They also have improved effect dealing."};
+        String [] ArcherText = {"They pick off enemies from afar.",
+                                "They are also fast. They have low", 
+                                "damage, massive range, and boast",
+                                "good concealment."};
+        String [] nothing = {""};
+        String[][] thingsToSay = {
+            swordsText, //Swords
+            warriorText, //Warrior
+            WizardText, //Wizard
+            ArcherText, //Archer
+            nothing}; //Empty
+        //Draw string...
+        //The area you have is limited, but too bad Graphics.drawString does not allow \n stuff. 
+        //So, a loop should do.
+        g2d.setFont(new Font("Arial", Font.PLAIN, 20));
+        g2d.setColor(Color.black);
+        //Note, go in incerements of 25 pixels every time.
+        switch (character) {
+            case swords:
+                g2d.drawString(thingsToSay[0][0], 775, 100);
+                g2d.drawString(thingsToSay[0][1], 775, 125);
+                g2d.drawString(thingsToSay[0][2], 775, 150);
+                g2d.drawString(thingsToSay[0][3], 775, 175);
+                g2d.drawString(thingsToSay[0][4], 775, 200);
+                break;
+            case warrior:
+                g2d.drawString(thingsToSay[1][0], 775, 100);
+                g2d.drawString(thingsToSay[1][1], 775, 125);
+                g2d.drawString(thingsToSay[1][2], 775, 150);
+                g2d.drawString(thingsToSay[1][3], 775, 175);
+                break;
+            case magician:
+                g2d.drawString(thingsToSay[2][0], 775, 100);
+                g2d.drawString(thingsToSay[2][1], 775, 125);
+                g2d.drawString(thingsToSay[2][2], 775, 150);
+                g2d.drawString(thingsToSay[2][3], 775, 175);
+                break;
+            case archer:
+                g2d.drawString(thingsToSay[3][0], 775, 100);
+                g2d.drawString(thingsToSay[3][1], 775, 125);
+                g2d.drawString(thingsToSay[3][2], 775, 150);
+                g2d.drawString(thingsToSay[3][3], 775, 175);
+                break;
+            case nothing:
+                g2d.drawString(thingsToSay[4][0], 0, 0);
+                break;
+        
+        }
     }
 }
 
 enum CharacterType {
-    swords, warrior, magician, archer; 
+    swords, warrior, magician, archer, nothing; 
 }

@@ -39,6 +39,7 @@ public class ControlUnit implements MouseListener, KeyListener{
     //IMPORTANT: player stats: level, name and stuff
     public static String playerName;
     public static boolean playerGender; //true is boy, false is girl
+    public static CharacterType playerCharacter;
     public ControlUnit() {
         boolean loading = false;
         WindowMain.window.addMouseListener(this);
@@ -183,7 +184,7 @@ public class ControlUnit implements MouseListener, KeyListener{
 
     @Override
     public void mouseReleased(MouseEvent e) {
-        System.out.println("Zyun.Lam.Game.MonsterQuest.ControlUnit.mouseReleased()");
+        System.out.println("Zyun.Lam.Game.MonsterQuest.ControlUnit.mouseReleased() @ X : " + e.getX() + " Y : " + e.getY());
         SystemLog.log("Zyun.Lam.Game.MonsterQuest.ControlUnit.mouseReleased()");
         if (startScreen) {
             if ((e.getX() > 1000 & e.getX() < 1200 ) & (e.getY() > 200 & e.getY() < 330)) {
@@ -233,24 +234,59 @@ public class ControlUnit implements MouseListener, KeyListener{
             }
         }
         if (gamePart1__Tutorial.genderChoose) {
-            if ((e.getX() > 378 & e.getX() < 530 ) & (e.getY() > 198 & e.getY() < 273)) {
+            if ((e.getX() > 378 & e.getX() < 530 ) & (e.getY() > 200 & e.getY() < 300)) {
                 //Pressed boy button
                 System.out.println("Pressed boy button");
                 SystemLog.log ("The player is a boy");
                 gamePart1__Tutorial.genderChoose = false;
+                playerGender = BOY_GENDER;
                 ControlUnit.tutorial = true;
                 gamePart1__Tutorial.wordToShow++;
                 WindowMain.frameRepaint();
             }
-            if ((e.getX() > 598 & e.getX() <  748) & (e.getY() > 198 & e.getY() < 273)) {
+            if ((e.getX() > 598 & e.getX() <  748) & (e.getY() > 200 & e.getY() < 300)) {
                 //Pressed girl button
                 System.out.println("Pressed girl button");
                 SystemLog.log("The player is a girl");
                 gamePart1__Tutorial.genderChoose = false;
                 ControlUnit.tutorial = true;
+                playerGender = GIRL_GENDER;
                 gamePart1__Tutorial.wordToShow++;
                 WindowMain.frameRepaint();
                 
+            }
+        }
+        if (gamePart1__Tutorial.characterChoose) {
+            if ((e.getX() > 100 & e.getX() < 350) & (e.getY() > 125 & e.getY() < 200)) {
+               //Pressed button 1, swords...
+                System.out.println("Pressed swords button");
+                gamePart1__Tutorial.characterShow = CharacterType.swords;
+                WindowMain.frameRepaint();
+            }
+            else if ((e.getX() > 100 & e.getX() < 350) & (e.getY() > 275 & e.getY() < 350)) {
+                //Pressed button 2, warrior...
+                System.out.println("Pressed warrior button");
+                gamePart1__Tutorial.characterShow = CharacterType.warrior;
+                WindowMain.frameRepaint();
+            }
+            else if ((e.getX() > 100 & e.getX() < 350) & (e.getY() > 425 & e.getY() < 500)) {
+                //Pressed button 3, magician...
+                System.out.println("Pressed wizard button");
+                gamePart1__Tutorial.characterShow = CharacterType.magician;
+                WindowMain.frameRepaint();
+            }
+            else if ((e.getX() > 100 & e.getX() < 350) & (e.getY() > 575 & e.getY() < 650)) {
+                //Pressed button 4, archer...
+                System.out.println("Pressed archer button");
+                gamePart1__Tutorial.characterShow = CharacterType.archer;
+                WindowMain.frameRepaint();
+            }
+            else if ((e.getX() > 950 & e.getX() < 1100) & (e.getY() > 575 & e.getY() < 620)) {
+                System.out.println("Pressed select button. Assign player type, and load map.");
+                SystemLog.log("Pressed select button. Assign player type, and load map.");
+                //Cry.. Spent 3 months to reach here...
+                playerCharacter = gamePart1__Tutorial.characterShow;
+                gamePart1__Tutorial.characterChoose = false;
             }
         }
     }
@@ -338,7 +374,7 @@ public class ControlUnit implements MouseListener, KeyListener{
                     } 
                     else {
                         int keyChar = e.getExtendedKeyCode();
-                        if(!(keyChar >= 0 & keyChar <= 32 | keyChar == 127)){
+                        if(!(keyChar >= 0 & keyChar <= 32 | keyChar >= 127)){
                             System.out.println("Appending character " + e.getKeyChar() + " to player name , which has ASCII of " + e.getKeyCode() );
                             playerNameBuilder.append(e.getKeyChar());
                             WindowMain.frameRepaint();
@@ -368,7 +404,6 @@ public class ControlUnit implements MouseListener, KeyListener{
                     WindowMain.window.dispose();
             }
         }
-        
     }
 
     @Override
@@ -376,5 +411,8 @@ public class ControlUnit implements MouseListener, KeyListener{
         
     }
     
-    
+    //To initilize character 
+    public void initCharacter () {
+        
+    }
 }

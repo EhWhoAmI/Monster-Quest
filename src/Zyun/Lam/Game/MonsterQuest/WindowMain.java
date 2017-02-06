@@ -163,10 +163,6 @@ public class WindowMain extends JFrame implements WindowListener {
             new ControlUnit();   
     }
 
-    /**
-     *
-     * @param args
-     */
     public static void main(String[] args) {
         //Screw this...
         //termsAndConditions tmcds = new termsAndConditions();
@@ -175,7 +171,7 @@ public class WindowMain extends JFrame implements WindowListener {
 
     //Window listeners
 
-    //Window in the front resume.
+    //Window in the front, resume.
     @Override
     public void windowActivated(WindowEvent e) {
         System.out.println("Zyun.Lam.Game.MonsterQuest.WindowMain.windowActivated()");
@@ -234,6 +230,7 @@ public class WindowMain extends JFrame implements WindowListener {
      * For repainting the window. Might do a separate one for the game, because it doesn't have a way to measure time. 
      * THis one is just for the menu parts.
      */
+    
     public static void frameRepaint () {
         window.repaint();
     }
