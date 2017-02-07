@@ -32,6 +32,7 @@ public class ControlUnit implements MouseListener, KeyListener{
     public static HashMap textFileResourceMap;
     public static Stack fileHashMap;
     static StringBuilder playerNameBuilder;
+    static int currentMap = 0;
     //A few constants...
     final static int NAME_MAX_SIZE = 16;
     final static boolean BOY_GENDER = true;
@@ -151,8 +152,6 @@ public class ControlUnit implements MouseListener, KeyListener{
         //Start screen open...
         loadingfinished = true; 
         startScreen = true;
-        
-        
     }
 
     @Override
@@ -287,6 +286,9 @@ public class ControlUnit implements MouseListener, KeyListener{
                 //Cry.. Spent 3 months to reach here...
                 playerCharacter = gamePart1__Tutorial.characterShow;
                 gamePart1__Tutorial.characterChoose = false;
+                //Load map
+                currentMap = 1;
+                WindowMain.frameRepaint();
             }
         }
     }
