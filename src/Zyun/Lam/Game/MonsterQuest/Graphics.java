@@ -43,6 +43,9 @@ class Graphics extends JPanel{
         if (gamePart1__Tutorial.characterChoose) {
             gamePart1__Tutorial.playerChoose(comp);
         }
+        if (ControlUnit.currentMap != 0) {
+            maps.maps(comp);
+        }
     }
     
     //For loading images...
