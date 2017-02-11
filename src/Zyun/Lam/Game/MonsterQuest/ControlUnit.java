@@ -417,4 +417,8 @@ public class ControlUnit implements MouseListener, KeyListener{
     public void initCharacter () {
         
     }
+    
+    static void funct (){
+    
+    }
 }
