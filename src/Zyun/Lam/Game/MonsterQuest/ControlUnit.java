@@ -415,13 +415,24 @@ public class ControlUnit implements MouseListener, KeyListener{
     
     //To initilize character 
     public void initCharacter () {
-        
-<<<<<<< HEAD
-=======
+        //check if this is first time setup
+        File PlayerSave = new File ("/data/saves/save1.mqgs");
+        File KEYCHAIN = new File ("/data/settings/KEYCHAIN");
+        if (WindowMain.firstTimeSetup) {
+            //Create files
+            try {
+                PlayerSave.createNewFile();
+                KEYCHAIN.createNewFile();
+                //Write to files.
+                
+            } catch (IOException ioe) {
+                
+            }
+            
+        }
     }
     
     static void funct (){
-    
->>>>>>> parent of 31aefdb... Continued on the animation for player to walk, and started on the save game functions.
+
     }
 }
