@@ -13,7 +13,6 @@ $RECYCLE.BIN/
 *.msi
 *.msm
 *.msp
-*.exe
 
 # Windows shortcuts
 *.lnk
@@ -28,7 +27,6 @@ $RECYCLE.BIN/
 .DS_Store
 .AppleDouble
 .LSOverride
-.dmg
 
 # Thumbnails
 ._*
@@ -48,7 +46,7 @@ Network Trash Folder
 Temporary Items
 .apdisk
 
-# Java specific things
+# Java sepecific things
 *.class
 *.jar
 
@@ -61,7 +59,7 @@ Temporary Items
 
 # Stuff used for archives: 
 archived/
-/raw/
+raw/
 
 # Log files:
 *.log
