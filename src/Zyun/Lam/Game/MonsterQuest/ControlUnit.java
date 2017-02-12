@@ -192,7 +192,7 @@ public class ControlUnit implements MouseListener, KeyListener{
                 SystemLog.log("Start game button pressed -- Start game");
                 tutorial = true;
                 startScreen = false;
-                
+                //Load player files and things
                 WindowMain.frameRepaint();
             }
             if ((e.getX() > 1000 & e.getX() < 1200 ) & (e.getY() > 375 & e.getY() < 480)) {
@@ -415,7 +415,21 @@ public class ControlUnit implements MouseListener, KeyListener{
     
     //To initilize character 
     public void initCharacter () {
-        
+        //check if this is first time setup
+        File PlayerSave = new File ("/data/saves/save1.mqgs");
+        File KEYCHAIN = new File ("/data/settings/KEYCHAIN");
+        if (WindowMain.firstTimeSetup) {
+            //Create files
+            try {
+                PlayerSave.createNewFile();
+                KEYCHAIN.createNewFile();
+                //Write to files.
+                
+            } catch (IOException ioe) {
+                
+            }
+            
+        }
     }
     
     static void funct (){
