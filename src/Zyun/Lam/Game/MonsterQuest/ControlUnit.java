@@ -416,5 +416,12 @@ public class ControlUnit implements MouseListener, KeyListener{
     //To initilize character 
     public void initCharacter () {
         
+<<<<<<< HEAD
+=======
+    }
+    
+    static void funct (){
+    
+>>>>>>> parent of 31aefdb... Continued on the animation for player to walk, and started on the save game functions.
     }
 }
