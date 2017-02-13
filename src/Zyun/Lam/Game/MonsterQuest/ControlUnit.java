@@ -399,6 +399,9 @@ public class ControlUnit implements MouseListener, KeyListener{
                WindowMain.frameRepaint(); 
             }
         }
+        if (CurrentMap != 0) {
+            //Control character
+        }
         //Debug keys
         if (DEBUG) {
             if (e.getExtendedKeyCode() == 123) {
