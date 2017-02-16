@@ -13,10 +13,8 @@ $RECYCLE.BIN/
 *.msi
 *.msm
 *.msp
-<<<<<<< HEAD
 *.exe
-=======
->>>>>>> parent of 31aefdb... Continued on the animation for player to walk, and started on the save game functions.
+# =======
 
 # Windows shortcuts
 *.lnk
@@ -52,7 +50,8 @@ Temporary Items
 
 # Java sepecific things
 *.class
-*.jar
+# for the moment...
+# *.jar
 
 # Stuff asked to add by netbeans
 *.netbeans_update_resources
@@ -76,4 +75,4 @@ raw/
 
 # Log files:
 *.log
->>>>>>> parent of 31aefdb... Continued on the animation for player to walk, and started on the save game functions.
+
