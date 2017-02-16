@@ -50,8 +50,8 @@ Temporary Items
 
 # Java sepecific things
 *.class
-# for the moment...
-# *.jar
+
+*.jar
 
 # Stuff asked to add by netbeans
 *.netbeans_update_resources
@@ -60,7 +60,6 @@ Temporary Items
 *.mf
 *.zip
 
-<<<<<<< HEAD
 # log files
 *.log
 # Keychain for encryption
