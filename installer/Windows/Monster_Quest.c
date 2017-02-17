@@ -35,5 +35,7 @@ int main (void) {
     MessageBox (NULL, "Unable to open resource file, so we have to exit. Please reinstall the game.", "Monster Quest -- ERROR", MB_ICONERROR);
     exit (1);
   }
+  //Finish up
+  system ("java -jar Monster-Quest.jar");
   return 0;
 }
