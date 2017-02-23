@@ -45,6 +45,8 @@ class Graphics extends JPanel{
         }
         if (ControlUnit.currentMap != 0) {
             maps.maps(comp);
+            //show character
+            Player.showCharacter(comp);
         }
     }
     
