@@ -357,7 +357,6 @@ public class ControlUnit implements MouseListener, KeyListener{
                        gamePart1__Tutorial.nameWrite = false;
                        gamePart1__Tutorial.wordToShow ++;
                        gamePart1__Tutorial.genderChoose = true;
-                       //WILL DO GENDER PART SOON...
                        WindowMain.frameRepaint();
                    }
                 }
@@ -400,16 +399,20 @@ public class ControlUnit implements MouseListener, KeyListener{
             if (e.getKeyChar() == 's' | e.getKeyChar() == 'S') {
                //Player.SKey(g);
                try {
-                System.out.println("Pressed S key.");
-                Player.playerDirection = Player.FOWARD;
-                Player.FrameNum = 1;
-                WindowMain.frameRepaint();
-                Thread.sleep(166);
-                Player.FrameNum = 2;
-                WindowMain.frameRepaint();
-                Thread.sleep (166);
-                Player.FrameNum = 3;
-                WindowMain.frameRepaint();
+                    System.out.println("Pressed S key."); //May need to make this more smoother, something like 2, 1, 3, 1
+                    Player.playerDirection = Player.FOWARD; // Also needs to change posistion TODO
+                    Player.FrameNum = 1;
+                    WindowMain.frameRepaint();
+                    Thread.sleep(166);
+                    Player.FrameNum = 2;
+                    WindowMain.frameRepaint();
+                    Thread.sleep (166);
+                    Player.FrameNum = 3;
+                    WindowMain.frameRepaint();
+                    Player.FrameNum = 1;
+                    WindowMain.frameRepaint();
+                   Thread.sleep (167);
+                   //Done
                 }catch (InterruptedException ie) {
                     //Ingore
                 }
