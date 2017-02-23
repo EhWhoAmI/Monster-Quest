@@ -7,17 +7,15 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.io.BufferedInputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.io.InputStream;
 import java.util.HashMap;
 import java.util.Stack;
 import javax.swing.JOptionPane;
 import nu.xom.*;
-import sun.audio.AudioPlayer;
-import sun.audio.AudioStream;
 
 public class ControlUnit implements MouseListener, KeyListener{
     //Remember to turn this into false when testing is over
@@ -38,9 +36,7 @@ public class ControlUnit implements MouseListener, KeyListener{
     final static boolean BOY_GENDER = true;
     final static boolean GIRL_GENDER = false;
     //IMPORTANT: player stats: level, name and stuff
-    public static String playerName;
-    public static boolean playerGender; //true is boy, false is girl
-    public static CharacterType playerCharacter;
+    
     public ControlUnit() {
         boolean loading = false;
         WindowMain.window.addMouseListener(this);
@@ -238,7 +234,7 @@ public class ControlUnit implements MouseListener, KeyListener{
                 System.out.println("Pressed boy button");
                 SystemLog.log ("The player is a boy");
                 gamePart1__Tutorial.genderChoose = false;
-                playerGender = BOY_GENDER;
+                Player.playerGender = BOY_GENDER;
                 ControlUnit.tutorial = true;
                 gamePart1__Tutorial.wordToShow++;
                 WindowMain.frameRepaint();
@@ -249,7 +245,7 @@ public class ControlUnit implements MouseListener, KeyListener{
                 SystemLog.log("The player is a girl");
                 gamePart1__Tutorial.genderChoose = false;
                 ControlUnit.tutorial = true;
-                playerGender = GIRL_GENDER;
+                Player.playerGender = GIRL_GENDER;
                 gamePart1__Tutorial.wordToShow++;
                 WindowMain.frameRepaint();
                 
@@ -284,7 +280,7 @@ public class ControlUnit implements MouseListener, KeyListener{
                 System.out.println("Pressed select button. Assign player type, and load map.");
                 SystemLog.log("Pressed select button. Assign player type, and load map.");
                 //Cry.. Spent 3 months to reach here...
-                playerCharacter = gamePart1__Tutorial.characterShow;
+                Player.playerCharacter = gamePart1__Tutorial.characterShow;
                 gamePart1__Tutorial.characterChoose = false;
                 //Load map
                 currentMap = 1;
@@ -354,7 +350,7 @@ public class ControlUnit implements MouseListener, KeyListener{
                     if (!playerNameBuilder.toString().equals("")){
                        //Save name
                        System.out.println("Enter pressed: exit");
-                       playerName = playerNameBuilder.toString();
+                        Player.playerName = playerNameBuilder.toString();
                        //Clear up things...
                        playerNameBuilder = null;
                        //Exit place
@@ -399,8 +395,25 @@ public class ControlUnit implements MouseListener, KeyListener{
                WindowMain.frameRepaint(); 
             }
         }
-        if (CurrentMap != 0) {
-            //Control character
+        if (currentMap != 0) {
+            //Wait for player to press keys
+            if (e.getKeyChar() == 's' | e.getKeyChar() == 'S') {
+               //Player.SKey(g);
+               try {
+                System.out.println("Pressed S key.");
+                Player.playerDirection = Player.FOWARD;
+                Player.FrameNum = 1;
+                WindowMain.frameRepaint();
+                Thread.sleep(166);
+                Player.FrameNum = 2;
+                WindowMain.frameRepaint();
+                Thread.sleep (166);
+                Player.FrameNum = 3;
+                WindowMain.frameRepaint();
+                }catch (InterruptedException ie) {
+                    //Ingore
+                }
+            }
         }
         //Debug keys
         if (DEBUG) {
@@ -427,15 +440,54 @@ public class ControlUnit implements MouseListener, KeyListener{
                 PlayerSave.createNewFile();
                 KEYCHAIN.createNewFile();
                 //Write to files.
-                
+                FileInputStream PlayerSaveStream = new FileInputStream(PlayerSave);
+                BufferedInputStream PlayerSaveOutputStream = new BufferedInputStream(PlayerSaveStream);
+                //Keychain
+                FileInputStream KEYCHAINStream = new FileInputStream(KEYCHAIN);
+                BufferedInputStream KEYCHAINOutputStream = new BufferedInputStream(KEYCHAINStream);
+                //Generate random prime number
+                int publicKey = findPrime();
+                int privateKey = findPrime();
+                //hash it
+                byte[] pubKey = SHA256.hash(Integer.toString(publicKey));
+                //write to file.
             } catch (IOException ioe) {
                 
             }
-            
         }
     }
     
     static void funct (){
 
+    }
+    
+    int findPrime () throws IOException{
+        FileInputStream PrimesStream = new FileInputStream("/data/primes.txt");
+        BufferedInputStream PrimesOutputStream = new BufferedInputStream(PrimesStream);
+        int result = 0;
+        int randNum = (int)Math.round(1000000 * Math.random());
+        //Read from file
+        int i = 0;
+        while (i != randNum) {    
+            StringBuilder number = new StringBuilder();
+            while (true) {
+                i++;
+                
+                //Read from file
+                //read until space
+                int num = PrimesOutputStream.read();
+                if (num == 32) //32 is space
+                    break;
+                number.append(Integer.toString(num));
+            }
+            //This is number...
+            if (i == randNum) {
+                result = Integer.parseInt(number.toString());
+                break;
+            } else 
+                continue;
+        }
+        System.out.println("Prime is " + result);
+        return result;
     }
 }

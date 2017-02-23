@@ -38,6 +38,7 @@ class gamePart1__Tutorial {
         };
     //The word to show -- Will be used in the textsStrings array
     static int wordToShow = 0;
+    
     static void drawImage (java.awt.Graphics g) {
         //The image variable
         BufferedImage villagerImage = null;
@@ -170,7 +171,7 @@ class gamePart1__Tutorial {
             Rectangle2D.Float button = new Rectangle2D.Float(100, 100, 250, 75);
             g2d.fill(button);
             g2d.setColor(Color.black);
-            String character = (!ControlUnit.playerGender)?"Swordswoman":"Swordsman";
+            String character = (!Player.playerGender)?"Swordswoman":"Swordsman";
             g2d.drawString(character, 110, 140);
             //Draw the image.
             BufferedImage swordImage;
@@ -197,7 +198,7 @@ class gamePart1__Tutorial {
             Rectangle2D.Float button = new Rectangle2D.Float(100, 400, 250, 75);
             g2d.fill(button);
             g2d.setColor(Color.black);
-            String character = (!ControlUnit.playerGender)?"Witch":"Wizard";
+            String character = (!Player.playerGender)?"Witch":"Wizard";
             g2d.drawString(character, 110, 440);
             //Magician wand image
             BufferedImage WandImage;
@@ -242,22 +243,22 @@ class gamePart1__Tutorial {
         String explanation;
         switch (character) {
             case swords:
-                fileName += (ControlUnit.playerGender)?"SwordsManImageMale":"SwordsManImageWoman";
+                fileName += (Player.playerGender)?"SwordsManImageMale":"SwordsManImageWoman";
                 //Deal with the point...
                 //                                  Boy,                             Girl...
-                pos = (ControlUnit.playerGender)? new Point(500, 75): new Point(500, 75);
+                pos = (Player.playerGender)? new Point(500, 75): new Point(500, 75);
                 break;
             case warrior:
-                fileName += (ControlUnit.playerGender)?"WarriorImageMale":"WarriorImageWoman";
-                pos = (ControlUnit.playerGender)? new Point(500, 75): new Point(500, 75);
+                fileName += (Player.playerGender)?"WarriorImageMale":"WarriorImageWoman";
+                pos = (Player.playerGender)? new Point(500, 75): new Point(500, 75);
                 break;
             case magician:
-                fileName += (ControlUnit.playerGender)?"WizardImage":"WitchImage";
-                pos = (ControlUnit.playerGender)? new Point(500, 75): new Point(500, 75);
+                fileName += (Player.playerGender)?"WizardImage":"WitchImage";
+                pos = (Player.playerGender)? new Point(500, 75): new Point(500, 75);
                 break;
             case archer:
-                fileName += (ControlUnit.playerGender)?"ArcherMaleImage":"ArcherFemaleImage";
-                pos = (ControlUnit.playerGender)? new Point(500, 75): new Point(480, 75);
+                fileName += (Player.playerGender)?"ArcherMaleImage":"ArcherFemaleImage";
+                pos = (Player.playerGender)? new Point(500, 75): new Point(480, 75);
                 break;
             default:
                 pos = new Point(0, 0);

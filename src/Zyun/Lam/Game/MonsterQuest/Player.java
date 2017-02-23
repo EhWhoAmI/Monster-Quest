@@ -1,5 +1,6 @@
 package Zyun.Lam.Game.MonsterQuest;
 
+import com.sun.corba.se.impl.orbutil.graph.Graph;
 import java.awt.Graphics2D;
 import java.awt.Point;
 import java.awt.image.BufferedImage;
@@ -14,7 +15,19 @@ class Player {
     public static int attack;
     public static int speed;
     public static int defense;
-    public static Point playerPos = new Point(816, 408);
+    public static Point playerPos = new Point(820, 408);
+    public static byte playerDirection = Player.NODIRECTION;
+    public static byte FrameNum = 1;
+    public static String playerName;
+    public static boolean playerGender; //true is boy, false is girl
+    public static CharacterType playerCharacter;
+    //Define for player direction
+    public static final byte FOWARD = 1;
+    public static final byte BACKWARD = 2;
+    public static final byte LEFT = 3;
+    public static final byte RIGHT = 4;
+    public static final byte NODIRECTION = 0;
+    //For player 
     //Generates default stats
     public Player() {
     }
@@ -62,4 +75,36 @@ class Player {
     }
     //Invoked when player presses A
     //Invoked when player presses D
+    //Invoked when nothing happens
+    static void nothingHappens (java.awt.Graphics g) {
+        Graphics2D g2d = (Graphics2D) g;
+        //Show player in frame 1
+        BufferedImage animatedimage1 = Graphics.loadImage("/resources/images/sprites/PersonWalking1");
+        g2d.drawImage(animatedimage1, playerPos.x, playerPos.y, null);
+    }
+    
+    static void showCharacter (java.awt.Graphics g) {
+        Graphics2D g2d = (Graphics2D) g;
+            switch (playerDirection) {
+                case NODIRECTION:
+                    //Display player as not moving...
+                    BufferedImage playerLookingFoward = Graphics.loadImage("/resources/images/sprites/PersonWalking1.png");
+                    //Add image...
+                    g2d.drawImage(playerLookingFoward, playerPos.x, playerPos.y, null);
+                    break;
+                case FOWARD:
+                    //Display movement...
+                    //three times...
+                    
+                    
+                    break;
+                case BACKWARD:
+                    break;
+                case LEFT:
+                    break;
+                case RIGHT:
+                    break;
+            }
+        
+    }
 }
