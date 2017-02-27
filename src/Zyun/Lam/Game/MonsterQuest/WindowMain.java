@@ -19,6 +19,7 @@ package Zyun.Lam.Game.MonsterQuest;
  * |_____  ___|   |  |_____|  |    |  |__________    __________| |       |  | 
  *       \_\      |___________|    |_____________|   |___________|       |__| 
  * 
+ * 
  * This is placed in somewhere like the medieval times. I tried to make it as 
  * historically "accurate" as possible, or make the clothing and weapons 
  * like then. But, I made some fake stuff, and so..... Yeah, you have this game.
@@ -164,8 +165,13 @@ public class WindowMain extends JFrame implements WindowListener {
     }
 
     public static void main(String[] args) {
-        //Screw this...
-        //termsAndConditions tmcds = new termsAndConditions();
+        //Game start
+        /*
+        Please no bugs Please no bugs Please no bugs Please no bugs Please no bugs Please no bugs Please no bugs Please no bugs 
+        Please no bugs Please no bugs Please no bugs Please no bugs Please no bugs Please no bugs Please no bugs Please no bugs 
+        Don't fail on me Don't fail on me Don't fail on me Don't fail on me Don't fail on me Don't fail on me Don't fail on me 
+        Don't fail on me Don't fail on me Don't fail on me Don't fail on me Don't fail on me Don't fail on me Don't fail on me 
+        */
         new WindowMain();
     }
 
@@ -182,7 +188,7 @@ public class WindowMain extends JFrame implements WindowListener {
     public void windowClosed(WindowEvent e) {  
         System.out.println("Zyun.Lam.Game.MonsterQuest.WindowMain.windowClosed()");
         SystemLog.log("Zyun.Lam.Game.MonsterQuest.WindowMain.windowClosed()");
-        //The files were already closed, so no need th closed
+        //The files were already closed, so no need to closed
         System.out.println("Exiting program...");
         System.exit(0);
     }
@@ -233,5 +239,7 @@ public class WindowMain extends JFrame implements WindowListener {
     
     public static void frameRepaint () {
         window.repaint();
+        System.out.println("Frame Repainted");
+        //System.out.println("Window value: " + window.toString());
     }
 }

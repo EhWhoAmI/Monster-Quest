@@ -401,17 +401,21 @@ public class ControlUnit implements MouseListener, KeyListener{
                try {
                     System.out.println("Pressed S key."); //May need to make this more smoother, something like 2, 1, 3, 1
                     Player.playerDirection = Player.FOWARD; // Also needs to change posistion TODO
-                    Player.FrameNum = 1;
+                    Player.FrameNum = 2; //This part is not working? Why???
                     WindowMain.frameRepaint();
+                    System.out.println("Dislaying frame 2");
                     Thread.sleep(166);
-                    Player.FrameNum = 2;
-                    WindowMain.frameRepaint();
+                    //Player.FrameNum = 3;
+                    //WindowMain.frameRepaint();
+                    /*
                     Thread.sleep (166);
-                    Player.FrameNum = 3;
+                    Player.FrameNum = 1;
                     WindowMain.frameRepaint();
                     Player.FrameNum = 1;
                     WindowMain.frameRepaint();
-                   Thread.sleep (167);
+                    Thread.sleep (167);*/
+                    System.out.println("Done displaying character");
+                    //Player.playerDirection = Player.NODIRECTION;
                    //Done
                 }catch (InterruptedException ie) {
                     //Ingore
@@ -458,10 +462,6 @@ public class ControlUnit implements MouseListener, KeyListener{
                 
             }
         }
-    }
-    
-    static void funct (){
-
     }
     
     int findPrime () throws IOException{
