@@ -13,11 +13,11 @@ class Player {
     public static int defenselv;
     public static int speedlv;
     public static int attack;
-    public static int speed;
+    public volatile static int speed;
     public static int defense;
     public static Point playerPos = new Point(820, 408);
     public static byte playerDirection = Player.NODIRECTION;
-    public static byte FrameNum = 1;
+    public volatile static byte FrameNum = 1;
     public static String playerName;
     public static boolean playerGender; //true is boy, false is girl
     public static CharacterType playerCharacter;
@@ -95,8 +95,19 @@ class Player {
                 case FOWARD:
                     //Display movement...
                     //three times...
-                    
-                    
+                    System.out.println("Showing thing");
+                    BufferedImage playerToShow = Graphics.loadImage("/resources/images/sprites/PersonWalking"+ Player.FrameNum + ".png");
+                    g2d.drawImage(playerToShow,playerPos.x , playerPos.y, null);
+                    if (Player.FrameNum > 3) {
+                        Player.FrameNum = 1;
+                        playerDirection = NODIRECTION;
+                        break;
+                    }
+                    if (Player.FrameNum <= 3 ) {
+                        Player.FrameNum ++;
+                        try {Thread.sleep(166);}catch (InterruptedException ie){}
+                        WindowMain.frameRepaint();
+                    }
                     break;
                 case BACKWARD:
                     break;

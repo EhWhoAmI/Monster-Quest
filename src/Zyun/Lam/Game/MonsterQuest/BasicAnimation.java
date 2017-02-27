@@ -203,7 +203,7 @@ class BasicAnimation {
             Font fontForMenubigga = new Font ("Arial", Font.PLAIN, 50);
             comp2D.setFont(fontForMenubigga);
             comp2D.setColor (new Color (240, 248, 255));
-            comp2D.drawString ("", EULAButtonX + (EULAButtonLength / 2), EULAButtonY + 90);
+            comp2D.drawString ("Help", EULAButtonX + (EULAButtonLength / 2), EULAButtonY + 90);
             //End of terms and conditions Button
         }
         {
