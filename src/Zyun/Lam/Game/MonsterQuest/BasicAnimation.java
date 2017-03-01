@@ -243,14 +243,34 @@ class BasicAnimation {
     static void showCredits (java.awt.Graphics comp) {
         Graphics2D comp2D = (Graphics2D) comp;
         Rectangle2D.Float bg = new Rectangle2D.Float(0, 0, (float)WindowMain.window.getWidth(), (float)WindowMain.window.getHeight());
+        comp2D.setColor(Color.BLACK);
         comp2D.fill(bg);
         comp2D.setColor(Color.WHITE);
-        Font fontForMenubigga = new Font ("Arial", Font.PLAIN, 50);
+        Font fontForMenubigga = new Font ("Arial", Font.PLAIN, 30);
         comp2D.setFont(fontForMenubigga);
         FontMetrics fnt = comp2D.getFontMetrics(fontForMenubigga);
-        comp2D.drawString("By : Zyun", (WindowMain.window.getWidth()/ 2) - (fnt.stringWidth("By : Zyun") / 2), (WindowMain.window.getHeight() / 2) - (fnt.stringWidth("By : Zyun") / 2));
-        comp2D.drawString("Press any key to exit.", 10, 500);
+        comp2D.drawString("By : Zyun", 10, 30);
+        comp2D.drawString("Beta Testers: ", 10, 70);
+        comp2D.drawString("Press any key to exit.", 10, 680);
         System.out.println("Zyun.Lam.Game.MonsterQuest.BasicAnimation.showCredits()");
+        ControlUnit.othersScreen = false;
+        ControlUnit.credits = true;
+        WindowMain.frameRepaint();
+    }
+    
+    static void showHelp ( java.awt.Graphics g ) {
+        Graphics2D g2d = (Graphics2D) g;
+        Rectangle2D.Float bg = new Rectangle2D.Float(0, 0, (float)WindowMain.window.getWidth(), (float)WindowMain.window.getHeight());
+        g2d.setColor(Color.BLACK);
+        g2d.fill(bg);
+        g2d.setColor(Color.WHITE);
+        Font fontForMenubigga = new Font ("Arial", Font.PLAIN, 30);
+        g2d.setFont(fontForMenubigga);
+        FontMetrics fnt = g2d.getFontMetrics(fontForMenubigga);
+        g2d.drawString("Help", 10, 30);
+        g2d.drawString("For help, please visit this game's website: https://ehwhoami.github.io/Monster-Quest/ ", 10, 70);
+        g2d.drawString("Press any key to exit.", 10, 680);
+        System.out.println("Zyun.Lam.Game.MonsterQuest.BasicAnimation.showHelp()");
         ControlUnit.othersScreen = false;
         ControlUnit.credits = true;
         WindowMain.frameRepaint();
