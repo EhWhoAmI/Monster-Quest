@@ -214,10 +214,7 @@ public class ControlUnit implements MouseListener, KeyListener{
                 credits = true;
                 othersScreen = false;
                 startScreen = false;
-                
                 WindowMain.frameRepaint();
-                //Wait till enter pressed
-                //TODO
             }
             if (((e.getX() > 1072) & (e.getX() < 1117)) & ((e.getY() > 27) & (e.getY() < 95))) {
                 System.out.println("Pressed exit button");
@@ -405,6 +402,7 @@ public class ControlUnit implements MouseListener, KeyListener{
                     WindowMain.frameRepaint();
                     System.out.println("Dislaying frame 2");
                     Thread.sleep(166);
+                    Player.playerPos.y += 11;
                     //Player.FrameNum = 3;
                     //WindowMain.frameRepaint();
                     /*

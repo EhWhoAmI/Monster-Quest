@@ -95,19 +95,24 @@ class Player {
                 case FOWARD:
                     //Display movement...
                     //three times...
+                    // A bit choppy, though..
                     System.out.println("Showing thing");
                     BufferedImage playerToShow = Graphics.loadImage("/resources/images/sprites/PersonWalking"+ Player.FrameNum + ".png");
                     g2d.drawImage(playerToShow,playerPos.x , playerPos.y, null);
-                    if (Player.FrameNum > 3) {
-                        Player.FrameNum = 1;
-                        playerDirection = NODIRECTION;
-                        break;
-                    }
                     if (Player.FrameNum <= 3 ) {
                         Player.FrameNum ++;
+                        playerPos.y += 11;
                         try {Thread.sleep(166);}catch (InterruptedException ie){}
                         WindowMain.frameRepaint();
                     }
+                    if (Player.FrameNum > 3) {
+                        try {Thread.sleep(166);}catch (InterruptedException ie){}
+                        Player.FrameNum = 1;
+                        playerDirection = NODIRECTION;
+                        System.out.println("Exiting the anamtion");
+                        break;
+                    }
+                    
                     break;
                 case BACKWARD:
                     break;
