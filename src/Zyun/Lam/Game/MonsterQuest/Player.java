@@ -85,42 +85,74 @@ class Player {
     
     static void showCharacter (java.awt.Graphics g) {
         Graphics2D g2d = (Graphics2D) g;
-            switch (playerDirection) {
-                case NODIRECTION:
-                    //Display player as not moving...
-                    BufferedImage playerLookingFoward = Graphics.loadImage("/resources/images/sprites/PersonWalking1.png");
-                    //Add image...
-                    g2d.drawImage(playerLookingFoward, playerPos.x, playerPos.y, null);
+        BufferedImage playerToShow;
+        switch (playerDirection) {
+            case NODIRECTION:
+                //Display player as not moving...
+                BufferedImage playerLookingFoward = Graphics.loadImage("/resources/images/sprites/PersonWalking1.png");
+                //Add image...
+                g2d.drawImage(playerLookingFoward, playerPos.x, playerPos.y, null);
+                break;
+            case FOWARD:
+                //Display movement...
+                //three times...
+                // A bit choppy, though..
+                playerToShow = Graphics.loadImage("/resources/images/sprites/PersonWalking"+ Player.FrameNum + ".png");
+                g2d.drawImage(playerToShow,playerPos.x , playerPos.y, null);
+                if (Player.FrameNum <= 3 ) {
+                    Player.FrameNum ++;
+                    playerPos.y += 11;
+                    try {Thread.sleep(166);}catch (InterruptedException ie){}
+                    WindowMain.frameRepaint();
+                }
+                if (Player.FrameNum > 3) {
+                    try {Thread.sleep(166);}catch (InterruptedException ie){}
+                    Player.FrameNum = 1;
+                    playerDirection = NODIRECTION;
+                    System.out.println("Exiting the anamtion");
                     break;
-                case FOWARD:
-                    //Display movement...
-                    //three times...
-                    // A bit choppy, though..
-                    System.out.println("Showing thing");
-                    BufferedImage playerToShow = Graphics.loadImage("/resources/images/sprites/PersonWalking"+ Player.FrameNum + ".png");
-                    g2d.drawImage(playerToShow,playerPos.x , playerPos.y, null);
-                    if (Player.FrameNum <= 3 ) {
-                        Player.FrameNum ++;
-                        playerPos.y += 11;
-                        try {Thread.sleep(166);}catch (InterruptedException ie){}
-                        WindowMain.frameRepaint();
-                    }
-                    if (Player.FrameNum > 3) {
-                        try {Thread.sleep(166);}catch (InterruptedException ie){}
-                        Player.FrameNum = 1;
-                        playerDirection = NODIRECTION;
-                        System.out.println("Exiting the anamtion");
-                        break;
-                    }
-                    
+                }
+                break;
+            case BACKWARD:
+               //Display movement...
+                //three times...
+                // A bit choppy, though..
+                playerToShow = Graphics.loadImage("/resources/images/sprites/PersonWalking"+ Player.FrameNum + ".png");
+                g2d.drawImage(playerToShow,playerPos.x , playerPos.y, null);
+                if (Player.FrameNum <= 6 ) {
+                    Player.FrameNum ++;
+                    playerPos.y -= 11;
+                    try {Thread.sleep(166);}catch (InterruptedException ie){}
+                    WindowMain.frameRepaint();
+                }
+                if (Player.FrameNum > 6) {
+                    try {Thread.sleep(166);}catch (InterruptedException ie){}
+                    Player.FrameNum = 1;
+                    playerDirection = NODIRECTION;
+                    System.out.println("Exiting the anamtion");
                     break;
-                case BACKWARD:
+                }
+                break;
+            case LEFT:
+                break;
+            case RIGHT:
+                playerToShow = Graphics.loadImage("/resources/images/sprites/PersonWalking"+ Player.FrameNum + ".png");
+                g2d.drawImage(playerToShow,playerPos.x , playerPos.y, null);
+                if (Player.FrameNum <= 8 ) {
+                    Player.FrameNum ++;
+                    playerPos.x += 17;
+                    try {Thread.sleep(250);}catch (InterruptedException ie){}
+                    WindowMain.frameRepaint();
+                }
+                if (Player.FrameNum > 6) {
+                    try {Thread.sleep(250);}catch (InterruptedException ie){}
+                    Player.FrameNum = 1;
+                    playerDirection = NODIRECTION;
+                    System.out.println("Exiting the anamtion");
                     break;
-                case LEFT:
-                    break;
-                case RIGHT:
-                    break;
-            }
-        
+                }
+                break;
+        }
+        System.gc();
     }
 }
