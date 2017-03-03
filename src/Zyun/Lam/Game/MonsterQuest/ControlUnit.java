@@ -10,7 +10,6 @@ import java.awt.event.MouseListener;
 import java.io.BufferedInputStream;
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Stack;
@@ -19,7 +18,8 @@ import nu.xom.*;
 
 public class ControlUnit implements MouseListener, KeyListener{
     //Remember to turn this into false when testing is over
-    final public static boolean DEBUG = true;
+    final public static boolean DEBUG = false;
+    ///////////////////////////////////////
     static boolean startScreenSplash = true;
     static boolean loadingfinished = true;
     static boolean startScreen = false;
@@ -402,7 +402,23 @@ public class ControlUnit implements MouseListener, KeyListener{
                     WindowMain.frameRepaint();
                     System.out.println("Dislaying frame 2");
                     Thread.sleep(166);
-                    Player.playerPos.y += 11;
+                    Player.playerPos.y += 12;
+                    System.out.println("Done displaying character");
+                    //Done
+                }catch (InterruptedException ie) {
+                    //Ingore
+                }
+            }
+            if (e.getKeyChar() == 'w' | e.getKeyChar() == 'W') {
+                
+                try {
+                    System.out.println("Pressed W key."); //May need to make this more smoother, something like 2, 1, 3, 1
+                    Player.playerDirection = Player.BACKWARD;
+                    Player.FrameNum = 4; 
+                    WindowMain.frameRepaint();
+                    System.out.println("Dislaying frame 2");
+                    Thread.sleep(166);
+                    Player.playerPos.y -= 12;
                     //Player.FrameNum = 3;
                     //WindowMain.frameRepaint();
                     /*
@@ -413,12 +429,28 @@ public class ControlUnit implements MouseListener, KeyListener{
                     WindowMain.frameRepaint();
                     Thread.sleep (167);*/
                     System.out.println("Done displaying character");
-                    //Player.playerDirection = Player.NODIRECTION;
                    //Done
                 }catch (InterruptedException ie) {
                     //Ingore
                 }
             }
+            if (e.getKeyChar() == 'd' | e.getKeyChar() == 'D') {
+                    //Player.SKey(g);
+                    try {
+                        System.out.println("Pressed D key."); //May need to make this more smoother, something like 2, 1, 3, 1
+                        Player.playerDirection = Player.RIGHT;
+                        Player.FrameNum = 7; 
+                        WindowMain.frameRepaint();
+                        System.out.println("Dislaying frame 2");
+                        Thread.sleep(166);
+                        Player.playerPos.x += 17;
+
+                        System.out.println("Done displaying character animantion");
+                       //Done
+                    }catch (InterruptedException ie) {
+                        //Ingore
+                    }
+                }
         }
         //Debug keys
         if (DEBUG) {

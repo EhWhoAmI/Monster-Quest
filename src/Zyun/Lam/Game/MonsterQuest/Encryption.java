@@ -5,7 +5,6 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.security.PublicKey;
 import javax.crypto.Cipher;
-import java.util.Scanner;
 
 class SHA256 {
     public static byte [] hash (String text){
