@@ -4,7 +4,11 @@ Monster Quest
 
 This is RPG game made by me. Please try it out when it is ready.
 
-The first version, or the pre-alpha, or indev, or whatever you want to call it, will come out in March 2017, I hope.
+The first version, or the pre-alpha, or indev, or whatever you want to call it, will come out soon, I hope.
+
+This is just a hobby project, so I think it will never be released to any shops.
+
+Don't expect to have it done any time, too, because I usually prostinate anything...
 
 ### A very short summary of this game
 
