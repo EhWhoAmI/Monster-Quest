@@ -108,6 +108,7 @@ public class MonsterQuestMain {
         //Show window.
         MonsterQuestWindow.setVisible(true);
         //Add the start intro screen to the card layout.
+        MonsterQuestWindow.add(cardLayout);
         StartIntroScreen intro = new StartIntroScreen();
         MonsterQuestWindow.add(intro);
         MonsterQuestWindow.repaint();
