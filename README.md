@@ -26,7 +26,7 @@ The website is here, at [https://ehwhoami.github.io/Monster-Quest/] (https://ehw
 ### Classes
 
 Not much has been done about character classes. The concepts have come out though,
- 
+
  - Swordsman/Swordswoman - They carry swords, and deal great damage over places. They are fast, and have good armour 
  
  ![Sword Image](https://raw.githubusercontent.com/EhWhoAmI/Monster-Quest/master/resources/images/tutorial/SwordImage.png)
@@ -40,7 +40,7 @@ Not much has been done about character classes. The concepts have come out thoug
  
  ![Bow Image](https://raw.githubusercontent.com/EhWhoAmI/Monster-Quest/master/resources/images/tutorial/BowImage.png)
 
+Small side note: We will add the charaters in the website, but not here, because it will be too messy.
 ### Notes
   - We use the xom library for XML parsing. The website can be found [here](http://xom.nu)
   - This game is still in development :wink:
-  - We are coming up with the images for the classes!
