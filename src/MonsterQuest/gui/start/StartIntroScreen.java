@@ -60,7 +60,7 @@ public class StartIntroScreen extends JPanel{
             Rectangle2D.Float bg = new Rectangle2D.Float (0,0,MonsterQuestMain.MonsterQuestWindow.getWidth(), MonsterQuestMain.MonsterQuestWindow.getHeight());
             g2d.fill(bg);
             g.drawImage(splashScreen, 250, 0, null);
-            MonsterQuestMain.systemLog.log("Just showed image.");
+            MonsterQuestMain.systemLog.log("Just showed start image.");
         } catch (IOException e) {
             MonsterQuestMain.systemLog.log("Oh no! Unable to open file!" + e.getMessage());
         }
