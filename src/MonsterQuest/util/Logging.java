@@ -23,6 +23,7 @@
  */
 package MonsterQuest.util;
 
+import MonsterQuest.MonsterQuestMain;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
@@ -93,6 +94,8 @@ public class Logging {
                 //Create Time Stamp
                 Date timeStamp = new Date();
                 String content = ("[" + timeStamp + "]: " + text);
+                if (MonsterQuestMain.DEBUG)
+                    System.out.println(content);
                 try {
                     logFileOutput = new FileWriter(System.getProperty("user.dir") + this.logString, true);
                     logFileWriter = new BufferedWriter(logFileOutput);

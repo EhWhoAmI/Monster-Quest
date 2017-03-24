@@ -29,17 +29,15 @@ import MonsterQuest.gui.start.StartIntroScreen;
 import java.awt.Toolkit;
 import javax.swing.JFrame;
 import MonsterQuest.util.Logging;
-import Zyun.Lam.Game.MonsterQuest.SystemLog;
-import Zyun.Lam.Game.MonsterQuest.WindowMain;
 import java.awt.CardLayout;
-import java.awt.Graphics;
-import java.awt.PopupMenu;
+import java.awt.LayoutManager;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import javax.swing.JPanel;
-import javax.swing.JProgressBar;
+import javax.swing.UIManager;
+import javax.swing.UnsupportedLookAndFeelException;
 import sun.audio.AudioPlayer;
 import sun.audio.AudioStream;
 
@@ -79,8 +77,10 @@ import sun.audio.AudioStream;
 
 public class MonsterQuestMain {
     public static JFrame MonsterQuestWindow;
-    public static Logging systemLog;
+    public static JPanel MonsterQuestPanel;
     CardLayout cardLayout;
+    public static Logging systemLog;
+    public static final boolean DEBUG = true;
     //All the values for the version of the game...
     public static String app_Version;
     /**
@@ -105,25 +105,27 @@ public class MonsterQuestMain {
         MonsterQuestWindow.setSize(Toolkit.getDefaultToolkit().getScreenSize());
         MonsterQuestWindow.setResizable(false);
         MonsterQuestWindow.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        //Show window.
-        MonsterQuestWindow.setVisible(true);
-        //Add the start intro screen to the card layout.
-        MonsterQuestWindow.add(cardLayout);
+        //Do all the frame init stuff
         StartIntroScreen intro = new StartIntroScreen();
-        MonsterQuestWindow.add(intro);
+        Loading loadScreen = new Loading();
+        MonsterQuestPanel = new JPanel();
+        cardLayout = new CardLayout();
+        setLookAndFeel();
+        MonsterQuestWindow.add(MonsterQuestPanel);
+       //Add the start intro screen to the card layout.
+        MonsterQuestPanel.add(intro, "intro");
+        MonsterQuestPanel.add(loadScreen, "loading");
+        MonsterQuestPanel.setLayout(cardLayout); 
+        //Show window.
+        MonsterQuestPanel.setVisible(true);
+        cardLayout.show(MonsterQuestPanel, "intro");
         MonsterQuestWindow.repaint();
         playSound("/resources/audio/start.wav");
+
         try {
             Thread.sleep(5000);
         } catch (Exception e) {
         }
-        MonsterQuestWindow.remove(intro);
-        MonsterQuestWindow.remove(intro);
-        MonsterQuestWindow.repaint();
-        Loading loadScreen = new Loading();
-        MonsterQuestMain.systemLog.log("Loading the bar.");
-        MonsterQuestWindow.add(loadScreen);
-        MonsterQuestWindow.repaint();
         MonsterQuestWindow.repaint(10);
     }
     
@@ -137,10 +139,29 @@ public class MonsterQuestMain {
                 // play the audio clip with the audioplayer class
                 AudioPlayer.player.start(audioStream);
                 audioStream.close();
-            } catch (FileNotFoundException fnfe) {
+        } catch (FileNotFoundException fnfe) {
                 systemLog.log("Unable to open file! " + fnfe.getMessage());
-            } catch (IOException ioe) {
+        } catch (IOException ioe) {
                 systemLog.log("IO error! " + ioe.getMessage());
-            }
+        }
+    }
+    
+    private void setLookAndFeel () {
+        try {
+            //UIManager.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel");
+            UIManager.setLookAndFeel("javax.swing.plaf.metal.MetalLookAndFeel");
+            systemLog.log("Setting look and feel");
+        } catch (UnsupportedLookAndFeelException ex) {
+            ex.printStackTrace();
+        } catch (IllegalAccessException ex) {
+            ex.printStackTrace();
+        } catch (InstantiationException ex) {
+            ex.printStackTrace();
+        } catch (ClassNotFoundException ex) {
+            ex.printStackTrace();
+        }
+        /* Turn off metal's use of bold fonts */
+        UIManager.put("swing.boldMetal", Boolean.FALSE);
+         
     }
 }
