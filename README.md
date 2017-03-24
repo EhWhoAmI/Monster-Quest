@@ -1,18 +1,16 @@
 Monster Quest 
 ===============
-### A fun RPG game :octocat:
+### A open source RPG game
+This RPG game is made by [EhWhoAmI](https://github.com/EhWhoAmI/). I have spent many afternoons after school trying to do this game. I hope it will be fun enough.
 
-This is RPG game made by me. Please try it out when it is ready.
-
-The first version, or the pre-alpha, or indev, or whatever you want to call it, will come out soon, I hope.
-
-This is just a hobby project, so I think it will never be released to any shops.
-
-Don't expect to have it done any time, too, because I usually prostinate anything...
+This game will ALWAYS be open source, and free, because this is a hobby, and I do not feel like earning anything from this.
 
 ### A very short summary of this game
 
 You are supposed to fight these monsters that are fighting innocent villagers. We are planning to have quite a big map and stuff. Well, you get to explore caves, mountains and stuff.
+But, we will start off small, maybe a few maps and weapons.
+
+We are in the progress of "pixelating" this game, or making all the graphics into pixels. It WILL take some time.
 
 ### How to help :wrench:
 Please help, it takes quite a bunch of time to make it... If you want, you can just test it, and I'll be happy. Please see in the TODO section in projects if you want to code the thing.
