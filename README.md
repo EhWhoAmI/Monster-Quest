@@ -16,7 +16,7 @@ We are in the progress of "pixelating" this game, or making all the graphics int
 Please help, it takes quite a bunch of time to make it... If you want, you can just test it, and I'll be happy. Please see in the TODO section in projects if you want to code the thing.
 
 ### Website
-The website is here, at [https://ehwhoami.github.io/Monster-Quest/] (https://ehwhoami.github.io/Monster-Quest/) Its quite basic, but I will update it oftenly.
+The website is here, at <https://ehwhoami.github.io/Monster-Quest/> Its quite basic, but I will update it oftenly.
 
 ### Splash Screen Image
 ![Splash screen Image](https://raw.githubusercontent.com/EhWhoAmI/Monster-Quest/master/resources/images/start/SplashScreen.png)
