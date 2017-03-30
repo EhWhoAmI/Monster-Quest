@@ -50,11 +50,7 @@ public class About extends JPanel{
         g2d.setColor(Color.WHITE);
         Font pixelFontBigger = new Font("Minecraft", Font.TRUETYPE_FONT, 35);
         g2d.setFont(pixelFontBigger);
-        FontMetrics fnt = g2d.getFontMetrics(pixelFontBigger);
-        g2d.drawString("By : Zyun", 10, 40);
-        g2d.drawString("Beta Testers: ", 10, 80);
-        g2d.drawString("Press any key to exit.", 10, 680);
-        System.out.println("Zyun.Lam.Game.MonsterQuest.BasicAnimation.showCredits()");
+        
     }
     
     public About() {
