@@ -29,16 +29,17 @@ import java.awt.Font;
 import java.awt.FontMetrics;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.geom.Rectangle2D;
 import javax.swing.JPanel;
+import javax.swing.JButton;
 
 /**
  *
  * @author Zyun
  */
-public class About extends JPanel{
+public class About extends JPanel implements ActionListener{
 
     @Override
     protected void paintComponent(Graphics g) {
@@ -50,29 +51,24 @@ public class About extends JPanel{
         g2d.setColor(Color.WHITE);
         Font pixelFontBigger = new Font("Minecraft", Font.TRUETYPE_FONT, 35);
         g2d.setFont(pixelFontBigger);
-        
+        FontMetrics fnt = g2d.getFontMetrics(pixelFontBigger);
+        g2d.drawString("Monster Quest",(MonsterQuestMain.MonsterQuestWindow.getWidth()/2 - fnt.getWidth("Monster Quest")/2), 10);
+        Font pixelFontBody = new Font("Minecraft", Font.TRUETYPE_FONT, 25);
+        g2d.setFont(pixelFontBody);
+        g2d.drawString("Version: " + MonsterQuestMain.app_Version, 10, 50);
     }
     
     public About() {
         super();
-        this.addKeyListener(new KeyListener() {
-            @Override
-            public void keyTyped(KeyEvent e) {
-                //Do nothing. Will deal with it in keyPressed ()
-            }
-
-            @Override
-            public void keyPressed(KeyEvent e) {
-                //Change scene to the others scene
-                MonsterQuestMain.systemLog.log("Going back to others scene.");
-                MonsterQuestMain.cardLayout.show(MonsterQuestMain.MonsterQuestPanel, "othersOption");
-                MonsterQuestMain.MonsterQuestPanel.repaint();
-            }
-
-            @Override
-            public void keyReleased(KeyEvent e) {
-                //Do nothing. Will deal with it in keyPressed ()
-            }
-        });
+        JButton exit = new JButton ("X");
+        exit.
+    }
+    
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        //Exit the credits place into the others place
+         MonsterQuestMain.systemLog.log("Show others");
+         MonsterQuestMain.cardLayout.show(MonsterQuestMain.MonsterQuestPanel, "othersOption");
+         MonsterQuestMain.MonsterQuestWindow.repaint();
     }
 }
