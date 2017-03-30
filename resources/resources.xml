@@ -7,31 +7,14 @@ and open the template in the editor.
 
 
 <root>
-    <file type="image" name="villagerimg">
-        /resources/images/tutorial/villagerimg.png
-    </file>
-    <file type="image" name="boygenderimg">
-        /resources/images/tutorial/boysymbol.png
-    </file>
-    <file type="image" name="girlgenderimg">
-        /resources/images/tutorial/Girlsymbol.png
-    </file>
-    <file type="audio" name="startSound">
-        /resources/audio/start.wav
-    </file>
-    <file type="image" name="AxeImageForTutorial">
-        /resources/images/tutorial/AxeImage.png
-    </file>
-    <file type="image" name="BowImageForTutorial">
-        /resources/images/tutorial/BowImage.png
-    </file>
-    <file type="image" name="SwordImageForTutorial">
-        /resources/images/tutorial/SwordImage.png
-    </file>
-    <file type="image" name="WandImageImageForTutorial">
-        /resources/images/tutorial/.png
-    </file>
-    <file type="image" name="SwordsManMale">
-        /resources/images/tutorial/SwordsManImageMale.png
-    </file>
+    <file type="image" name="villagerimg">/resources/images/tutorial/villagerimg.png</file>
+    <file type="image" name="boygenderimg">/resources/images/tutorial/boysymbol.png</file>
+    <file type="image" name="girlgenderimg">/resources/images/tutorial/Girlsymbol.png</file>
+    <file type="audio" name="startSound">/resources/audio/start.wav</file>
+    <file type="image" name="AxeImageForTutorial">/resources/images/tutorial/AxeImage.png</file>
+    <file type="image" name="BowImageForTutorial">/resources/images/tutorial/BowImage.png</file>
+    <file type="image" name="SwordImageForTutorial">/resources/images/tutorial/SwordImage.png</file>
+    <file type="image" name="WandImageImageForTutorial">/resources/images/tutorial/WandImage.png</file>
+    <file type="image" name="SwordsManMale">/resources/images/tutorial/SwordsManImageMale.png</file>
+    <file type="font" name="minecraftfont">/resources/fonts/Minecraft.tff</file>
 </root>
