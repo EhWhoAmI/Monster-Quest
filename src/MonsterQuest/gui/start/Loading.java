@@ -25,16 +25,18 @@ package MonsterQuest.gui.start;
 
 import MonsterQuest.MonsterQuestMain;
 import java.awt.Color;
+import java.awt.FontMetrics;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Toolkit;
-import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
+import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
 import javax.imageio.ImageIO;
 import javax.swing.JPanel;
-import javax.swing.JProgressBar;
+import nu.xom.Attribute;
 import nu.xom.Builder;
 import nu.xom.Document;
 import nu.xom.Element;
@@ -45,17 +47,7 @@ import nu.xom.ParsingException;
  * @author Zyun
  */
 public class Loading extends JPanel{
-    
-    //Array for quotes...
-    String[] quoteList = {"Tip: Tips go here :P", 
-            "This game is the best game in the world. Tell your mom that.",
-            "Kill monsters to get rewards!(I know you know this. Just killing time)", 
-            "Filling the world with monsters... Bwuwahahaha...",
-            "Please buy a beginner's handbook from the shop. It's free.",
-            "Welcome back to Monster Quest!",
-            "Monster Quest is in constant development! Yay!!",
-            "Always remember that you are absolutely unique. Just like everyone else.",
-            };
+    private String quote;
     @Override
     protected void paintComponent(Graphics g) {
         //Draw image for the splash screen in the middle.
@@ -66,8 +58,14 @@ public class Loading extends JPanel{
             splashScreen = ImageIO.read(new File (System.getProperty("user.dir") + "/resources/images/start/SplashScreen.png"));
             
             int splashScreenPosX = Toolkit.getDefaultToolkit().getScreenSize().width / 2 - splashScreen.getWidth() / 2 ;
-            g.drawImage(splashScreen, splashScreenPosX, 0, null);
+            g2d.setColor(Color.black);
+            g2d.drawImage(splashScreen, splashScreenPosX, 0, null);
             MonsterQuestMain.systemLog.log("Just showed start splash image.");
+            g2d.setFont(MonsterQuestMain.pixelFont);
+            FontMetrics metrics = getFontMetrics(MonsterQuestMain.pixelFont);
+            g2d.drawString("Loading...", (Toolkit.getDefaultToolkit().getScreenSize().width/2 - metrics.stringWidth("Loading...")/2), 700);
+            //Show quote.
+            g2d.drawString(quote, (Toolkit.getDefaultToolkit().getScreenSize().width/2 - metrics.stringWidth(quote)/2), 650);
         } catch (IOException e) {
             MonsterQuestMain.systemLog.log("Oh no! Unable to open file!" + e.getMessage());
         }
@@ -75,16 +73,10 @@ public class Loading extends JPanel{
     
     public Loading() {
         super();
-        MonsterQuestMain.systemLog.log("Loading the bar.");
-        JProgressBar current = new JProgressBar(0, 2000);
-        current.setValue(0);
-        current.setStringPainted(true);
-        current.setSize(500, 30);
-        this.add(current);
-        loadFiles();
+        quote = createNewQuote();
     }
     
-    void loadFiles () {
+    public void loadFiles () {
         File startupSettings = new File (System.getProperty("user.dir") + "/data/settings/Startup-Settings.xml");
         if (startupSettings.exists()) {
             //Read from startup settings file
@@ -99,19 +91,84 @@ public class Loading extends JPanel{
                     MonsterQuestMain.systemLog.log("Not the first time setup!");
                 }
                 else {
-                    //Deal with it. Remeber to delete element!
+                    //Deal with it. Remeber to delete firsttimestartup element!
                     //The space
                     root.removeChild(0);
                     //The element it self.
                     root.removeChild(1);
+                    root.removeChild(2);
                     MonsterQuestMain.app_Version = root.getFirstChildElement("version").getAttribute("value").toString();
                     MonsterQuestMain.systemLog.log("App version: " + MonsterQuestMain.app_Version);
+                    
+                    MonsterQuestMain.systemLog.log(root.toXML());
+                    FileWriter writer = new FileWriter(startupSettings);
+                    BufferedWriter bufferedWriter = new BufferedWriter(writer);
+                    MonsterQuestMain.systemLog.log("Writing to file " + bufferedWriter.toString());
+                    bufferedWriter.write(root.toXML());
+                    bufferedWriter.flush();
+                    bufferedWriter.close();
                 }
             } catch (ParsingException pe) {
-                
+                MonsterQuestMain.systemLog.log("Parsing exception! " + pe.getMessage());
+                //Remake file.
+                startupSettings.delete();
+                loadFiles();
             } catch (IOException ioe) {
-                
+                MonsterQuestMain.systemLog.log("I/O exception! " + ioe.getMessage());
+                //Remake file.
+                startupSettings.delete();
+                loadFiles();
             }
         }
+        else {
+            //Create new file.
+            MonsterQuestMain.systemLog.log ("Creating new file!");
+            try {
+                startupSettings.createNewFile();
+                Element root = new Element("root");
+                Element firstTimeSetup = new Element ("firsttimesetup");
+                root.appendChild(firstTimeSetup);
+                Element version = new Element("version");
+                version.addAttribute(new Attribute("value", "UNKNOWN"));
+                root.appendChild(version);
+                MonsterQuestMain.systemLog.log("Root = " + root.toXML());
+                MonsterQuestMain.systemLog.log("Writing to file.");
+                //Save file.
+                FileWriter writer = new FileWriter(startupSettings);
+                BufferedWriter bufferedWriter = new BufferedWriter(writer);
+                MonsterQuestMain.systemLog.log("Writing to file " + bufferedWriter.toString());
+                bufferedWriter.write(root.toXML());
+                bufferedWriter.flush();
+                bufferedWriter.close();
+            }catch (IOException ioe) {
+                MonsterQuestMain.systemLog.log("Unable to write to file!!! I give up!!" + ioe.getMessage());
+            }
+        }
+        
+        ////////////////////
+        //Now, read from resources.xml, and check all files.
+        //File resources = new File (System.getProperty("user.dir") + "/resources/resources.xml");
+        //We will skip all the verfying for now, and we will do it later.
+        
+        //Done!
+    }
+    
+    private String createNewQuote () {
+        //Array for quotes...
+        String[] quoteList = {"Tip: Tips go here :P", 
+                "This game is the best game in the world. Tell your mom that.",
+                "Kill monsters to get rewards!(I know you know this. Just killing time)", 
+                "Filling the world with monsters... Bwuwahahaha...",
+                "Please buy a beginner's handbook from the shop. It's free.",
+                "Welcome back to Monster Quest!",
+                "Monster Quest is in constant development! Yay!!",
+                "Always remember that you are absolutely unique. Just like everyone else.",
+                "You can buy many things from the shop, if you have the money"
+                };
+        int randomNo = ((int)(Math.random() * 1000) % quoteList.length);
+        MonsterQuestMain.systemLog.log("Random quote number: " + randomNo);
+        String randomQuote = quoteList[randomNo];
+        MonsterQuestMain.systemLog.log("Quote: " + randomQuote);
+        return randomQuote;
     }
 }

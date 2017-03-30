@@ -24,13 +24,20 @@
 
 package MonsterQuest;
 
+import MonsterQuest.gui.start.About;
+import MonsterQuest.gui.start.Credits;
 import MonsterQuest.gui.start.Loading;
+import MonsterQuest.gui.start.Others;
+import MonsterQuest.gui.start.StartInterfaceMenu;
 import MonsterQuest.gui.start.StartIntroScreen;
 import java.awt.Toolkit;
 import javax.swing.JFrame;
 import MonsterQuest.util.Logging;
 import java.awt.CardLayout;
-import java.awt.LayoutManager;
+import java.awt.Font;
+import java.awt.FontFormatException;
+import java.awt.GraphicsEnvironment;
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -78,9 +85,10 @@ import sun.audio.AudioStream;
 public class MonsterQuestMain {
     public static JFrame MonsterQuestWindow;
     public static JPanel MonsterQuestPanel;
-    CardLayout cardLayout;
+    public static CardLayout cardLayout = new CardLayout();;
     public static Logging systemLog;
-    public static final boolean DEBUG = true;
+    public static boolean DEBUG = false;
+    public static Font pixelFont;
     //All the values for the version of the game...
     public static String app_Version;
     /**
@@ -88,6 +96,16 @@ public class MonsterQuestMain {
      * @param args 
      */
     public static void main(String[] args) {
+        //Set up first logging.
+        systemLog = new Logging("/data/logs/system.log");
+        //Command line args: 
+        for (int n = 0; n < args.length; n++) {
+            if (args[n].equals("-d")) {
+                //Turn on debug tools
+                DEBUG = true;
+                systemLog.log("Debugging mode is on");
+            }
+        }
         new MonsterQuestMain();
     }
     
@@ -96,37 +114,45 @@ public class MonsterQuestMain {
      * opening the window, and initializing the whole thing, too
      */
     public MonsterQuestMain () {
-        //Set up first logging.
-        systemLog = new Logging("/data/logs/system.log");
         systemLog.log("Starting game...");
         MonsterQuestWindow = new JFrame("Monster Quest");
         MonsterQuestWindow.setIconImage(Toolkit.getDefaultToolkit().getImage("resources/icon/Icon.png"));
         //Set size for window
         MonsterQuestWindow.setSize(Toolkit.getDefaultToolkit().getScreenSize());
+        systemLog.log("Screen size: H= " + Toolkit.getDefaultToolkit().getScreenSize().height + " W= " + Toolkit.getDefaultToolkit().getScreenSize().width);
         MonsterQuestWindow.setResizable(false);
         MonsterQuestWindow.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         //Do all the frame init stuff
         StartIntroScreen intro = new StartIntroScreen();
         Loading loadScreen = new Loading();
         MonsterQuestPanel = new JPanel();
-        cardLayout = new CardLayout();
-        setLookAndFeel();
         MonsterQuestWindow.add(MonsterQuestPanel);
-       //Add the start intro screen to the card layout.
+        MonsterQuestPanel.setLayout(cardLayout); 
+        //Add the start intro screen to the card layout.
         MonsterQuestPanel.add(intro, "intro");
         MonsterQuestPanel.add(loadScreen, "loading");
-        MonsterQuestPanel.setLayout(cardLayout); 
+        MonsterQuestPanel.add(new StartInterfaceMenu(), "startMenu");
+        loadFont();
         //Show window.
-        MonsterQuestPanel.setVisible(true);
+        MonsterQuestWindow.setVisible(true);
         cardLayout.show(MonsterQuestPanel, "intro");
         MonsterQuestWindow.repaint();
         playSound("/resources/audio/start.wav");
-
         try {
             Thread.sleep(5000);
         } catch (Exception e) {
         }
-        MonsterQuestWindow.repaint(10);
+        cardLayout.show(MonsterQuestPanel, "loading");
+        //Load all the crucial bits for the start menu
+        MonsterQuestPanel.add(new Others(), "othersOption");
+        MonsterQuestPanel.add(new Credits(), "creditsScene");
+        //Load files
+        loadScreen.loadFiles();
+        try {
+            Thread.sleep(1000);
+        } catch (Exception e) {
+        }
+        cardLayout.show(MonsterQuestPanel, "startMenu");
     }
     
     static void playSound (String soundFileName) {
@@ -137,8 +163,8 @@ public class MonsterQuestMain {
                 // create an audiostream from the inputstream
                 AudioStream audioStream = new AudioStream(in);
                 // play the audio clip with the audioplayer class
+                systemLog.log("Loading sound...");
                 AudioPlayer.player.start(audioStream);
-                audioStream.close();
         } catch (FileNotFoundException fnfe) {
                 systemLog.log("Unable to open file! " + fnfe.getMessage());
         } catch (IOException ioe) {
@@ -148,20 +174,31 @@ public class MonsterQuestMain {
     
     private void setLookAndFeel () {
         try {
-            //UIManager.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel");
-            UIManager.setLookAndFeel("javax.swing.plaf.metal.MetalLookAndFeel");
+            UIManager.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel");
             systemLog.log("Setting look and feel");
         } catch (UnsupportedLookAndFeelException ex) {
-            ex.printStackTrace();
+            systemLog.log("Unsupported Look and feel!");
         } catch (IllegalAccessException ex) {
-            ex.printStackTrace();
+            systemLog.log("Illegal access!");
         } catch (InstantiationException ex) {
-            ex.printStackTrace();
+            systemLog.log("Instantiation Exception!");
         } catch (ClassNotFoundException ex) {
-            ex.printStackTrace();
+            systemLog.log("Class not found!");
         }
-        /* Turn off metal's use of bold fonts */
-        UIManager.put("swing.boldMetal", Boolean.FALSE);
-         
+    }
+    
+    private void loadFont () {
+        try {
+            //create the font to use. Specify the size!
+            pixelFont = Font.createFont(Font.TRUETYPE_FONT, new File(System.getProperty("user.dir") + "/resources/fonts/Minecraft.ttf")).deriveFont(20f);
+            GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
+            //register the font
+            ge.registerFont(Font.createFont(Font.TRUETYPE_FONT, new File(System.getProperty("user.dir") + "/resources/fonts/Minecraft.ttf")));
+            //List avaible fonts
+        } catch (IOException e) {
+            systemLog.log("Unable to open file! " + e.getMessage());
+        } catch(FontFormatException e) {
+            systemLog.log("Font format exception!");
+        }
     }
 }
