@@ -61,12 +61,18 @@ public class Credits extends JPanel implements ActionListener{
     public Credits() {
         super();
         exitButton = new JButton("X");
+        exitButton.setBackground(Color.red);
         exitButton.setBounds(10, 680, 60, 40);
+        exitButton.addActionListener(this);
+        add(exitButton);
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        
+        //Exit the credits place into the others place
+         MonsterQuestMain.systemLog.log("Show others");
+         MonsterQuestMain.cardLayout.show(MonsterQuestMain.MonsterQuestPanel, "othersOption");
+         MonsterQuestMain.MonsterQuestWindow.repaint();
     }
     
     
