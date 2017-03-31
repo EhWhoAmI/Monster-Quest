@@ -50,15 +50,13 @@ public class Settings extends JPanel implements ActionListener{
     JRadioButton sound, music;
     JSlider volume;
     JButton how2Play, exit;
-    @Override
-    protected void paintComponent(Graphics g) {
-        super.paintComponent(g); //To change body of generated methods, choose Tools | Templates.
-    }
 
     public Settings() {
-        super();
+        super(); 
+        setBackground(Color.white);
         GridLayout layout = new GridLayout(12, 3);
         Font pixelFontBigger = new Font("Minecraft", Font.TRUETYPE_FONT, 25);
+        
         JLabel label = new JLabel("Settings");
         label.setFont(pixelFontBigger);
         add(label);
@@ -132,7 +130,15 @@ public class Settings extends JPanel implements ActionListener{
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        
+        Object source = e.getSource();
+        if (source == how2Play) {
+            J
+        }
+        else if (source == exit) {
+            MonsterQuestMain.systemLog.log("Showing start menu");
+            MonsterQuestMain.cardLayout.show(MonsterQuestMain.MonsterQuestPanel, "startMenu");
+            MonsterQuestMain.MonsterQuestWindow.repaint();
+        }
     }
     
     
