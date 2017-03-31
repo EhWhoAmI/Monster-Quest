@@ -55,15 +55,18 @@ public class Credits extends JPanel implements ActionListener{
         FontMetrics fnt = g2d.getFontMetrics(pixelFontBigger);
         g2d.drawString("By : Zyun", 10, 40);
         g2d.drawString("Beta Testers: ", 10, 80);
-        g2d.drawString("Press any key to exit.", 10, 680);
+        g2d.drawString("Not yet in beta mode!", 10, 120);
+        g2d.drawString("Get out using this button: ", 10, 650);
     }
     
     public Credits() {
         super();
+        setLayout(null);
         exitButton = new JButton("X");
         exitButton.setBackground(Color.red);
         exitButton.setBounds(10, 680, 60, 40);
         exitButton.addActionListener(this);
+        exitButton.setFont(new Font("Minecraft", Font.TRUETYPE_FONT, 35));
         add(exitButton);
     }
 

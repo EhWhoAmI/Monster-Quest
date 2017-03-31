@@ -28,6 +28,7 @@ import MonsterQuest.gui.start.About;
 import MonsterQuest.gui.start.Credits;
 import MonsterQuest.gui.start.Loading;
 import MonsterQuest.gui.start.Others;
+import MonsterQuest.gui.start.Settings;
 import MonsterQuest.gui.start.StartInterfaceMenu;
 import MonsterQuest.gui.start.StartIntroScreen;
 import java.awt.Toolkit;
@@ -146,6 +147,8 @@ public class MonsterQuestMain {
         //Load all the crucial bits for the start menu
         MonsterQuestPanel.add(new Others(), "othersOption");
         MonsterQuestPanel.add(new Credits(), "creditsScene");
+        MonsterQuestPanel.add(new About(), "aboutScene");
+        MonsterQuestPanel.add(new Settings(), "settings");
         //Load files
         loadScreen.loadFiles();
         try {

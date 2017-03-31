@@ -52,16 +52,23 @@ public class About extends JPanel implements ActionListener{
         Font pixelFontBigger = new Font("Minecraft", Font.TRUETYPE_FONT, 35);
         g2d.setFont(pixelFontBigger);
         FontMetrics fnt = g2d.getFontMetrics(pixelFontBigger);
-        g2d.drawString("Monster Quest",(MonsterQuestMain.MonsterQuestWindow.getWidth()/2 - fnt.getWidth("Monster Quest")/2), 10);
+        g2d.drawString("Monster Quest",(MonsterQuestMain.MonsterQuestWindow.getWidth()/2 - fnt.stringWidth("Monster Quest")/2), 30);
         Font pixelFontBody = new Font("Minecraft", Font.TRUETYPE_FONT, 25);
         g2d.setFont(pixelFontBody);
-        g2d.drawString("Version: " + MonsterQuestMain.app_Version, 10, 50);
+        g2d.drawString("Version: " + MonsterQuestMain.app_Version, 10, 80);
+        
+        g2d.drawString("Get out using this button: ", 10, 650);
     }
     
     public About() {
         super();
-        JButton exit = new JButton ("X");
-        exit.
+        setLayout(null);
+        JButton exitButton = new JButton("X");
+        exitButton.setBackground(Color.red);
+        exitButton.setBounds(10, 680, 60, 40);
+        exitButton.addActionListener(this);
+        exitButton.setFont(new Font("Minecraft", Font.TRUETYPE_FONT, 35));
+        add(exitButton);
     }
     
     @Override
