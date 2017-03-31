@@ -89,6 +89,9 @@ public class Loading extends JPanel{
                 if (first_time_setup == null) {
                     //Not the first time this was setup!
                     MonsterQuestMain.systemLog.log("Not the first time setup!");
+                    //Get version
+                    MonsterQuestMain.app_Version = root.getFirstChildElement("version").getAttribute("value").getValue();
+                    MonsterQuestMain.systemLog.log("App version: " + MonsterQuestMain.app_Version);
                 }
                 else {
                     //Deal with it. Remeber to delete firsttimestartup element!
@@ -97,6 +100,7 @@ public class Loading extends JPanel{
                     //The element it self.
                     root.removeChild(1);
                     root.removeChild(2);
+                    //Get version
                     MonsterQuestMain.app_Version = root.getFirstChildElement("version").getAttribute("value").toString();
                     MonsterQuestMain.systemLog.log("App version: " + MonsterQuestMain.app_Version);
                     

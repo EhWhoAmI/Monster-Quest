@@ -99,6 +99,8 @@ public class StartInterfaceMenu extends JPanel implements ActionListener{
         }
         else if (source == options) {
             MonsterQuestMain.systemLog.log("Options");
+            MonsterQuestMain.cardLayout.show(MonsterQuestMain.MonsterQuestPanel, "settings");
+            MonsterQuestMain.MonsterQuestPanel.repaint();
         } 
         else if (source == others) {
             MonsterQuestMain.systemLog.log("Show others");

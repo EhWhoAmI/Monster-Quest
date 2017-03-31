@@ -106,6 +106,9 @@ public class Others extends JPanel implements ActionListener{
             MonsterQuestMain.MonsterQuestPanel.repaint();
         } 
         else if (source == about) {
+            MonsterQuestMain.systemLog.log("Showing about scene");
+            MonsterQuestMain.cardLayout.show(MonsterQuestMain.MonsterQuestPanel, "aboutScene");
+            MonsterQuestMain.MonsterQuestPanel.repaint();
         }
         else if (source == exit) {
             MonsterQuestMain.systemLog.log("Showing start menu");
