@@ -167,7 +167,8 @@ public class Loading extends JPanel{
                 "Welcome back to Monster Quest!",
                 "Monster Quest is in constant development! Yay!!",
                 "Always remember that you are absolutely unique. Just like everyone else.",
-                "You can buy many things from the shop, if you have the money"
+                "You can buy many things from the shop, if you have the money",
+                "Had I been present at the Creation, I would have given some useful hints for the better ordering of the universe - Alfonso X, King of Castile"
                 };
         int randomNo = ((int)(Math.random() * 1000) % quoteList.length);
         MonsterQuestMain.systemLog.log("Random quote number: " + randomNo);

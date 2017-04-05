@@ -34,6 +34,7 @@ import java.io.File;
 import java.io.IOException;
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JSlider;
@@ -50,7 +51,9 @@ public class Settings extends JPanel implements ActionListener{
     JRadioButton sound, music;
     JSlider volume;
     JButton how2Play, exit;
-
+    Builder settingsBuilder;
+    Element root, soundElement, volumeElement, musicElement;
+    
     public Settings() {
         super(); 
         setBackground(Color.white);
@@ -63,6 +66,7 @@ public class Settings extends JPanel implements ActionListener{
         
         sound = new JRadioButton("Sounds");
         sound.setFont(pixelFontBigger);
+        sound.addActionListener(this);
         add(sound);
         
         music = new JRadioButton("Music");
@@ -80,11 +84,13 @@ public class Settings extends JPanel implements ActionListener{
         
         how2Play = new JButton("How to play");
         how2Play.setFont(pixelFontBigger);
+        how2Play.addActionListener(this);
         add(how2Play);
         
         exit = new JButton("X");
         exit.setBackground(Color.red);
         exit.setFont(pixelFontBigger);
+        exit.addActionListener(this);
         add(exit);
         
         readFromFile();
@@ -96,10 +102,10 @@ public class Settings extends JPanel implements ActionListener{
         if (settings.exists()) {
             //Read from settings
             try {
-                Builder settingsBuilder = new Builder();
+                settingsBuilder = new Builder();
                 Document settingsDocument = settingsBuilder.build(settings);
-                Element root = settingsDocument.getRootElement();
-                Element soundElement = root.getFirstChildElement("sound");
+                root = settingsDocument.getRootElement();
+                soundElement = root.getFirstChildElement("sound");
                 if (soundElement.getChild(0).getValue().equals("On")) {
                     sound.setSelected(true);
                     MonsterQuestMain.systemLog.log("Sound is on");
@@ -109,12 +115,12 @@ public class Settings extends JPanel implements ActionListener{
                     MonsterQuestMain.systemLog.log("Sound is off");
                 }
                 
-                Element volumeElement = root.getFirstChildElement("volume");
+                volumeElement = root.getFirstChildElement("volume");
                 int volumeNum = Integer.valueOf(volumeElement.getChild(0).getValue());
                 MonsterQuestMain.systemLog.log("Volume = " + volumeNum);
                 volume.setValue(volumeNum);
                 
-                Element musicElement = root.getFirstChildElement("music");
+                musicElement = root.getFirstChildElement("music");
                 if (musicElement.getChild(0).getValue().equals("On")) {
                     music.setSelected(true);
                     MonsterQuestMain.systemLog.log("Music is on");
@@ -132,15 +138,17 @@ public class Settings extends JPanel implements ActionListener{
     public void actionPerformed(ActionEvent e) {
         Object source = e.getSource();
         if (source == how2Play) {
-            J
+            JOptionPane.showMessageDialog(MonsterQuestMain.MonsterQuestWindow, "W, A, S, D to move about\nArrow keys to chose direction to attack\n1, 2, 3, Q, E keys to use ability\nZ for inventory\nX to pause","How to play", JOptionPane.OK_OPTION);
         }
         else if (source == exit) {
             MonsterQuestMain.systemLog.log("Showing start menu");
             MonsterQuestMain.cardLayout.show(MonsterQuestMain.MonsterQuestPanel, "startMenu");
             MonsterQuestMain.MonsterQuestWindow.repaint();
         }
+        else if (source == music) {
+            
+        }
     }
     
-    
-    
 }
+    

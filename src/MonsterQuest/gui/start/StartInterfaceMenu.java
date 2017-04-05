@@ -96,7 +96,9 @@ public class StartInterfaceMenu extends JPanel implements ActionListener{
         Object source = e.getSource();
         if (source == startGame) {
             MonsterQuestMain.systemLog.log("Start game");
-        }
+            MonsterQuestMain.cardLayout.show(MonsterQuestMain.MonsterQuestPanel, "villagerSpeech");
+            MonsterQuestMain.MonsterQuestPanel.repaint();
+        }   
         else if (source == options) {
             MonsterQuestMain.systemLog.log("Options");
             MonsterQuestMain.cardLayout.show(MonsterQuestMain.MonsterQuestPanel, "settings");

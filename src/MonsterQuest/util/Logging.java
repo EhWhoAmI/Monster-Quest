@@ -63,10 +63,12 @@ public class Logging {
                 Date timeStamp = new Date();
                 String content = ("--- NEW LOG STARTED [" + timeStamp + "]---");
                 try {
-                    logFileOutput = new FileWriter(System.getProperty("user.dir") + this.logString, true);
-                    logFileWriter = new BufferedWriter(logFileOutput);
-                    logFileWriter.write(content);
-                    logFileWriter.newLine();
+                    if (MonsterQuestMain.PRINT_TO_LOGFILE) {
+                        logFileOutput = new FileWriter(System.getProperty("user.dir") + this.logString, true);
+                        logFileWriter = new BufferedWriter(logFileOutput);
+                        logFileWriter.write(content);
+                        logFileWriter.newLine();
+                    }
                 } catch (IOException ex) {
                 }
                 try {
@@ -97,10 +99,12 @@ public class Logging {
                 if (MonsterQuestMain.DEBUG)
                     System.out.println(content);
                 try {
-                    logFileOutput = new FileWriter(System.getProperty("user.dir") + this.logString, true);
-                    logFileWriter = new BufferedWriter(logFileOutput);
-                    logFileWriter.write(content);
-                    logFileWriter.newLine();
+                    if (MonsterQuestMain.PRINT_TO_LOGFILE) {
+                        logFileOutput = new FileWriter(System.getProperty("user.dir") + this.logString, true);
+                        logFileWriter = new BufferedWriter(logFileOutput);
+                        logFileWriter.write(content);
+                        logFileWriter.newLine();
+                    }
                 } catch (IOException ex) {
                 }
                 try {
