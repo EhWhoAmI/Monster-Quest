@@ -24,6 +24,9 @@
 
 package MonsterQuest;
 
+import MonsterQuest.game.FadeInOut;
+import MonsterQuest.game.Player;
+import MonsterQuest.game.tutorial.VillagerSpeech;
 import MonsterQuest.gui.start.About;
 import MonsterQuest.gui.start.Credits;
 import MonsterQuest.gui.start.Loading;
@@ -89,7 +92,10 @@ public class MonsterQuestMain {
     public static CardLayout cardLayout = new CardLayout();;
     public static Logging systemLog;
     public static boolean DEBUG = false;
+    public static boolean PRINT_TO_LOGFILE = false;
     public static Font pixelFont;
+    public static FadeInOut fader = new FadeInOut();
+    public static Player playerStats;
     //All the values for the version of the game...
     public static String app_Version;
     /**
@@ -105,6 +111,15 @@ public class MonsterQuestMain {
                 //Turn on debug tools
                 DEBUG = true;
                 systemLog.log("Debugging mode is on");
+            }
+            if (args[n].equals("-l")) {
+                //Allow to print to debug file
+                PRINT_TO_LOGFILE = true;
+                systemLog.log("Writing to logfile...");
+            }
+            if (args[n].equals("-c")) {
+                //Enable cheats.
+                //TODO
             }
         }
         new MonsterQuestMain();
@@ -144,11 +159,15 @@ public class MonsterQuestMain {
         } catch (Exception e) {
         }
         cardLayout.show(MonsterQuestPanel, "loading");
+        MonsterQuestWindow.repaint();
         //Load all the crucial bits for the start menu
         MonsterQuestPanel.add(new Others(), "othersOption");
         MonsterQuestPanel.add(new Credits(), "creditsScene");
         MonsterQuestPanel.add(new About(), "aboutScene");
         MonsterQuestPanel.add(new Settings(), "settings");
+        MonsterQuestPanel.add(new VillagerSpeech(), "villagerSpeech");
+        MonsterQuestPanel.add(fader);
+        playerStats = new Player();
         //Load files
         loadScreen.loadFiles();
         try {
