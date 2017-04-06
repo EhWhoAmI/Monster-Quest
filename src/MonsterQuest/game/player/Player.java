@@ -21,36 +21,28 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package MonsterQuest.game.items;
-
+package MonsterQuest.game.player;
 
 /**
  *
  * @author Zyun
  */
-public class Weapon implements Item{
-    String name;
-    String description;
-    int level;
-    int attackBoost;
-    final ItemType type = ItemType.weapon;
-    
-    @Override
-    public String getDescription() {
-        return description;
-    }
-
-    @Override
-    public String getName() {
-        return name;
-    }
-
-    @Override
-    public ItemType getType() {
-        return type;
+public class Player {
+    public String name;
+    public boolean gender;
+    public int Level;
+    public int Experience;
+    public int Attack;
+    public int Defense;
+    public int Speed;
+    public int Gold;
+    public static final boolean BOY = true;
+    public static final boolean GIRL = false;
+    /**Player ()
+     * This defines the default stats for player
+     */
+    public Player() {
     }
     
-    public int getLevel () {
-        return level;
-    }
+    
 }
