@@ -24,6 +24,7 @@
 package MonsterQuest.game.tutorial;
 
 import MonsterQuest.MonsterQuestMain;
+import MonsterQuest.game.player.Player;
 import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Font;
@@ -33,22 +34,16 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.geom.GeneralPath;
 import java.awt.image.BufferedImage;
-import java.beans.PropertyChangeEvent;
-import java.beans.PropertyChangeListener;
 import java.io.File;
 import java.io.IOException;
 import javax.imageio.ImageIO;
 import javax.swing.*;
-import javax.swing.text.AbstractDocument;
-import javax.swing.text.AttributeSet;
-import javax.swing.text.BadLocationException;
-import javax.swing.text.DocumentFilter;
 
 /**
  *
  * @author Zyun
  */
-public class VillagerSpeech extends JPanel implements ActionListener, PropertyChangeListener{
+public class VillagerSpeech extends JPanel implements ActionListener{
     private final static String TEXT_STRINGS [] = { 
         "Hello, I am a villager from Newbies Town!", 
         "Welcome to Monster Quest.", 
@@ -69,7 +64,7 @@ public class VillagerSpeech extends JPanel implements ActionListener, PropertyCh
         };
     int words = 0;
     JTextField nameBox;
-    JButton next;
+    JButton next, boyButton, girlButton;
     @Override
     protected void paintComponent(Graphics g) {
         //The image variable
@@ -78,7 +73,8 @@ public class VillagerSpeech extends JPanel implements ActionListener, PropertyCh
             //Retrive Image from hash map
             //TODO
             //show image
-            villagerImage = ImageIO.read(new File (System.getProperty("user.dir") + "/resources/images/tutorial/villagerimg.png"));
+            villagerImage = ImageIO.read(
+                    new File (System.getProperty("user.dir") + "/resources/images/tutorial/villagerimg.png"));
             g.drawImage(villagerImage, 0, 0, null);
             textBox(g);
             drawWords(g, words);
@@ -130,8 +126,27 @@ public class VillagerSpeech extends JPanel implements ActionListener, PropertyCh
     @Override
     public void actionPerformed(ActionEvent e) {
         JLabel label;
-        
+        if (e.getSource() == next) {
+            words++;
+            this.repaint();
+        }
         //Define behavour for player read name
+        if (e.getSource() == nameBox) {
+            if (nameBox.getText().length() >= 16) {
+                //If it is more than 16 characters, do not allow it.
+                nameBox.setText("");
+                MonsterQuestMain.systemLog.log("String is too long! change to 0 characters!");
+            } 
+            else {
+                //Pass it, and write to name...
+                MonsterQuestMain.systemLog.log("Written to name box, name is " + nameBox.getText());
+                MonsterQuestMain.playerStats.name = nameBox.getText();
+                remove(nameBox);
+                next.setEnabled(true);
+                words++;
+                this.repaint();
+            }
+        }
         if (words == 10) {
             nameBox = new JTextField();
             nameBox.setFocusable(true);
@@ -145,22 +160,47 @@ public class VillagerSpeech extends JPanel implements ActionListener, PropertyCh
             
             label = new JLabel("15 characters only!");
             
-        }
-        if (e.getSource() == nameBox) {
-            if (nameBox.getText().length() >= 16) {
-                nameBox.setText("");
-                MonsterQuestMain.systemLog.log("String is too long! change to 0 characters!");
-            }
-            MonsterQuestMain.systemLog.log("Written to name box");
-            MonsterQuestMain.playerStats.name = nameBox.getText();
-            remove(nameBox);
+        } 
+        //Program for player selecting gender.
+        if (e.getSource() == boyButton) {
+            MonsterQuestMain.playerStats.gender = Player.BOY;
             next.setEnabled(true);
+            remove(boyButton);
+            remove(girlButton);
+            words++;
+            this.repaint();
+            MonsterQuestMain.systemLog.log("Player is a girl");
         }
+        if (e.getSource() == girlButton) {
+            MonsterQuestMain.playerStats.gender = Player.GIRL;
+            next.setEnabled(true);
+            remove(boyButton);
+            remove(girlButton);
+            words++;
+            this.repaint();
+            MonsterQuestMain.systemLog.log("Player is a girl");
+        }
+        if (words == 11) {
+            boyButton = new JButton("Boy");
+            ImageIcon boyIcon = new ImageIcon(System.getProperty("user.dir") + "/resources/images/tutorial/boysymbol.png");
+            boyButton.setIcon(boyIcon);
+            boyButton.setBounds(350, 200, 150, 50);
+            boyButton.setFont(new Font("Minecraft", Font.PLAIN, 30));
+            boyButton.setBackground(new Color (66, 209, 244));
+            boyButton.addActionListener(this);
+            add(boyButton);
+            
+            girlButton = new JButton("Girl");
+            ImageIcon girlIcon = new ImageIcon(System.getProperty("user.dir") + "/resources/images/tutorial/Girlsymbol.png");
+            girlButton.setIcon(boyIcon);
+            girlButton.setBounds(600, 200, 150, 50);
+            girlButton.setFont(new Font("Minecraft", Font.PLAIN, 30));
+            girlButton.setBackground(new Color (255, 175, 175));
+            girlButton.addActionListener(this);
+            add(girlButton);
+            
+            next.setEnabled(false);
+        }
+        
     }
-
-    @Override
-    public void propertyChange(PropertyChangeEvent evt) {
-       
-    }
-    
 }

@@ -21,36 +21,12 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package MonsterQuest.game.items;
-
+package MonsterQuest.game.tutorial;
 
 /**
  *
  * @author Zyun
  */
-public class Weapon implements Item{
-    String name;
-    String description;
-    int level;
-    int attackBoost;
-    final ItemType type = ItemType.weapon;
+public class CharacterChoose {
     
-    @Override
-    public String getDescription() {
-        return description;
-    }
-
-    @Override
-    public String getName() {
-        return name;
-    }
-
-    @Override
-    public ItemType getType() {
-        return type;
-    }
-    
-    public int getLevel () {
-        return level;
-    }
 }

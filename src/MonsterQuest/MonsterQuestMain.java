@@ -25,7 +25,7 @@
 package MonsterQuest;
 
 import MonsterQuest.game.FadeInOut;
-import MonsterQuest.game.Player;
+import MonsterQuest.game.player.Player;
 import MonsterQuest.game.tutorial.VillagerSpeech;
 import MonsterQuest.gui.start.About;
 import MonsterQuest.gui.start.Credits;
