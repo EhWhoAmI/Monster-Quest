@@ -29,6 +29,7 @@ package MonsterQuest.game.player;
  */
 public class Player {
     public String name;
+    public PlayerType playerType;
     public boolean gender;
     public int Level;
     public int Experience;
@@ -42,7 +43,32 @@ public class Player {
      * This defines the default stats for player
      */
     public Player() {
+        this.Level = 0;
+        this.Experience = 0;
+        this.Attack = 0;
+        this.Defense = 0;
+        this.Speed = 0;
+        this.Gold = 0;
+    }
+
+    public Player(int Level, int Experience, int Attack, int Defense, int Speed, int Gold) {
+        this.Level = Level;
+        this.Experience = Experience;
+        this.Attack = Attack;
+        this.Defense = Defense;
+        this.Speed = Speed;
+        this.Gold = Gold;
     }
     
+    public void setName (String name) {
+        this.name = name;
+    }
     
+    public void setLevel (int level) {
+        this.Level = level;
+    }
+    
+    public void setGender (boolean gender) {
+        this.gender = gender;
+    }
 }

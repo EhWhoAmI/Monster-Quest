@@ -23,10 +23,186 @@
  */
 package MonsterQuest.game.tutorial;
 
+import MonsterQuest.MonsterQuestMain;
+import MonsterQuest.game.player.Player;
+import Zyun.Lam.Game.MonsterQuest.WindowMain;
+import java.awt.CardLayout;
+import java.awt.Color;
+import java.awt.Font;
+import java.awt.FontMetrics;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.geom.Rectangle2D;
+import java.io.File;
+import java.io.IOException;
+import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JPanel;
+import sun.nio.cs.ext.MS950;
+
 /**
  *
  * @author Zyun
  */
-public class CharacterChoose {
+public class CharacterChoose extends JPanel implements ActionListener {
+
+    private JButton swordsMan;
+    private JButton warrior;
+    private JButton wizard;
+    private JButton archer;
+    private JButton select;
     
+    private int characterShowing = 0;
+    
+    private final int NOTHING = 0;
+    private final int SWORDS = 1;
+    private final int WARRIOR = 2;
+    private final int MAGIC = 3;
+    private final int ARCHER = 4;
+    CardLayout layout;
+    //Strings for indexing the characters
+    @Override
+        protected void paintComponent(Graphics g) {
+            Graphics2D g2d = (Graphics2D) g;
+            Rectangle2D.Float bg = new Rectangle2D.Float(0, 0, MonsterQuestMain.MonsterQuestWindow.getWidth(), MonsterQuestMain.MonsterQuestWindow.getWidth());
+            g2d.setColor(Color.blue);
+            g2d.fill(bg);
+            Font fontToShow = new Font("Minecraft", Font.PLAIN, 30);
+            g2d.setFont(fontToShow);
+            FontMetrics metrics = getFontMetrics(fontToShow);
+            g2d.drawString("Choose your character", (MonsterQuestMain.MonsterQuestWindow.getWidth() / 2) - (metrics.stringWidth("Choose your character") / 2), 50);
+            //Draw box that is supposed to be in the middle.
+            Rectangle2D.Float showCharacterArea = new Rectangle2D.Float(500, 75, 850, 550);
+            g2d.setColor(Color.green);
+            g2d.fill(showCharacterArea);
+            //Show image of character.
+            try {
+                switch (characterShowing) {
+                    case 0:
+                        //Draw a string that tells you to press a button
+                        g2d.setColor(Color.black);
+                        g2d.drawString("Please choose a character", 550, 384);
+                        break;
+                    case 1:
+                        if (MonsterQuestMain.playerStats.gender == Player.BOY) 
+                            g.drawImage(ImageIO.read(new File (WindowMain.user_dir + "/resources/images/tutorial/SwordsManImageMale.png")), 500, 75, null);
+                        else
+                            g.drawImage(ImageIO.read(new File (WindowMain.user_dir + "/resources/images/tutorial/SwordsManImageWoman.png")), 500, 75, null);
+                        break;
+                    case 2:
+                        if (MonsterQuestMain.playerStats.gender == Player.BOY) 
+                            g.drawImage(ImageIO.read(new File (WindowMain.user_dir + "/resources/images/tutorial/WarriorImageMale.png")), 500, 75, null);
+                        else
+                            g.drawImage(ImageIO.read(new File (WindowMain.user_dir + "/resources/images/tutorial/WarriorImageWoman.png")), 500, 75, null);
+                        break;
+                    case 3:
+                        if (MonsterQuestMain.playerStats.gender == Player.BOY) 
+                            g.drawImage(ImageIO.read(new File (WindowMain.user_dir + "/resources/images/tutorial/WizardImage.png")), 500, 75, null);
+                        else
+                            g.drawImage(ImageIO.read(new File (WindowMain.user_dir + "/resources/images/tutorial/WitchImage.png")), 500, 75, null);
+                        break;
+                    case 4:
+                        if (MonsterQuestMain.playerStats.gender == Player.BOY) 
+                            g.drawImage(ImageIO.read(new File (WindowMain.user_dir + "/resources/images/tutorial/ArcherMaleImage.png")), 500, 75, null);
+                        else
+                            g.drawImage(ImageIO.read(new File (WindowMain.user_dir + "/resources/images/tutorial/ArcherFemaleImage.png")), 480, 75, null);
+                        break;
+                }
+            }catch (IOException ioe) {
+                
+            }
+        }
+    public CharacterChoose() {
+        super();
+        //layout = new CardLayout();
+        //setLayout(layout);
+        setLayout(null);
+        
+        swordsMan = new JButton();
+        wizard = new JButton();
+        warrior = new JButton("Warrior");
+        archer = new JButton("Archer");
+        select = new JButton("Select");
+
+        //Init the buttons...
+        //Swordsman
+        if (MonsterQuestMain.playerStats.gender == Player.BOY)
+            swordsMan.setText("Swordsman");
+        else 
+            swordsMan.setText("Swordswoman");
+        MonsterQuestMain.systemLog.log("Just set swordsman button title to " + swordsMan.getText());
+        swordsMan.setBackground(Color.green);
+        swordsMan.setBounds(100, 100, 250, 75);
+        swordsMan.setIcon(new ImageIcon(System.getProperty("user.dir") + "/resources/images/tutorial/SwordImage.png"));
+        swordsMan.setFont(new Font("Minecraft", Font.PLAIN, 17));
+        swordsMan.addActionListener(this);
+
+        //Warrior
+        warrior.setBackground(Color.green);
+        warrior.setBounds(100, 250, 250, 75);
+        warrior.setIcon(new ImageIcon(System.getProperty("user.dir") + "/resources/images/tutorial/AxeImage.png"));
+        warrior.setFont(new Font("Minecraft", Font.PLAIN, 17));
+        warrior.addActionListener(this);
+        
+        //Wizard
+        if (MonsterQuestMain.playerStats.gender == Player.BOY)
+            wizard.setText("Wizard");
+        else 
+            wizard.setText("Witch");
+        MonsterQuestMain.systemLog.log("Just set wizard button title to " + swordsMan.getText());
+        wizard.setBackground(Color.green);
+        wizard.setBounds(100, 400, 250, 75);
+        wizard.setIcon(new ImageIcon(System.getProperty("user.dir") + "/resources/images/tutorial/WandImage.png"));
+        wizard.setFont(new Font("Minecraft", Font.PLAIN, 17));
+        wizard.addActionListener(this);
+        
+        //Archer
+        archer.setBackground(Color.green);
+        archer.setBounds(100, 550, 250, 75);
+        archer.setIcon(new ImageIcon(System.getProperty("user.dir") + "/resources/images/tutorial/BowImage.png"));
+        archer.setFont(new Font("Minecraft", Font.PLAIN, 17));
+        archer.addActionListener(this);
+        
+        select.setBackground(Color.green);
+        select.setBounds(1150, 550, 150, 45);
+        select.setFont(new Font("Minecraft", Font.PLAIN, 17));
+        select.addActionListener(this);
+        add(archer);
+        add(swordsMan);
+        add(warrior);
+        add(wizard);
+        
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        Object source = e.getSource();
+        if (source.equals(swordsMan)) {
+            characterShowing = SWORDS;
+            this.repaint();
+            add(select);
+        }
+        else if (source.equals(warrior)) {
+            characterShowing = WARRIOR;
+            this.repaint();
+            add (select);
+        }
+        else if (source.equals(wizard)) {
+            characterShowing = MAGIC;
+            this.repaint();
+            add (select);
+        } 
+        else if (source.equals(archer)) {
+            characterShowing = ARCHER;
+            this.repaint();
+            add (select);
+        }
+        else if (source.equals(select)) {
+            //Start game...
+            MonsterQuestMain.systemLog.log("Start game!!!");
+        }
+    }
 }

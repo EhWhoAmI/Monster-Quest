@@ -36,7 +36,7 @@ import javax.swing.JPanel;
 import javax.swing.JButton;
 
 /**
- *
+ * This is the about scene, it will show the version, and other things.
  * @author Zyun
  */
 public class About extends JPanel implements ActionListener{
@@ -60,6 +60,9 @@ public class About extends JPanel implements ActionListener{
         g2d.drawString("Get out using this button: ", 10, 650);
     }
     
+    /**
+     * This just adds the buttons and action listeners to the window.
+     */
     public About() {
         super();
         setLayout(null);

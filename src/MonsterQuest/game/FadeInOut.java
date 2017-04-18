@@ -31,7 +31,8 @@ import java.awt.geom.Rectangle2D;
 import javax.swing.JPanel;
 
 /**
- *
+ * This class was meant to let the screen fade to black, in that time you will process whatever you need, then make it show whatever that is underneath.
+ * @deprecated INDEV
  * @author Zyun
  */
 public class FadeInOut extends JPanel{

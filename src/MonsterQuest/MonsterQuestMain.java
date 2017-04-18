@@ -26,6 +26,7 @@ package MonsterQuest;
 
 import MonsterQuest.game.FadeInOut;
 import MonsterQuest.game.player.Player;
+import MonsterQuest.game.tutorial.CharacterChoose;
 import MonsterQuest.game.tutorial.VillagerSpeech;
 import MonsterQuest.gui.start.About;
 import MonsterQuest.gui.start.Credits;
@@ -87,20 +88,49 @@ import sun.audio.AudioStream;
  */
 
 public class MonsterQuestMain {
+    /**
+     * This is for the window of the game.
+     */
     public static JFrame MonsterQuestWindow;
+    /**
+     * This stores the container for the whole game.
+     */
     public static JPanel MonsterQuestPanel;
-    public static CardLayout cardLayout = new CardLayout();;
+    /**
+     * This is the card layout, it is the 'traffic police' of the game.
+     */
+    public static CardLayout cardLayout = new CardLayout();
+    /**
+     * This is the logger for logging all that goes on.
+     */
     public static Logging systemLog;
+    /**
+     * This enables the debug mode, use -d to enable.
+     */
     public static boolean DEBUG = false;
+    /**
+     * This variable deciedes whether or not we should write to the log file, use -l to enable.
+     */
     public static boolean PRINT_TO_LOGFILE = false;
+    /**
+     * We might not need this, but this is for the font.
+     */
     public static Font pixelFont;
-    public static FadeInOut fader = new FadeInOut();
+    /**
+     * This is to store the stats of the player. 
+     */
     public static Player playerStats;
-    //All the values for the version of the game...
+    /** 
+     * This is the string that will store the app version.
+     */
     public static String app_Version;
     /**
+     * We only need this because the buttons need to load. Might find a better solution in the future.
+     */
+    public static CharacterChoose choose;
+    /**
      * The Main function of the monster quest game.
-     * @param args 
+     * @param args The command line arguments
      */
     public static void main(String[] args) {
         //Set up first logging.
@@ -166,7 +196,7 @@ public class MonsterQuestMain {
         MonsterQuestPanel.add(new About(), "aboutScene");
         MonsterQuestPanel.add(new Settings(), "settings");
         MonsterQuestPanel.add(new VillagerSpeech(), "villagerSpeech");
-        MonsterQuestPanel.add(fader);
+
         playerStats = new Player();
         //Load files
         loadScreen.loadFiles();
@@ -177,6 +207,10 @@ public class MonsterQuestMain {
         cardLayout.show(MonsterQuestPanel, "startMenu");
     }
     
+    /**
+     * This plays the sound specified in the parameters.
+     * @param soundFileName The file name for the sound file
+     */
     static void playSound (String soundFileName) {
         try {
                 String soundFile = (System.getProperty("user.dir") + soundFileName);
@@ -194,6 +228,9 @@ public class MonsterQuestMain {
         }
     }
     
+    /**
+     * This sets the look and feel, but we might decaperate it soon.
+     */
     private void setLookAndFeel () {
         try {
             UIManager.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel");
@@ -208,7 +245,9 @@ public class MonsterQuestMain {
             systemLog.log("Class not found!");
         }
     }
-    
+    /**
+     * This loads the font, and registers the font onto the computer.
+     */
     private void loadFont () {
         try {
             //create the font to use. Specify the size!
