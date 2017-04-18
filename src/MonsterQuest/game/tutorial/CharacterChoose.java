@@ -48,7 +48,7 @@ import sun.nio.cs.ext.MS950;
  * @author Zyun
  */
 public class CharacterChoose extends JPanel implements ActionListener {
-
+    //Buttons for the character choose
     private JButton swordsMan;
     private JButton warrior;
     private JButton wizard;
@@ -56,15 +56,39 @@ public class CharacterChoose extends JPanel implements ActionListener {
     private JButton select;
     
     private int characterShowing = 0;
-    
+    //This is the indexes for the character displays.
     private final int NOTHING = 0;
     private final int SWORDS = 1;
     private final int WARRIOR = 2;
     private final int MAGIC = 3;
     private final int ARCHER = 4;
-    CardLayout layout;
-    //Strings for indexing the characters
-    @Override
+    
+    //The descriptions for the character
+     String [] swordsText = {"These people are well known throughout",
+                             "the land. They are powerful, and have ",
+                             "decent damage, decent armour and a",
+                             "short range, that can prove devasting",
+                             "to anybody.. "};
+     String [] warriorText = {"They are strong, and powerful, their",
+                              "axes cutting through anything. They ",
+                              "have massive damage and good range, ",
+                              "but they lack any armour."};
+     String [] WizardText = {"Well known for their magic, they are", 
+                             "powerful, from afar. They have good", 
+                             "damage, good range, and lower armour. ",
+                             "They also have improved effect dealing."};
+     String [] ArcherText = {"They pick off enemies from afar.",
+                             "They are also fast. They have low", 
+                             "damage, massive range, and boast",
+                             "good concealment."};
+    //The master array for the strings
+    String[][] thingsToSay = {
+            swordsText, //Swords
+            warriorText, //Warrior
+            WizardText, //Wizard
+            ArcherText, //Archer
+        };
+        @Override
         protected void paintComponent(Graphics g) {
             Graphics2D g2d = (Graphics2D) g;
             Rectangle2D.Float bg = new Rectangle2D.Float(0, 0, MonsterQuestMain.MonsterQuestWindow.getWidth(), MonsterQuestMain.MonsterQuestWindow.getWidth());
@@ -79,8 +103,10 @@ public class CharacterChoose extends JPanel implements ActionListener {
             g2d.setColor(Color.green);
             g2d.fill(showCharacterArea);
             //Show image of character.
+            
             try {
                 switch (characterShowing) {
+                    //Nothing
                     case 0:
                         //Draw a string that tells you to press a button
                         g2d.setColor(Color.black);
@@ -91,24 +117,45 @@ public class CharacterChoose extends JPanel implements ActionListener {
                             g.drawImage(ImageIO.read(new File (WindowMain.user_dir + "/resources/images/tutorial/SwordsManImageMale.png")), 500, 75, null);
                         else
                             g.drawImage(ImageIO.read(new File (WindowMain.user_dir + "/resources/images/tutorial/SwordsManImageWoman.png")), 500, 75, null);
+                        //Draw the description for the player.
+                        g2d.drawString(thingsToSay[0][0], 775, 100);
+                        g2d.drawString(thingsToSay[0][1], 775, 125);
+                        g2d.drawString(thingsToSay[0][2], 775, 150);
+                        g2d.drawString(thingsToSay[0][3], 775, 175);
+                        g2d.drawString(thingsToSay[0][4], 775, 200);
                         break;
                     case 2:
                         if (MonsterQuestMain.playerStats.gender == Player.BOY) 
                             g.drawImage(ImageIO.read(new File (WindowMain.user_dir + "/resources/images/tutorial/WarriorImageMale.png")), 500, 75, null);
                         else
                             g.drawImage(ImageIO.read(new File (WindowMain.user_dir + "/resources/images/tutorial/WarriorImageWoman.png")), 500, 75, null);
-                        break;
+                        //Draw the description for the player.
+                        g2d.drawString(thingsToSay[1][0], 775, 100);
+                        g2d.drawString(thingsToSay[1][1], 775, 125);
+                        g2d.drawString(thingsToSay[1][2], 775, 150);
+                        g2d.drawString(thingsToSay[1][3], 775, 175);
+                    break;
                     case 3:
                         if (MonsterQuestMain.playerStats.gender == Player.BOY) 
                             g.drawImage(ImageIO.read(new File (WindowMain.user_dir + "/resources/images/tutorial/WizardImage.png")), 500, 75, null);
                         else
                             g.drawImage(ImageIO.read(new File (WindowMain.user_dir + "/resources/images/tutorial/WitchImage.png")), 500, 75, null);
+                        //Draw the description for the player.
+                        g2d.drawString(thingsToSay[2][0], 775, 100);
+                        g2d.drawString(thingsToSay[2][1], 775, 125);
+                        g2d.drawString(thingsToSay[2][2], 775, 150);
+                        g2d.drawString(thingsToSay[2][3], 775, 175);
                         break;
                     case 4:
                         if (MonsterQuestMain.playerStats.gender == Player.BOY) 
                             g.drawImage(ImageIO.read(new File (WindowMain.user_dir + "/resources/images/tutorial/ArcherMaleImage.png")), 500, 75, null);
                         else
                             g.drawImage(ImageIO.read(new File (WindowMain.user_dir + "/resources/images/tutorial/ArcherFemaleImage.png")), 480, 75, null);
+                        //Draw the description for the player.
+                        g2d.drawString(thingsToSay[3][0], 775, 100);
+                        g2d.drawString(thingsToSay[3][1], 775, 125);
+                        g2d.drawString(thingsToSay[3][2], 775, 150);
+                        g2d.drawString(thingsToSay[3][3], 775, 175);
                         break;
                 }
             }catch (IOException ioe) {
