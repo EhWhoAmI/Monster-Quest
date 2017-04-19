@@ -32,6 +32,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.IOException;
+import java.io.FileWriter;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -141,6 +142,11 @@ public class Settings extends JPanel implements ActionListener{
             JOptionPane.showMessageDialog(MonsterQuestMain.MonsterQuestWindow, "W, A, S, D to move about\nArrow keys to chose direction to attack\n1, 2, 3, Q, E keys to use ability\nZ for inventory\nX to pause","How to play", JOptionPane.OK_OPTION);
         }
         else if (source == exit) {
+            MonsterQuestMain.systemLog.log("Writing to settings file");
+            try {
+                FileWriter 
+            } catch () {
+            }
             MonsterQuestMain.systemLog.log("Showing start menu");
             MonsterQuestMain.cardLayout.show(MonsterQuestMain.MonsterQuestPanel, "startMenu");
             MonsterQuestMain.MonsterQuestWindow.repaint();
