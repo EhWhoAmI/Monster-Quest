@@ -43,6 +43,7 @@ import nu.xom.Builder;
 import nu.xom.Document;
 import nu.xom.Element;
 import nu.xom.ParsingException;
+import nu.xom.Document;
 
 /**
  *
@@ -143,9 +144,14 @@ public class Settings extends JPanel implements ActionListener{
         }
         else if (source == exit) {
             MonsterQuestMain.systemLog.log("Writing to settings file");
-            try {
-                FileWriter 
-            } catch () {
+            try (
+                FileWriter fw = new FileWriter (System.getProperty("user.dir") + "/data/settings/settings.xml");
+                BufferedWriter out = new BufferedWriter(fw);  
+            ) {
+                Document doc = new Document (root);
+                out.write (doc.toXML());
+            }catch (IOException ioe) {
+                MonsterQuestMain.systemLog.log("UNABLE TO WRITE TO SETTINGS FILE: " + ioe.getMessage); 
             }
             MonsterQuestMain.systemLog.log("Showing start menu");
             MonsterQuestMain.cardLayout.show(MonsterQuestMain.MonsterQuestPanel, "startMenu");
