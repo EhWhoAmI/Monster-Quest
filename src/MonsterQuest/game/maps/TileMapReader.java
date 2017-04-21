@@ -36,24 +36,34 @@ public class TileMapReader {
     Dimension sizeOfEachElement;
     int NumberOfRecurrenceX;
     int NumberOfRecurrenceY;
-    int posX;
-    int posY;
+    private int posX;
+    private int posY;
+    
     public TileMapReader(BufferedImage tileImage, Dimension sizeOfEachElement) {
         this.tileImage = tileImage;
         this.sizeOfEachElement = sizeOfEachElement;
         
+        //Find the amount of occurences of the tiles on each axes.
         NumberOfRecurrenceX = this.tileImage.getWidth() / this.sizeOfEachElement.width;
         NumberOfRecurrenceY = this.tileImage.getHeight() / this.sizeOfEachElement.height;
-        
+        //Loop to get all the tiles. Some might be empty, though.
+        int index = 0;
         for (int i = 0; i < NumberOfRecurrenceY; i++) {
             posY += sizeOfEachElement.height;
             for (int n = 0; n < NumberOfRecurrenceX; n++) {
                 posX += this.sizeOfEachElement.width;
-                tiles[i*n] = this.tileImage.getSubimage(posX, posY, this.sizeOfEachElement.width, this.sizeOfEachElement.height);
+                tiles[index] = this.tileImage.getSubimage(posX, posY, this.sizeOfEachElement.width, this.sizeOfEachElement.height);
+                index ++;
             }
         }
-        
+        //Done.
     }
     
-    
+    /**
+     * @param index the index of the tile
+     * @return the image of the tile specified in the index.
+     */
+    BufferedImage getImage (int index) {
+        return (tiles[index]);
+    }
 }
