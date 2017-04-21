@@ -103,7 +103,8 @@ public class CharacterChoose extends JPanel implements ActionListener {
             g2d.setColor(Color.green);
             g2d.fill(showCharacterArea);
             //Show image of character.
-            
+            g2d.setColor(Color.black);
+            g2d.setFont(new Font("Minecraft", Font.PLAIN, 25));
             try {
                 switch (characterShowing) {
                     //Nothing

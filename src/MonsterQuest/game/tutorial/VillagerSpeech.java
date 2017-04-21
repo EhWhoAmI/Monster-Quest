@@ -34,6 +34,7 @@ import java.awt.Graphics2D;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.geom.GeneralPath;
+import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -210,7 +211,7 @@ public class VillagerSpeech extends JPanel implements ActionListener {
         }
 
         //To choose the character
-        if (words > 16) {
+        if (words >= 16) {
             MonsterQuestMain.systemLog.log("Loading next text...");
             MonsterQuestPanel.add(new CharacterChoose(), "CharacterChoose");
             MonsterQuestMain.cardLayout.show(MonsterQuestMain.MonsterQuestPanel, "CharacterChoose");

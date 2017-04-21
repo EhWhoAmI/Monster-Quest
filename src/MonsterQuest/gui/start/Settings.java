@@ -32,7 +32,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.IOException;
-import java.io.FileWriter;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -43,7 +42,6 @@ import nu.xom.Builder;
 import nu.xom.Document;
 import nu.xom.Element;
 import nu.xom.ParsingException;
-import nu.xom.Document;
 
 /**
  *
@@ -143,16 +141,6 @@ public class Settings extends JPanel implements ActionListener{
             JOptionPane.showMessageDialog(MonsterQuestMain.MonsterQuestWindow, "W, A, S, D to move about\nArrow keys to chose direction to attack\n1, 2, 3, Q, E keys to use ability\nZ for inventory\nX to pause","How to play", JOptionPane.OK_OPTION);
         }
         else if (source == exit) {
-            MonsterQuestMain.systemLog.log("Writing to settings file");
-            try (
-                FileWriter fw = new FileWriter (System.getProperty("user.dir") + "/data/settings/settings.xml");
-                BufferedWriter out = new BufferedWriter(fw);  
-            ) {
-                Document doc = new Document (root);
-                out.write (doc.toXML());
-            }catch (IOException ioe) {
-                MonsterQuestMain.systemLog.log("UNABLE TO WRITE TO SETTINGS FILE: " + ioe.getMessage); 
-            }
             MonsterQuestMain.systemLog.log("Showing start menu");
             MonsterQuestMain.cardLayout.show(MonsterQuestMain.MonsterQuestPanel, "startMenu");
             MonsterQuestMain.MonsterQuestWindow.repaint();
