@@ -26,7 +26,6 @@ package MonsterQuest.game.tutorial;
 import MonsterQuest.MonsterQuestMain;
 import MonsterQuest.game.player.Player;
 import Zyun.Lam.Game.MonsterQuest.WindowMain;
-import java.awt.CardLayout;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.FontMetrics;
@@ -41,7 +40,6 @@ import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JPanel;
-import sun.nio.cs.ext.MS950;
 
 /**
  *

@@ -26,10 +26,10 @@ package MonsterQuest.gui.start;
 import MonsterQuest.MonsterQuestMain;
 import java.awt.Color;
 import java.awt.Font;
-import java.awt.Graphics;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.IOException;
 import java.io.FileWriter;
@@ -40,10 +40,10 @@ import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JSlider;
 import nu.xom.Builder;
-import nu.xom.Document;
 import nu.xom.Element;
 import nu.xom.ParsingException;
 import nu.xom.Document;
+import nu.xom.Text;
 
 /**
  *
@@ -73,6 +73,7 @@ public class Settings extends JPanel implements ActionListener{
         
         music = new JRadioButton("Music");
         music.setFont(pixelFontBigger);
+        music.addActionListener(this);
         add(music);
         
         JLabel volLabel = new JLabel ("Volume: ");
@@ -134,12 +135,15 @@ public class Settings extends JPanel implements ActionListener{
             } catch (IOException | ParsingException e) {
             }
         }
+        else {
+            //Create new file...
+        }
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
         Object source = e.getSource();
-        if (source == how2Play) {
+        if (source.equals(how2Play)) {
             JOptionPane.showMessageDialog(MonsterQuestMain.MonsterQuestWindow, "W, A, S, D to move about\nArrow keys to chose direction to attack\n1, 2, 3, Q, E keys to use ability\nZ for inventory\nX to pause","How to play", JOptionPane.OK_OPTION);
         }
         else if (source == exit) {
@@ -148,17 +152,47 @@ public class Settings extends JPanel implements ActionListener{
                 FileWriter fw = new FileWriter (System.getProperty("user.dir") + "/data/settings/settings.xml");
                 BufferedWriter out = new BufferedWriter(fw);  
             ) {
-                Document doc = new Document (root);
+                Document doc = new Document (root.getDocument());
                 out.write (doc.toXML());
             }catch (IOException ioe) {
-                MonsterQuestMain.systemLog.log("UNABLE TO WRITE TO SETTINGS FILE: " + ioe.getMessage); 
+                MonsterQuestMain.systemLog.log("UNABLE TO WRITE TO SETTINGS FILE: " + ioe.getMessage()); 
             }
             MonsterQuestMain.systemLog.log("Showing start menu");
             MonsterQuestMain.cardLayout.show(MonsterQuestMain.MonsterQuestPanel, "startMenu");
             MonsterQuestMain.MonsterQuestWindow.repaint();
         }
-        else if (source == music) {
-            
+        else if (source.equals(music)) {
+            Text toPut;
+            if (music.isSelected()) {
+                MonsterQuestMain.systemLog.log("Turn off music.");
+                toPut = new Text("On");
+            }
+            else {
+                MonsterQuestMain.systemLog.log("Turn on music");
+                toPut = new Text("Off");
+            }
+            musicElement.removeChild(0);
+            musicElement.appendChild(toPut);
+        }
+        else if (source.equals(sound)) {
+            Text toPut;
+            if (sound.isSelected()) {
+                MonsterQuestMain.systemLog.log("Turn off music.");
+                toPut = new Text("On");
+            }
+            else {
+                MonsterQuestMain.systemLog.log("Turn on music");
+                toPut = new Text("Off");
+            }
+            soundElement.removeChild(0);
+            soundElement.appendChild(toPut);
+        }
+        else if (source.equals(volume)) {
+            Text valueText;
+            int value = volume.getValue();
+            valueText = new Text(Integer.toString(value));
+            volumeElement.removeChild(0);
+            volumeElement.appendChild(valueText);
         }
     }
     
