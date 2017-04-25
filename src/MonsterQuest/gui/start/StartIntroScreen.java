@@ -34,7 +34,7 @@ import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 import MonsterQuest.MonsterQuestMain;
 
-/**
+/** This class shows the star splash screen on the application's start.
  *
  * @author Zyun
  */
@@ -42,23 +42,23 @@ public class StartIntroScreen extends JPanel{
 
     @Override
     protected void paintComponent(Graphics g) {
-        //To change body of generated methods, choose Tools | Templates.
         Graphics2D g2d = (Graphics2D) g;
         MonsterQuestMain.systemLog.log("Showing start intro");
+        //Load the image into the graphics object
         loadImage(g);
         Rectangle2D.Float bg = new Rectangle2D.Float (0, 0, 100, 100);
         g2d.fill(bg);
     }
     
-    void loadImage (Graphics g) {
+    /** Loads the image onto screen
+     * @param g the graphics object to load onto the screen 
+     */
+    private void loadImage (Graphics g) {
         Graphics2D g2d = (Graphics2D) g;
         BufferedImage splashScreen = null;
         try {
-            //show image
+            //show image, and open file
             splashScreen = ImageIO.read(new File (System.getProperty("user.dir") + "/resources/images/start/titlepageSplash.png"));
-            g2d.setColor(Color.white);
-            Rectangle2D.Float bg = new Rectangle2D.Float (0,0,MonsterQuestMain.MonsterQuestWindow.getWidth(), MonsterQuestMain.MonsterQuestWindow.getHeight());
-            g2d.fill(bg);
             g.drawImage(splashScreen, 250, 0, null);
             MonsterQuestMain.systemLog.log("Just showed start image.");
         } catch (IOException e) {
