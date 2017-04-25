@@ -30,5 +30,13 @@ import javax.swing.JPanel;
  * @author Zyun
  */
 public class MapProcesser extends JPanel{
+
+    public MapProcesser() {
+        super();
+        setLayout(null);
+        
+        //Load a newbies town map for testing.
+        add(new NewbiesTownCenter());
+    }
     
 }
