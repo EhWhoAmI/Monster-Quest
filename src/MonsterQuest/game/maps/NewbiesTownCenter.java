@@ -23,7 +23,10 @@
  */
 package MonsterQuest.game.maps;
 
+import MonsterQuest.util.tilemapengine.TileMapReader;
 import java.awt.Dimension;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -38,12 +41,27 @@ public class NewbiesTownCenter extends JPanel{
     //New tilemap reader
     TileMapReader ground;
 
-    public NewbiesTownCenter() {
+    @Override
+    protected void paintComponent(Graphics g) {
+        Graphics2D g2d = (Graphics2D) g;
         try {
-            ground = new TileMapReader(ImageIO.read(new File(System.getProperty("user.dir") + "/resources/tilemaps/things.png")), new Dimension(8, 8));
-        }catch (IOException ioe) {
+            File tilemap = new File(System.getProperty("user.dir") + "/resources/tilemaps/things.png");
+            ground = new TileMapReader(ImageIO.read(tilemap), new Dimension(16, 16));
             
-        }
+        }catch (IOException ioe) {}
+        BufferedImage i = ground.getImage(3);
+        g2d.drawImage(i, 0, 0, null);
+    }
+
+    
+    public NewbiesTownCenter() {
+        super();
+//        try {
+//            ground = new TileMapReader(ImageIO.read(new File(System.getProperty("user.dir") + "/resources/tilemaps/things.png")), new Dimension(16, 16));
+//            
+//        }catch (IOException ioe) {
+            
+//        }
     }
     
     

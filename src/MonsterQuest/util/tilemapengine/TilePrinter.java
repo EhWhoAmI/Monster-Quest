@@ -23,10 +23,34 @@
  */
 package MonsterQuest.util.tilemapengine;
 
+import MonsterQuest.MonsterQuestMain;
+import java.awt.Graphics;
+
 /**
  *
  * @author Lam Zyun
  */
 public class TilePrinter {
+    TileMapReader tilemap;
+    Integer [][] map;
+    Graphics g;
+
+    public TilePrinter(TileMapReader tilemap, Integer[][] map, Graphics g) {
+        this.tilemap = tilemap;
+        this.map = map;
+        this.g = g;
+        
+        MonsterQuestMain.systemLog.log("Drawing the map...");
+        int posX = 0, posY = 0;
+        for (int i = 0; i < map.length; i++) {
+            posX = 0;
+            posY += tilemap.sizeOfEachElement.height;
+            for (int n = 0; n < map[0].length; n++) {
+                g.drawImage(tilemap.getImage(map[i][n]), posX, posY, null);
+                posX += tilemap.sizeOfEachElement.width;
+            }
+        }
+    }
+    
     
 }

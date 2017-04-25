@@ -24,6 +24,8 @@
 package MonsterQuest.game.tutorial;
 
 import MonsterQuest.MonsterQuestMain;
+import MonsterQuest.game.maps.MapProcesser;
+import MonsterQuest.game.maps.NewbiesTownCenter;
 import MonsterQuest.game.player.Player;
 import Zyun.Lam.Game.MonsterQuest.WindowMain;
 import java.awt.Color;
@@ -198,7 +200,7 @@ public class CharacterChoose extends JPanel implements ActionListener {
             wizard.setText("Wizard");
         else 
             wizard.setText("Witch");
-        MonsterQuestMain.systemLog.log("Just set wizard button title to " + swordsMan.getText());
+        MonsterQuestMain.systemLog.log("Just set wizard button title to " + wizard.getText());
         wizard.setBackground(Color.green);
         wizard.setBounds(100, 400, 250, 75);
         wizard.setIcon(new ImageIcon(System.getProperty("user.dir") + "/resources/images/tutorial/WandImage.png"));
@@ -249,6 +251,10 @@ public class CharacterChoose extends JPanel implements ActionListener {
         else if (source.equals(select)) {
             //Start game...
             MonsterQuestMain.systemLog.log("Start game!!!");
+            MonsterQuestMain.systemLog.log("Loading map");
+            MonsterQuestMain.MonsterQuestPanel.add(new MapProcesser(), "Map");
+            MonsterQuestMain.cardLayout.show(MonsterQuestMain.MonsterQuestPanel, "Map");
+            MonsterQuestMain.MonsterQuestPanel.repaint();
         }
     }
 }

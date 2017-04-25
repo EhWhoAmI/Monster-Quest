@@ -21,10 +21,12 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package MonsterQuest.game.maps;
+package MonsterQuest.util.tilemapengine;
 
+import MonsterQuest.MonsterQuestMain;
 import java.awt.Dimension;
 import java.awt.image.BufferedImage;
+import java.util.ArrayList;
 
 /**
  *
@@ -32,12 +34,12 @@ import java.awt.image.BufferedImage;
  */
 public class TileMapReader {
     BufferedImage tileImage;
-    BufferedImage[] tiles;
-    Dimension sizeOfEachElement;
-    int NumberOfRecurrenceX;
-    int NumberOfRecurrenceY;
-    private int posX;
-    private int posY;
+    public ArrayList<BufferedImage> tiles;
+    public Dimension sizeOfEachElement;
+    public int NumberOfRecurrenceX;
+    public int NumberOfRecurrenceY;
+    private int posX = 0;
+    private int posY = 0;
     
     public TileMapReader(BufferedImage tileImage, Dimension sizeOfEachElement) {
         this.tileImage = tileImage;
@@ -46,16 +48,28 @@ public class TileMapReader {
         //Find the amount of occurences of the tiles on each axes.
         NumberOfRecurrenceX = this.tileImage.getWidth() / this.sizeOfEachElement.width;
         NumberOfRecurrenceY = this.tileImage.getHeight() / this.sizeOfEachElement.height;
+        
+        MonsterQuestMain.systemLog.log("Occurunces (x, y), (" + NumberOfRecurrenceX + ", " + NumberOfRecurrenceY + ")");
+        //Init the arraylist for the tiles.
+        tiles = new ArrayList<>(NumberOfRecurrenceX * NumberOfRecurrenceY);
+        
         //Loop to get all the tiles. Some might be empty, though.
         int index = 0;
         for (int i = 0; i < NumberOfRecurrenceY; i++) {
-            posY += sizeOfEachElement.height;
             for (int n = 0; n < NumberOfRecurrenceX; n++) {
-                posX += this.sizeOfEachElement.width;
-                tiles[index] = this.tileImage.getSubimage(posX, posY, this.sizeOfEachElement.width, this.sizeOfEachElement.height);
+                MonsterQuestMain.systemLog.log("Reading tile " + index + " Position, x " + posX + " y, " + posY);
+                tiles.add(this.tileImage.getSubimage(posX, posY, this.sizeOfEachElement.width, this.sizeOfEachElement.height));
+                try {
+                    Thread.sleep(1);
+                } catch (InterruptedException ie) {
+                }
                 index ++;
+                posX += this.sizeOfEachElement.width;
             }
+            posX = 0;
+            posY += sizeOfEachElement.height;
         }
+        MonsterQuestMain.systemLog.log("Loaded " + index + " tiles.");
         //Done.
     }
     
@@ -63,7 +77,7 @@ public class TileMapReader {
      * @param index the index of the tile
      * @return the image of the tile specified in the index.
      */
-    BufferedImage getImage (int index) {
-        return (tiles[index]);
+    public BufferedImage getImage (int index) {
+        return (tiles.get(index));
     }
 }
