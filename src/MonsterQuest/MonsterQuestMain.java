@@ -84,7 +84,8 @@ import sun.audio.AudioStream;
  * This game's github repo: <a href="https://github.com/EhWhoAmI/Monster-Quest">https://github.com/EhWhoAmI/Monster-Quest<a>
  */ 
 
-/**The main class of Monster Quest.
+/**
+ * The main class of Monster Quest.
  */
 
 public class MonsterQuestMain {
@@ -160,50 +161,76 @@ public class MonsterQuestMain {
      * opening the window, and initializing the whole thing, too
      */
     public MonsterQuestMain () {
+        //Set up all the window and stuff
         systemLog.log("Starting game...");
         MonsterQuestWindow = new JFrame("Monster Quest");
-        MonsterQuestWindow.setIconImage(Toolkit.getDefaultToolkit().getImage("resources/icon/Icon.png"));
-        //Set size for window
+        
+        //Do all the frame init stuff
+        MonsterQuestPanel = new JPanel();
+        MonsterQuestWindow.add(MonsterQuestPanel);
+        
+        //Card layout for sorting out all the cards.
+        MonsterQuestPanel.setLayout(cardLayout); 
+        
+        //Set window size
         MonsterQuestWindow.setSize(Toolkit.getDefaultToolkit().getScreenSize());
         systemLog.log("Screen size: H= " + Toolkit.getDefaultToolkit().getScreenSize().height + " W= " + Toolkit.getDefaultToolkit().getScreenSize().width);
         MonsterQuestWindow.setResizable(false);
         MonsterQuestWindow.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        //Do all the frame init stuff
-        StartIntroScreen intro = new StartIntroScreen();
-        Loading loadScreen = new Loading();
-        MonsterQuestPanel = new JPanel();
-        MonsterQuestWindow.add(MonsterQuestPanel);
-        MonsterQuestPanel.setLayout(cardLayout); 
+        
+        //Set icon
+        MonsterQuestWindow.setIconImage(Toolkit.getDefaultToolkit().getImage("resources/icon/Icon.png"));
+        
         //Add the start intro screen to the card layout.
-        MonsterQuestPanel.add(intro, "intro");
-        MonsterQuestPanel.add(loadScreen, "loading");
+        MonsterQuestPanel.add(new StartIntroScreen(), "intro");
+        MonsterQuestPanel.add(new Loading(), "loading");
         MonsterQuestPanel.add(new StartInterfaceMenu(), "startMenu");
+        
+        //Load the fonts neccesary for the game...
         loadFont();
+        
         //Show window.
         MonsterQuestWindow.setVisible(true);
+        
+        //Show the start screen
         cardLayout.show(MonsterQuestPanel, "intro");
         MonsterQuestWindow.repaint();
+        
+        //Play music
         playSound("/resources/audio/start.wav");
+        
+        //Wait for music to finish playing
         try {
             Thread.sleep(5000);
         } catch (Exception e) {
+            //Ingore if interrupted
         }
+        
+        //Now, load all the things for the game
         cardLayout.show(MonsterQuestPanel, "loading");
         MonsterQuestWindow.repaint();
+        
         //Load all the crucial bits for the start menu
+        //The panels will be all here
         MonsterQuestPanel.add(new Others(), "othersOption");
         MonsterQuestPanel.add(new Credits(), "creditsScene");
         MonsterQuestPanel.add(new About(), "aboutScene");
         MonsterQuestPanel.add(new Settings(), "settings");
         MonsterQuestPanel.add(new VillagerSpeech(), "villagerSpeech");
-
+        
+        //Init player
         playerStats = new Player();
+        
         //Load files
         loadScreen.loadFiles();
+        
+        //Fake loading after that.
         try {
             Thread.sleep(1000);
         } catch (Exception e) {
         }
+        
+        //Show start menu
         cardLayout.show(MonsterQuestPanel, "startMenu");
     }
     
@@ -228,23 +255,7 @@ public class MonsterQuestMain {
         }
     }
     
-    /**
-     * This sets the look and feel, but we might decaperate it soon.
-     */
-    private void setLookAndFeel () {
-        try {
-            UIManager.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel");
-            systemLog.log("Setting look and feel");
-        } catch (UnsupportedLookAndFeelException ex) {
-            systemLog.log("Unsupported Look and feel!");
-        } catch (IllegalAccessException ex) {
-            systemLog.log("Illegal access!");
-        } catch (InstantiationException ex) {
-            systemLog.log("Instantiation Exception!");
-        } catch (ClassNotFoundException ex) {
-            systemLog.log("Class not found!");
-        }
-    }
+    
     /**
      * This loads the font, and registers the font onto the computer.
      */
@@ -257,6 +268,7 @@ public class MonsterQuestMain {
             ge.registerFont(Font.createFont(Font.TRUETYPE_FONT, new File(System.getProperty("user.dir") + "/resources/fonts/Minecraft.ttf")));
             //List avaible fonts
         } catch (IOException e) {
+            //Will add a find file on the internet soon.
             systemLog.log("Unable to open file! " + e.getMessage());
         } catch(FontFormatException e) {
             systemLog.log("Font format exception!");
