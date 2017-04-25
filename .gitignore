@@ -50,7 +50,6 @@ Temporary Items
 
 # Java sepecific things
 *.class
-
 *.jar
 
 # Stuff asked to add by netbeans
@@ -64,14 +63,8 @@ Temporary Items
 *.log
 # Keychain for encryption
 KEYCHAIN
-# Stuff used for archives: 
-archived/
-raw/
-=======
-# Stuff used for archives: 
-archived/
-raw/
 
-# Log files:
-*.log
+# Stuff used for archives: 
+/resources/archived/
+/raw/
 
