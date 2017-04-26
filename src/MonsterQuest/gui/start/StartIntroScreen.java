@@ -44,10 +44,14 @@ public class StartIntroScreen extends JPanel{
     protected void paintComponent(Graphics g) {
         Graphics2D g2d = (Graphics2D) g;
         MonsterQuestMain.systemLog.log("Showing start intro");
+        
+        //Set background for filling the screen
+        g2d.setColor(Color.white);
+        Rectangle2D.Float bg = new Rectangle2D.Float (0, 0, MonsterQuestMain.MonsterQuestWindow.getWidth(), MonsterQuestMain.MonsterQuestWindow.getHeight());
+        g2d.fill(bg);
+        
         //Load the image into the graphics object
         loadImage(g);
-        Rectangle2D.Float bg = new Rectangle2D.Float (0, 0, 100, 100);
-        g2d.fill(bg);
     }
     
     /** Loads the image onto screen

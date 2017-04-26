@@ -35,6 +35,7 @@ import MonsterQuest.gui.start.Others;
 import MonsterQuest.gui.start.Settings;
 import MonsterQuest.gui.start.StartInterfaceMenu;
 import MonsterQuest.gui.start.StartIntroScreen;
+import MonsterQuest.util.LoadingScreen;
 import java.awt.Toolkit;
 import javax.swing.JFrame;
 import MonsterQuest.util.Logging;
@@ -217,12 +218,13 @@ public class MonsterQuestMain {
         MonsterQuestPanel.add(new About(), "aboutScene");
         MonsterQuestPanel.add(new Settings(), "settings");
         MonsterQuestPanel.add(new VillagerSpeech(), "villagerSpeech");
+        MonsterQuestPanel.add(new LoadingScreen(), "loadScreen");
         
         //Init player
         playerStats = new Player();
         
         //Load files
-        loadScreen.loadFiles();
+        Loading.loadFiles();
         
         //Fake loading after that.
         try {
