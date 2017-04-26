@@ -36,7 +36,7 @@ import javax.swing.JButton;
 import javax.swing.JPanel;
 
 /**
- *
+ * This shows the credits screen
  * @author Zyun
  */
 public class Credits extends JPanel implements ActionListener{
@@ -50,18 +50,25 @@ public class Credits extends JPanel implements ActionListener{
         g2d.setColor(Color.BLACK);
         g2d.fill(bg);
         g2d.setColor(Color.WHITE);
+        //Set font
         Font pixelFontBigger = new Font("Minecraft", Font.TRUETYPE_FONT, 35);
         g2d.setFont(pixelFontBigger);
-        FontMetrics fnt = g2d.getFontMetrics(pixelFontBigger);
+
+        //The credits text, all the peeps who helped!
+        //If you did help a bit, please edit this a bit to show your name. Just don't delete any names
         g2d.drawString("By : Zyun", 10, 40);
         g2d.drawString("Beta Testers: ", 10, 80);
         g2d.drawString("Not yet in beta mode!", 10, 120);
+
+        //To highlight the get out part
         g2d.drawString("Get out using this button: ", 10, 650);
     }
     
     public Credits() {
         super();
         setLayout(null);
+
+        //The exit button for exiting this scene
         exitButton = new JButton("X");
         exitButton.setBackground(Color.red);
         exitButton.setBounds(10, 680, 60, 40);

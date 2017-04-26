@@ -60,36 +60,43 @@ public class Settings extends JPanel implements ActionListener{
         super(); 
         setBackground(Color.white);
         GridLayout layout = new GridLayout(12, 3);
+        //Define font
         Font pixelFontBigger = new Font("Minecraft", Font.TRUETYPE_FONT, 25);
         
+        //Title
         JLabel label = new JLabel("Settings");
         label.setFont(pixelFontBigger);
         add(label);
         
+        //Sound button
         sound = new JRadioButton("Sounds");
         sound.setFont(pixelFontBigger);
         sound.addActionListener(this);
         add(sound);
         
+        //Music button
         music = new JRadioButton("Music");
         music.setFont(pixelFontBigger);
         music.addActionListener(this);
         add(music);
         
+        //Description button
         JLabel volLabel = new JLabel ("Volume: ");
         volLabel.setFont(pixelFontBigger);
         add(volLabel);
         
+        //Volume slider
         volume = new JSlider(0, 100);
-        
         volume.setFont(pixelFontBigger);
         add(volume);
         
+        //How to play button
         how2Play = new JButton("How to play");
         how2Play.setFont(pixelFontBigger);
         how2Play.addActionListener(this);
         add(how2Play);
         
+        //Exit button 
         exit = new JButton("X");
         exit.setBackground(Color.red);
         exit.setFont(pixelFontBigger);
@@ -99,16 +106,26 @@ public class Settings extends JPanel implements ActionListener{
         readFromFile();
     }
     
+    /** This reads from the settings file.
+     * 
+     */
     void readFromFile () {
         File settings = new File (System.getProperty("user.dir") + "/data/settings/settings.xml");
         
         if (settings.exists()) {
             //Read from settings
             try {
+                //Open file, and parse file
                 settingsBuilder = new Builder();
                 Document settingsDocument = settingsBuilder.build(settings);
+
+                //Get root element
                 root = settingsDocument.getRootElement();
+
+                //Get sound element
                 soundElement = root.getFirstChildElement("sound");
+
+                //Check wether it is selected or not selected
                 if (soundElement.getChild(0).getValue().equals("On")) {
                     sound.setSelected(true);
                     MonsterQuestMain.systemLog.log("Sound is on");
@@ -118,11 +135,13 @@ public class Settings extends JPanel implements ActionListener{
                     MonsterQuestMain.systemLog.log("Sound is off");
                 }
                 
+                //Volume element
                 volumeElement = root.getFirstChildElement("volume");
                 int volumeNum = Integer.valueOf(volumeElement.getChild(0).getValue());
                 MonsterQuestMain.systemLog.log("Volume = " + volumeNum);
                 volume.setValue(volumeNum);
                 
+                //Music element
                 musicElement = root.getFirstChildElement("music");
                 if (musicElement.getChild(0).getValue().equals("On")) {
                     music.setSelected(true);
@@ -136,7 +155,7 @@ public class Settings extends JPanel implements ActionListener{
             }
         }
         else {
-            //Create new file...
+            //Create new file... TODO
         }
     }
 
@@ -144,6 +163,7 @@ public class Settings extends JPanel implements ActionListener{
     public void actionPerformed(ActionEvent e) {
         Object source = e.getSource();
         if (source.equals(how2Play)) {
+            //How to play this game
             JOptionPane.showMessageDialog(MonsterQuestMain.MonsterQuestWindow, "W, A, S, D to move about\nArrow keys to chose direction to attack\n1, 2, 3, Q, E keys to use ability\nZ for inventory\nX to pause","How to play", JOptionPane.OK_OPTION);
         }
         else if (source == exit) {
@@ -153,15 +173,18 @@ public class Settings extends JPanel implements ActionListener{
                 BufferedWriter out = new BufferedWriter(fw);  
             ) {
                 Document doc = new Document (root.getDocument());
+                //Write to settings file
                 out.write (doc.toXML());
             }catch (IOException ioe) {
                 MonsterQuestMain.systemLog.log("UNABLE TO WRITE TO SETTINGS FILE: " + ioe.getMessage()); 
             }
+            //Go back to start menu
             MonsterQuestMain.systemLog.log("Showing start menu");
             MonsterQuestMain.cardLayout.show(MonsterQuestMain.MonsterQuestPanel, "startMenu");
             MonsterQuestMain.MonsterQuestWindow.repaint();
         }
         else if (source.equals(music)) {
+            //Change XM:
             Text toPut;
             if (music.isSelected()) {
                 MonsterQuestMain.systemLog.log("Turn off music.");
@@ -171,6 +194,7 @@ public class Settings extends JPanel implements ActionListener{
                 MonsterQuestMain.systemLog.log("Turn on music");
                 toPut = new Text("Off");
             }
+            //Remove, then relpace the element
             musicElement.removeChild(0);
             musicElement.appendChild(toPut);
         }

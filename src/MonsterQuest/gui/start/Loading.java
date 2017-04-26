@@ -43,7 +43,7 @@ import nu.xom.Element;
 import nu.xom.ParsingException;
 
 /**
- *
+ * This is the loading at the start of the application boot
  * @author Zyun
  */
 public class Loading extends JPanel{
@@ -57,14 +57,18 @@ public class Loading extends JPanel{
             //show image
             splashScreen = ImageIO.read(new File (System.getProperty("user.dir") + "/resources/images/start/SplashScreen.png"));
             
+            //Find the middle of the screen
             int splashScreenPosX = Toolkit.getDefaultToolkit().getScreenSize().width / 2 - splashScreen.getWidth() / 2 ;
             g2d.setColor(Color.black);
             g2d.drawImage(splashScreen, splashScreenPosX, 0, null);
             MonsterQuestMain.systemLog.log("Just showed start splash image.");
+
+            //Set font
             g2d.setFont(MonsterQuestMain.pixelFont);
             FontMetrics metrics = getFontMetrics(MonsterQuestMain.pixelFont);
             g2d.drawString("Loading...", (Toolkit.getDefaultToolkit().getScreenSize().width/2 - metrics.stringWidth("Loading...")/2), 700);
-            //Show quote.
+
+            //Show quote as chosen
             g2d.drawString(quote, (Toolkit.getDefaultToolkit().getScreenSize().width/2 - metrics.stringWidth(quote)/2), 650);
         } catch (IOException e) {
             MonsterQuestMain.systemLog.log("Oh no! Unable to open file!" + e.getMessage());
@@ -73,9 +77,15 @@ public class Loading extends JPanel{
     
     public Loading() {
         super();
+        //Make new quote
         quote = createNewQuote();
     }
     
+    /**
+     * This loads startup settings, will also use this to load other files in the future.
+     * This is only used in the MonsterQuestMain part, when booting the app
+     * @see 
+    */
     public static void loadFiles () {
         File startupSettings = new File (System.getProperty("user.dir") + "/data/settings/Startup-Settings.xml");
         if (startupSettings.exists()) {
