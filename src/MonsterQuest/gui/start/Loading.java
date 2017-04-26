@@ -76,7 +76,7 @@ public class Loading extends JPanel{
         quote = createNewQuote();
     }
     
-    public void loadFiles () {
+    public static void loadFiles () {
         File startupSettings = new File (System.getProperty("user.dir") + "/data/settings/Startup-Settings.xml");
         if (startupSettings.exists()) {
             //Read from startup settings file

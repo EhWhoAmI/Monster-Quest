@@ -23,10 +23,29 @@
  */
 package MonsterQuest.util;
 
-/**
+import MonsterQuest.MonsterQuestMain;
+import java.awt.Color;
+import java.awt.Font;
+import java.awt.Graphics;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+
+/** This is just a black screen, for loading.
  *
  * @author Zyun
  */
-public class LoadingScreen {
+public class LoadingScreen extends JPanel{
+
+    public LoadingScreen() {
+        super();
+        setLayout(null);
+        setBackground(Color.black);
+        
+        //Draw a label for the text: "Loading"
+        JLabel label = new JLabel("Loading");
+        label.setFont(new Font("Minecraft", Font.TRUETYPE_FONT, 30));
+        label.setLocation(750, 1000);
+        add(label);
+    }
     
 }

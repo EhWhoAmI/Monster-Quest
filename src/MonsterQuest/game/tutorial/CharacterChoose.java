@@ -252,7 +252,12 @@ public class CharacterChoose extends JPanel implements ActionListener {
             //Start game...
             MonsterQuestMain.systemLog.log("Start game!!!");
             MonsterQuestMain.systemLog.log("Loading map");
-            MonsterQuestMain.MonsterQuestPanel.add(new MapProcesser(), "Map");
+            //Show loading screen while the map loads.
+            MonsterQuestMain.cardLayout.show(MonsterQuestMain.MonsterQuestPanel, "loadScreen");
+            MonsterQuestMain.MonsterQuestPanel.repaint();
+            
+            MonsterQuestMain.MonsterQuestPanel.add(new NewbiesTownCenter(), "Map");
+            //After done loading, show the map.
             MonsterQuestMain.cardLayout.show(MonsterQuestMain.MonsterQuestPanel, "Map");
             MonsterQuestMain.MonsterQuestPanel.repaint();
         }
