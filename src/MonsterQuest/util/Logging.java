@@ -30,18 +30,30 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Date;
 
-/**
+/** This class is used for logging.
  *
  * @author Zyun
  */
 public class Logging {
+    /** 
+     * The filename of the log file
+     */
     private String logString;
     private boolean openable = true;
     
+    /** This inits the whole logging thing
+     * @param logString this is the file to load
+     */
     public Logging (String logString) {
         this.logString = logString;
-        //Start new log, but first check if the file is bigger than 128 kb.
         File logFile = new File (System.getProperty("user.dir") + this.logString);
+
+        //Check if file is bigger than 100 kb, delete the file and start over.
+        if (logFile.length() > (1024 * 100)) {
+            logFile.delete();
+        }
+
+        //Check if file exists
         if (!logFile.exists()) {
             //Create new file.
             try {
@@ -51,18 +63,19 @@ public class Logging {
                 openable = false;
             }
         }
-        if (logFile.length() > (1024 * 100)) {
-            logFile.delete();
-        }
-        
+
         if (openable) {
+
+            //The thread for logging, makes it faster
             Runnable thread = () -> {
                 FileWriter logFileOutput = null;
                 BufferedWriter logFileWriter = null;
                 //Create Time Stamp
                 Date timeStamp = new Date();
+                //Say that a  new log has started
                 String content = ("--- NEW LOG STARTED [" + timeStamp + "]---");
                 try {
+                    //To write or not to write
                     if (MonsterQuestMain.PRINT_TO_LOGFILE) {
                         logFileOutput = new FileWriter(System.getProperty("user.dir") + this.logString, true);
                         logFileWriter = new BufferedWriter(logFileOutput);
@@ -83,25 +96,39 @@ public class Logging {
                 }
 
             };
+
+            //Start thread for logging
             Thread print = new Thread (thread);
             print.start();
         }
     }
     
+    /** This will take <code>text</code> as a string, append it to the beginning of the text, and deal with it accodingly
+     * @param text this is the text for the logging
+     */
     public void log (String text) {
+        //This is basically a copy of the constructor, just that you can change the text you write, not just --- NEW LOG STARTED [] ---
         if (openable) {
+
+            //Thread for logging. makes it faster
             Runnable thread = () -> {
                 FileWriter logFileOutput = null;
                 BufferedWriter logFileWriter = null;
                 //Create Time Stamp
                 Date timeStamp = new Date();
+
+                //The date, and the text
                 String content = ("[" + timeStamp + "]: " + text);
+
+                //Check if to write to console
                 if (MonsterQuestMain.DEBUG)
                     System.out.println(content);
                 try {
+                    //Check if write to logfile
                     if (MonsterQuestMain.PRINT_TO_LOGFILE) {
                         logFileOutput = new FileWriter(System.getProperty("user.dir") + this.logString, true);
                         logFileWriter = new BufferedWriter(logFileOutput);
+                        //Write to file
                         logFileWriter.write(content);
                         logFileWriter.newLine();
                     }
@@ -119,11 +146,16 @@ public class Logging {
                 }
 
             };
+
+            //Start the logging in thread
             Thread print = new Thread (thread);
             print.start();
         }
     }
     
+    /* 
+     * @return the filename of the log
+     */
     public String getLogString () {
         return this.logString;
     }

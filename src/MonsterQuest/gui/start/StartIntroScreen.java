@@ -61,7 +61,7 @@ public class StartIntroScreen extends JPanel{
         Graphics2D g2d = (Graphics2D) g;
         BufferedImage splashScreen = null;
         try {
-            //show image, and open file
+            //open image and show image
             splashScreen = ImageIO.read(new File (System.getProperty("user.dir") + "/resources/images/start/titlepageSplash.png"));
             g.drawImage(splashScreen, 250, 0, null);
             MonsterQuestMain.systemLog.log("Just showed start image.");

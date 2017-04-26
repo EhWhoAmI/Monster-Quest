@@ -43,7 +43,7 @@ public class About extends JPanel implements ActionListener{
 
     @Override
     protected void paintComponent(Graphics g) {
-        //Draw image for credits.
+        //Draw image for about scene.
         Graphics2D g2d = (Graphics2D) g;
         Rectangle2D.Float bg = new Rectangle2D.Float(0, 0, (float)MonsterQuestMain.MonsterQuestWindow.getWidth(), (float)MonsterQuestMain.MonsterQuestWindow.getHeight());
         g2d.setColor(Color.BLACK);
@@ -55,8 +55,11 @@ public class About extends JPanel implements ActionListener{
         g2d.drawString("Monster Quest",(MonsterQuestMain.MonsterQuestWindow.getWidth()/2 - fnt.stringWidth("Monster Quest")/2), 30);
         Font pixelFontBody = new Font("Minecraft", Font.TRUETYPE_FONT, 25);
         g2d.setFont(pixelFontBody);
+
+        //Show version
         g2d.drawString("Version: " + MonsterQuestMain.app_Version, 10, 80);
         
+        //Just to take out space :P
         g2d.drawString("Get out using this button: ", 10, 650);
     }
     
