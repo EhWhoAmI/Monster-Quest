@@ -24,10 +24,9 @@
 package MonsterQuest.game.tutorial;
 
 import MonsterQuest.MonsterQuestMain;
+import MonsterQuest.game.MainProcessor;
 import MonsterQuest.game.maps.MapProcesser;
-import MonsterQuest.game.maps.NewbiesTownCenter;
 import MonsterQuest.game.player.Player;
-import Zyun.Lam.Game.MonsterQuest.WindowMain;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.FontMetrics;
@@ -62,6 +61,7 @@ public class CharacterChoose extends JPanel implements ActionListener {
     private final int WARRIOR = 2;
     private final int MAGIC = 3;
     private final int ARCHER = 4;
+    
     
     //The descriptions for the character
      String [] swordsText = {"These people are well known throughout",
@@ -115,9 +115,9 @@ public class CharacterChoose extends JPanel implements ActionListener {
                         break;
                     case 1:
                         if (MonsterQuestMain.playerStats.gender == Player.BOY) 
-                            g.drawImage(ImageIO.read(new File (WindowMain.user_dir + "/resources/images/tutorial/SwordsManImageMale.png")), 500, 75, null);
+                            g.drawImage(ImageIO.read(new File (System.getProperty("user.dir") + "/resources/images/tutorial/SwordsManImageMale.png")), 500, 75, null);
                         else
-                            g.drawImage(ImageIO.read(new File (WindowMain.user_dir + "/resources/images/tutorial/SwordsManImageWoman.png")), 500, 75, null);
+                            g.drawImage(ImageIO.read(new File (System.getProperty("user.dir") + "/resources/images/tutorial/SwordsManImageWoman.png")), 500, 75, null);
                         //Draw the description for the player.
                         g2d.drawString(thingsToSay[0][0], 775, 100);
                         g2d.drawString(thingsToSay[0][1], 775, 125);
@@ -127,9 +127,9 @@ public class CharacterChoose extends JPanel implements ActionListener {
                         break;
                     case 2:
                         if (MonsterQuestMain.playerStats.gender == Player.BOY) 
-                            g.drawImage(ImageIO.read(new File (WindowMain.user_dir + "/resources/images/tutorial/WarriorImageMale.png")), 500, 75, null);
+                            g.drawImage(ImageIO.read(new File (System.getProperty("user.dir") + "/resources/images/tutorial/WarriorImageMale.png")), 500, 75, null);
                         else
-                            g.drawImage(ImageIO.read(new File (WindowMain.user_dir + "/resources/images/tutorial/WarriorImageWoman.png")), 500, 75, null);
+                            g.drawImage(ImageIO.read(new File (System.getProperty("user.dir") + "/resources/images/tutorial/WarriorImageWoman.png")), 500, 75, null);
                         //Draw the description for the player.
                         g2d.drawString(thingsToSay[1][0], 775, 100);
                         g2d.drawString(thingsToSay[1][1], 775, 125);
@@ -138,9 +138,9 @@ public class CharacterChoose extends JPanel implements ActionListener {
                     break;
                     case 3:
                         if (MonsterQuestMain.playerStats.gender == Player.BOY) 
-                            g.drawImage(ImageIO.read(new File (WindowMain.user_dir + "/resources/images/tutorial/WizardImage.png")), 500, 75, null);
+                            g.drawImage(ImageIO.read(new File (System.getProperty("user.dir") + "/resources/images/tutorial/WizardImage.png")), 500, 75, null);
                         else
-                            g.drawImage(ImageIO.read(new File (WindowMain.user_dir + "/resources/images/tutorial/WitchImage.png")), 500, 75, null);
+                            g.drawImage(ImageIO.read(new File (System.getProperty("user.dir") + "/resources/images/tutorial/WitchImage.png")), 500, 75, null);
                         //Draw the description for the player.
                         g2d.drawString(thingsToSay[2][0], 775, 100);
                         g2d.drawString(thingsToSay[2][1], 775, 125);
@@ -149,9 +149,9 @@ public class CharacterChoose extends JPanel implements ActionListener {
                         break;
                     case 4:
                         if (MonsterQuestMain.playerStats.gender == Player.BOY) 
-                            g.drawImage(ImageIO.read(new File (WindowMain.user_dir + "/resources/images/tutorial/ArcherMaleImage.png")), 500, 75, null);
+                            g.drawImage(ImageIO.read(new File (System.getProperty("user.dir") + "/resources/images/tutorial/ArcherMaleImage.png")), 500, 75, null);
                         else
-                            g.drawImage(ImageIO.read(new File (WindowMain.user_dir + "/resources/images/tutorial/ArcherFemaleImage.png")), 480, 75, null);
+                            g.drawImage(ImageIO.read(new File (System.getProperty("user.dir") + "/resources/images/tutorial/ArcherFemaleImage.png")), 480, 75, null);
                         //Draw the description for the player.
                         g2d.drawString(thingsToSay[3][0], 775, 100);
                         g2d.drawString(thingsToSay[3][1], 775, 125);
@@ -252,11 +252,22 @@ public class CharacterChoose extends JPanel implements ActionListener {
             //Start game...
             MonsterQuestMain.systemLog.log("Start game!!!");
             MonsterQuestMain.systemLog.log("Loading map");
+            
             //Show loading screen while the map loads.
+            //Doesn't work, it only shows after the things load.
             MonsterQuestMain.cardLayout.show(MonsterQuestMain.MonsterQuestPanel, "loadScreen");
             MonsterQuestMain.MonsterQuestPanel.repaint();
-            
-            MonsterQuestMain.MonsterQuestPanel.add(new NewbiesTownCenter(), "Map");
+
+            Runnable thread = () -> {
+                MainProcessor.mapProcesser = new MapProcesser();
+                MonsterQuestMain.MonsterQuestPanel.add(MainProcessor.mapProcesser , "Map");
+                MonsterQuestMain.systemLog.log("Done loading");
+            };
+            new Thread(thread).run();
+            try {
+                    Thread.sleep(10);
+            } catch (InterruptedException ie) {
+            }
             //After done loading, show the map.
             MonsterQuestMain.cardLayout.show(MonsterQuestMain.MonsterQuestPanel, "Map");
             MonsterQuestMain.MonsterQuestPanel.repaint();

@@ -24,7 +24,6 @@
 
 package MonsterQuest;
 
-import MonsterQuest.game.FadeInOut;
 import MonsterQuest.game.player.Player;
 import MonsterQuest.game.tutorial.CharacterChoose;
 import MonsterQuest.game.tutorial.VillagerSpeech;
@@ -49,8 +48,6 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import javax.swing.JPanel;
-import javax.swing.UIManager;
-import javax.swing.UnsupportedLookAndFeelException;
 import sun.audio.AudioPlayer;
 import sun.audio.AudioStream;
 

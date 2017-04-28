@@ -27,6 +27,8 @@ import MonsterQuest.MonsterQuestMain;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.geom.Rectangle2D;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
@@ -36,16 +38,24 @@ import javax.swing.JPanel;
  */
 public class LoadingScreen extends JPanel{
 
+    @Override
+    protected void paintComponent(Graphics g) {
+        Graphics2D g2d = (Graphics2D) g;
+        Rectangle2D.Float bg = new Rectangle2D.Float(0, 0, MonsterQuestMain.MonsterQuestWindow.getWidth(), MonsterQuestMain.MonsterQuestWindow.getHeight());
+        g2d.setColor(new Color(0, 0, 0));
+        g2d.fill(bg);
+        g2d.setColor(Color.white);
+        MonsterQuestMain.systemLog.log("Loading...");
+        g2d.setFont(MonsterQuestMain.pixelFont.deriveFont(40F));
+        g2d.drawString("Loading", 25, 650);
+    }
+    
+    
+    
     public LoadingScreen() {
         super();
         setLayout(null);
         setBackground(Color.black);
-        
-        //Draw a label for the text: "Loading"
-        JLabel label = new JLabel("Loading");
-        label.setFont(new Font("Minecraft", Font.TRUETYPE_FONT, 30));
-        label.setLocation(750, 1000);
-        add(label);
     }
     
 }
