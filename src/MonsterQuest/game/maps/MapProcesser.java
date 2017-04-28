@@ -23,6 +23,7 @@
  */
 package MonsterQuest.game.maps;
 
+import java.awt.Graphics;
 import javax.swing.JPanel;
 
 /**
@@ -30,13 +31,26 @@ import javax.swing.JPanel;
  * @author Zyun
  */
 public class MapProcesser extends JPanel{
-
+    int mapID;
+    //All the tilemaps
+    
+    NewbiesTownCenter newbiesTownCenter_ID_0x0000 = new NewbiesTownCenter();
     public MapProcesser() {
         super();
         setLayout(null);
         
-        //Load a newbies town map for testing.
-        add(new NewbiesTownCenter());
+        
+    }
+
+    @Override
+    protected void paintComponent(Graphics g) {
+        super.paintComponent(g);
+        //Just for testing, will remove later
+        newbiesTownCenter_ID_0x0000.printMap(g);
+    }
+    
+    static void loadTilemaps () {
+        
     }
     
 }
