@@ -33,29 +33,40 @@ public class Player {
     public boolean gender;
     public int Level;
     public int Experience;
+    public int AttackLv;
     public int Attack;
+    public int DefenseLv;
     public int Defense;
+    public int SpeedLv;
     public int Speed;
     public int Gold;
+    //Need to add the inventory arraylist, and weapon slots
     public static final boolean BOY = true;
     public static final boolean GIRL = false;
-    /**Player ()
+    /**
      * This defines the default stats for player
      */
     public Player() {
         this.Level = 0;
         this.Experience = 0;
-        this.Attack = 0;
-        this.Defense = 0;
-        this.Speed = 0;
-        this.Gold = 0;
+        this.AttackLv = 1;
+        this.Attack = 10;
+        this.DefenseLv = 1;
+        this.Defense = 10;
+        this.SpeedLv = 1;
+        this.Speed = 10;
+        this.Gold = 10;
     }
 
-    public Player(int Level, int Experience, int Attack, int Defense, int Speed, int Gold) {
+    public Player(PlayerType playerType, int Level, int Experience, int AttackLv, int Attack, int DefenseLv, int Defense, int SpeedLv, int Speed, int Gold) {
+        this.playerType = playerType;
         this.Level = Level;
         this.Experience = Experience;
+        this.AttackLv = AttackLv
         this.Attack = Attack;
+        this.DefenseLv = DefenseLv
         this.Defense = Defense;
+        this.SpeedLv = SpeedLv
         this.Speed = Speed;
         this.Gold = Gold;
     }
@@ -70,5 +81,11 @@ public class Player {
     
     public void setGender (boolean gender) {
         this.gender = gender;
+    }
+    
+    /** This is to init the player, but it doesn't directly init the object. Rather, it reads from the file, and returns a player object
+     * @param file the filename to read from
+     */
+    public static Player PlayerInit (String file) {
     }
 }
