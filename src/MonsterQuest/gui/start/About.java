@@ -59,6 +59,8 @@ public class About extends JPanel implements ActionListener{
         //Show version
         g2d.drawString("Version: " + MonsterQuestMain.app_Version, 10, 80);
         
+        //Might need to add extra things for this. The website? The date of compaliton?
+
         //Just to take out space :P
         g2d.drawString("Get out using this button: ", 10, 650);
     }
@@ -69,6 +71,8 @@ public class About extends JPanel implements ActionListener{
     public About() {
         super();
         setLayout(null);
+
+        //The exit button to exit this scene
         JButton exitButton = new JButton("X");
         exitButton.setBackground(Color.red);
         exitButton.setBounds(10, 680, 60, 40);
