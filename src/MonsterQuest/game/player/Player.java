@@ -23,6 +23,17 @@
  */
 package MonsterQuest.game.player;
 
+import MonsterQuest.util.FileFormatException;
+import java.awt.Point;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import nu.xom.Builder;
+import nu.xom.Document;
+import nu.xom.Element;
+import nu.xom.ParsingException;
+import nu.xom.Text;
+
 /**
  *
  * @author Zyun
@@ -40,6 +51,8 @@ public class Player {
     public int SpeedLv;
     public int Speed;
     public int Gold;
+    public int mapHash;
+    public Point playerPos;
     //Need to add the inventory arraylist, and weapon slots
     public static final boolean BOY = true;
     public static final boolean GIRL = false;
@@ -62,11 +75,11 @@ public class Player {
         this.playerType = playerType;
         this.Level = Level;
         this.Experience = Experience;
-        this.AttackLv = AttackLv
+        this.AttackLv = AttackLv;
         this.Attack = Attack;
-        this.DefenseLv = DefenseLv
+        this.DefenseLv = DefenseLv;
         this.Defense = Defense;
-        this.SpeedLv = SpeedLv
+        this.SpeedLv = SpeedLv;
         this.Speed = Speed;
         this.Gold = Gold;
     }
@@ -85,7 +98,45 @@ public class Player {
     
     /** This is to init the player, but it doesn't directly init the object. Rather, it reads from the file, and returns a player object
      * @param file the filename to read from
+     * @throws FileNotFoundException if the file cannot be found
+     * @throws FileFormatException when file is formatted wrongly
+     * @return
      */
-    public static Player PlayerInit (String file) {
+    public static Player PlayerInit (String file) throws FileNotFoundException, FileFormatException{
+        File inputFile = new File (file);
+        Player player = new Player();
+        if (!inputFile.exists())
+            throw new FileNotFoundException("The file, " + file + " cannot be found");
+        try {
+            Builder inputFileBuilder = new Builder();
+        
+            Document inputFileDoc = inputFileBuilder.build(inputFile);
+            Element root = inputFileDoc.getRootElement();
+            
+            //Read name
+            Element nameElement = root.getFirstChildElement("name");
+            Text name = (Text) nameElement.getChild(0);
+            player.name = name.getValue();
+            
+            Element gender = root.getFirstChildElement("gender");
+            Text genderText = (Text) gender.getChild(0);
+            if (genderText.getValue().equals("Boy")) {
+                //The player is a boy
+                player.setGender(GIRL);
+            }
+            else if (genderText.getValue().equals("Girl")) {
+                //The gender is a girl
+                player.setGender(GIRL);
+            }
+            else {
+                throw new FileFormatException("The text is corrupted, when the text should have been either \"Boy\" or \"Girl\", it was" + genderText.getValue());
+            }
+        } catch (ParsingException pe) {
+            //Throw a file format exception, because the file is formatted wrongly.
+            throw new FileFormatException("OOPS! File parsed wrongly!" + pe.getMessage());
+        } catch (IOException ioe ) {
+            
+        }
+        return player;
     }
 }

@@ -26,7 +26,10 @@ package MonsterQuest.util.tilemapengine;
 import MonsterQuest.MonsterQuestMain;
 import java.awt.Dimension;
 import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
+import javax.imageio.ImageIO;
 
 /**
  *
@@ -72,6 +75,11 @@ public class TileMapReader {
         MonsterQuestMain.systemLog.log("Loaded " + index + " tiles.");
         //Done.
     }
+
+    public TileMapReader(String fileName, Dimension sizeOfElement) throws IOException{
+        this(ImageIO.read(new File(fileName)), sizeOfElement);
+    }
+    
     
     /**
      * @param index the index of the tile
@@ -80,4 +88,6 @@ public class TileMapReader {
     public BufferedImage getImage (int index) {
         return (tiles.get(index));
     }
+    
+    
 }

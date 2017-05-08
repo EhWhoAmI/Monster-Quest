@@ -41,6 +41,10 @@ public class Logging {
     private String logString;
     private boolean openable = true;
     
+    public final static int INFO = 0;
+    public final static int WARINING = 1;
+    public final static int ERROR = 2;
+    public final static int ALERT = 3;
     /** This inits the whole logging thing
      * @param logString this is the file to load
      */
@@ -118,7 +122,55 @@ public class Logging {
                 Date timeStamp = new Date();
 
                 //The date, and the text
-                String content = ("[" + timeStamp + "]: " + text);
+                String content = ("[" + timeStamp + "]{" + getLogfileName() + "}(" + INFO + "): " + text);
+
+                //Check if to write to console
+                if (MonsterQuestMain.DEBUG)
+                    System.out.println(content);
+                try {
+                    //Check if write to logfile
+                    if (MonsterQuestMain.PRINT_TO_LOGFILE) {
+                        logFileOutput = new FileWriter(System.getProperty("user.dir") + this.logString, true);
+                        logFileWriter = new BufferedWriter(logFileOutput);
+                        //Write to file
+                        logFileWriter.write(content);
+                        logFileWriter.newLine();
+                    }
+                } catch (IOException ex) {
+                }
+                try {
+                    if (logFileWriter != null)
+                        logFileWriter.close();
+                    if (logFileOutput != null)
+                        logFileOutput.close();
+                    System.gc();
+                } catch (IOException ex) {
+                    //Just clear it up, nothing we can do.
+                    System.gc();
+                }
+
+            };
+
+            //Start the logging in thread
+            Thread print = new Thread (thread);
+            print.start();
+        }
+    }
+    
+    
+    public void log (String text, int type) {
+        //This is basically a copy of the constructor, just that you can change the text you write, not just --- NEW LOG STARTED [] ---
+        if (openable) {
+
+            //Thread for logging. makes it faster
+            Runnable thread = () -> {
+                FileWriter logFileOutput = null;
+                BufferedWriter logFileWriter = null;
+                //Create Time Stamp
+                Date timeStamp = new Date();
+
+                //The date, and the text
+                String content = ("[" + timeStamp + "]{" + getLogfileName() + "}(" + type + "): " + text);
 
                 //Check if to write to console
                 if (MonsterQuestMain.DEBUG)
@@ -156,7 +208,7 @@ public class Logging {
     /* 
      * @return the filename of the log
      */
-    public String getLogString () {
+    public String getLogfileName () {
         return this.logString;
     }
 }

@@ -21,12 +21,29 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package MonsterQuest.game.player;
+package MonsterQuest.util;
 
 /**
- *
+ * This is if the file is formatted wrongly, when reading from the player data files.
  * @author Zyun
  */
-public class PlayerShow {
-    
+public class FileFormatException extends Exception {
+
+    /**
+     * Creates a new instance of <code>FileFormatException</code> without detail
+     * message.
+     */
+    public FileFormatException() {
+        super();
+    }
+
+    /**
+     * Constructs an instance of <code>FileFormatException</code> with the
+     * specified detail message.
+     *
+     * @param msg the detail message.
+     */
+    public FileFormatException(String msg) {
+        super(msg);
+    }
 }

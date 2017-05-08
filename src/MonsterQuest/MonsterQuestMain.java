@@ -177,7 +177,7 @@ public class MonsterQuestMain {
         MonsterQuestWindow.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         
         //Set icon
-        MonsterQuestWindow.setIconImage(Toolkit.getDefaultToolkit().getImage("resources/icon/Icon.png"));
+        MonsterQuestWindow.setIconImage(Toolkit.getDefaultToolkit().getImage(System.getProperty("user.dir") + "/resources/icon/Icon.png"));
         
         //Add the start intro screen to the card layout.
         MonsterQuestPanel.add(new StartIntroScreen(), "intro");
