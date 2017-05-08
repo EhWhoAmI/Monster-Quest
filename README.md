@@ -1,6 +1,6 @@
 Monster Quest 
 ===============
-### A open source RPG game
+### An open source RPG game
 This RPG game is made by [EhWhoAmI](https://github.com/EhWhoAmI/). I have spent many afternoons after school trying to do this game. I hope it will be fun enough.
 
 This game will ALWAYS be open source, and free, because this is a hobby, and I do not feel like earning anything from this.
