@@ -41,11 +41,15 @@ public class NewbiesTownCenter extends JPanel{
     public static final int MAP_HASH = 0x0000;
     //New tilemap reader
     private static TileMapReader ground;
-
+    //Array size: [34][62]
+    private int[][] list = {
+        {0, 0, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 0, 1, 0, 1, 0, 1, 1, 0, 0, 1, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0}
+    };
+            
     public void printMap (Graphics g) {
         Graphics2D g2d = (Graphics2D) g;
-        
-        BufferedImage i = ground.getImage(3);
+        //Load the maps and stuff
+        BufferedImage i = MapProcesser.genericGround.getImage(2);
         g2d.drawImage(i, 0, 0, null);
     }
     public NewbiesTownCenter() {

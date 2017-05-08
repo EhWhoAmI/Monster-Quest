@@ -23,7 +23,13 @@
  */
 package MonsterQuest.game.maps;
 
+import MonsterQuest.MonsterQuestMain;
+import MonsterQuest.util.Logging;
+import MonsterQuest.util.tilemapengine.TileMapReader;
+import java.awt.Dimension;
 import java.awt.Graphics;
+import java.io.IOException;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 /**
@@ -33,13 +39,12 @@ import javax.swing.JPanel;
 public class MapProcesser extends JPanel{
     int mapID;
     //All the tilemaps
-    
+    static public TileMapReader genericGround;
     NewbiesTownCenter newbiesTownCenter_ID_0x0000 = new NewbiesTownCenter();
     public MapProcesser() {
         super();
+        loadTilemaps();
         setLayout(null);
-        
-        
     }
 
     @Override
@@ -50,7 +55,12 @@ public class MapProcesser extends JPanel{
     }
     
     static void loadTilemaps () {
-        
+        try {
+            genericGround = new TileMapReader(System.getProperty("user.dir") + "/resources/tilemaps/TownGroundTilemap.png", new Dimension(22, 22));
+        } catch (IOException ioe) {
+                MonsterQuestMain.systemLog.log("Unable to open tilemap, " + ioe.getMessage() + " Unable to do anything because tilemaps are essential.", Logging.ERROR);
+                JOptionPane.showMessageDialog(MonsterQuestMain.MonsterQuestWindow, "Unable to open the file", "Unable to open file", JOptionPane.ERROR_MESSAGE);
+        }
     }
     
 }
