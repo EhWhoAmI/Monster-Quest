@@ -56,7 +56,7 @@ public class MapProcesser extends JPanel{
     
     static void loadTilemaps () {
         try {
-            genericGround = new TileMapReader(System.getProperty("user.dir") + "/resources/tilemaps/TownGroundTilemap.png", new Dimension(22, 22));
+            genericGround = new TileMapReader(System.getProperty("user.dir") + "/resources/tilemaps/GenericGround.png", new Dimension(34, 34));
         } catch (IOException ioe) {
                 MonsterQuestMain.systemLog.log("Unable to open tilemap, " + ioe.getMessage() + " Unable to do anything because tilemaps are essential.", Logging.ERROR);
                 JOptionPane.showMessageDialog(MonsterQuestMain.MonsterQuestWindow, "Unable to open the file", "Unable to open file", JOptionPane.ERROR_MESSAGE);

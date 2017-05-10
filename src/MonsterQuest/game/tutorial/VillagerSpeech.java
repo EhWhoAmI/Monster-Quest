@@ -131,10 +131,7 @@ public class VillagerSpeech extends JPanel implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         JLabel label;
         //Debug stuff
-        if (MonsterQuestMain.DEBUG) {
-            //words = 11;
-            this.repaint();
-        }
+        
         if (e.getSource() == next) {
             words++;
             this.repaint();

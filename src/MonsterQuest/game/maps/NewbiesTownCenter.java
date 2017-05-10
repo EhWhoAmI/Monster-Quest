@@ -23,6 +23,7 @@
  */
 package MonsterQuest.game.maps;
 
+import MonsterQuest.MonsterQuestMain;
 import MonsterQuest.util.tilemapengine.TileMapReader;
 import java.awt.Dimension;
 import java.awt.Graphics;
@@ -41,23 +42,57 @@ public class NewbiesTownCenter extends JPanel{
     public static final int MAP_HASH = 0x0000;
     //New tilemap reader
     private static TileMapReader ground;
-    //Array size: [34][62]
+    //Array size: [34][62],
     private int[][] list = {
-        {0, 0, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 0, 1, 0, 1, 0, 1, 1, 0, 0, 1, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0}
-    };
+        {2, 0, 2, 2, 0, 0, 1, 0, 2, 1, 0, 2, 0, 2, 0, 2, 0, 0, 2, 2, 1, 2, 2, 2, 1, 1, 0, 0, 0, 1, 0, 2, 1, 0, 0, 2, 2, 2, 1, 2},
+        {0, 0, 0, 0, 1, 0, 0, 1, 1, 0, 2, 0, 0, 1, 0, 0, 0, 2, 0, 1, 0, 1, 2, 2, 1, 2, 1, 2, 1, 2, 2, 0, 0, 2, 0, 1, 2, 2, 0, 0},
+        {2, 2, 0, 0, 1, 2, 2, 2, 1, 2, 2, 0, 1, 1, 0, 1, 1, 1, 2, 2, 0, 1, 2, 2, 1, 0, 2, 2, 1, 0, 0, 2, 1, 1, 0, 0, 0, 0, 0, 0},
+        {0, 1, 0, 2, 0, 0, 2, 2, 1, 2, 1, 2, 1, 0, 2, 0, 1, 1, 0, 2, 0, 0, 1, 2, 1, 0, 0, 0, 2, 2, 0, 2, 1, 1, 1, 0, 2, 0, 2, 2},
+        {2, 1, 1, 1, 1, 1, 0, 0, 0, 2, 0, 1, 0, 0, 2, 2, 0, 2, 2, 0, 1, 0, 1, 1, 1, 2, 1, 2, 1, 0, 2, 0, 2, 2, 2, 2, 1, 0, 2, 0},
+        {2, 1, 2, 1, 1, 1, 0, 0, 1, 0, 2, 0, 1, 2, 2, 1, 0, 0, 1, 0, 2, 1, 1, 2, 2, 0, 0, 0, 1, 1, 0, 2, 0, 2, 0, 0, 1, 0, 0, 2},
+        {1, 0, 2, 2, 2, 2, 2, 2, 1, 0, 0, 0, 1, 2, 0, 0, 1, 0, 1, 0, 1, 2, 1, 0, 1, 1, 1, 0, 0, 1, 0, 2, 0, 1, 2, 1, 1, 0, 2, 1},
+        {2, 1, 1, 1, 0, 0, 2, 0, 0, 1, 1, 2, 0, 0, 0, 0, 2, 1, 2, 1, 2, 2, 0, 2, 1, 1, 2, 1, 0, 0, 2, 0, 1, 1, 0, 1, 2, 2, 0, 2},
+        {2, 1, 0, 2, 2, 1, 1, 0, 0, 0, 1, 0, 0, 1, 0, 1, 1, 0, 0, 1, 2, 1, 2, 0, 2, 0, 2, 0, 0, 2, 0, 1, 1, 1, 2, 0, 2, 2, 2, 2},
+        {0, 2, 0, 0, 2, 2, 1, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 2, 2, 1, 0, 2, 2, 1, 1, 2, 1, 2, 0, 0, 2, 0, 2, 2, 2, 2, 0, 0, 0, 1},
+        {1, 0, 0, 2, 1, 0, 2, 2, 0, 2, 1, 2, 2, 0, 0, 1, 0, 0, 1, 0, 0, 2, 0, 1, 1, 2, 0, 0, 0, 2, 1, 1, 2, 1, 1, 0, 1, 2, 1, 0},
+        {2, 1, 0, 1, 1, 0, 2, 2, 0, 1, 1, 0, 0, 2, 0, 1, 1, 1, 0, 0, 0, 1, 0, 1, 0, 2, 0, 0, 1, 2, 2, 0, 2, 2, 2, 0, 2, 0, 2, 0},
+        {0, 1, 2, 2, 2, 1, 0, 1, 2, 2, 1, 1, 0, 1, 1, 2, 0, 0, 1, 2, 2, 2, 0, 1, 2, 0, 0, 2, 1, 2, 2, 1, 2, 2, 0, 1, 0, 1, 0, 1},
+        {1, 0, 2, 2, 0, 2, 1, 2, 1, 0, 1, 2, 0, 2, 1, 1, 0, 1, 0, 1, 0, 1, 2, 0, 0, 0, 1, 2, 2, 0, 0, 1, 1, 0, 2, 2, 2, 2, 0, 1},
+        {0, 2, 0, 2, 1, 2, 0, 0, 2, 1, 1, 1, 2, 2, 0, 2, 0, 1, 2, 2, 1, 1, 2, 2, 1, 1, 1, 0, 0, 1, 0, 1, 2, 1, 2, 2, 0, 0, 1, 2},
+        {2, 1, 1, 2, 1, 2, 0, 2, 0, 1, 0, 1, 0, 1, 1, 0, 0, 1, 1, 2, 1, 0, 2, 1, 1, 1, 2, 2, 0, 1, 1, 1, 1, 0, 0, 1, 1, 0, 0, 2},
+        {2, 2, 1, 0, 1, 2, 0, 1, 1, 2, 0, 1, 0, 1, 0, 0, 1, 0, 0, 1, 2, 1, 1, 0, 2, 0, 2, 1, 1, 0, 0, 2, 2, 1, 2, 2, 1, 0, 1, 0},
+        {0, 2, 0, 0, 1, 0, 1, 1, 2, 0, 0, 1, 0, 2, 1, 1, 2, 1, 2, 1, 2, 0, 1, 0, 1, 0, 1, 2, 1, 2, 0, 0, 2, 1, 0, 0, 1, 0, 2, 0},
+        {2, 2, 0, 2, 1, 2, 1, 1, 1, 2, 0, 0, 0, 1, 1, 2, 2, 1, 2, 1, 0, 0, 0, 0, 0, 1, 2, 2, 0, 2, 0, 1, 2, 1, 1, 1, 0, 1, 2, 0},
+        {2, 1, 0, 0, 0, 0, 2, 1, 0, 0, 2, 0, 2, 2, 0, 2, 0, 0, 2, 1, 1, 1, 1, 2, 2, 0, 2, 0, 1, 0, 2, 2, 2, 0, 1, 2, 1, 1, 0, 2},
+        {1, 0, 1, 2, 2, 0, 2, 1, 2, 1, 2, 0, 0, 2, 2, 1, 0, 2, 1, 2, 1, 1, 1, 1, 2, 2, 0, 0, 1, 0, 2, 2, 0, 1, 1, 0, 0, 1, 1, 0},
+        {2, 1, 0, 2, 0, 1, 1, 1, 0, 1, 2, 1, 2, 0, 1, 0, 1, 0, 0, 0, 2, 2, 0, 2, 1, 0, 2, 2, 1, 2, 1, 2, 0, 2, 1, 1, 1, 2, 2, 2},
+};
+
+
+    void loadMap () {
+        
+    }
             
     public void printMap (Graphics g) {
         Graphics2D g2d = (Graphics2D) g;
         //Load the maps and stuff
-        BufferedImage i = MapProcesser.genericGround.getImage(2);
-        g2d.drawImage(i, 0, 0, null);
+        int index = 0;
+        for (int num = 0; num < list.length; num ++) {
+            for (int num2 = 0; num2 < list[0].length; num2 ++) {
+                g2d.drawImage(MapProcesser.genericGround.getImage(list[num][num2]), (num2*MapProcesser.genericGround.sizeOfEachElement.width), (num*MapProcesser.genericGround.sizeOfEachElement.width), null);
+                MonsterQuestMain.systemLog.log("Loading square " + index + " Pos " + num + ", " + num2);
+                index ++;
+                try {Thread.sleep(1);}catch(InterruptedException ie){}
+            }
+        }
     }
+    
     public NewbiesTownCenter() {
         super();
         try {
             File tilemap = new File(System.getProperty("user.dir") + "/resources/tilemaps/things.png");
-            ground = new TileMapReader(ImageIO.read(tilemap), new Dimension(16, 16));      
-        }catch (IOException ioe) {}
+            //ground = new TileMapReader(ImageIO.read(tilemap), new Dimension(16, 16));      
+        }catch (Exception ioe) {}
     }
     
     
