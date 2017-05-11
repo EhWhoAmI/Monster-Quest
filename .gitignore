@@ -68,3 +68,7 @@ KEYCHAIN
 /resources/archived/
 /raw/
 
+# Other compiler files
+*.ctxt
+*.bluej
+
