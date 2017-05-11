@@ -52,13 +52,14 @@ public class Loading extends JPanel{
     protected void paintComponent(Graphics g) {
         //Draw image for the splash screen in the middle.
         Graphics2D g2d = (Graphics2D) g;
+        super.paintComponent (g);
         BufferedImage splashScreen = null;
         try {
             //show image
             splashScreen = ImageIO.read(new File (System.getProperty("user.dir") + "/resources/images/start/SplashScreen.png"));
             
             //Find the middle of the screen
-            int splashScreenPosX = Toolkit.getDefaultToolkit().getScreenSize().width / 2 - splashScreen.getWidth() / 2 ;
+            int splashScreenPosX = MonsterQuestMain.MonsterQuestWindow.getWidth() / 2 - splashScreen.getWidth() / 2 ;
             g2d.setColor(Color.black);
             g2d.drawImage(splashScreen, splashScreenPosX, 0, null);
             MonsterQuestMain.systemLog.log("Just showed start splash image.");
@@ -66,10 +67,10 @@ public class Loading extends JPanel{
             //Set font
             g2d.setFont(MonsterQuestMain.pixelFont);
             FontMetrics metrics = getFontMetrics(MonsterQuestMain.pixelFont);
-            g2d.drawString("Loading...", (Toolkit.getDefaultToolkit().getScreenSize().width/2 - metrics.stringWidth("Loading...")/2), 700);
+            g2d.drawString("Loading...", (MonsterQuestMain.MonsterQuestWindow.getWidth()/2 - metrics.stringWidth("Loading...")/2), 700);
 
             //Show quote as chosen
-            g2d.drawString(quote, (Toolkit.getDefaultToolkit().getScreenSize().width/2 - metrics.stringWidth(quote)/2), 650);
+            g2d.drawString(quote, (MonsterQuestMain.MonsterQuestWindow.getWidth()/2 - metrics.stringWidth(quote)/2), 650);
         } catch (IOException e) {
             MonsterQuestMain.systemLog.log("Oh no! Unable to open file!" + e.getMessage());
         }

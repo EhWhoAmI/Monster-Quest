@@ -34,7 +34,7 @@ import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 import MonsterQuest.MonsterQuestMain;
 
-/** This class shows the star splash screen on the application's start.
+/** This class shows the start splash screen on the application's start.
  *
  * @author Zyun
  */
@@ -43,6 +43,7 @@ public class StartIntroScreen extends JPanel{
     @Override
     protected void paintComponent(Graphics g) {
         Graphics2D g2d = (Graphics2D) g;
+        super.paintComponent(g);
         MonsterQuestMain.systemLog.log("Showing start intro");
         
         //Set background for filling the screen

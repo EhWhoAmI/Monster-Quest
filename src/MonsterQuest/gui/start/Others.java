@@ -49,12 +49,13 @@ public class Others extends JPanel implements ActionListener{
     protected void paintComponent(Graphics g) {
         //Draw image for the splash screen in the middle.
         Graphics2D g2d = (Graphics2D) g;
+        super.paintComponent(g);
         BufferedImage splashScreen = null;
         try {
             //show image
             splashScreen = ImageIO.read(new File (System.getProperty("user.dir") + "/resources/images/start/SplashScreen.png"));
             Font pixelFontBigger = new Font("Minecraft", Font.TRUETYPE_FONT, 35);
-            int splashScreenPosX = Toolkit.getDefaultToolkit().getScreenSize().width / 2 - splashScreen.getWidth() / 2 ;
+            int splashScreenPosX = MonsterQuestMain.MonsterQuestWindow.getWidth() / 2 - splashScreen.getWidth() / 2 ;
             g2d.drawImage(splashScreen, splashScreenPosX, 0, null);
             MonsterQuestMain.systemLog.log("Just showed start splash image.");
             RoundRectangle2D.Float WindowPopup = new RoundRectangle2D.Float ((MonsterQuestMain.MonsterQuestWindow.getWidth() / 2)- 450, 10, 900, 700, 10, 10);
@@ -66,7 +67,7 @@ public class Others extends JPanel implements ActionListener{
             g2d.fill(WindowPopup);
             g2d.setColor(Color.black);
             FontMetrics metrics = getFontMetrics(pixelFontBigger);
-            g2d.drawString("Others", ((Toolkit.getDefaultToolkit().getScreenSize().width/2) - metrics.stringWidth("Others")/2), 100);
+            g2d.drawString("Others", ((MonsterQuestMain.MonsterQuestWindow.getWidth()/2) - metrics.stringWidth("Others")/2), 100);
         } catch (IOException e) {
             MonsterQuestMain.systemLog.log("Oh no! Unable to open file!" + e.getMessage());
         }
