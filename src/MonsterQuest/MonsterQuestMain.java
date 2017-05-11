@@ -1,3 +1,5 @@
+package MonsterQuest;
+
 /*
  * The MIT License
  *
@@ -22,7 +24,7 @@
  * THE SOFTWARE.
  */
 
-package MonsterQuest;
+ 
 
 import MonsterQuest.game.player.Player;
 import MonsterQuest.game.tutorial.CharacterChoose;
