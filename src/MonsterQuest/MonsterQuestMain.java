@@ -171,8 +171,9 @@ public class MonsterQuestMain {
         MonsterQuestPanel.setLayout(cardLayout); 
         
         //Set window size
-        MonsterQuestWindow.setSize(Toolkit.getDefaultToolkit().getScreenSize());
-        systemLog.log("Screen size: H= " + Toolkit.getDefaultToolkit().getScreenSize().height + " W= " + Toolkit.getDefaultToolkit().getScreenSize().width);
+        //this is the size of my computer screen, so 
+        MonsterQuestWindow.setSize(1366, 768);
+        systemLog.log("Screen size: H= " + MonsterQuestWindow.getHeight() + " W= " + MonsterQuestWindow.getWidth());
         MonsterQuestWindow.setResizable(false);
         MonsterQuestWindow.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         
