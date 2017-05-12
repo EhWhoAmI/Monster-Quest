@@ -75,8 +75,12 @@ public class NewbiesTownCenter extends JPanel{
             }
         }
         MonsterQuestMain.systemLog.log("Loading image into temp file");
+        File imageFileName = new File(System.getProperty("user.dir") + "/resources/tilemaps/TEMP/NewbiesTownCenter_temp.png");
+        
         try {
-            ImageIO.write(temp, "PNG", new File(System.getProperty("user.dir") + "/resources/tilemaps/TEMP/NewbiesTownCenter_temp.png"));
+            imageFileName.createNewFile();
+            imageFileName.deleteOnExit();
+            ImageIO.write(temp, "PNG", imageFileName);
         } catch (IOException ex) {
             MonsterQuestMain.systemLog.log("Unable to write to file! " + ex.getMessage(), Logging.ERROR);
         }
@@ -103,10 +107,10 @@ public class NewbiesTownCenter extends JPanel{
         try {
             MonsterQuestMain.systemLog.log("Loading the file onto screen");
             //Draw the temp image
-            imagetemp = ImageIO.read(new File (System.getProperty("user.dir") + "/tilemaps/TEMP/NewbiesTownCenter_temp.png"));
+            imagetemp = ImageIO.read(new File (System.getProperty("user.dir") + "/resources/tilemaps/TEMP/NewbiesTownCenter_temp.png"));
             g2d.drawImage(imagetemp, 0, 0, null);
         } catch (IOException ex) {
-            MonsterQuestMain.systemLog.log("Unable to open log file!", Logging.ERROR);
+            MonsterQuestMain.systemLog.log("Unable to open file!", Logging.ERROR);
         }
         
     }
