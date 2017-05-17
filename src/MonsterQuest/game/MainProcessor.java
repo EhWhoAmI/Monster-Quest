@@ -24,11 +24,24 @@
 package MonsterQuest.game;
 
 import MonsterQuest.game.maps.MapProcesser;
+import MonsterQuest.game.player.PlayerShow;
+import java.awt.Graphics;
+import javax.swing.JPanel;
 
 /**
  *
  * @author Zyun
  */
-public class MainProcessor {
-    public static MapProcesser mapProcesser;
+public class MainProcessor extends JPanel{
+    public static MapProcesser mapProcesser = new MapProcesser();
+    public static PlayerShow playerShow;
+
+    @Override
+    protected void paintComponent(Graphics g) {
+        super.paintComponent(g); //To change body of generated methods, choose Tools | Templates.
+        mapProcesser.loadMaps(g);
+        playerShow.printCharacter(g);
+    }
+    
+    
 }

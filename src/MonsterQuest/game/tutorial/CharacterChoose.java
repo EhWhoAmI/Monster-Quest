@@ -24,6 +24,7 @@
 package MonsterQuest.game.tutorial;
 
 import MonsterQuest.MonsterQuestMain;
+import MonsterQuest.game.GameKeyListener;
 import MonsterQuest.game.MainProcessor;
 import MonsterQuest.game.maps.MapProcesser;
 import MonsterQuest.game.player.Player;
@@ -259,17 +260,20 @@ public class CharacterChoose extends JPanel implements ActionListener {
             MonsterQuestMain.MonsterQuestPanel.repaint();
 
             Runnable thread = () -> {
-                MainProcessor.mapProcesser = new MapProcesser();
-                MonsterQuestMain.MonsterQuestPanel.add(MainProcessor.mapProcesser , "Map");
+                MainProcessor mainProcesser = new MainProcessor();
+                MonsterQuestMain.MonsterQuestPanel.add(mainProcesser , "game");
                 MonsterQuestMain.systemLog.log("Done loading");
             };
             new Thread(thread).run();
+            //Add action listener
+            MonsterQuestMain.MonsterQuestWindow.addKeyListener(new GameKeyListener());
             try {
                     Thread.sleep(10);
             } catch (InterruptedException ie) {
             }
+            
             //After done loading, show the map.
-            MonsterQuestMain.cardLayout.show(MonsterQuestMain.MonsterQuestPanel, "Map");
+            MonsterQuestMain.cardLayout.show(MonsterQuestMain.MonsterQuestPanel, "game");
             MonsterQuestMain.MonsterQuestPanel.repaint();
         }
     }

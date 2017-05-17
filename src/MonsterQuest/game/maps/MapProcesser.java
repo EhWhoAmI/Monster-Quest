@@ -40,7 +40,7 @@ public class MapProcesser extends JPanel{
     int mapID;
     //All the tilemaps
     static public TileMapReader genericGround;
-    NewbiesTownCenter newbiesTownCenter_ID_0x0000;
+    private static NewbiesTownCenter newbiesTownCenter_ID_0x0000;
     public MapProcesser() {
         super();
         loadTilemaps();
@@ -49,9 +49,7 @@ public class MapProcesser extends JPanel{
         newbiesTownCenter_ID_0x0000 = new NewbiesTownCenter();
     }
 
-    @Override
-    protected void paintComponent(Graphics g) {
-        super.paintComponent(g);
+    public static void loadMaps(Graphics g) {
         //Just for testing, will remove later
         newbiesTownCenter_ID_0x0000.printMap(g);
     }
