@@ -23,10 +23,31 @@
  */
 package MonsterQuest.game.player;
 
+import MonsterQuest.MonsterQuestMain;
+import static MonsterQuest.MonsterQuestMain.systemLog;
+import MonsterQuest.util.Logging;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+import javax.imageio.ImageIO;
+
 /**
  *
  * @author Zyun
  */
 public class PlayerShow {
-    
+    public static void printCharacter (Graphics g) {
+        Graphics2D g2d = (Graphics2D) g;
+        //Open image for the player
+        try {
+            File image = new File(System.getProperty("user.dir") + "/resources/images/sprites/PersonWalking1.png");
+            BufferedImage spriteImage = ImageIO.read(image);
+            g2d.drawImage(spriteImage, MonsterQuestMain.playerStats.playerPos.x, MonsterQuestMain.playerStats.playerPos.y, null);
+        } catch (IOException ioe) {
+            systemLog.log("Unable to open file! " + ioe.getMessage(), Logging.ERROR);
+        }
+        
+    }
 }

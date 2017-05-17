@@ -52,7 +52,7 @@ public class Player {
     public int Speed;
     public int Gold;
     public int mapHash;
-    public Point playerPos;
+    public Point playerPos = new Point(0, 0);
     //Need to add the inventory arraylist, and weapon slots
     public static final boolean BOY = true;
     public static final boolean GIRL = false;

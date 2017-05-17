@@ -45,7 +45,6 @@ public class LoadingScreen extends JPanel{
         g2d.setColor(new Color(0, 0, 0));
         g2d.fill(bg);
         g2d.setColor(Color.white);
-        MonsterQuestMain.systemLog.log("Loading...");
         g2d.setFont(MonsterQuestMain.pixelFont.deriveFont(40F));
         g2d.drawString("Loading", 25, 650);
     }
