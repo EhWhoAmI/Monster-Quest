@@ -40,6 +40,7 @@ public class LoadingScreen extends JPanel{
 
     @Override
     protected void paintComponent(Graphics g) {
+        //show the loading black screen
         Graphics2D g2d = (Graphics2D) g;
         Rectangle2D.Float bg = new Rectangle2D.Float(0, 0, MonsterQuestMain.MonsterQuestWindow.getWidth(), MonsterQuestMain.MonsterQuestWindow.getHeight());
         g2d.setColor(new Color(0, 0, 0));
@@ -50,7 +51,9 @@ public class LoadingScreen extends JPanel{
     }
     
     
-    
+    /**
+     * This inits the loading screen
+     */
     public LoadingScreen() {
         super();
         setLayout(null);

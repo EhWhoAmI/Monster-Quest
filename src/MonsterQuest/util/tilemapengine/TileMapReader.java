@@ -32,19 +32,51 @@ import java.util.ArrayList;
 import javax.imageio.ImageIO;
 
 /**
- *
+ * This reads ftom the tilemap
  * @author Zyun
  */
 public class TileMapReader {
+    /**
+     * The original tilemap
+     */
     BufferedImage tileImage;
+    /**
+     * The list of tiles in the tilemaps
+     */
     public ArrayList<BufferedImage> tiles;
+    
+    /**
+     * The size of each element
+     */
     public Dimension sizeOfEachElement;
+    
+    /**
+     * The number of reccurences of the tilemaps
+     */
     public int NumberOfRecurrenceX;
+    
+    /**
+     * Same as <code>NumberOfRecurrenceY</code>
+     */
     public int NumberOfRecurrenceY;
+    
+    /**
+     * The X position of the pointer to read the image
+     */
     private int posX = 0;
+    
+    /**
+     * The Y position of the pointer to read the image
+     */
     private int posY = 0;
     
+    /**
+     * Splits the original tilemap, and puts it into the arraylist <code>tiles</code>
+     * @param tileImage the original tilemap image
+     * @param sizeOfEachElement the size of each element
+     */
     public TileMapReader(BufferedImage tileImage, Dimension sizeOfEachElement) {
+        //Get the values
         this.tileImage = tileImage;
         this.sizeOfEachElement = sizeOfEachElement;
         
@@ -53,6 +85,7 @@ public class TileMapReader {
         NumberOfRecurrenceY = this.tileImage.getHeight() / this.sizeOfEachElement.height;
         
         MonsterQuestMain.systemLog.log("Occurunces (x, y), (" + NumberOfRecurrenceX + ", " + NumberOfRecurrenceY + ")");
+        
         //Init the arraylist for the tiles.
         tiles = new ArrayList<>(NumberOfRecurrenceX * NumberOfRecurrenceY);
         
@@ -60,28 +93,45 @@ public class TileMapReader {
         int index = 0;
         for (int i = 0; i < NumberOfRecurrenceY; i++) {
             for (int n = 0; n < NumberOfRecurrenceX; n++) {
-                MonsterQuestMain.systemLog.log("Reading tile " + index + " Position, x " + posX + " y, " + posY);
+                //Don't need to log this
+                //MonsterQuestMain.systemLoh.log("Reading tile " + index + " Position, x " + posX + " y, " + posY);
+                
+                //Add the image to the arraylist
                 tiles.add(this.tileImage.getSubimage(posX, posY, this.sizeOfEachElement.width, this.sizeOfEachElement.height));
+                
+                //Wait for 0.001 seconds, for the sake of the JVM (Don't bog it down)
                 try {
                     Thread.sleep(1);
                 } catch (InterruptedException ie) {
+                    //Ingore
                 }
+                //Get the number of files, and increment position
                 index ++;
                 posX += this.sizeOfEachElement.width;
             }
+            
+            //Increment the position
             posX = 0;
             posY += sizeOfEachElement.height;
         }
         MonsterQuestMain.systemLog.log("Loaded " + index + " tiles.");
         //Done.
     }
-
+    
+    /**
+     * This just like <code>TileMapReader(BufferedImage, Dimension)</code>, just that it takes a string as a filename
+     * @param fileName the name of the file
+     * @param sizeOfElement the size of each element
+     * @throws IOException If the file cannot be opened
+     * @see @link TileMapReader(BufferedImage, Dimension)
+     */
     public TileMapReader(String fileName, Dimension sizeOfElement) throws IOException{
         this(ImageIO.read(new File(fileName)), sizeOfElement);
     }
     
     
     /**
+     * Get the tile of the index thingy
      * @param index the index of the tile
      * @return the image of the tile specified in the index.
      */

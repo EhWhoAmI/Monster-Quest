@@ -40,6 +40,9 @@ public class GameKeyListener implements KeyListener{
                 case 'W':
                 case 'w':
                     playerStats.playerPos.y -= 68;
+                    //If position is out of bounds, change map.
+                    //Detect map
+                    //Change map to that map
                     MonsterQuest.MonsterQuestMain.MonsterQuestWindow.repaint();
                     break;
                 case 'A':

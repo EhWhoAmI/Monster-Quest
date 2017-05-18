@@ -39,8 +39,13 @@ public class Logging {
      * The filename of the log file
      */
     private String logString;
+    
+    /**
+     * Determines whether the file can be opened or not
+     */
     private boolean openable = true;
     
+    //The IDs of the message type
     public final static int INFO = 0;
     public final static int WARINING = 1;
     public final static int ERROR = 2;
@@ -157,7 +162,10 @@ public class Logging {
         }
     }
     
-    
+    /** This will take <code>text</code> as a string, append it to the beginning of the text, and deal with it accodingly
+     * @param text this is the text for the logging
+     * @param type the type of message
+     */
     public void log (String text, int type) {
         //This is basically a copy of the constructor, just that you can change the text you write, not just --- NEW LOG STARTED [] ---
         if (openable) {
