@@ -41,7 +41,7 @@ import javax.swing.JButton;
 import javax.swing.JPanel;
 
 /**
- *
+ * This shows the 'Others' scene, where you can select Credits and About part 
  * @author Zyun
  */
 public class Others extends JPanel implements ActionListener{
@@ -58,6 +58,8 @@ public class Others extends JPanel implements ActionListener{
             int splashScreenPosX = MonsterQuestMain.MonsterQuestWindow.getWidth() / 2 - splashScreen.getWidth() / 2 ;
             g2d.drawImage(splashScreen, splashScreenPosX, 0, null);
             MonsterQuestMain.systemLog.log("Just showed start splash image.");
+            
+            //Show the popup
             RoundRectangle2D.Float WindowPopup = new RoundRectangle2D.Float ((MonsterQuestMain.MonsterQuestWindow.getWidth() / 2)- 450, 10, 900, 700, 10, 10);
             RoundRectangle2D.Float WindowPopupBack = new RoundRectangle2D.Float((MonsterQuestMain.MonsterQuestWindow.getWidth() / 2) - 452.5F, 7.5F, 905, 705, 10, 10);
             g2d.setFont(pixelFontBigger);
@@ -66,12 +68,14 @@ public class Others extends JPanel implements ActionListener{
             g2d.setColor(new Color (186, 191, 198));
             g2d.fill(WindowPopup);
             g2d.setColor(Color.black);
+            //Show the others text
             FontMetrics metrics = getFontMetrics(pixelFontBigger);
             g2d.drawString("Others", ((MonsterQuestMain.MonsterQuestWindow.getWidth()/2) - metrics.stringWidth("Others")/2), 100);
         } catch (IOException e) {
             MonsterQuestMain.systemLog.log("Oh no! Unable to open file!" + e.getMessage());
         }
     }
+    
     public Others() {
         super();
         setLayout(null);
@@ -101,16 +105,19 @@ public class Others extends JPanel implements ActionListener{
     @Override
     public void actionPerformed(ActionEvent e) {
         Object source = e.getSource();
+        //Pressed credits button
         if (source == credits) {
             MonsterQuestMain.systemLog.log("Showing credits scene");
             MonsterQuestMain.cardLayout.show(MonsterQuestMain.MonsterQuestPanel, "creditsScene");
             MonsterQuestMain.MonsterQuestPanel.repaint();
         } 
+        //Pressed about button
         else if (source == about) {
             MonsterQuestMain.systemLog.log("Showing about scene");
             MonsterQuestMain.cardLayout.show(MonsterQuestMain.MonsterQuestPanel, "aboutScene");
             MonsterQuestMain.MonsterQuestPanel.repaint();
         }
+        //Pressed exit button, exit
         else if (source == exit) {
             MonsterQuestMain.systemLog.log("Showing start menu");
             MonsterQuestMain.cardLayout.show(MonsterQuestMain.MonsterQuestPanel, "startMenu");
