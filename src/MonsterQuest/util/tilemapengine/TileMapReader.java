@@ -69,7 +69,11 @@ public class TileMapReader {
      * The Y position of the pointer to read the image
      */
     private int posY = 0;
-    
+
+    /**
+     * The name of the tilemap file
+     */
+    private String filename;
     /**
      * Splits the original tilemap, and puts it into the arraylist <code>tiles</code>
      * @param tileImage the original tilemap image
