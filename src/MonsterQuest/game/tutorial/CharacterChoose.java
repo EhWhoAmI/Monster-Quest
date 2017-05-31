@@ -26,7 +26,6 @@ package MonsterQuest.game.tutorial;
 import MonsterQuest.MonsterQuestMain;
 import MonsterQuest.game.GameKeyListener;
 import MonsterQuest.game.MainProcessor;
-import MonsterQuest.game.maps.MapProcesser;
 import MonsterQuest.game.player.Player;
 import java.awt.Color;
 import java.awt.Font;
@@ -164,6 +163,10 @@ public class CharacterChoose extends JPanel implements ActionListener {
                 
             }
         }
+
+    /**
+     *
+     */
     public CharacterChoose() {
         super();
         //layout = new CardLayout();

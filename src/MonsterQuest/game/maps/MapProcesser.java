@@ -28,19 +28,37 @@ import MonsterQuest.util.Logging;
 import MonsterQuest.util.tilemapengine.TileMapReader;
 import java.awt.Dimension;
 import java.awt.Graphics;
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Scanner;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 /**
- *
+ * This class processes all the maps.
  * @author Zyun
  */
 public class MapProcesser extends JPanel{
     int mapID;
     //All the tilemaps
+
+    /**
+     * The tilemap for the generic ground.
+     */
     static public TileMapReader genericGround;
+    
+    /**
+     * Newbies town center map;
+     */
     private static NewbiesTownCenter newbiesTownCenter_ID_0x0000;
+
+    /**
+     * Constructor for a new MapProcesser class
+     */
     public MapProcesser() {
         super();
         loadTilemaps();
@@ -49,11 +67,18 @@ public class MapProcesser extends JPanel{
         newbiesTownCenter_ID_0x0000 = new NewbiesTownCenter();
     }
 
+    /**
+     * Load all the maps onto the screen
+     * @param g
+     */
     public static void loadMaps(Graphics g) {
         //Just for testing, will remove later
         newbiesTownCenter_ID_0x0000.printMap(g);
     }
     
+    /**
+     * Load all the tilemaps.
+     */
     static void loadTilemaps () {
         try {
             genericGround = new TileMapReader(System.getProperty("user.dir") + "/resources/tilemaps/GenericGround.png", new Dimension(68, 68));
@@ -62,5 +87,28 @@ public class MapProcesser extends JPanel{
                 JOptionPane.showMessageDialog(MonsterQuestMain.MonsterQuestWindow, "Unable to open the file", "Unable to open file", JOptionPane.ERROR_MESSAGE);
         }
     }
+    
+    static void loadMap () {
+        try {
+            //Get list of map files.
+            File readMapFileName = new File (System.getProperty("user.dir") + "/data/maplist");
+            Scanner readmapfiles = new Scanner(readMapFileName);
+            ArrayList<String> fileList = new ArrayList<>();
+            while (readmapfiles.hasNext()) {
+                String fileName = readmapfiles.nextLine();
+                File exists = new File(System.getProperty("user.dir") + fileName);
+                if (!exists.exists()) {
+                    //Report it, and exit game...
+                    JOptionPane.showMessageDialog(MonsterQuestMain.MonsterQuestWindow, "You don't have the file " + fileName, "Missing File", JOptionPane.ERROR_MESSAGE);
+                    System.exit(1);
+                }
+            }
+            //Then load all the
+        } catch (FileNotFoundException ex) {
+            MonsterQuestMain.systemLog.log("File not found!!!", Logging.ERROR);
+        }
+    }
+    
+    
     
 }

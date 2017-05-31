@@ -115,6 +115,9 @@ public class VillagerSpeech extends JPanel implements ActionListener {
         g2d.drawString(TEXT_STRINGS[textToShow], 350, 100);
     }
 
+    /**
+     *
+     */
     public VillagerSpeech() {
         super();
         setLayout(null);

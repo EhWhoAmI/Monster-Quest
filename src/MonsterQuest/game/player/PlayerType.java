@@ -24,7 +24,7 @@
 package MonsterQuest.game.player;
 
 /**
- *
+ * Most of these are self explanatory...
  * @author Lam Zyun
  */
 public enum PlayerType {

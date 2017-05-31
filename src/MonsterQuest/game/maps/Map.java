@@ -19,26 +19,4 @@ import nu.xom.ValidityException;
  */
 public class Map {
 
-    /**
-     *
-     */
-    public Map() {
-        //Open map file
-        File map = new File(System.getProperty("user.dir") + "/data/maps/map0x0000.xml");
-        Builder buildMap = new Builder();
-        
-        try {
-            Document docMap = buildMap.build(map);
-            Element root = docMap.getRootElement();
-            Elements childElements = root.getChildElements();
-           for (int i = 0; i < childElements.size(); i++){
-                Element maps = childElements.get(i);
-                Elements layers = maps.getChildElements()
-           }
-        } catch (ParsingException pe) {
-            
-        } catch (IOException ex) {
-            
-        }
-    }
 }

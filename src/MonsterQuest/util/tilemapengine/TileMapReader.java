@@ -98,7 +98,7 @@ public class TileMapReader {
         for (int i = 0; i < NumberOfRecurrenceY; i++) {
             for (int n = 0; n < NumberOfRecurrenceX; n++) {
                 //Don't need to log this
-                //MonsterQuestMain.systemLoh.log("Reading tile " + index + " Position, x " + posX + " y, " + posY);
+                //MonsterQuestMain.systemLog.log("Reading tile " + index + " Position, x " + posX + " y, " + posY);
                 
                 //Add the image to the arraylist
                 tiles.add(this.tileImage.getSubimage(posX, posY, this.sizeOfEachElement.width, this.sizeOfEachElement.height));

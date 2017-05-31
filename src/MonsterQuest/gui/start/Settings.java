@@ -56,6 +56,9 @@ public class Settings extends JPanel implements ActionListener{
     Builder settingsBuilder;
     Element root, soundElement, volumeElement, musicElement;
     
+    /**
+     *
+     */
     public Settings() {
         super(); 
         setBackground(Color.white);

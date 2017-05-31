@@ -46,10 +46,26 @@ public class Logging {
     private boolean openable = true;
     
     //The IDs of the message type
+
+    /**
+     */
     public final static int INFO = 0;
+    
+    /**
+     *
+     */
     public final static int WARINING = 1;
+
+    /**
+     *
+     */
     public final static int ERROR = 2;
+
+    /**
+     *
+     */
     public final static int ALERT = 3;
+    
     /** This inits the whole logging thing
      * @param logString this is the file to load
      */
@@ -213,9 +229,11 @@ public class Logging {
         }
     }
     
-    /* 
+    /**
+     * Returns the name of the file that you are logging on.
      * @return the filename of the log
      */
+
     public String getLogfileName () {
         return this.logString;
     }

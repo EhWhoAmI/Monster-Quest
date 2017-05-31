@@ -76,6 +76,9 @@ public class Others extends JPanel implements ActionListener{
         }
     }
     
+    /**
+     *
+     */
     public Others() {
         super();
         setLayout(null);

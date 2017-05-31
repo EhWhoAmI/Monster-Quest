@@ -76,6 +76,9 @@ public class Loading extends JPanel{
         }
     }
     
+    /**
+     *
+     */
     public Loading() {
         super();
         //Make new quote

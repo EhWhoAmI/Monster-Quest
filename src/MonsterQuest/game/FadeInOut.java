@@ -45,6 +45,9 @@ public class FadeInOut extends JPanel{
         g2d.fill(rect);
     }
     
+    /**
+     * This is in charge of fading the fader in (make it appear)
+     */
     public void fadeIn () {
         for (alpha = 0; alpha < 255; alpha ++) {
             try {Thread.sleep(2);}catch(InterruptedException ie){}
@@ -52,6 +55,9 @@ public class FadeInOut extends JPanel{
         }
     }
     
+    /**
+     * This is in charge of making the fader fade out (make it dissappear)
+     */
     public void fadeOut () {
         for (alpha = 255; alpha > 0; alpha --) {
             try {Thread.sleep(2);}catch(InterruptedException ie){}
