@@ -64,6 +64,9 @@ public class Credits extends JPanel implements ActionListener{
         g2d.drawString("Get out using this button: ", 10, 650);
     }
     
+    /**
+     * Create a new Credits 
+     */
     public Credits() {
         super();
         setLayout(null);

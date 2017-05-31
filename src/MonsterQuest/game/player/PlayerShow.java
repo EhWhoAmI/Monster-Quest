@@ -38,6 +38,11 @@ import javax.imageio.ImageIO;
  * @author Zyun
  */
 public class PlayerShow {
+
+    /**
+     *
+     * @param g
+     */
     public static void printCharacter (Graphics g) {
         Graphics2D g2d = (Graphics2D) g;
         //Open image for the player

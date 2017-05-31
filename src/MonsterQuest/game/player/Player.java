@@ -23,6 +23,7 @@
  */
 package MonsterQuest.game.player;
 
+import MonsterQuest.game.player.PlayerType;
 import MonsterQuest.util.FileFormatException;
 import java.awt.Point;
 import java.io.File;
@@ -35,27 +36,72 @@ import nu.xom.ParsingException;
 import nu.xom.Text;
 
 /**
- *
+ * The class that defines the player
  * @author Zyun
  */
 public class Player {
+
+    /**
+     * Name of the player.
+     */
     public String name;
-    public PlayerType playerType;
-    public boolean gender;
+
+    /**
+     * Level of the player.
+     */
     public int Level;
+
+    /**
+     * Experience of the player.
+     */
     public int Experience;
-    public int AttackLv;
+
+    /**
+     * Attack of the player.
+     */
     public int Attack;
-    public int DefenseLv;
+
+    /**
+     * The defense of the player.
+     */
     public int Defense;
-    public int SpeedLv;
+
+    /**
+     * The speed of the player.
+     */
     public int Speed;
+
+    /**
+     * The money the player has.
+     */
     public int Gold;
+    
+    /**
+     * The ID of the map the player is in
+     */
     public int mapHash;
+
+    /**
+     * The position the player is
+     */
     public Point playerPos = new Point(0, 0);
+    public PlayerType playerType;
+    public int AttackLv;
+    public int DefenseLv;
+    public int SpeedLv;
+    public boolean gender;
     //Need to add the inventory arraylist, and weapon slots
+
+    /**
+     * Gender constant of Boy, to identify the gender.
+     */
     public static final boolean BOY = true;
+
+    /**
+     * Gender constant of Girl, to identify the gender.
+     */
     public static final boolean GIRL = false;
+    
     /**
      * This defines the default stats for player
      */
@@ -71,6 +117,19 @@ public class Player {
         this.Gold = 10;
     }
 
+    /**
+     *
+     * @param playerType
+     * @param Level
+     * @param Experience
+     * @param AttackLv
+     * @param Attack
+     * @param DefenseLv
+     * @param Defense
+     * @param SpeedLv
+     * @param Speed
+     * @param Gold
+     */
     public Player(PlayerType playerType, int Level, int Experience, int AttackLv, int Attack, int DefenseLv, int Defense, int SpeedLv, int Speed, int Gold) {
         this.playerType = playerType;
         this.Level = Level;
@@ -84,14 +143,26 @@ public class Player {
         this.Gold = Gold;
     }
     
+    /**
+     *
+     * @param name
+     */
     public void setName (String name) {
         this.name = name;
     }
     
+    /**
+     *
+     * @param level
+     */
     public void setLevel (int level) {
         this.Level = level;
     }
     
+    /**
+     *
+     * @param gender
+     */
     public void setGender (boolean gender) {
         this.gender = gender;
     }
@@ -102,9 +173,9 @@ public class Player {
      * @throws FileFormatException when file is formatted wrongly
      * @return
      */
-    public static Player PlayerInit (String file) throws FileNotFoundException, FileFormatException{
+    public static MonsterQuest.game.player.Player PlayerInit (String file) throws FileNotFoundException, FileFormatException{
         File inputFile = new File (file);
-        Player player = new Player();
+        MonsterQuest.game.player.Player player = new MonsterQuest.game.player.Player();
         if (!inputFile.exists())
             throw new FileNotFoundException("The file, " + file + " cannot be found");
         try {
@@ -139,4 +210,6 @@ public class Player {
         }
         return player;
     }
+    
+    
 }

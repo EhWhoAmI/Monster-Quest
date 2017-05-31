@@ -64,6 +64,9 @@ public class StartInterfaceMenu extends JPanel implements ActionListener{
         }
     }
     
+    /**
+     *
+     */
     public StartInterfaceMenu() {
         super();
         this.setLayout(null);

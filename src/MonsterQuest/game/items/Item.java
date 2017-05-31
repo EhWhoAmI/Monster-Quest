@@ -29,8 +29,23 @@ package MonsterQuest.game.items;
  * @author Zyun
  */
 public interface Item {
+
+    /**
+     * Get the name of the item object
+     * @return the name of the item
+     */
     public String getName();
+
+    /**
+     * The description of the item.
+     * @return the description of the item
+     */
     public String getDescription ();
+
+    /**
+     * Get the type of the weapon
+     * @return the type of the weapon
+     */
     public ItemType getType ();
     
 }

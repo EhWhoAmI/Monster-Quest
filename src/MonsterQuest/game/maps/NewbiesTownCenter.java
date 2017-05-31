@@ -39,10 +39,20 @@ import javax.swing.JPanel;
  * @author Zyun
  */
 public class NewbiesTownCenter extends JPanel{
+
+    /**
+     * The ID of the map
+     */
     public static final int MAP_HASH = 0x0000;
     //New tilemap reader
+    /**
+     * Read a new tilemap
+     */
     private static TileMapReader ground;
     //Array size: [34][62],
+    /**
+     * The layout of the map.
+     */
     private int[][] list = {
         {2, 0, 2, 2, 0, 0, 1, 0, 2, 1, 0, 2, 0, 2, 0, 2, 0, 0, 2, 0},
         {1, 2, 2, 2, 1, 1, 0, 0, 0, 1, 0, 2, 1, 0, 0, 2, 2, 2, 1, 0},
@@ -87,6 +97,11 @@ public class NewbiesTownCenter extends JPanel{
     }
             
     //Only one problem: it loads each time the window repaints.
+
+    /**
+     *
+     * @param g
+     */
     public void printMap (Graphics g) {
         Graphics2D g2d = (Graphics2D) g;
         
@@ -115,6 +130,9 @@ public class NewbiesTownCenter extends JPanel{
         
     }
     
+    /**
+     *
+     */
     public NewbiesTownCenter() {
         super();
         loadMap();

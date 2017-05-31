@@ -24,7 +24,7 @@
 package MonsterQuest.game.items;
 
 /**
- *
+ * All the names in this enum are basically self explainatory.
  * @author Zyun
  */
 public enum ItemType {

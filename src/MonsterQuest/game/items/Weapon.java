@@ -25,31 +25,47 @@ package MonsterQuest.game.items;
 
 
 /**
- *
+ * Weapon class for the weapons
  * @author Zyun
  */
 public class Weapon implements Item{
-    String name;
-    String description;
-    int level;
-    int attackBoost;
-    final ItemType type = ItemType.weapon;
+    public String name;
+    public String description;
+    public int level;
+    public int attackBoost;
+    public final ItemType type = ItemType.weapon;
     
+    /**
+     * Get the description
+     * @return the description
+     */
     @Override
     public String getDescription() {
         return description;
     }
 
+    /**
+     * Get the name of the weapon
+     * @return The name of weapon
+     */
     @Override
     public String getName() {
         return name;
     }
 
+    /**
+     * Get the type of the item.
+     * @return the item type
+     */
     @Override
     public ItemType getType() {
         return type;
     }
     
+    /**
+     * The level of the weapon
+     * @return the level of the weapon
+     */
     public int getLevel () {
         return level;
     }

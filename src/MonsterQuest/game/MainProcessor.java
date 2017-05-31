@@ -29,16 +29,26 @@ import java.awt.Graphics;
 import javax.swing.JPanel;
 
 /**
- *
+ * This is just a wrapper for the whole game's graphics.
  * @author Zyun
  */
 public class MainProcessor extends JPanel{
+
+    /**
+     * The processor for the maps
+     */
     public static MapProcesser mapProcesser = new MapProcesser();
+
+    /**
+     * To show the player
+     */
     public static PlayerShow playerShow;
 
     @Override
     protected void paintComponent(Graphics g) {
-        super.paintComponent(g); //To change body of generated methods, choose Tools | Templates.
+        super.paintComponent(g);
+        
+        //Load maps
         mapProcesser.loadMaps(g);
         playerShow.printCharacter(g);
     }
