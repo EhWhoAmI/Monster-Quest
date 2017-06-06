@@ -128,7 +128,7 @@ public class TileMapReader {
      * @param fileName the name of the file
      * @param sizeOfElement the size of each element
      * @throws IOException If the file cannot be opened
-     * @see @link TileMapReader(BufferedImage, Dimension)
+     * @see TileMapReader(BufferedImage, Dimension)
      */
     public TileMapReader(String fileName, Dimension sizeOfElement) throws IOException{
         this(ImageIO.read(new File(fileName)), sizeOfElement);

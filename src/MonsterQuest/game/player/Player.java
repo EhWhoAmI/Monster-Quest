@@ -171,9 +171,9 @@ public class Player {
      * @param file the filename to read from
      * @throws FileNotFoundException if the file cannot be found
      * @throws FileFormatException when file is formatted wrongly
-     * @return
+     * @return the Player red from the file
      */
-    public static MonsterQuest.game.player.Player PlayerInit (String file) throws FileNotFoundException, FileFormatException{
+    public static Player PlayerInit (String file) throws FileNotFoundException, FileFormatException{
         File inputFile = new File (file);
         MonsterQuest.game.player.Player player = new MonsterQuest.game.player.Player();
         if (!inputFile.exists())
