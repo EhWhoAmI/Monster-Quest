@@ -42,8 +42,9 @@ public class TilemapRFFile {
     int [][][] layers = new int [3][11][20];
     boolean [][] accessability = new boolean[11][20];
     ArrayList<TileMap> tilemaps = new ArrayList<>();
+    
     /**
-     *
+     * Important! Do not add the <code>System.getProperty("user.dir")</code> before this.
      * @param tilemapName
      */
     public TilemapRFFile(String tilemapName) {
@@ -53,7 +54,8 @@ public class TilemapRFFile {
             //The number of maps in the file
             mapReccurences = stream.read();
             systemLog.log("Number of map reccurences: " + mapReccurences);
-            for (int num = 0; num < mapReccurences; num++) {
+            int num;
+            for (num = 0; num < mapReccurences; num++) {
                 //Get the map ID
                 mapID = stream.read();
                 systemLog.log("Got map ID, it is " + mapID);
@@ -101,16 +103,16 @@ public class TilemapRFFile {
                     }
                 }
                 //Add all of that onto a tilemap object...
-                TileMap map = new TileMap(mapID, mapName, layers[1], layers[2], layers[3], accessability, mapName);
+                TileMap map = new TileMap(mapID, mapName, layers[0], layers[1], layers[2], accessability, mapName);
                 tilemaps.add(map);
                 //end of read map
             }
-            
+            systemLog.log("Loaded " + num + " files");
             //Close file.
             stream.close();
             
         } catch (FileNotFoundException fnfe) {
-            systemLog.log("File not found!", Logging.ERROR);
+            systemLog.log("File not found! " + fnfe.getMessage(), Logging.ERROR);
             //Might add code to download from internet.
         } catch (IOException ioe) {
             systemLog.log("IO exception! " + ioe.getMessage(), Logging.ERROR);
@@ -141,5 +143,9 @@ public class TilemapRFFile {
         }
         //Did not find it
         return null;
+    }
+    
+    public int getNumberOfMaps () {
+        return mapReccurences;
     }
 }

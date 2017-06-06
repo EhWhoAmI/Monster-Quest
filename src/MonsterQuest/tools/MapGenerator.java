@@ -79,10 +79,10 @@ public class MapGenerator {
                 System.out.println("Map name: remember, max 50 characters. Extra will be cut off");
                 mapname = scan.nextLine();
                 mapname = mapname.replace('\n', (char)0);
-                if (mapname.length() < 50) {
+                if (mapname.length() > 50) {
                     System.out.println("The map name is too long! max 50 characters!");
                 }
-            }while (mapname.length() < 50);
+            }while (mapname.length() > 50);
             
             //If it passes the loop
             //Append null characters in the end

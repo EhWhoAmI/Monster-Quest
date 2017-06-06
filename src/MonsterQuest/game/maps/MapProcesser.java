@@ -25,18 +25,21 @@ package MonsterQuest.game.maps;
 
 import MonsterQuest.MonsterQuestMain;
 import MonsterQuest.util.Logging;
+import MonsterQuest.util.tilemapengine.TileMap;
 import MonsterQuest.util.tilemapengine.TileMapReader;
+import MonsterQuest.util.tilemapengine.TilemapRFFile;
 import java.awt.Dimension;
 import java.awt.Graphics;
+import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import javax.imageio.ImageIO;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import static MonsterQuest.MonsterQuestMain.systemLog;
 
 /**
  * This class processes all the maps.
@@ -54,36 +57,59 @@ public class MapProcesser extends JPanel{
     /**
      * Newbies town center map;
      */
-    private static NewbiesTownCenter newbiesTownCenter_ID_0x0000;
-
+    
+    public static ArrayList<TileMap> tilemapList = new ArrayList<>();
     /**
      * Constructor for a new MapProcesser class
      */
     public MapProcesser() {
         super();
+        loadMap();
         loadTilemaps();
         setLayout(null);
-        //Load all the maps
-        newbiesTownCenter_ID_0x0000 = new NewbiesTownCenter();
     }
 
     /**
      * Load all the maps onto the screen
      * @param g
      */
-    public static void loadMaps(Graphics g) {
-        //Just for testing, will remove later
-        newbiesTownCenter_ID_0x0000.printMap(g);
+    public void printMaps(Graphics g) {
+        //Get current map
+        //Find it.
+        systemLog.log("Loading current map");
+        boolean found = false;
+        int i;
+        for (i = 0; i < tilemapList.size();i++) {
+            if (tilemapList.get(i).getMapID() == MonsterQuestMain.playerStats.mapHash) {
+                //Found it
+                found = true;
+                break;
+            }
+        }
+        if (!found) {
+                systemLog.log("Bug: Unable to find the map id " + i + ".", Logging.ALERT);
+        } else {
+            try {
+                MapImageLoad load = new MapImageLoad(tilemapList.get(i));
+                //Open file and load image
+                File tempOpenFile = new File(load.getMapImagePath());
+                BufferedImage tempOpen = ImageIO.read(tempOpenFile);
+                g.drawImage(tempOpen, 0, 0, null);
+            } catch (IOException ex) {
+                systemLog.log("Unable to open image!", Logging.ERROR);
+            }
+        }
+        
     }
     
     /**
      * Load all the tilemaps.
      */
-    static void loadTilemaps () {
+    void loadTilemaps () {
         try {
             genericGround = new TileMapReader(System.getProperty("user.dir") + "/resources/tilemaps/GenericGround.png", new Dimension(68, 68));
         } catch (IOException ioe) {
-                MonsterQuestMain.systemLog.log("Unable to open tilemap, " + ioe.getMessage() + " Unable to do anything because tilemaps are essential.", Logging.ERROR);
+                systemLog.log("Unable to open tilemap, " + ioe.getMessage() + " Unable to do anything because tilemaps are essential.", Logging.ERROR);
                 JOptionPane.showMessageDialog(MonsterQuestMain.MonsterQuestWindow, "Unable to open the file", "Unable to open file", JOptionPane.ERROR_MESSAGE);
         }
     }
@@ -91,9 +117,12 @@ public class MapProcesser extends JPanel{
     static void loadMap () {
         try {
             //Get list of map files.
+            systemLog.log("Loading list of maps");
             File readMapFileName = new File (System.getProperty("user.dir") + "/data/maplist");
             Scanner readmapfiles = new Scanner(readMapFileName);
             ArrayList<String> fileList = new ArrayList<>();
+            int numberOfFiles = 0;
+            
             while (readmapfiles.hasNext()) {
                 String fileName = readmapfiles.nextLine();
                 File exists = new File(System.getProperty("user.dir") + fileName);
@@ -101,11 +130,28 @@ public class MapProcesser extends JPanel{
                     //Report it, and exit game...
                     JOptionPane.showMessageDialog(MonsterQuestMain.MonsterQuestWindow, "You don't have the file " + fileName, "Missing File", JOptionPane.ERROR_MESSAGE);
                     System.exit(1);
+                } else {
+                    fileList.add(fileName);
+                }
+                numberOfFiles++;
+            }
+            systemLog.log("There are " + numberOfFiles + " map name files.");
+            
+            //Then load all the stuff into tilemap objects
+            systemLog.log("Loading stuff into tilemap objects");
+            int f = 0;
+            for (int i = 0; i < fileList.size(); i++) {
+                TilemapRFFile reader = new TilemapRFFile(fileList.get(i));
+                systemLog.log("There are " + reader.getNumberOfMaps() + " in the mapfile");
+                for (f = 0; f <= reader.getNumberOfMaps(); f++) {
+                    systemLog.log("Loading tilemap" + f);
+                    tilemapList.add(reader.getTileMap(f));
                 }
             }
-            //Then load all the
+            systemLog.log("Loaded " + f + " maps");
+            //Done...
         } catch (FileNotFoundException ex) {
-            MonsterQuestMain.systemLog.log("File not found!!!", Logging.ERROR);
+            systemLog.log("File not found!!!", Logging.ERROR);
         }
     }
     

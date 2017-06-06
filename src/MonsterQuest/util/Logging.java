@@ -28,6 +28,7 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.PrintStream;
 import java.util.Date;
 
 /** This class is used for logging.
@@ -197,8 +198,13 @@ public class Logging {
                 String content = ("[" + timeStamp + "]{" + getLogfileName() + "}(" + type + "): " + text);
 
                 //Check if to write to console
+                
+                //Check the stream to write to
+                PrintStream stream = (type == INFO)? System.out : System.err;
+
                 if (MonsterQuestMain.DEBUG)
-                    System.out.println(content);
+                    stream.println(content);
+                
                 try {
                     //Check if write to logfile
                     if (MonsterQuestMain.PRINT_TO_LOGFILE) {

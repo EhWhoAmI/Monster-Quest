@@ -41,6 +41,7 @@ import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JPanel;
+import static MonsterQuest.MonsterQuestMain.systemLog;
 
 /**
  *
@@ -185,7 +186,7 @@ public class CharacterChoose extends JPanel implements ActionListener {
             swordsMan.setText("Swordsman");
         else 
             swordsMan.setText("Swordswoman");
-        MonsterQuestMain.systemLog.log("Just set swordsman button title to " + swordsMan.getText());
+        systemLog.log("Just set swordsman button title to " + swordsMan.getText());
         swordsMan.setBackground(Color.green);
         swordsMan.setBounds(100, 100, 250, 75);
         swordsMan.setIcon(new ImageIcon(System.getProperty("user.dir") + "/resources/images/tutorial/SwordImage.png"));
@@ -204,7 +205,7 @@ public class CharacterChoose extends JPanel implements ActionListener {
             wizard.setText("Wizard");
         else 
             wizard.setText("Witch");
-        MonsterQuestMain.systemLog.log("Just set wizard button title to " + wizard.getText());
+        systemLog.log("Just set wizard button title to " + wizard.getText());
         wizard.setBackground(Color.green);
         wizard.setBounds(100, 400, 250, 75);
         wizard.setIcon(new ImageIcon(System.getProperty("user.dir") + "/resources/images/tutorial/WandImage.png"));
@@ -254,8 +255,7 @@ public class CharacterChoose extends JPanel implements ActionListener {
         }
         else if (source.equals(select)) {
             //Start game...
-            MonsterQuestMain.systemLog.log("Start game!!!");
-            MonsterQuestMain.systemLog.log("Loading map");
+            systemLog.log("Start game!!!");
             
             //Show loading screen while the map loads.
             //Doesn't work, it only shows after the things load.
@@ -265,7 +265,7 @@ public class CharacterChoose extends JPanel implements ActionListener {
             Runnable thread = () -> {
                 MainProcessor mainProcesser = new MainProcessor();
                 MonsterQuestMain.MonsterQuestPanel.add(mainProcesser , "game");
-                MonsterQuestMain.systemLog.log("Done loading");
+                systemLog.log("Done loading");
             };
             new Thread(thread).run();
             //Add action listener

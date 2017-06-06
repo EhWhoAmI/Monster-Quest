@@ -34,12 +34,12 @@ import java.awt.Graphics2D;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.geom.GeneralPath;
-import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import javax.imageio.ImageIO;
 import javax.swing.*;
+import static MonsterQuest.MonsterQuestMain.systemLog;
 
 /**
  *
@@ -134,7 +134,8 @@ public class VillagerSpeech extends JPanel implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         JLabel label;
         //Debug stuff
-        
+        if (MonsterQuestMain.DEBUG == true & words == 0)
+            words = 9;
         if (e.getSource() == next) {
             words++;
             this.repaint();
@@ -144,10 +145,10 @@ public class VillagerSpeech extends JPanel implements ActionListener {
             if (nameBox.getText().length() >= 16) {
                 //If it is more than 16 characters, do not allow it.
                 nameBox.setText("");
-                MonsterQuestMain.systemLog.log("String is too long! change to 0 characters!");
+                systemLog.log("String is too long! change to 0 characters!");
             } else {
                 //Pass it, and write to name...
-                MonsterQuestMain.systemLog.log("Written to name box, name is " + nameBox.getText());
+                systemLog.log("Written to name box, name is " + nameBox.getText());
                 MonsterQuestMain.playerStats.name = nameBox.getText();
                 remove(nameBox);
                 next.setEnabled(true);
@@ -177,7 +178,7 @@ public class VillagerSpeech extends JPanel implements ActionListener {
             remove(girlButton);
             words++;
             this.repaint();
-            MonsterQuestMain.systemLog.log("Player is a boy");
+            systemLog.log("Player is a boy");
         }
         if (e.getSource() == girlButton) {
             MonsterQuestMain.playerStats.gender = Player.GIRL;
@@ -186,7 +187,7 @@ public class VillagerSpeech extends JPanel implements ActionListener {
             remove(girlButton);
             words++;
             this.repaint();
-            MonsterQuestMain.systemLog.log("Player is a girl");
+            systemLog.log("Player is a girl");
         }
         if (words == 11) {
             boyButton = new JButton("Boy");
@@ -212,7 +213,7 @@ public class VillagerSpeech extends JPanel implements ActionListener {
 
         //To choose the character
         if (words >= 16) {
-            MonsterQuestMain.systemLog.log("Loading next text...");
+            systemLog.log("Loading next text...");
             MonsterQuestPanel.add(new CharacterChoose(), "CharacterChoose");
             MonsterQuestMain.cardLayout.show(MonsterQuestMain.MonsterQuestPanel, "CharacterChoose");
             MonsterQuestMain.MonsterQuestWindow.repaint();

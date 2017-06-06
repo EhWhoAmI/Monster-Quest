@@ -25,11 +25,9 @@ package MonsterQuest.util;
 
 import MonsterQuest.MonsterQuestMain;
 import java.awt.Color;
-import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.geom.Rectangle2D;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 /** This is just a black screen, for loading.

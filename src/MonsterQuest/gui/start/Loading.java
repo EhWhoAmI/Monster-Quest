@@ -28,7 +28,6 @@ import java.awt.Color;
 import java.awt.FontMetrics;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
-import java.awt.Toolkit;
 import java.awt.image.BufferedImage;
 import java.io.BufferedWriter;
 import java.io.File;
@@ -41,6 +40,7 @@ import nu.xom.Builder;
 import nu.xom.Document;
 import nu.xom.Element;
 import nu.xom.ParsingException;
+import static MonsterQuest.MonsterQuestMain.systemLog;
 
 /**
  * This is the loading at the start of the application boot
@@ -62,7 +62,7 @@ public class Loading extends JPanel{
             int splashScreenPosX = MonsterQuestMain.MonsterQuestWindow.getWidth() / 2 - splashScreen.getWidth() / 2 ;
             g2d.setColor(Color.black);
             g2d.drawImage(splashScreen, splashScreenPosX, 0, null);
-            MonsterQuestMain.systemLog.log("Just showed start splash image.");
+            systemLog.log("Just showed start splash image.");
 
             //Set font
             g2d.setFont(MonsterQuestMain.pixelFont);
@@ -72,7 +72,7 @@ public class Loading extends JPanel{
             //Show quote as chosen
             g2d.drawString(quote, (MonsterQuestMain.MonsterQuestWindow.getWidth()/2 - metrics.stringWidth(quote)/2), 650);
         } catch (IOException e) {
-            MonsterQuestMain.systemLog.log("Oh no! Unable to open file!" + e.getMessage());
+            systemLog.log("Oh no! Unable to open file!" + e.getMessage());
         }
     }
     
@@ -95,17 +95,17 @@ public class Loading extends JPanel{
         if (startupSettings.exists()) {
             //Read from startup settings file
             try {
-                MonsterQuestMain.systemLog.log("Startup settings file exists.");
+                systemLog.log("Startup settings file exists.");
                 Builder startupSettingsBuilder = new Builder();
                 Document startupSettingsDocument = startupSettingsBuilder.build(startupSettings);
                 Element root = startupSettingsDocument.getRootElement();
                 Element first_time_setup = root.getFirstChildElement("firsttimesetup");
                 if (first_time_setup == null) {
                     //Not the first time this was setup!
-                    MonsterQuestMain.systemLog.log("Not the first time setup!");
+                    systemLog.log("Not the first time setup!");
                     //Get version
                     MonsterQuestMain.app_Version = root.getFirstChildElement("version").getAttribute("value").getValue();
-                    MonsterQuestMain.systemLog.log("App version: " + MonsterQuestMain.app_Version);
+                    systemLog.log("App version: " + MonsterQuestMain.app_Version);
                 }
                 else {
                     //Deal with it. Remeber to delete firsttimestartup element!
@@ -116,23 +116,23 @@ public class Loading extends JPanel{
                     root.removeChild(2);
                     //Get version
                     MonsterQuestMain.app_Version = root.getFirstChildElement("version").getAttribute("value").toString();
-                    MonsterQuestMain.systemLog.log("App version: " + MonsterQuestMain.app_Version);
+                    systemLog.log("App version: " + MonsterQuestMain.app_Version);
                     
-                    MonsterQuestMain.systemLog.log(root.toXML());
+                    systemLog.log(root.toXML());
                     FileWriter writer = new FileWriter(startupSettings);
                     BufferedWriter bufferedWriter = new BufferedWriter(writer);
-                    MonsterQuestMain.systemLog.log("Writing to file " + bufferedWriter.toString());
+                    systemLog.log("Writing to file " + bufferedWriter.toString());
                     bufferedWriter.write(root.toXML());
                     bufferedWriter.flush();
                     bufferedWriter.close();
                 }
             } catch (ParsingException pe) {
-                MonsterQuestMain.systemLog.log("Parsing exception! " + pe.getMessage());
+                systemLog.log("Parsing exception! " + pe.getMessage());
                 //Remake file.
                 startupSettings.delete();
                 loadFiles();
             } catch (IOException ioe) {
-                MonsterQuestMain.systemLog.log("I/O exception! " + ioe.getMessage());
+                systemLog.log("I/O exception! " + ioe.getMessage());
                 //Remake file.
                 startupSettings.delete();
                 loadFiles();
@@ -140,7 +140,7 @@ public class Loading extends JPanel{
         }
         else {
             //Create new file.
-            MonsterQuestMain.systemLog.log ("Creating new file!");
+            systemLog.log ("Creating new file!");
             try {
                 startupSettings.createNewFile();
                 Element root = new Element("root");
@@ -149,17 +149,17 @@ public class Loading extends JPanel{
                 Element version = new Element("version");
                 version.addAttribute(new Attribute("value", "UNKNOWN"));
                 root.appendChild(version);
-                MonsterQuestMain.systemLog.log("Root = " + root.toXML());
-                MonsterQuestMain.systemLog.log("Writing to file.");
+                systemLog.log("Root = " + root.toXML());
+                systemLog.log("Writing to file.");
                 //Save file.
                 FileWriter writer = new FileWriter(startupSettings);
                 BufferedWriter bufferedWriter = new BufferedWriter(writer);
-                MonsterQuestMain.systemLog.log("Writing to file " + bufferedWriter.toString());
+                systemLog.log("Writing to file " + bufferedWriter.toString());
                 bufferedWriter.write(root.toXML());
                 bufferedWriter.flush();
                 bufferedWriter.close();
             }catch (IOException ioe) {
-                MonsterQuestMain.systemLog.log("Unable to write to file!!! I give up!!" + ioe.getMessage());
+                systemLog.log("Unable to write to file!!! I give up!!" + ioe.getMessage());
             }
         }
         
@@ -181,12 +181,12 @@ public class Loading extends JPanel{
                 "Welcome back to Monster Quest!",
                 "Monster Quest is in constant development! Yay!!",
                 "Always remember that you are absolutely unique. Just like everyone else.",
-                "You can buy many things from the shop, if you have the money"
+                "You can buy many things from the shop, if you have the money."
                 };
         int randomNo = ((int)(Math.random() * 1000) % quoteList.length);
-        MonsterQuestMain.systemLog.log("Random quote number: " + randomNo);
+        systemLog.log("Random quote number: " + randomNo);
         String randomQuote = quoteList[randomNo];
-        MonsterQuestMain.systemLog.log("Quote: " + randomQuote);
+        systemLog.log("Quote: " + randomQuote);
         return randomQuote;
     }
 }

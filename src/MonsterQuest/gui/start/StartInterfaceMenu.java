@@ -29,7 +29,6 @@ import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
-import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
@@ -38,6 +37,7 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 import javax.swing.JButton;
 import javax.swing.JPanel;
+import static MonsterQuest.MonsterQuestMain.systemLog;
 
 /**
  *
@@ -58,9 +58,9 @@ public class StartInterfaceMenu extends JPanel implements ActionListener{
             int splashScreenPosX = MonsterQuestMain.MonsterQuestWindow.getWidth() / 2 - splashScreen.getWidth() / 2 ;
             g2d.setColor(Color.black);
             g2d.drawImage(splashScreen, splashScreenPosX, 0, null);
-            MonsterQuestMain.systemLog.log("Just showed start splash image.");
+            systemLog.log("Just showed start splash image.");
         } catch (IOException e) {
-            MonsterQuestMain.systemLog.log("Oh no! Unable to open file!" + e.getMessage());
+            systemLog.log("Oh no! Unable to open file!" + e.getMessage());
         }
     }
     
@@ -99,17 +99,17 @@ public class StartInterfaceMenu extends JPanel implements ActionListener{
     public void actionPerformed(ActionEvent e) {
         Object source = e.getSource();
         if (source == startGame) {
-            MonsterQuestMain.systemLog.log("Start game");
+            systemLog.log("Start game");
             MonsterQuestMain.cardLayout.show(MonsterQuestMain.MonsterQuestPanel, "villagerSpeech");
             MonsterQuestMain.MonsterQuestPanel.repaint();
         }   
         else if (source == options) {
-            MonsterQuestMain.systemLog.log("Options");
+            systemLog.log("Options");
             MonsterQuestMain.cardLayout.show(MonsterQuestMain.MonsterQuestPanel, "settings");
             MonsterQuestMain.MonsterQuestPanel.repaint();
         } 
         else if (source == others) {
-            MonsterQuestMain.systemLog.log("Show others");
+            systemLog.log("Show others");
             MonsterQuestMain.cardLayout.show(MonsterQuestMain.MonsterQuestPanel, "othersOption");
             MonsterQuestMain.MonsterQuestWindow.repaint();
         }

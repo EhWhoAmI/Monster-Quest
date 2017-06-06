@@ -44,6 +44,7 @@ import nu.xom.Element;
 import nu.xom.ParsingException;
 import nu.xom.Document;
 import nu.xom.Text;
+import static MonsterQuest.MonsterQuestMain.systemLog;
 
 /**
  *
@@ -131,28 +132,28 @@ public class Settings extends JPanel implements ActionListener{
                 //Check wether it is selected or not selected
                 if (soundElement.getChild(0).getValue().equals("On")) {
                     sound.setSelected(true);
-                    MonsterQuestMain.systemLog.log("Sound is on");
+                    systemLog.log("Sound is on");
                 } 
                 else {
                     sound.setSelected(false);
-                    MonsterQuestMain.systemLog.log("Sound is off");
+                    systemLog.log("Sound is off");
                 }
                 
                 //Volume element
                 volumeElement = root.getFirstChildElement("volume");
                 int volumeNum = Integer.valueOf(volumeElement.getChild(0).getValue());
-                MonsterQuestMain.systemLog.log("Volume = " + volumeNum);
+                systemLog.log("Volume = " + volumeNum);
                 volume.setValue(volumeNum);
                 
                 //Music element
                 musicElement = root.getFirstChildElement("music");
                 if (musicElement.getChild(0).getValue().equals("On")) {
                     music.setSelected(true);
-                    MonsterQuestMain.systemLog.log("Music is on");
+                    systemLog.log("Music is on");
                 }
                 else {
                     music.setSelected(false);
-                    MonsterQuestMain.systemLog.log("Music is off");
+                    systemLog.log("Music is off");
                 }
             } catch (IOException | ParsingException e) {
             }
@@ -170,7 +171,7 @@ public class Settings extends JPanel implements ActionListener{
             JOptionPane.showMessageDialog(MonsterQuestMain.MonsterQuestWindow, "W, A, S, D to move about\nArrow keys to chose direction to attack\n1, 2, 3, Q, E keys to use ability\nZ for inventory\nX to pause","How to play", JOptionPane.OK_OPTION);
         }
         else if (source == exit) {
-            MonsterQuestMain.systemLog.log("Writing to settings file");
+            systemLog.log("Writing to settings file");
             try (
                 FileWriter fw = new FileWriter (System.getProperty("user.dir") + "/data/settings/settings.xml");
                 BufferedWriter out = new BufferedWriter(fw);  
@@ -179,10 +180,10 @@ public class Settings extends JPanel implements ActionListener{
                 //Write to settings file
                 out.write (doc.toXML());
             }catch (IOException ioe) {
-                MonsterQuestMain.systemLog.log("UNABLE TO WRITE TO SETTINGS FILE: " + ioe.getMessage()); 
+                systemLog.log("UNABLE TO WRITE TO SETTINGS FILE: " + ioe.getMessage()); 
             }
             //Go back to start menu
-            MonsterQuestMain.systemLog.log("Showing start menu");
+            systemLog.log("Showing start menu");
             MonsterQuestMain.cardLayout.show(MonsterQuestMain.MonsterQuestPanel, "startMenu");
             MonsterQuestMain.MonsterQuestWindow.repaint();
         }
@@ -190,11 +191,11 @@ public class Settings extends JPanel implements ActionListener{
             //Change XM:
             Text toPut;
             if (music.isSelected()) {
-                MonsterQuestMain.systemLog.log("Turn off music.");
+                systemLog.log("Turn off music.");
                 toPut = new Text("On");
             }
             else {
-                MonsterQuestMain.systemLog.log("Turn on music");
+                systemLog.log("Turn on music");
                 toPut = new Text("Off");
             }
             //Remove, then relpace the element
@@ -204,11 +205,11 @@ public class Settings extends JPanel implements ActionListener{
         else if (source.equals(sound)) {
             Text toPut;
             if (sound.isSelected()) {
-                MonsterQuestMain.systemLog.log("Turn off music.");
+                systemLog.log("Turn off music.");
                 toPut = new Text("On");
             }
             else {
-                MonsterQuestMain.systemLog.log("Turn on music");
+                systemLog.log("Turn on music");
                 toPut = new Text("Off");
             }
             soundElement.removeChild(0);

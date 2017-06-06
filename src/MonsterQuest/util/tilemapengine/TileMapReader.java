@@ -30,6 +30,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import javax.imageio.ImageIO;
+import static MonsterQuest.MonsterQuestMain.systemLog;
 
 /**
  * This reads ftom the tilemap
@@ -88,7 +89,7 @@ public class TileMapReader {
         NumberOfRecurrenceX = this.tileImage.getWidth() / this.sizeOfEachElement.width;
         NumberOfRecurrenceY = this.tileImage.getHeight() / this.sizeOfEachElement.height;
         
-        MonsterQuestMain.systemLog.log("Occurunces (x, y), (" + NumberOfRecurrenceX + ", " + NumberOfRecurrenceY + ")");
+        systemLog.log("Occurunces (x, y), (" + NumberOfRecurrenceX + ", " + NumberOfRecurrenceY + ")");
         
         //Init the arraylist for the tiles.
         tiles = new ArrayList<>(NumberOfRecurrenceX * NumberOfRecurrenceY);
@@ -98,7 +99,7 @@ public class TileMapReader {
         for (int i = 0; i < NumberOfRecurrenceY; i++) {
             for (int n = 0; n < NumberOfRecurrenceX; n++) {
                 //Don't need to log this
-                //MonsterQuestMain.systemLog.log("Reading tile " + index + " Position, x " + posX + " y, " + posY);
+                //systemLog.log("Reading tile " + index + " Position, x " + posX + " y, " + posY);
                 
                 //Add the image to the arraylist
                 tiles.add(this.tileImage.getSubimage(posX, posY, this.sizeOfEachElement.width, this.sizeOfEachElement.height));
@@ -118,7 +119,7 @@ public class TileMapReader {
             posX = 0;
             posY += sizeOfEachElement.height;
         }
-        MonsterQuestMain.systemLog.log("Loaded " + index + " tiles.");
+        systemLog.log("Loaded " + index + " tiles.");
         //Done.
     }
     

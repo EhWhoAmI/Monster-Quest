@@ -34,6 +34,7 @@ import java.awt.event.ActionListener;
 import java.awt.geom.Rectangle2D;
 import javax.swing.JPanel;
 import javax.swing.JButton;
+import static MonsterQuest.MonsterQuestMain.systemLog;
 
 /**
  * This is the about scene, it will show the version, and other things.
@@ -80,7 +81,7 @@ public class About extends JPanel implements ActionListener{
     @Override
     public void actionPerformed(ActionEvent e) {
         //Exit the credits place into the others place
-         MonsterQuestMain.systemLog.log("Show others");
+         systemLog.log("Show others");
          MonsterQuestMain.cardLayout.show(MonsterQuestMain.MonsterQuestPanel, "othersOption");
          MonsterQuestMain.MonsterQuestWindow.repaint();
     }
