@@ -13,10 +13,7 @@ $RECYCLE.BIN/
 *.msi
 *.msm
 *.msp
-<<<<<<< HEAD
 *.exe
-=======
->>>>>>> parent of 31aefdb... Continued on the animation for player to walk, and started on the save game functions.
 
 # Windows shortcuts
 *.lnk
@@ -61,7 +58,6 @@ Temporary Items
 *.mf
 *.zip
 
-<<<<<<< HEAD
 # log files
 *.log
 # Keychain for encryption
@@ -69,14 +65,13 @@ KEYCHAIN
 # Stuff used for archives: 
 archived/
 raw/
-=======
-# Stuff used for archives: 
-archived/
-raw/
 
 # Log files:
 *.log
->>>>>>> parent of 31aefdb... Continued on the animation for player to walk, and started on the save game functions.
+
 /build/
-/dist/
+# ingore all the stuff used for the output, but keep the javadoc
+/dist/lib/
+/dist/lib/
+
 /nbproject/private/

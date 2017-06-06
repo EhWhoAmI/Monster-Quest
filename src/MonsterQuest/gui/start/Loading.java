@@ -88,7 +88,7 @@ public class Loading extends JPanel{
     /**
      * This loads startup settings, will also use this to load other files in the future.
      * This is only used in the MonsterQuestMain part, when booting the app
-     * @see 
+     * @see MonsterQuestMain
     */
     public static void loadFiles () {
         File startupSettings = new File (System.getProperty("user.dir") + "/data/settings/Startup-Settings.xml");
