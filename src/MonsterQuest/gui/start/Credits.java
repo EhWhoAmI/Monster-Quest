@@ -26,7 +26,6 @@ package MonsterQuest.gui.start;
 import MonsterQuest.MonsterQuestMain;
 import java.awt.Color;
 import java.awt.Font;
-import java.awt.FontMetrics;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.event.ActionEvent;
@@ -34,6 +33,7 @@ import java.awt.event.ActionListener;
 import java.awt.geom.Rectangle2D;
 import javax.swing.JButton;
 import javax.swing.JPanel;
+import static MonsterQuest.MonsterQuestMain.systemLog;
 
 /**
  * This shows the credits screen
@@ -83,7 +83,7 @@ public class Credits extends JPanel implements ActionListener{
     @Override
     public void actionPerformed(ActionEvent e) {
         //Exit the credits place into the others place
-         MonsterQuestMain.systemLog.log("Show others");
+         systemLog.log("Show others");
          MonsterQuestMain.cardLayout.show(MonsterQuestMain.MonsterQuestPanel, "othersOption");
          MonsterQuestMain.MonsterQuestWindow.repaint();
     }

@@ -163,6 +163,7 @@ public class MonsterQuestMain {
     public MonsterQuestMain () {
         //Set up all the window and stuff
         systemLog.log("Starting game...");
+
         MonsterQuestWindow = new JFrame("Monster Quest");
         
         //Do all the frame init stuff

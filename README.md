@@ -1,22 +1,20 @@
 Monster Quest 
 ===============
-### An open source RPG game
-This RPG game is made by [EhWhoAmI](https://github.com/EhWhoAmI/). I have spent many afternoons after school trying to do this game. I hope it will be fun enough.
+### A fun RPG game :octocat:
 
-This game will ALWAYS be open source, and free, because this is a hobby, and I do not feel like earning anything from this.
+This is RPG game made by me. Please try it out when it is ready.
+
+The first version, or the pre-alpha, or indev, or whatever you want to call it, will come out in March 2017, I hope.
 
 ### A very short summary of this game
 
 You are supposed to fight these monsters that are fighting innocent villagers. We are planning to have quite a big map and stuff. Well, you get to explore caves, mountains and stuff.
-But, we will start off small, maybe a few maps and weapons.
-
-We are in the progress of "pixelating" this game, or making all the graphics into pixels. It WILL take some time.
 
 ### How to help :wrench:
 Please help, it takes quite a bunch of time to make it... If you want, you can just test it, and I'll be happy. Please see in the TODO section in projects if you want to code the thing.
 
 ### Website
-The website is here, at <https://ehwhoami.github.io/Monster-Quest/> Its quite basic, but I will update it oftenly.
+The website is here, at [https://ehwhoami.github.io/Monster-Quest/] (https://ehwhoami.github.io/Monster-Quest/) Its quite basic, but I will update it oftenly.
 
 ### Splash Screen Image
 ![Splash screen Image](https://raw.githubusercontent.com/EhWhoAmI/Monster-Quest/master/resources/images/start/SplashScreen.png)
@@ -24,7 +22,7 @@ The website is here, at <https://ehwhoami.github.io/Monster-Quest/> Its quite ba
 ### Classes
 
 Not much has been done about character classes. The concepts have come out though,
-
+ 
  - Swordsman/Swordswoman - They carry swords, and deal great damage over places. They are fast, and have good armour 
  
  ![Sword Image](https://raw.githubusercontent.com/EhWhoAmI/Monster-Quest/master/resources/images/tutorial/SwordImage.png)
@@ -38,7 +36,7 @@ Not much has been done about character classes. The concepts have come out thoug
  
  ![Bow Image](https://raw.githubusercontent.com/EhWhoAmI/Monster-Quest/master/resources/images/tutorial/BowImage.png)
 
-Small side note: We will add the charaters in the website, but not here, because it will be too messy.
 ### Notes
   - We use the xom library for XML parsing. The website can be found [here](http://xom.nu)
   - This game is still in development :wink:
+  - We are coming up with the images for the classes!

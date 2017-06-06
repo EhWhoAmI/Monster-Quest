@@ -49,7 +49,7 @@ public class MainProcessor extends JPanel{
         super.paintComponent(g);
         
         //Load maps
-        mapProcesser.loadMaps(g);
+        mapProcesser.printMaps(g);
         playerShow.printCharacter(g);
     }
     

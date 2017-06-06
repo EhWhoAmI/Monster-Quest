@@ -31,10 +31,10 @@ public class TileMap {
 
     private int mapID;
     private String mapName;
-    int[][] layer1;
-    int[][] layer2;
-    int[][] layer3;
-    boolean[][] accessability;
+    public int[][] layer1;
+    public int[][] layer2;
+    public int[][] layer3;
+    public boolean[][] accessability;
     /**
      * Might not need this soon...
      */
@@ -67,5 +67,8 @@ public class TileMap {
     public String getMapName () {
         return this.mapName;
     }
-
+    
+    public int getMapID (){
+        return mapID;
+    }
 }

@@ -33,6 +33,7 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 import MonsterQuest.MonsterQuestMain;
+import static MonsterQuest.MonsterQuestMain.systemLog;
 
 /** This class shows the start splash screen on the application's start.
  *
@@ -44,7 +45,7 @@ public class StartIntroScreen extends JPanel{
     protected void paintComponent(Graphics g) {
         Graphics2D g2d = (Graphics2D) g;
         super.paintComponent(g);
-        MonsterQuestMain.systemLog.log("Showing start intro");
+        systemLog.log("Showing start intro");
         
         //Set background for filling the screen
         g2d.setColor(Color.white);
@@ -65,9 +66,9 @@ public class StartIntroScreen extends JPanel{
             //open image and show image
             splashScreen = ImageIO.read(new File (System.getProperty("user.dir") + "/resources/images/start/titlepageSplash.png"));
             g.drawImage(splashScreen, 250, 0, null);
-            MonsterQuestMain.systemLog.log("Just showed start image.");
+            systemLog.log("Just showed start image.");
         } catch (IOException e) {
-            MonsterQuestMain.systemLog.log("Oh no! Unable to open file!" + e.getMessage());
+            systemLog.log("Oh no! Unable to open file!" + e.getMessage());
         }
     }
 }
