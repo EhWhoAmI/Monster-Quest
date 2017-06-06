@@ -71,7 +71,6 @@ raw/
 
 /build/
 # ingore all the stuff used for the output, but keep the javadoc
-/dist/lib/
-/dist/lib/
+/dist/bin/
 
 /nbproject/private/
