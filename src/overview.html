@@ -31,12 +31,20 @@ THE SOFTWARE.
     <body>
         <div>
             <h1>The developer's guide to programming Monster Quest</h1>
-            <h2>This will tell you a bit on our naming conventions. This will 
+            <h3>This will tell you a bit on our naming conventions. This will 
                 also explain roughly what the files do (Even though you can see 
-                that in the <a href="./../dist/javadoc/index.html" target="_blank">javadoc</a>)</h2>
+                that in the <a href="./../dist/javadoc/index.html" target="_blank">javadoc</a>)</h3>
         </div>
         
-        <div>
+        <div id="tableOfContents">
+            <p>Table of contents</p>
+            <ul>
+                <li><a href="#rules">Rules</a></li>
+                <li><a href="#summaryOfClasses">Short summary of classes</a></li>
+                <li><a href="#packageInfo">Infomation on packages</a></li>
+            </ul>
+        </div>
+        <div id="rules">
             <p>Rules</p>
             <ul>
                 <li><p>Spacing: 4 spaces. A good IDE should be able to do this.</p></li>
@@ -44,7 +52,7 @@ THE SOFTWARE.
                     <p>Naming Conventions:</p>
                     <ul>
                         <li><p>We follow the java naming conventions. Link is 
-                                <a href="http://www.oracle.com/technetwork/java/codeconventions-135099.html">here</a></p></li>
+                                <a href="http://www.oracle.com/technetwork/java/codeconventions-135099.html">here</a>.</p></li>
                         <li><p>Please make all the variables and method names 
                                 clear. Please, or else we might spend quite a bit of time trying to refractor this.</p></li>
                     </ul>
@@ -60,8 +68,31 @@ THE SOFTWARE.
                         <li><p style="font-family: courier; color: rgb(150, 150, 150)">/** Document */</p></li>
                     </ul>
                 </li>
+                <li>
+                    <p>Please, no stuff like this: </p>
+                    <p style="font-family: courier; color: rgb(150, 150, 150)">someVariable.someMethod().anotherMethod().aRandomVariable.toString()</p>
+                    <p>No more than 3 fullstops will be allowed</p>
+                </li>
             </ul>
-            
+        </div>
+        <div id="summaryOfClasses">
+            <p>Summary of classes</p>
+            <p>The classes listed in the following are listed in alphabetical order</p>
+            <ul>
+                <li></li>
+            </ul>
+        </div>
+        <div id="packageInfo">
+            <p>Packages: how to place them and how to create them</p>
+            <ul>
+                <li><p>Packages are created based on what the set package does.</p></li>
+                <li>
+                    <p>For example, the package: </p>
+                    <p style="font-family: courier; color: rgb(150, 150, 150)">MonsterQuest.game.player</p>
+                    <p>Is in charge for the player behaviour, and basically, anything to do with the player.</p>
+                </li>
+                
+            </ul>
         </div>
     </body>
 </html>
