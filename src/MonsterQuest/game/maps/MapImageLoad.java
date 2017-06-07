@@ -44,7 +44,7 @@ public class MapImageLoad {
             
     public MapImageLoad(TileMap map) {
         this.map = map;
-        
+        loadMap();
     }
     
     private void loadMap () {
@@ -71,6 +71,7 @@ public class MapImageLoad {
         
         File imageFileName = new File(System.getProperty("user.dir") + "/resources/tilemaps/TEMP/" + map.getMapName() + ".png");
         mapImagePath = imageFileName.getPath();
+        systemLog.log("The path of the map image is: " + mapImagePath);
         try {
             imageFileName.createNewFile();
             imageFileName.deleteOnExit();
