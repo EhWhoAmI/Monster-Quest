@@ -76,6 +76,7 @@ public class MapProcesser extends JPanel{
     public void printMaps(Graphics g) {
         //Get current map
         //Find it.
+        //Note for later: Remember to move all this into a separate place, and place the path of the image into a file, then open it when needed. If even needed, store it into a buffered image.
         systemLog.log("Loading current map");
         boolean found = false;
         int i;
@@ -139,11 +140,15 @@ public class MapProcesser extends JPanel{
             
             //Then load all the stuff into tilemap objects
             systemLog.log("Loading stuff into tilemap objects");
+            if (fileList.size() <=0 ) {
+                systemLog.log("There are 0 files in the directory!", Logging.ERROR);
+                
+            }
             int f = 0;
             for (int i = 0; i < fileList.size(); i++) {
                 TilemapRFFile reader = new TilemapRFFile(fileList.get(i));
                 systemLog.log("There are " + reader.getNumberOfMaps() + " in the mapfile");
-                for (f = 0; f <= reader.getNumberOfMaps(); f++) {
+                for (f = 0; f < reader.getNumberOfMaps(); f++) {
                     systemLog.log("Loading tilemap" + f);
                     tilemapList.add(reader.getTileMap(f));
                 }
