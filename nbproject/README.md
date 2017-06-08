@@ -12,8 +12,8 @@ annotation.processing.source.output=${build.generated.sources.dir}/ap-source-out
 application.title=Monster Quest
 ```
 If you decide to change this, it is fine too. I don't care.
-application.vendor=Zyun Games 
-```
+ ```
+application.vendor=Zyun Games
 auxiliary.org-netbeans-spi-editor-hints-projects.perProjectHintSettingsFile=nbproject/cfg_hints.xml
 build.classes.dir=${build.dir}/classes
 build.classes.excludes=**/*.java,**/*.form
