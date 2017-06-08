@@ -31,7 +31,7 @@ public class TileMap {
 
     private int mapID;
     private String mapName;
-    public int[][] layer1;
+    public int[][] layer1 = new int [20][11];
     public int[][] layer2;
     public int[][] layer3;
     public boolean[][] accessability;

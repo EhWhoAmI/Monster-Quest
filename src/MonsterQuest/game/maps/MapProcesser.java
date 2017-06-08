@@ -59,6 +59,10 @@ public class MapProcesser extends JPanel{
      */
     
     public static ArrayList<TileMap> tilemapList = new ArrayList<>();
+    
+    private BufferedImage currentMapImage;
+    
+    private int currentMap;
     /**
      * Constructor for a new MapProcesser class
      */
@@ -80,6 +84,10 @@ public class MapProcesser extends JPanel{
         systemLog.log("Loading current map");
         boolean found = false;
         int i;
+        
+        if (currentMap == MonsterQuestMain.playerStats.mapHash) {
+            //Load the map which is stored in variable
+        }
         for (i = 0; i < tilemapList.size();i++) {
             if (tilemapList.get(i).getMapID() == MonsterQuestMain.playerStats.mapHash) {
                 //Found it
@@ -100,7 +108,6 @@ public class MapProcesser extends JPanel{
                 systemLog.log("Unable to open image!", Logging.ERROR);
             }
         }
-        
     }
     
     /**
@@ -108,7 +115,7 @@ public class MapProcesser extends JPanel{
      */
     void loadTilemaps () {
         try {
-            genericGround = new TileMapReader(System.getProperty("user.dir") + "/resources/tilemaps/GenericGround.png", new Dimension(68, 68));
+            genericGround = new TileMapReader(System.getProperty("user.dir") + "/resources/tilemaps/GenericGroundDebug.png", new Dimension(68, 68));
         } catch (IOException ioe) {
                 systemLog.log("Unable to open tilemap, " + ioe.getMessage() + " Unable to do anything because tilemaps are essential.", Logging.ERROR);
                 JOptionPane.showMessageDialog(MonsterQuestMain.MonsterQuestWindow, "Unable to open the file", "Unable to open file", JOptionPane.ERROR_MESSAGE);

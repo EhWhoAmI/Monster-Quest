@@ -1,0 +1,16 @@
+#code {
+	font-family: courier; 
+	color: rgb(150, 150, 150);
+}
+
+table{
+	border: 1px solid black;
+}
+
+th, tr {
+	padding: 5px;
+}
+
+body {
+    font-family: arial;
+}

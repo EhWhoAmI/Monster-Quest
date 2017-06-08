@@ -64,7 +64,9 @@ public class MapImageLoad {
         //Loop to add layers
         for (int i = 0; i < map.layer1.length; i++) {
             for (int f = 0; f < map.layer1[1].length; f++) {
-                g2d.drawImage(MapProcesser.genericGround.getImage(map.layer1[i][f]), (f*MapProcesser.genericGround.sizeOfEachElement.width), (i*MapProcesser.genericGround.sizeOfEachElement.height), null);
+                //If it is equal to 0, skip it, because 0 is null.
+                //if (map.layer1[i][f] != 0 )
+                    g2d.drawImage(MapProcesser.genericGround.getImage(map.layer1[i][f]), (f*MapProcesser.genericGround.sizeOfEachElement.width), (i*MapProcesser.genericGround.sizeOfEachElement.height), null);
                 try {Thread.sleep(1);}catch(InterruptedException ie){}
             }   
         }

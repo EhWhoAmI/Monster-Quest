@@ -28,7 +28,6 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import static MonsterQuest.MonsterQuestMain.systemLog;
 import MonsterQuest.util.Logging;
-import java.nio.ByteBuffer;
 import java.util.ArrayList;
 /** 
  * RFFile stands for Read From File. This reads from the tilemap file specified 
@@ -59,23 +58,24 @@ public class TilemapRFFile {
                 //Get the map ID
                 mapID = stream.read();
                 systemLog.log("Got map ID, it is " + mapID);
-                ByteBuffer buffer = ByteBuffer.allocate(50);
 
                 //String builder for mapname
                 StringBuilder builder = new StringBuilder();
 
                 //Get name
                 for (int i = 0; i < 50; i++) {
-                    builder.append(Integer.toString(stream.read()));
+                    int read = stream.read();
+                    builder.append((char)read);
                 }
                 
                 mapName = builder.toString();
                 
                 mapName = mapName.trim();
+                
+                systemLog.log("Map name is: " + mapName);
                 //Get layers
                 for (int layer = 0; layer < 3; layer++) {
                     //Get one layer
-                    
                     //Get the row
                     for (int row1 = 0; row1 < 11; row1 ++) {
                         //Get columns
@@ -83,8 +83,6 @@ public class TilemapRFFile {
                             layers[layer][row1][column] = stream.read();
                         }
                     }
-                    
-                    
                 }
                 
                 //get accessability
