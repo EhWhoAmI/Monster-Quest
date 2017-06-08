@@ -95,14 +95,12 @@ public class MapGenerator {
             //Write to file
             buff.write(builder.toString().getBytes(StandardCharsets.UTF_8));
             
-            
-            
             //loop for layers 
             for (int maps = 0; maps < numMaps; maps++) {
                 System.out.println("Enter map " + maps);
                 for (int layers = 0; layers < 3; layers ++) {
                     for (int i = 0; i < 11; i++){
-                        System.out.println("Enter row " + i + " of layer " + layers + ",separated by a space.");
+                        System.out.println("Enter row " + (i + 1) + " of layer " + layers + ",separated by a space. 20 squares only!");
                         String character = scan.nextLine();
                         StringTokenizer tokenizer = new StringTokenizer(character);
                         

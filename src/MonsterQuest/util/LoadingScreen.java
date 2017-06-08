@@ -48,7 +48,6 @@ public class LoadingScreen extends JPanel{
         g2d.drawString("Loading", 25, 650);
     }
     
-    
     /**
      * This inits the loading screen
      */

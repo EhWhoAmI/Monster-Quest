@@ -27,6 +27,7 @@ THE SOFTWARE.
         <title>Monster Quest Game Developer's guide</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="overview.css">
     </head>
     <body>
         <div>
@@ -37,12 +38,12 @@ THE SOFTWARE.
         </div>
         
         <div id="tableOfContents">
-            <p>Table of contents</p>
-            <ul>
-                <li><a href="#rules">Rules</a></li>
-                <li><a href="#summaryOfClasses">Short summary of classes</a></li>
-                <li><a href="#packageInfo">Infomation on packages</a></li>
-            </ul>
+            <table>
+                <tr><td><p><u>Table of contents<hr></u></p></td></tr>
+                <tr><td><a href="#rules">Rules</a></td></tr>
+                <tr><td><a href="#summaryOfClasses">Short summary of classes</a></td></tr>
+                <tr><td><a href="#packageInfo">Infomation on packages</a></td></tr>
+            </table>
         </div>
         <div id="rules">
             <p>Rules</p>
@@ -61,16 +62,16 @@ THE SOFTWARE.
                     <p>Please, document your code with comments.</p>
                     <ul>
                         <li><p>This one</p></li>
-                        <li><p style="font-family: courier; color: rgb(150, 150, 150)">// whatever you want to put</p></li>
+                        <li><p id="code">// whatever you want to put</p></li>
                         <li><p>or this one</p></li>
-                        <li><p style="font-family: courier; color: rgb(150, 150, 150)">/* whatever you want to put */</p></li>
+                        <li><p id="code">/* whatever you want to put */</p></li>
                         <li><p>Lastly the javadoc ones</p></li>
-                        <li><p style="font-family: courier; color: rgb(150, 150, 150)">/** Document */</p></li>
+                        <li><p id="code">/** Document */</p></li>
                     </ul>
                 </li>
                 <li>
                     <p>Please, no stuff like this: </p>
-                    <p style="font-family: courier; color: rgb(150, 150, 150)">someVariable.someMethod().anotherMethod().aRandomVariable.toString()</p>
+                    <p id="code">someVariable.someMethod().anotherMethod().aRandomVariable.toString()</p>
                     <p>No more than 3 fullstops will be allowed</p>
                 </li>
             </ul>
@@ -88,7 +89,7 @@ THE SOFTWARE.
                 <li><p>Packages are created based on what the set package does.</p></li>
                 <li>
                     <p>For example, the package: </p>
-                    <p style="font-family: courier; color: rgb(150, 150, 150)">MonsterQuest.game.player</p>
+                    <p id="code">MonsterQuest.game.player</p>
                     <p>Is in charge for the player behaviour, and basically, anything to do with the player.</p>
                 </li>
                 <li>

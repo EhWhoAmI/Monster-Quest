@@ -134,7 +134,6 @@ public class TileMapReader {
         this(ImageIO.read(new File(fileName)), sizeOfElement);
     }
     
-    
     /**
      * Get the tile of the index thingy
      * @param index the index of the tile

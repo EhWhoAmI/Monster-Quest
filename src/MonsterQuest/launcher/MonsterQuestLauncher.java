@@ -25,6 +25,7 @@ package MonsterQuest.launcher;
 
 /**
  * Used to launch monster quest. Is also in charge of updating it and things like that.
+ * NOT yet implemented
  * 
  * @author Zyun
  */

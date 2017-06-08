@@ -47,23 +47,23 @@ public class Logging {
     private boolean openable = true;
     
     //The IDs of the message type
-
     /**
+     * Info log level
      */
     public final static int INFO = 0;
     
     /**
-     *
+     * Warning log level
      */
     public final static int WARINING = 1;
 
     /**
-     *
+     * Error log level
      */
     public final static int ERROR = 2;
 
     /**
-     *
+     * Alert log level
      */
     public final static int ALERT = 3;
     
@@ -91,7 +91,6 @@ public class Logging {
         }
 
         if (openable) {
-
             //The thread for logging, makes it faster
             Runnable thread = () -> {
                 FileWriter logFileOutput = null;
