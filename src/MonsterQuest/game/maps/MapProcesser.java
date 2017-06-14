@@ -25,10 +25,6 @@ package MonsterQuest.game.maps;
 
 import MonsterQuest.MonsterQuestMain;
 import MonsterQuest.util.Logging;
-import MonsterQuest.util.tilemapengine.TileMap;
-import MonsterQuest.util.tilemapengine.TileMapReader;
-import MonsterQuest.util.tilemapengine.TilemapRFFile;
-import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -40,36 +36,30 @@ import javax.imageio.ImageIO;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import static MonsterQuest.MonsterQuestMain.systemLog;
+import tiled.core.Map;
+import tiled.io.TMXMapReader;
 
 /**
  * This class processes all the maps.
  * @author Zyun
  */
 public class MapProcesser extends JPanel{
-    int mapID;
     //All the tilemaps
-
-    /**
-     * The tilemap for the generic ground.
-     */
-    static public TileMapReader genericGround;
-    
     /**
      * Newbies town center map;
      */
     
-    public static ArrayList<TileMap> tilemapList = new ArrayList<>();
+    public static ArrayList<Map> tilemapList = new ArrayList<>();
     
     private BufferedImage currentMapImage;
     
-    private int currentMap;
+    private int currentMap = -1;
     /**
      * Constructor for a new MapProcesser class
      */
     public MapProcesser() {
         super();
         loadMap();
-        loadTilemaps();
         setLayout(null);
     }
 
@@ -87,41 +77,47 @@ public class MapProcesser extends JPanel{
         
         if (currentMap == MonsterQuestMain.playerStats.mapHash) {
             //Load the map which is stored in variable
-        }
-        for (i = 0; i < tilemapList.size();i++) {
-            if (tilemapList.get(i).getMapID() == MonsterQuestMain.playerStats.mapHash) {
-                //Found it
-                found = true;
-                break;
-            }
-        }
-        if (!found) {
-                systemLog.log("Bug: Unable to find the map id " + i + ".", Logging.ALERT);
+            g.drawImage(currentMapImage, 0, 0, null);
+            
         } else {
-            try {
-                MapImageLoad load = new MapImageLoad(tilemapList.get(i));
-                //Open file and load image
-                File tempOpenFile = new File(load.getMapImagePath());
-                BufferedImage tempOpen = ImageIO.read(tempOpenFile);
-                g.drawImage(tempOpen, 0, 0, null);
-            } catch (IOException ex) {
-                systemLog.log("Unable to open image!", Logging.ERROR);
+            //Place the map number the player is in into the currentMap variable
+            currentMap = MonsterQuestMain.playerStats.mapHash;
+            //Load map
+            for (i = 0; i < tilemapList.size();i++) {
+                String ID  = tilemapList.get(i).getProperties().getProperty("ID");
+                int mapID = Integer.parseInt(ID);
+                if (mapID == MonsterQuestMain.playerStats.mapHash) {
+                    //Found it
+                    found = true;
+                    break;
+                }
+            }
+            if (!found) {
+                    systemLog.log("Bug: Unable to find the map id " + i + ".", Logging.ALERT);
+            } else {
+                try {
+                    /*try {
+                    MapImageLoad load = new MapImageLoad(tilemapList.get(i));
+                    //Open file and load image
+                    File tempOpenFile = new File(load.getMapImagePath());
+                    BufferedImage tempOpen = ImageIO.read(tempOpenFile);
+                    g.drawImage(tempOpen, 0, 0, null);
+                    } catch (IOException ex) {
+                    systemLog.log("Unable to open image!", Logging.ERROR);
+                    }*/
+                    //Load the map on a image
+                    MapImageLoad load = new MapImageLoad(tilemapList.get(i));
+                    String mapImagePath = load.getMapImagePath();
+                    File toOpen = new File(mapImagePath);
+                    ImageIO.read(toOpen);
+                    g.drawImage(currentMapImage, 0, 0, null);
+                } catch (IOException ex) {
+                    systemLog.log("Unable to open file!" + ex.getMessage(), Logging.ERROR, ex);
+                }
             }
         }
     }
-    
-    /**
-     * Load all the tilemaps.
-     */
-    void loadTilemaps () {
-        try {
-            genericGround = new TileMapReader(System.getProperty("user.dir") + "/resources/tilemaps/GenericGroundDebug.png", new Dimension(68, 68));
-        } catch (IOException ioe) {
-                systemLog.log("Unable to open tilemap, " + ioe.getMessage() + " Unable to do anything because tilemaps are essential.", Logging.ERROR);
-                JOptionPane.showMessageDialog(MonsterQuestMain.MonsterQuestWindow, "Unable to open the file", "Unable to open file", JOptionPane.ERROR_MESSAGE);
-        }
-    }
-    
+        
     static void loadMap () {
         try {
             //Get list of map files.
@@ -151,20 +147,18 @@ public class MapProcesser extends JPanel{
                 systemLog.log("There are 0 files in the directory!", Logging.ERROR);
                 
             }
-            int f = 0;
-            for (int i = 0; i < fileList.size(); i++) {
-                TilemapRFFile reader = new TilemapRFFile(fileList.get(i));
-                systemLog.log("There are " + reader.getNumberOfMaps() + " in the mapfile");
-                for (f = 0; f < reader.getNumberOfMaps(); f++) {
-                    systemLog.log("Loading tilemap" + f);
-                    tilemapList.add(reader.getTileMap(f));
-                }
+            
+            for (int n = 0; n < fileList.size(); n ++)  {
+                TMXMapReader reader = new TMXMapReader();
+                Map map = reader.readMap(System.getProperty("user.dir") + fileList.get(n));
+                tilemapList.add(map);
             }
-            systemLog.log("Loaded " + f + " maps");
-            //Done...
         } catch (FileNotFoundException ex) {
-            systemLog.log("File not found!!!", Logging.ERROR);
+            systemLog.log("File not found!!!", Logging.ERROR, ex);
+        } catch (Exception ex) {
+            systemLog.log("Unknown exception! " + ex.getMessage(), Logging.ERROR, ex);
         }
+        
     }
     
     

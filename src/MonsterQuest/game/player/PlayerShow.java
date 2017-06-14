@@ -51,7 +51,7 @@ public class PlayerShow {
             BufferedImage spriteImage = ImageIO.read(image);
             g2d.drawImage(spriteImage, MonsterQuestMain.playerStats.playerPos.x, MonsterQuestMain.playerStats.playerPos.y, null);
         } catch (IOException ioe) {
-            systemLog.log("Unable to open file! " + ioe.getMessage(), Logging.ERROR);
+            systemLog.log("Unable to open file! " + ioe.getMessage(), Logging.ERROR, ioe);
         }
         
     }

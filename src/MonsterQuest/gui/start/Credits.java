@@ -59,7 +59,10 @@ public class Credits extends JPanel implements ActionListener{
         g2d.drawString("By : Zyun", 10, 40);
         g2d.drawString("Beta Testers: ", 10, 80);
         g2d.drawString("Not yet in beta mode!", 10, 120);
-
+        //The resources and libraries we used.
+        g2d.drawString("Libraries used:", 10, 160);
+        g2d.drawString("XOM: XML object model", 10, 200);
+        g2d.drawString("Tiled map editor", 10, 240);
         //To highlight the get out part
         g2d.drawString("Get out using this button: ", 10, 650);
     }

@@ -37,7 +37,8 @@ public class GameKeyListener implements KeyListener{
     public void keyPressed(KeyEvent e) {
         //If keys are part of the wasd things
         if (e.getKeyChar() == 'W' | e.getKeyChar() == 'w' | e.getKeyChar() == 'A' | e.getKeyChar() == 'a' | e.getKeyChar() == 'S' | e.getKeyChar() == 's' | e.getKeyChar() == 'D' | e.getKeyChar() == 'd') {
-            systemLog.log("Person is moving");
+            //Do not log in animations!
+            //systemLog.log("Person is moving");
             switch (e.getKeyChar()) {
                 case 'W':
                 case 'w':

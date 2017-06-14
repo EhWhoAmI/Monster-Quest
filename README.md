@@ -38,5 +38,6 @@ Not much has been done about character classes. The concepts have come out thoug
 
 ### Notes
   - We use the xom library for XML parsing. The website can be found [here](http://xom.nu)
+  - We use Tiled's xml format and java library for the tilemaps and tilesets. The website is [here](http://www.mapeditor.org/), and the github repo is [here](https://github.com/bjorn/tiled).
   - This game is still in development :wink:
   - We are coming up with the images for the classes!
