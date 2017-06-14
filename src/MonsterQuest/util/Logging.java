@@ -234,6 +234,60 @@ public class Logging {
         }
     }
     
+    public void log (String text, int type, final Exception ex) {
+        //This is basically a copy of the constructor, just that you can change the text you write, not just --- NEW LOG STARTED [] ---
+        if (openable) {
+
+            //Thread for logging. makes it faster
+            Runnable thread = () -> {
+                FileWriter logFileOutput = null;
+                BufferedWriter logFileWriter = null;
+                //Create Time Stamp
+                Date timeStamp = new Date();
+
+                //The date, and the text
+                String content = ("[" + timeStamp + "]{" + getLogfileName() + "}(" + type + "): " + text);
+
+                //Check if to write to console
+                
+                //Check the stream to write to
+                PrintStream stream = (type == INFO)? System.out : System.err;
+
+                if (MonsterQuestMain.DEBUG) {
+                    stream.println(content);
+                    ex.printStackTrace();
+                }
+                try {
+                    //Check if write to logfile
+                    if (MonsterQuestMain.PRINT_TO_LOGFILE) {
+                        logFileOutput = new FileWriter(System.getProperty("user.dir") + this.logString, true);
+                        logFileWriter = new BufferedWriter(logFileOutput);
+                        //Write to file
+                        logFileWriter.write(content);
+                        ex.printStackTrace(stream);
+                        logFileWriter.newLine();
+                    }
+                } catch (IOException ioe) {
+                }
+                try {
+                    if (logFileWriter != null)
+                        logFileWriter.close();
+                    if (logFileOutput != null)
+                        logFileOutput.close();
+                    System.gc();
+                } catch (IOException ioe) {
+                    //Just clear it up, nothing we can do.
+                    System.gc();
+                }
+
+            };
+
+            //Start the logging in thread
+            Thread print = new Thread (thread);
+            print.start();
+        }
+    }
+    
     /**
      * Returns the name of the file that you are logging on.
      * @return the filename of the log

@@ -39,14 +39,15 @@ THE SOFTWARE.
         
         <div id="tableOfContents">
             <table>
-                <tr><td><p><u>Table of contents<hr></u></p></td></tr>
+                <tr><td><p><u>Table of contents<hr/></u></p></td></tr>
                 <tr><td><a href="#rules">Rules</a></td></tr>
                 <tr><td><a href="#summaryOfClasses">Short summary of classes</a></td></tr>
                 <tr><td><a href="#packageInfo">Infomation on packages</a></td></tr>
+                <tr><td><a href="#loggingRules">Rules on logging</a></td></tr>
             </table>
         </div>
         <div id="rules">
-            <p>Rules</p>
+            <p id="subtitle">Rules</p>
             <ul>
                 <li><p>Spacing: 4 spaces. A good IDE should be able to do this.</p></li>
                 <li>
@@ -77,14 +78,14 @@ THE SOFTWARE.
             </ul>
         </div>
         <div id="summaryOfClasses">
-            <p>Summary of classes</p>
+            <p id="subtitle">Summary of classes</p>
             <p>The classes listed in the following are listed in alphabetical order</p>
             <ul>
                 <li></li>
             </ul>
         </div>
         <div id="packageInfo">
-            <p>Packages: how to place them and how to create them</p>
+            <p id="subtitle">Packages: how to place them and how to create them</p>
             <ul>
                 <li><p>Packages are created based on what the set package does.</p></li>
                 <li>
@@ -95,6 +96,21 @@ THE SOFTWARE.
                 <li>
                     <p>Make as much packages as necessary, but do not do 
                         unnecessary packages. Make packages made for just one vague task, then name classes to do name the specific task.</p>
+                </li>
+            </ul>
+        </div>
+        <div id="loggingRules">
+            <p id="subtitle">Logging</p>
+            <ul>
+                <li><p>Please log often, to show how the program is going.</p></li>
+                <li>
+                    <p>Add an import at the import part like this, it must be a static import</p>
+                    <p id="code">static import MonsterQuest.MonsterQuestMain.systemLog</p>
+                    <p>Logging can be used like this:</p>
+                    <p id="code">systemLog.log("Blah blah blah");</p>
+                </li>
+                <li>
+                    <p>There is only one restriction on where to log: In animations.</p>
                 </li>
             </ul>
         </div>

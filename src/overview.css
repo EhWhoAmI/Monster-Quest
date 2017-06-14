@@ -1,6 +1,5 @@
 #code {
 	font-family: courier; 
-	color: rgb(150, 150, 150);
 }
 
 table{
@@ -13,4 +12,12 @@ th, tr {
 
 body {
     font-family: arial;
+}
+
+#subtitle {
+    font-weight: bold;
+}
+
+a {
+    color: blue;
 }

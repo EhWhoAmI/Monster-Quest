@@ -179,6 +179,10 @@ public class MonsterQuestMain {
         systemLog.log("Screen size: H= " + MonsterQuestWindow.getHeight() + " W= " + MonsterQuestWindow.getWidth());
         MonsterQuestWindow.setResizable(false);
         MonsterQuestWindow.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        //To set it full screen.
+//        MonsterQuestWindow.setExtendedState(JFrame.MAXIMIZED_BOTH); 
+//        MonsterQuestWindow.setUndecorated(true);
+//        MonsterQuestWindow.setVisible(true);
         
         //Set icon
         MonsterQuestWindow.setIconImage(Toolkit.getDefaultToolkit().getImage(System.getProperty("user.dir") + "/resources/icon/Icon.png"));

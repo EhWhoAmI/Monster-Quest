@@ -25,13 +25,20 @@ package MonsterQuest.game.maps;
 
 import static MonsterQuest.MonsterQuestMain.systemLog;
 import MonsterQuest.util.Logging;
-import MonsterQuest.util.tilemapengine.TileMap;
-import MonsterQuest.util.tilemapengine.TileMapReader;
+import java.awt.Color;
 import java.awt.Graphics2D;
+import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.util.Properties;
 import javax.imageio.ImageIO;
+import tiled.core.Map;
+import tiled.core.MapLayer;
+import tiled.core.TileLayer;
+import tiled.view.IsometricRenderer;
+import tiled.view.MapRenderer;
+import tiled.view.OrthogonalRenderer;
 
 
 /**
@@ -39,10 +46,10 @@ import javax.imageio.ImageIO;
  * @author Zyun
  */
 public class MapImageLoad {
-    private TileMap map;
+    private Map map;
     private String mapImagePath;
             
-    public MapImageLoad(TileMap map) {
+    public MapImageLoad(Map map) {
         this.map = map;
         loadMap();
     }
@@ -51,39 +58,59 @@ public class MapImageLoad {
         //Load maps and stuff
         int index = 0;
         
-        //Array of list of tilemaps to read from
-        TileMapReader[] reader = {
-            MapProcesser.genericGround
-        };
         //Create tempoary image
         BufferedImage temp = new BufferedImage(1360, 748, BufferedImage.TYPE_INT_ARGB);
         
         //Create Graphics object to draw image
         Graphics2D g2d = temp.createGraphics();
         
-        //Loop to add layers
-        for (int i = 0; i < map.layer1.length; i++) {
-            for (int f = 0; f < map.layer1[1].length; f++) {
-                //If it is equal to 0, skip it, because 0 is null.
-                //if (map.layer1[i][f] != 0 )
-                    g2d.drawImage(MapProcesser.genericGround.getImage(map.layer1[i][f]), (f*MapProcesser.genericGround.sizeOfEachElement.width), (i*MapProcesser.genericGround.sizeOfEachElement.height), null);
-                try {Thread.sleep(1);}catch(InterruptedException ie){}
-            }   
+        //To show the map
+        MapRenderer renderer = createRenderer(map);
+        g2d.setClip(0, 0, 1360, 748);
+        //Draw on the image
+        //Draw each tile map layer
+        for (MapLayer layer : map) {
+            if (layer instanceof TileLayer) {
+                renderer.paintTileLayer(g2d, (TileLayer) layer);
+            }
         }
         
-        File imageFileName = new File(System.getProperty("user.dir") + "/resources/tilemaps/TEMP/" + map.getMapName() + ".png");
+        //Before placing the temp image, check whether the {user.dir}/resources/TEMP dir exists
+        File TEMPdir = new File(System.getProperty("user.dir") + "/resources/TEMP");
+        if (TEMPdir.mkdir()) {
+            systemLog.log("Made a dir...");
+        }
+        //Get the name and id of the map
+        Properties mapProperties = map.getProperties();
+        String mapID = mapProperties.getProperty("ID");
+        String mapName = mapProperties.getProperty("name");
+        File imageFileName = new File(System.getProperty("user.dir") + "/resources/TEMP/" + mapID + "_" + mapName + "_temp.png");
         mapImagePath = imageFileName.getPath();
+        
         systemLog.log("The path of the map image is: " + mapImagePath);
         try {
             imageFileName.createNewFile();
             imageFileName.deleteOnExit();
             ImageIO.write(temp, "PNG", imageFileName);
         } catch (IOException ex) {
-            systemLog.log("Unable to write to file! " + ex.getMessage(), Logging.ERROR);
+            systemLog.log("Unable to write to file! " + ex.getMessage(), Logging.ERROR, ex);
         }
     }
     
     public String getMapImagePath () {
         return mapImagePath;
+    }
+    
+    private static MapRenderer createRenderer(Map map) {
+        switch (map.getOrientation()) {
+            case ORTHOGONAL:
+                return new OrthogonalRenderer(map);
+
+            case ISOMETRIC:
+                return new IsometricRenderer(map);
+
+            default:
+                return null;
+        }
     }
 }
