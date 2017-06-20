@@ -49,6 +49,7 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.Properties;
 import javax.swing.JPanel;
 import sun.audio.AudioPlayer;
 import sun.audio.AudioStream;
@@ -183,7 +184,7 @@ public class MonsterQuestMain {
 //        MonsterQuestWindow.setExtendedState(JFrame.MAXIMIZED_BOTH); 
 //        MonsterQuestWindow.setUndecorated(true);
 //        MonsterQuestWindow.setVisible(true);
-        
+
         //Set icon
         MonsterQuestWindow.setIconImage(Toolkit.getDefaultToolkit().getImage(System.getProperty("user.dir") + "/resources/icon/Icon.png"));
         

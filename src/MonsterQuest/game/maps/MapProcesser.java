@@ -74,7 +74,7 @@ public class MapProcesser extends JPanel{
         systemLog.log("Loading current map");
         boolean found = false;
         int i;
-        
+        Map mapFound = null;
         if (currentMap == MonsterQuestMain.playerStats.mapHash) {
             //Load the map which is stored in variable
             g.drawImage(currentMapImage, 0, 0, null);
@@ -89,6 +89,7 @@ public class MapProcesser extends JPanel{
                 if (mapID == MonsterQuestMain.playerStats.mapHash) {
                     //Found it
                     found = true;
+                    mapFound = tilemapList.get(i);
                     break;
                 }
             }
@@ -96,21 +97,13 @@ public class MapProcesser extends JPanel{
                     systemLog.log("Bug: Unable to find the map id " + i + ".", Logging.ALERT);
             } else {
                 try {
-                    /*try {
-                    MapImageLoad load = new MapImageLoad(tilemapList.get(i));
-                    //Open file and load image
-                    File tempOpenFile = new File(load.getMapImagePath());
-                    BufferedImage tempOpen = ImageIO.read(tempOpenFile);
-                    g.drawImage(tempOpen, 0, 0, null);
-                    } catch (IOException ex) {
-                    systemLog.log("Unable to open image!", Logging.ERROR);
-                    }*/
-                    //Load the map on a image
-                    MapImageLoad load = new MapImageLoad(tilemapList.get(i));
-                    String mapImagePath = load.getMapImagePath();
-                    File toOpen = new File(mapImagePath);
-                    ImageIO.read(toOpen);
-                    g.drawImage(currentMapImage, 0, 0, null);
+                    MapView view = new MapView(mapFound);
+                    //MapImageLoad load = new MapImageLoad(mapFound);
+                    File input = new File(System.getProperty("user.dir") + view.getMapImagePath());
+                    BufferedImage image = ImageIO.read(input);
+                    currentMapImage = image;
+                    g.drawImage(image, 0, 0, null);
+                    
                 } catch (IOException ex) {
                     systemLog.log("Unable to open file!" + ex.getMessage(), Logging.ERROR, ex);
                 }
@@ -143,13 +136,13 @@ public class MapProcesser extends JPanel{
             
             //Then load all the stuff into tilemap objects
             systemLog.log("Loading stuff into tilemap objects");
+            
             if (fileList.size() <=0 ) {
                 systemLog.log("There are 0 files in the directory!", Logging.ERROR);
-                
             }
             
+            TMXMapReader reader = new TMXMapReader();
             for (int n = 0; n < fileList.size(); n ++)  {
-                TMXMapReader reader = new TMXMapReader();
                 Map map = reader.readMap(System.getProperty("user.dir") + fileList.get(n));
                 tilemapList.add(map);
             }
@@ -157,10 +150,6 @@ public class MapProcesser extends JPanel{
             systemLog.log("File not found!!!", Logging.ERROR, ex);
         } catch (Exception ex) {
             systemLog.log("Unknown exception! " + ex.getMessage(), Logging.ERROR, ex);
-        }
-        
+        }   
     }
-    
-    
-    
 }
