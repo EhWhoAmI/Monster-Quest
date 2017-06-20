@@ -1,5 +1,8 @@
 Monster Quest 
 ===============
+![](https://img.shields.io/badge/developement-in%20progress-green.svg)
+![](https://img.shields.io/badge/version-INDEV-yellow.svg) 
+![](https://img.shields.io/badge/dependencies-up%20to%20date-yellow.svg) 
 ### A fun RPG game :octocat:
 
 This is RPG game made by me. Please try it out when it is ready.
@@ -36,8 +39,13 @@ Not much has been done about character classes. The concepts have come out thoug
  
  ![Bow Image](https://raw.githubusercontent.com/EhWhoAmI/Monster-Quest/master/resources/images/tutorial/BowImage.png)
 
+### Dependencies
+Technology               | What it's used for
+-------------------------|--------------------------------
+**[Java](https://java.com)**                 | Used for programming this game
+**[XOM: XML object model](http://xom.nu)**| XML parsing
+**[Tiled map engine](http://mapeditor.org)**| Formatting the maps (We use their XML format, and their java library, though we might have changed it a bit to suit our game.)
+
 ### Notes
-  - We use the xom library for XML parsing. The website can be found [here](http://xom.nu)
-  - We use Tiled's xml format and java library for the tilemaps and tilesets. The website is [here](http://www.mapeditor.org/), and the github repo is [here](https://github.com/bjorn/tiled).
   - This game is still in development :wink:
   - We are coming up with the images for the classes!

@@ -34,6 +34,12 @@ import java.awt.geom.Rectangle2D;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 import static MonsterQuest.MonsterQuestMain.systemLog;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.util.ArrayList;
+import java.util.Scanner;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * This shows the credits screen
@@ -41,7 +47,7 @@ import static MonsterQuest.MonsterQuestMain.systemLog;
  */
 public class Credits extends JPanel implements ActionListener{
     private JButton exitButton;
-    
+    private ArrayList<String> creditsList = new ArrayList<>();
     @Override
     protected void paintComponent(Graphics g) {
         //Draw image for credits.
@@ -56,7 +62,8 @@ public class Credits extends JPanel implements ActionListener{
 
         //The credits text, all the peeps who helped!
         //If you did help a bit, please edit this a bit to show your name. Just don't delete any names
-        g2d.drawString("By : Zyun", 10, 40);
+        
+        g2d.drawString("By The following: Zyun", 10, 40);
         g2d.drawString("Beta Testers: ", 10, 80);
         g2d.drawString("Not yet in beta mode!", 10, 120);
         //The resources and libraries we used.
@@ -73,7 +80,18 @@ public class Credits extends JPanel implements ActionListener{
     public Credits() {
         super();
         setLayout(null);
-
+        //Read from credits file
+        File creditsFile = new File (System.getProperty("user.dir") + "/data/CREDITS");
+        try {
+            Scanner scan = new Scanner(creditsFile);
+            //for (String read: ) {
+                //Object key = .getKey();
+                //Object value = .getValue();
+                
+            //}
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(Credits.class.getName()).log(Level.SEVERE, null, ex);
+        }
         //The exit button for exiting this scene
         exitButton = new JButton("X");
         exitButton.setBackground(Color.red);
