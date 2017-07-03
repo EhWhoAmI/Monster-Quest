@@ -97,9 +97,9 @@ public class MapProcesser extends JPanel{
                     systemLog.log("Bug: Unable to find the map id " + i + ".", Logging.ALERT);
             } else {
                 try {
-                    MapView view = new MapView(mapFound);
-                    //MapImageLoad load = new MapImageLoad(mapFound);
-                    File input = new File(System.getProperty("user.dir") + view.getMapImagePath());
+                    MapImageLoad load = new MapImageLoad(mapFound);
+                    File input = new File(System.getProperty("user.dir") + load.getImagePath());
+                    systemLog.log("Getting " + input.getPath());
                     BufferedImage image = ImageIO.read(input);
                     currentMapImage = image;
                     g.drawImage(image, 0, 0, null);
@@ -146,6 +146,7 @@ public class MapProcesser extends JPanel{
                 Map map = reader.readMap(System.getProperty("user.dir") + fileList.get(n));
                 tilemapList.add(map);
             }
+            readmapfiles.close();
         } catch (FileNotFoundException ex) {
             systemLog.log("File not found!!!", Logging.ERROR, ex);
         } catch (Exception ex) {

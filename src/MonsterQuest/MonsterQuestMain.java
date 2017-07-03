@@ -82,7 +82,7 @@ import sun.audio.AudioStream;
  * player) has to fight them off, and stop them from harming the innocent
  * villagers.
  * 
- * This game's github repo: <a href="https://github.com/EhWhoAmI/Monster-Quest">https://github.com/EhWhoAmI/Monster-Quest<a>
+ * This game's github repo: <a href="https://github.com/EhWhoAmI/Monster-Quest">https://github.com/EhWhoAmI/Monster-Quest</a>
  */ 
 
 /**

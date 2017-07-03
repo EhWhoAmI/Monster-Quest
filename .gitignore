@@ -60,6 +60,8 @@ Temporary Items
 
 # log files
 *.log
+
+
 # Keychain for encryption
 KEYCHAIN
 # Stuff used for archives: 
@@ -69,8 +71,11 @@ raw/
 # Log files:
 *.log
 
-/build/
 # ingore all the stuff used for the output, but keep the javadoc
 /dist/bin/
-
+/build/
 /nbproject/private/
+
+# IDE stuff (Eclispe)
+.project
+.classpath

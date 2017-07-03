@@ -121,7 +121,7 @@ public class MapGenerator {
             }
             
             //Save file and flush
-            buff.flush();
+            buff.close();
         } catch (FileNotFoundException fe) {
             System.err.println("File not found");
         } catch (IOException ioe) {

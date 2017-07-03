@@ -25,7 +25,9 @@ package MonsterQuest.game.maps;
 
 import static MonsterQuest.MonsterQuestMain.systemLog;
 import MonsterQuest.util.Logging;
+import com.sun.org.apache.bcel.internal.generic.FCMPG;
 import java.awt.Color;
+import java.awt.Dimension;
 
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
@@ -33,6 +35,7 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.util.Properties;
+import java.util.StringTokenizer;
 
 import javax.imageio.ImageIO;
 
@@ -54,61 +57,103 @@ public class MapImageLoad {
     private BufferedImage currentImage;
     private String mapPath;
     
-    public MapImageLoad (Map map) {
+    public MapImageLoad(Map map) {
         this.map = map;
-        renderer = createRenderer(map);
-        createImage();
         
+        //Create renderer
+        renderer = createRenderer(map);
+    }
+
+    public MapImageLoad(Map map, String mapPath) {
+        this(map);
+        
+        this.mapPath = mapPath;
     }
     
     private static MapRenderer createRenderer(Map map) {
         switch (map.getOrientation()) {
+            //I've a feeling there're more, but they didn't put it on.
             case ORTHOGONAL:
                 return new OrthogonalRenderer(map);
 
             case ISOMETRIC:
                 return new IsometricRenderer(map);
-
+             
             default:
                 return null;
+                
         }
     }
     
-    private void createImage () {
-        //System.out.println("Map dimensions: (" + map.getHeight() * map.getTileHeight() + ", " + map.getHeight() * map.getTileWidth()+")");
-        currentImage = new BufferedImage(map.getWidth() * map.getTileWidth(), map.getHeight() * map.getTileHeight(), BufferedImage.TYPE_INT_ARGB);
-        final Graphics2D g2d = currentImage.createGraphics();
+    public void createMapImage() {
+        try {
+            //Create the image
+            int mapWidth = map.getWidth() * map.getTileWidth();
+            int mapHeight = map.getHeight() * map.getTileHeight();
+            Dimension mapSize = new Dimension(mapWidth, mapHeight);
+            systemLog.log("Map dimensions = " + mapSize.toString());
+            BufferedImage imageToWrite = new BufferedImage(mapSize.width, mapSize.height, BufferedImage.TYPE_INT_RGB);
+            
+            //Create graphics to write on image.
+            Graphics2D g2d = imageToWrite.createGraphics();
+            
+            //Create and set Clip
+            Rectangle clip = new Rectangle(mapSize);
+            g2d.setClip(clip);
+            
+            //Paint layers.
+            for (MapLayer layer : map) {
+                if (layer instanceof TileLayer)
+                    renderer.paintTileLayer(g2d, (TileLayer) layer);
+            }
+            
+            if (mapPath.isEmpty()) {
+                //Create temp name.
+                //Get property of map name.
+                Properties mapProperties = map.getProperties();
+                String mapName = mapProperties.getProperty("name");
+                if (mapName == null) {
+                    //Just use the filename, and change it a bit
+                    
+                }
+            }
+            File toWriteFile = new File(mapPath);
+            ImageIO.write(imageToWrite, mapPath, output);
+        } catch (Exception e) {
+        }
+    }
+     
+    public String getImagePath() {
+        return mapPath;
+    }
+    
+    private String createTempFilename (String filename) throws IOException {
+        StringTokenizer tokenizer = new StringTokenizer(filename, File.separator);
         
-        final Rectangle clip = new Rectangle(currentImage.getWidth(), currentImage.getHeight());
-        g2d.setClip(clip);
-        // Draw a gray background
-        g2d.setPaint(Color.white);
-        //g2d.fill(clip);
-        
-        // Draw each tile map layer
-        for (MapLayer layer : map) {
-            if (layer instanceof TileLayer) {
-                renderer.paintTileLayer(g2d, (TileLayer) layer);
+        StringBuilder path = new StringBuilder();
+        path.append(System.getProperty("user.dir"));
+        ///Get the full path of the thingy, and create a temp folder
+        while (tokenizer.hasMoreTokens()) {
+            String nextElement = tokenizer.nextToken();
+            //If it is a file, and it is the last one, abort or else...
+            if (!(nextElement.contains(".") & tokenizer.hasMoreTokens())) {
+                path.append(File.separator);
+                path.append(nextElement);
             }
         }
-        try {
-            //Place image into a file
-            //Get name and ID of map
-            Properties imageProperties = map.getProperties();
-            String ID = imageProperties.getProperty("ID");
-            String name = imageProperties.getProperty("name");
+        //Then add a TEMP folder
+        path.append(File.separator + "TEMP" + File.separator);
+        File TEMPfolder = new File(path.toString());
+        
+        //Debugging
+        if (!TEMPfolder.isDirectory()) {
+            systemLog.log("Oh no! The Filename is not a directory", Logging.ERROR);
+            throw new IOException("File path is not a dir");
+        } 
+        else {
+            TEMPfolder.mkdir();
             
-            mapPath = "/test.png";///src/MonsterQuest/resources/maps/temp_" + name + "_" + ID + ".png";
-            File imageFile = new File (System.getProperty("user.dir") + mapPath);
-            systemLog.log("Loading image to " + mapPath);
-            ImageIO.write(currentImage, "gif", imageFile);
-            imageFile.deleteOnExit();
-        } catch (IOException ex) {
-            systemLog.log("Unable to open image!" + ex.getMessage(), Logging.ERROR, ex);
         }
-    }
-    
-    public String getImagePath () {
-        return mapPath;
+        
     }
 }
