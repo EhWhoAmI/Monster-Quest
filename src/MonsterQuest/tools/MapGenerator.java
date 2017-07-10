@@ -23,110 +23,49 @@
  */
 package MonsterQuest.tools;
 
-import java.io.BufferedOutputStream;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.nio.charset.StandardCharsets;
-import java.util.Scanner;
-import java.util.StringTokenizer;
+import javax.swing.JFileChooser;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 
 /**
  * The map generator class, Generates a map file for the game.
  * @author Zyun
  */
-public class MapGenerator {
+public class MapGenerator extends JFrame{
 
-    /**
-     *
-     * @param args the filename of the map
-     */
+    public MapGenerator() {
+        super("MQM Generator");
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setSize(1366, 768);
+        setVisible(true);
+        selectionMenu();
+    }
+    
     public static void main(String[] args) {
-        //Check for args
-        if (args.length == 0) {
-            System.out.println("Args: filename of the map");
-            System.exit(0);
-        }
-        try {
-            //Open file 
-            File fn = new File (System.getProperty("user.dir") + args[0]);
-            fn.createNewFile();
-            
-            //Open file output streams
-            FileOutputStream file = new FileOutputStream(System.getProperty("user.dir") + args[0]);
-            BufferedOutputStream buff = new BufferedOutputStream(file);
-            
-            //Sacanner to read the map.
-            Scanner scan = new Scanner(System.in);
-            
-            //Get number of maps to put on this.
-            System.out.println("How many maps do you want to put on?");
-            int numMaps = Integer.parseInt(scan.nextLine());
-            buff.write(numMaps);
-            
-            System.out.println("Map name: " + args[0] + "\n");
-            
-            //Get map id
-            System.out.print("Enter map id:");
-            int mapID = Integer.parseInt(scan.nextLine());
-            buff.write(mapID);
-            
-            //Get map details
-            //Get map name -- max 50 characters
-            String mapname;
-            do {
-                System.out.println("Map name: remember, max 50 characters. Extra will be cut off");
-                mapname = scan.nextLine();
-                mapname = mapname.replace('\n', (char)0);
-                if (mapname.length() > 50) {
-                    System.out.println("The map name is too long! max 50 characters!");
-                }
-            }while (mapname.length() > 50);
-            
-            //If it passes the loop
-            //Append null characters in the end
-            StringBuilder builder = new StringBuilder(mapname);
+        new MapGenerator();
+    }
 
-            //Loop to append
-            for (int i = 0; i < (50 - mapname.length()); i ++)
-                builder.append((char)0);  
-
-            //Write to file
-            buff.write(builder.toString().getBytes(StandardCharsets.UTF_8));
-            
-            //loop for layers 
-            for (int maps = 0; maps < numMaps; maps++) {
-                System.out.println("Enter map " + maps);
-                for (int layers = 0; layers < 3; layers ++) {
-                    for (int i = 0; i < 11; i++){
-                        System.out.println("Enter row " + (i + 1) + " of layer " + layers + ",separated by a space. 20 squares only!");
-                        String character = scan.nextLine();
-                        StringTokenizer tokenizer = new StringTokenizer(character);
-                        
-                        //Write to file
-                        for (int n = 0; n < tokenizer.countTokens(); n++)
-                            buff.write(Integer.parseInt(tokenizer.nextToken()));
-                    }
-                }
-
-                //Accessability
-                for (int i = 0; i < 11; i++){
-                    System.out.println("Enter row " + i + " for accessability, separated by a space, 1 for can go, 0 for no go");
-                    String character = scan.nextLine();
-                    StringTokenizer tokenizer = new StringTokenizer(character);
-                    for (int n = 0; n < tokenizer.countTokens(); n++)
-                        buff.write(Integer.parseInt(tokenizer.nextToken()));
-                }
-            }
-            
-            //Save file and flush
-            buff.close();
-        } catch (FileNotFoundException fe) {
-            System.err.println("File not found");
-        } catch (IOException ioe) {
-            System.err.println("IO exception " + ioe.getMessage());
-            ioe.printStackTrace();
+    private void selectionMenu () {
+        Object[] options = { "Open File", "New File" };
+        int returnValue;
+        do {
+            returnValue = JOptionPane.showOptionDialog(this, "What would you like to do?", "Action you want to do",
+                    JOptionPane.DEFAULT_OPTION, JOptionPane.DEFAULT_OPTION,
+                    null, options, options[0]);
+            System.out.println(returnValue);
+        }while (returnValue == -1);
+        
+        switch (returnValue) {
+            case 0:
+                System.out.println("Open File");
+                JFileChooser chooser = new JFileChooser();
+                chooser.setDialogTitle("Open File");
+                chooser.setVisible(true);
+                add(chooser);
+                break;
+            case 1:
+                
         }
     }
 }
