@@ -79,3 +79,4 @@ raw/
 # IDE stuff (Eclispe)
 .project
 .classpath
+/docs/website/nbproject/private/
