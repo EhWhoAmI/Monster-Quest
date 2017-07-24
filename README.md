@@ -14,7 +14,14 @@ The first version, or the pre-alpha, or indev, or whatever you want to call it, 
 You are supposed to fight these monsters that are fighting innocent villagers. We are planning to have quite a big map and stuff. Well, you get to explore caves, mountains and stuff.
 
 ### How to help :wrench:
-Please help, it takes quite a bunch of time to make it... If you want, you can just test it, and I'll be happy. Please see in the TODO section in projects if you want to code the thing.
+Please help, it takes quite a bunch of time to make it... If you want, you can 
+just test it, and I'll be happy. Please see in the TODO section in projects if 
+you want to code the thing.
+
+If you want to add an idea, go to issues, type a title and description, amd add the
+idea label to it. Be specific, or it will not pass. Your idea might pass, but it
+is not guaranteed. Also, your idea might be subject to balancing, for better and more
+fair gameplay. Btw, if you add images, there will have an even higher chance.
 
 ### Website
 The website is here, at [https://ehwhoami.github.io/Monster-Quest/](https://ehwhoami.github.io/Monster-Quest/) Its quite basic, but I will update it oftenly.
@@ -42,9 +49,9 @@ Not much has been done about character classes. The concepts have come out thoug
 ### Dependencies
 Technology               | What it's used for
 -------------------------|--------------------------------
-**[Java](https://java.com)**                 | Used for programming this game
 **[XOM: XML object model](http://xom.nu)**| XML parsing
 **[Tiled map engine](http://mapeditor.org)**| Formatting the maps (We use their XML format, and their java library, though we might have changed it a bit to suit our game.)
+**[Commons IO](https://commons.apache.org/proper/commons-io/)**| File actions
 
 ### Notes
   - This game is still in development :wink:

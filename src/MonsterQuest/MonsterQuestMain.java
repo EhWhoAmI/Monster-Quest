@@ -37,9 +37,10 @@ import MonsterQuest.gui.start.Settings;
 import MonsterQuest.gui.start.StartInterfaceMenu;
 import MonsterQuest.gui.start.StartIntroScreen;
 import MonsterQuest.util.LoadingScreen;
+import MonsterQuest.util.Logging;
+
 import java.awt.Toolkit;
 import javax.swing.JFrame;
-import MonsterQuest.util.Logging;
 import java.awt.CardLayout;
 import java.awt.Font;
 import java.awt.FontFormatException;
@@ -49,8 +50,10 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.Properties;
+import java.io.Serializable;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+
 import sun.audio.AudioPlayer;
 import sun.audio.AudioStream;
 
@@ -89,7 +92,7 @@ import sun.audio.AudioStream;
  * The main class of Monster Quest.
  */
 
-public class MonsterQuestMain {
+public class MonsterQuestMain implements Serializable{
     /**
      * This is for the window of the game.
      */
@@ -111,7 +114,8 @@ public class MonsterQuestMain {
      */
     public static boolean DEBUG = false;
     /**
-     * This variable deciedes whether or not we should write to the log file, use -l to enable.
+     * This variable deciedes whether or not we should write to the log file, 
+     * use -l to enable.
      */
     public static boolean PRINT_TO_LOGFILE = false;
     /**
@@ -127,34 +131,50 @@ public class MonsterQuestMain {
      */
     public static String app_Version;
     /**
-     * We only need this because the buttons need to load. Might find a better solution in the future.
+     * We only need this because the buttons need to load. Might find a better 
+     * solution in the future.
      */
     public static CharacterChoose choose;
+    /**
+     * Serial version uid.
+     */
+    private static final long serialVersionUID = 1L;
+    
     /**
      * The Main function of the monster quest game.
      * @param args The command line arguments
      */
     public static void main(String[] args) {
         //Set up first logging.
-        systemLog = new Logging("/data/logs/system.log");
-        //Command line args: 
-        for (int n = 0; n < args.length; n++) {
-            if (args[n].equals("-d")) {
+        
+        //Command line args:
+        for (String arg : args) {
+            if (arg.equals("-d")) {
                 //Turn on debug tools
                 DEBUG = true;
-                systemLog.log("Debugging mode is on");
             }
-            if (args[n].equals("-l")) {
+            if (arg.equals("-l")) {
                 //Allow to print to debug file
                 PRINT_TO_LOGFILE = true;
-                systemLog.log("Writing to logfile...");
             }
-            if (args[n].equals("-c")) {
+            if (arg.equals("-c")) {
                 //Enable cheats.
                 //TODO
             }
         }
-        new MonsterQuestMain();
+        systemLog = new Logging("/data/logs/system.log", PRINT_TO_LOGFILE, DEBUG);
+        try {
+            new MonsterQuestMain();
+        } catch (NullPointerException npe) {
+            //We, the developers have messed up. This will tell on us.
+            JOptionPane.showMessageDialog(null, "Sorry, we developers have "
+                    + "messed up. We apologise for this fact. If you are angry"
+                    + "about this fact, please report this to the developers. Error: "
+                    + "NullPointerException.", "The developers have messed up.", 0);
+            
+        } catch (UnsupportedOperationException uoe) {
+            
+        }
     }
     
     /**
@@ -177,7 +197,8 @@ public class MonsterQuestMain {
         //Set window size
         //this is the size of my computer screen, so 
         MonsterQuestWindow.setSize(1366, 768);
-        systemLog.log("Screen size: H= " + MonsterQuestWindow.getHeight() + " W= " + MonsterQuestWindow.getWidth());
+        systemLog.log("Screen size: H= " + MonsterQuestWindow.getHeight() + 
+                " W= " + MonsterQuestWindow.getWidth());
         MonsterQuestWindow.setResizable(false);
         MonsterQuestWindow.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         //To set it full screen.
@@ -186,7 +207,8 @@ public class MonsterQuestMain {
 //        MonsterQuestWindow.setVisible(true);
 
         //Set icon
-        MonsterQuestWindow.setIconImage(Toolkit.getDefaultToolkit().getImage(System.getProperty("user.dir") + "/resources/icon/Icon.png"));
+        MonsterQuestWindow.setIconImage(Toolkit.getDefaultToolkit().getImage
+                (System.getProperty("user.dir") + "/resources/icon/Icon.png"));
         
         //Add the start intro screen to the card layout.
         MonsterQuestPanel.add(new StartIntroScreen(), "intro");
@@ -209,8 +231,8 @@ public class MonsterQuestMain {
         //Wait for music to finish playing
         try {
             Thread.sleep(5000);
-        } catch (Exception e) {
-            //Ingore if interrupted
+        } catch (InterruptedException e) {
+            //Ignore if interrupted
         }
         
         //Now, load all the things for the game
@@ -218,13 +240,7 @@ public class MonsterQuestMain {
         MonsterQuestWindow.repaint();
         
         //Load all the crucial bits for the start menu
-        //The panels will be all here
-        MonsterQuestPanel.add(new Others(), "othersOption");
-        MonsterQuestPanel.add(new Credits(), "creditsScene");
-        MonsterQuestPanel.add(new About(), "aboutScene");
-        MonsterQuestPanel.add(new Settings(), "settings");
-        MonsterQuestPanel.add(new VillagerSpeech(), "villagerSpeech");
-        MonsterQuestPanel.add(new LoadingScreen(), "loadScreen");
+        drawComponents();
         
         //Init player
         playerStats = new Player();
@@ -235,7 +251,7 @@ public class MonsterQuestMain {
         //Fake loading after that.
         try {
             Thread.sleep(1000);
-        } catch (Exception e) {
+        } catch (InterruptedException e) {
         }
         
         //Show start menu
@@ -270,10 +286,15 @@ public class MonsterQuestMain {
     private void loadFont () {
         try {
             //create the font to use. Specify the size!
-            pixelFont = Font.createFont(Font.TRUETYPE_FONT, new File(System.getProperty("user.dir") + "/resources/fonts/Minecraft.ttf")).deriveFont(20f);
-            GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
+            pixelFont = Font.createFont(Font.TRUETYPE_FONT, new File
+                    (System.getProperty("user.dir") 
+                            + "/resources/fonts/Minecraft.ttf")).deriveFont(20f);
+            GraphicsEnvironment ge = 
+                    GraphicsEnvironment.getLocalGraphicsEnvironment();
             //register the font
-            ge.registerFont(Font.createFont(Font.TRUETYPE_FONT, new File(System.getProperty("user.dir") + "/resources/fonts/Minecraft.ttf")));
+            ge.registerFont(Font.createFont(Font.TRUETYPE_FONT, 
+                    new File(System.getProperty("user.dir") 
+                            + "/resources/fonts/Minecraft.ttf")));
             //List avaible fonts
         } catch (IOException e) {
             //Will add a find file on the internet soon.
@@ -281,5 +302,15 @@ public class MonsterQuestMain {
         } catch(FontFormatException e) {
             systemLog.log("Font format exception!");
         }
+    }
+    
+    private void drawComponents() {
+        //The panels will be all here
+        MonsterQuestPanel.add(new Others(), "othersOption");
+        MonsterQuestPanel.add(new Credits(), "creditsScene");
+        MonsterQuestPanel.add(new About(), "aboutScene");
+        MonsterQuestPanel.add(new Settings(), "settings");
+        MonsterQuestPanel.add(new VillagerSpeech(), "villagerSpeech");
+        MonsterQuestPanel.add(new LoadingScreen(), "loadScreen");
     }
 }

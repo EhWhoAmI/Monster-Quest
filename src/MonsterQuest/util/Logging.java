@@ -23,7 +23,6 @@
  */
 package MonsterQuest.util;
 
-import MonsterQuest.MonsterQuestMain;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
@@ -67,11 +66,18 @@ public class Logging {
      */
     public final static int ALERT = 3;
     
+    private boolean writeToFile;
+    private boolean printToScreen;
+    
     /** This inits the whole logging thing
      * @param logString this is the file to load
+     * @param writeToFile
+     * @param printToScreen
      */
-    public Logging (String logString) {
+    public Logging (String logString, boolean writeToFile, boolean printToScreen) {
         this.logString = logString;
+        this.writeToFile = writeToFile;
+        this.printToScreen = printToScreen;
         File logFile = new File (System.getProperty("user.dir") + this.logString);
 
         //Check if file is bigger than 100 kb, delete the file and start over.
@@ -101,7 +107,7 @@ public class Logging {
                 String content = ("--- NEW LOG STARTED [" + timeStamp + "]---");
                 try {
                     //To write or not to write
-                    if (MonsterQuestMain.PRINT_TO_LOGFILE) {
+                    if (writeToFile) {
                         logFileOutput = new FileWriter(System.getProperty("user.dir") + this.logString, true);
                         logFileWriter = new BufferedWriter(logFileOutput);
                         logFileWriter.write(content);
@@ -146,11 +152,11 @@ public class Logging {
                 String content = ("[" + timeStamp + "]{" + getLogfileName() + "}(" + INFO + "): " + text);
 
                 //Check if to write to console
-                if (MonsterQuestMain.DEBUG)
+                if (printToScreen)
                     System.out.println(content);
                 try {
                     //Check if write to logfile
-                    if (MonsterQuestMain.PRINT_TO_LOGFILE) {
+                    if (writeToFile) {
                         logFileOutput = new FileWriter(System.getProperty("user.dir") + this.logString, true);
                         logFileWriter = new BufferedWriter(logFileOutput);
                         //Write to file
@@ -201,12 +207,12 @@ public class Logging {
                 //Check the stream to write to
                 PrintStream stream = (type == INFO)? System.out : System.err;
 
-                if (MonsterQuestMain.DEBUG)
+                if (printToScreen)
                     stream.println(content);
                 
                 try {
                     //Check if write to logfile
-                    if (MonsterQuestMain.PRINT_TO_LOGFILE) {
+                    if (writeToFile) {
                         logFileOutput = new FileWriter(System.getProperty("user.dir") + this.logString, true);
                         logFileWriter = new BufferedWriter(logFileOutput);
                         //Write to file
@@ -253,13 +259,13 @@ public class Logging {
                 //Check the stream to write to
                 PrintStream stream = (type == INFO)? System.out : System.err;
 
-                if (MonsterQuestMain.DEBUG) {
+                if (printToScreen) {
                     stream.println(content);
                     ex.printStackTrace();
                 }
                 try {
                     //Check if write to logfile
-                    if (MonsterQuestMain.PRINT_TO_LOGFILE) {
+                    if (writeToFile) {
                         logFileOutput = new FileWriter(System.getProperty("user.dir") + this.logString, true);
                         logFileWriter = new BufferedWriter(logFileOutput);
                         //Write to file
