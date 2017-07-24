@@ -23,7 +23,7 @@
  */
 package MonsterQuest.game;
 
-import MonsterQuest.game.maps.MapProcesser;
+import MonsterQuest.game.painter.Paintable;
 import MonsterQuest.game.player.PlayerShow;
 import java.awt.Graphics;
 import javax.swing.JPanel;
@@ -33,24 +33,18 @@ import javax.swing.JPanel;
  * @author Zyun
  */
 public class MainProcessor extends JPanel{
-
-    /**
-     * The processor for the maps
-     */
-    public static MapProcesser mapProcesser = new MapProcesser();
-
-    /**
+   /**
      * To show the player
      */
-    public static PlayerShow playerShow;
+    public static Paintable playerShow = new PlayerShow();
 
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
         
         //Load maps
-        mapProcesser.printMaps(g);
-        playerShow.printCharacter(g);
+        //mapProcesser.printMaps(g);
+        playerShow.paint(g);
     }
     
     

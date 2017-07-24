@@ -23,10 +23,13 @@
  */
 package MonsterQuest.tools;
 
+import java.io.File;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.filechooser.FileNameExtensionFilter;
+import org.apache.commons.io.FilenameUtils;
 
 /**
  * The map generator class, Generates a map file for the game.
@@ -61,8 +64,23 @@ public class MapGenerator extends JFrame{
                 System.out.println("Open File");
                 JFileChooser chooser = new JFileChooser();
                 chooser.setDialogTitle("Open File");
-                chooser.setVisible(true);
-                add(chooser);
+                FileNameExtensionFilter filter = new FileNameExtensionFilter(
+                        ".mqm files", "mqm");
+                chooser.setFileFilter(filter);
+                int returnVal = chooser.showOpenDialog(this);
+                if(returnVal == JFileChooser.APPROVE_OPTION) {
+                    //Check if it really is the file type:
+                    File selection = chooser.getSelectedFile();
+                    String extension = FilenameUtils.getExtension(selection.getPath());
+                    if (!extension.equals(".mqm")) {
+                        //If it is not .mqm extension,
+                        JOptionPane.showMessageDialog(this, "Please select a .mqm file.", "File selection error", JOptionPane.ERROR_MESSAGE);
+                        System.exit(0);
+                    }
+                    else {
+                        //Read file and dsplay.
+                    }
+                }
                 break;
             case 1:
                 

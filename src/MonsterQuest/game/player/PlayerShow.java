@@ -25,25 +25,48 @@ package MonsterQuest.game.player;
 
 import MonsterQuest.MonsterQuestMain;
 import static MonsterQuest.MonsterQuestMain.systemLog;
+import MonsterQuest.game.painter.Paintable;
 import MonsterQuest.util.Logging;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import javax.imageio.ImageIO;
+import javax.swing.JOptionPane;
 
 /**
  *
  * @author Zyun
  */
-public class PlayerShow {
+public class PlayerShow implements Paintable{
+    ArrayList<BufferedImage> spriteImages;
+    public PlayerShow() {
+        //Load all the images. For now, just load one.
+        try {
+            File image = new File(System.getProperty("user.dir") + "/resources/images/sprites/PersonWalking1.png");
+            BufferedImage spriteImage = ImageIO.read(image);
+            spriteImages.add(spriteImage);
+        } catch (IOException ioe) {
+            systemLog.log("Unable to open file! " + ioe.getMessage(), Logging.ERROR, ioe);
+            JOptionPane.showMessageDialog(MonsterQuestMain.MonsterQuestWindow, 
+                    "We have not found the file we needed to find.\n You might "
+                            + "have accidently deleted some of the files. Please uninstall.\n"
+                            + "Problem: " + ioe.getMessage(), "Unable to open file.", JOptionPane.ERROR_MESSAGE);
+            System.exit(1);
+        }
+    }
 
-    /**
-     *
-     * @param g
-     */
-    public static void printCharacter (Graphics g) {
+    @Override
+    public void paint(Graphics g) {
+        if (spriteImages.equals(null)) {
+            throw new NullPointerException("Arraylist spriteImages has not been"
+                    + "initalised. This function was probally called before the"
+                    + "constructor, or somthing went wrong around there.");
+        }
+        //Open the image
+        //For now, just do the first one.
         Graphics2D g2d = (Graphics2D) g;
         //Open image for the player
         try {
@@ -53,6 +76,5 @@ public class PlayerShow {
         } catch (IOException ioe) {
             systemLog.log("Unable to open file! " + ioe.getMessage(), Logging.ERROR, ioe);
         }
-        
     }
 }
