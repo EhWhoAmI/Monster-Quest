@@ -1,23 +1,13 @@
 #code {
 	font-family: courier; 
+	color: rgb(150, 150, 150);
 }
 
-table{
+table, th, tr {
+	width: 100;
 	border: 1px solid black;
 }
 
-th, tr {
+tr, td {
 	padding: 5px;
-}
-
-body {
-    font-family: arial;
-}
-
-#subtitle {
-    font-weight: bold;
-}
-
-a {
-    color: blue;
 }
