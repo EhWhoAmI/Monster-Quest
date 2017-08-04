@@ -21,35 +21,15 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package MonsterQuest.game;
+package MonsterQuest.game.painter;
 
-import MonsterQuest.game.maps.MapPainter;
-import MonsterQuest.game.painter.Paintable;
-import MonsterQuest.game.player.PlayerShow;
 import java.awt.Graphics;
-import javax.swing.JPanel;
 
 /**
- * This is just a wrapper for the whole game's graphics.
+ *
  * @author Zyun
  */
-public class MainProcessor extends JPanel{
-   /**
-     * To show the player
-     */
-    public static Paintable playerShow = new PlayerShow();
-    public static Paintable mapPainter = new MapPainter();
-    
-    @Override
-    protected void paintComponent(Graphics g) {
-        super.paintComponent(g);
-        
-        //Load map
-        mapPainter.paint(g);
-        playerShow.paint(g);
-        
-        
-    }
-    
+public interface Paintable {
+    void paint(Graphics g);
     
 }

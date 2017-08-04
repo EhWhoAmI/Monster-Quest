@@ -47,6 +47,8 @@ public class PlayerShow implements Paintable{
         try {
             File image = new File(System.getProperty("user.dir") + "/resources/images/sprites/PersonWalking1.png");
             BufferedImage spriteImage = ImageIO.read(image);
+            
+            spriteImages = new ArrayList<>();
             spriteImages.add(spriteImage);
         } catch (IOException ioe) {
             systemLog.log("Unable to open file! " + ioe.getMessage(), Logging.ERROR, ioe);
