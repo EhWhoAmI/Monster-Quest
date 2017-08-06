@@ -70,13 +70,14 @@ public class MapPainter implements Paintable{
     }
     
     public static void reloadMap (Map map)  {
-        systemLog.log("Loading map: " + map.getFilename());
+        //Uncomment for debug
+        //systemLog.log("Loading map: " + map.getFilename());
         MapPainter.map = map;
         List<TileSet> tileSets = map.getTileSets();
-        systemLog.log("Tilesets: " + tileSets.size());
-        for (TileSet ts : tileSets) {
-            systemLog.log("Tileset is: " + ts.getBaseDir());
-        }
+        //systemLog.log("Tilesets: " + tileSets.size());
+        //for (TileSet ts : tileSets) {
+        //    systemLog.log("Tileset is: " + ts.getBaseDir());
+        //}
         renderer = createRenderer(map);
     }
     

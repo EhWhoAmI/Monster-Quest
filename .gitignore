@@ -80,3 +80,7 @@ raw/
 .project
 .classpath
 /docs/website/nbproject/private/
+
+# bluejay ide
+package.bluej
+.ctxt
