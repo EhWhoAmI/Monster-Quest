@@ -174,6 +174,12 @@ public class MonsterQuestMain implements Serializable{
             
         } catch (UnsupportedOperationException uoe) {
             
+        } catch (Throwable t) {
+            JOptionPane.showMessageDialog(null, "Sorry, we developers have \n"
+                    + "messed up. We apologise for this fact. If you are angry\n"
+                    + "about this fact, please report this to the developers. Error: "
+                    + t.getClass().getName(), "The developers have messed up.", 0);
+                    t.printStackTrace();
         }
     }
     
