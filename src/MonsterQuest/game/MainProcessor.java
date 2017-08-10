@@ -26,6 +26,7 @@ package MonsterQuest.game;
 import MonsterQuest.game.maps.MapPainter;
 import MonsterQuest.game.painter.Paintable;
 import MonsterQuest.game.player.PlayerShow;
+import MonsterQuest.game.UI.PlayerDetails;
 import java.awt.Graphics;
 import javax.swing.JPanel;
 
@@ -39,7 +40,7 @@ public class MainProcessor extends JPanel{
      */
     public static Paintable playerShow = new PlayerShow();
     public static Paintable mapPainter = new MapPainter();
-    
+    public static Paintable playerDetails = new PlayerDetails();
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
@@ -47,7 +48,7 @@ public class MainProcessor extends JPanel{
         //Load map
         mapPainter.paint(g);
         playerShow.paint(g);
-        
+        playerDetails.paint(g);
         
     }
     
