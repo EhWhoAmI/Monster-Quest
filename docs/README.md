@@ -3,7 +3,7 @@ Monster Quest
 ![](https://img.shields.io/badge/developement-in%20progress-green.svg)
 ![](https://img.shields.io/badge/version-INDEV-yellow.svg) 
 ![](https://img.shields.io/badge/dependencies-up%20to%20date-yellow.svg) 
-### A fun RPG game :octocat:
+### A fun RPG game
 
 This is RPG game made by me. Please try it out when it is ready.
 
@@ -13,7 +13,7 @@ The first version, or the pre-alpha, or indev, or whatever you want to call it, 
 
 You are supposed to fight these monsters that are fighting innocent villagers. We are planning to have quite a big map and stuff. Well, you get to explore caves, mountains and stuff.
 
-### How to help :wrench:
+### How to help
 Please help, it takes quite a bunch of time to make it... If you want, you can 
 just test it, and I'll be happy. Please see in the TODO section in projects if 
 you want to code the thing.
@@ -47,12 +47,10 @@ Not much has been done about character classes. The concepts have come out thoug
  ![Bow Image](https://raw.githubusercontent.com/EhWhoAmI/Monster-Quest/master/resources/images/tutorial/BowImage.png)
 
 ### Dependencies
-Technology               | What it's used for
--------------------------|--------------------------------
-**[XOM: XML object model](http://xom.nu)**| XML parsing
-**[Tiled map engine](http://mapeditor.org)**| Formatting the maps (We use their XML format, and their java library, though we might have changed it a bit to suit our game.)
-**[Commons IO](https://commons.apache.org/proper/commons-io/)**| File actions
+ - **[XOM: XML object model](http://xom.nu)** for XML parsing
+ - **[Tiled map engine](http://mapeditor.org)** for Formatting the maps (We use their XML format, and their java library, though we might have changed it a bit to suit our game.)
+ - **[Commons IO](https://commons.apache.org/proper/commons-io/)** for File actions
 
 ### Notes
-  - This game is still in development :wink:
+  - This game is still in development
   - We are coming up with the images for the classes!
