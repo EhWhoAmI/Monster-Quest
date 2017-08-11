@@ -54,7 +54,7 @@ public class Logging {
     /**
      * Warning log level
      */
-    public final static int WARINING = 1;
+    public final static int WARNING = 1;
 
     /**
      * Error log level

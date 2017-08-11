@@ -27,6 +27,6 @@ public class PlayerDetails implements Paintable{
     }
     
     public static boolean mouseInSelection (int x, int y) {
-        return (userAvatar.intersects(x, y, 1, 1) | hpBar.intersects(x, y, 1, 1) | energyBar(x, y, 1, 1));
+        return (userAvatar.intersects(x, y, 1, 1) | hpBar.intersects(x, y, 1, 1) | energyBar.intersects(x, y, 1, 1));
     }
 }
