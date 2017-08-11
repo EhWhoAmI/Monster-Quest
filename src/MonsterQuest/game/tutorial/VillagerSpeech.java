@@ -132,14 +132,23 @@ public class VillagerSpeech extends JPanel implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        JLabel label;
+        //This is for the character limit.
+        JLabel label = new JLabel("15 characters only!");
         //Debug stuff
+        //If you are bored with dialog, this part skips everything,
         if (MonsterQuestMain.DEBUG == true & words == 0)
             words = 9;
+        if (MonsterQuestMain.DEBUG == true & words == 11)
+            words = 16;
         if (e.getSource() == next) {
             words++;
             this.repaint();
         }
+        
+        /*
+         * The order of this is very specific, because if any of this is messed up, the thing won't work.
+         * The button that is in charge of the action must come first, after the number that is in charge of the 
+         */
         //Define behavour for player read name
         if (e.getSource() == nameBox) {
             if (nameBox.getText().length() >= 16) {
@@ -153,6 +162,8 @@ public class VillagerSpeech extends JPanel implements ActionListener {
                 remove(nameBox);
                 next.setEnabled(true);
                 words++;
+                label.setVisible(false);
+                this.remove(label);
                 this.repaint();
             }
         }
@@ -168,6 +179,10 @@ public class VillagerSpeech extends JPanel implements ActionListener {
             next.setEnabled(false);
 
             label = new JLabel("15 characters only!");
+            label.setFont(new Font("Minecraft", Font.PLAIN, 30));
+            label.setBounds(350, 200, 300, 100);
+            this.add(label);
+            
 
         }
         //Program for player selecting gender.

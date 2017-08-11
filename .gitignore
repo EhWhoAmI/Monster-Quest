@@ -83,4 +83,4 @@ raw/
 
 # bluejay ide
 package.bluej
-.ctxt
+*.ctxt

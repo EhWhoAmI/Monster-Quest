@@ -24,6 +24,7 @@
 package MonsterQuest.gui.start;
 
 import MonsterQuest.MonsterQuestMain;
+import MonsterQuest.util.GraphicsUnit;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.GridLayout;
@@ -47,9 +48,10 @@ import nu.xom.Text;
 import static MonsterQuest.MonsterQuestMain.systemLog;
 
 /**
- *
+ * This deals with all the settings, it writes and parses all the settings,
  * @author Zyun
  */
+@GraphicsUnit
 public class Settings extends JPanel implements ActionListener{
     JRadioButton sound, music;
     JSlider volume;

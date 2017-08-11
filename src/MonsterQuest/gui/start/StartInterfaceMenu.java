@@ -24,6 +24,7 @@
 package MonsterQuest.gui.start;
 
 import MonsterQuest.MonsterQuestMain;
+import MonsterQuest.util.GraphicsUnit;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
@@ -40,9 +41,10 @@ import javax.swing.JPanel;
 import static MonsterQuest.MonsterQuestMain.systemLog;
 
 /**
- *
+ * This is the first menu, and all those things.
  * @author Zyun
  */
+@GraphicsUnit
 public class StartInterfaceMenu extends JPanel implements ActionListener{
     JButton options, startGame, others;
     @Override

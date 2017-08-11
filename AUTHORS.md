@@ -1,7 +1,7 @@
 Authors
 =======
 
-Add your name and email, but our email is optional.
+Add your name. username and email, but our email is optional.
 
 ----------------------------------------------------
-Zyun zyunlam@gmail.com
+Zyun @EhWhoAmI zyunlam@gmail.com

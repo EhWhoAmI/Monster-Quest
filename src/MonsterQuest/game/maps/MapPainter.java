@@ -24,6 +24,7 @@
 package MonsterQuest.game.maps;
 
 import MonsterQuest.MonsterQuestMain;
+import MonsterQuest.util.GraphicsUnit;
 import static MonsterQuest.MonsterQuestMain.systemLog;
 import MonsterQuest.game.painter.Paintable;
 import MonsterQuest.util.Logging;
@@ -46,6 +47,7 @@ import tiled.view.OrthogonalRenderer;
  *
  * @author Lam Zyun
  */
+@GraphicsUnit
 public class MapPainter implements Paintable{
     private static Map map;
     private static MapRenderer renderer;
@@ -55,7 +57,7 @@ public class MapPainter implements Paintable{
         getCurrentMap();
         final Graphics2D g2d = (Graphics2D) g.create();
         final Rectangle clip = g2d.getClipBounds();
-
+        systemLog.log(clip.toString());
         // Draw a gray background
         g2d.setPaint(new Color(100, 100, 100));
         g2d.fill(clip);
@@ -95,14 +97,13 @@ public class MapPainter implements Paintable{
         }
     }
     
+    //This was taken from TMX viewer in <https://raw.githubusercontent.com/bjorn/tiled/master/util/java/tmxviewer-java/src/main/java/TMXViewer.java>
     private static MapRenderer createRenderer(Map map) {
         switch (map.getOrientation()) {
             case ORTHOGONAL:
                 return new OrthogonalRenderer(map);
-
             case ISOMETRIC:
                 return new IsometricRenderer(map);
-
             default:
                 return null;
         }

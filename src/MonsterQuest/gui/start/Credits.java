@@ -24,6 +24,7 @@
 package MonsterQuest.gui.start;
 
 import MonsterQuest.MonsterQuestMain;
+import MonsterQuest.util.GraphicsUnit;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
@@ -45,6 +46,7 @@ import java.util.logging.Logger;
  * This shows the credits screen
  * @author Zyun
  */
+@GraphicsUnit
 public class Credits extends JPanel implements ActionListener{
     private JButton exitButton;
     private ArrayList<String> creditsList = new ArrayList<>();

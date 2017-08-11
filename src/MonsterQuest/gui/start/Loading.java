@@ -40,12 +40,14 @@ import nu.xom.Builder;
 import nu.xom.Document;
 import nu.xom.Element;
 import nu.xom.ParsingException;
+import MonsterQuest.util.GraphicsUnit;
 import static MonsterQuest.MonsterQuestMain.systemLog;
 
 /**
  * This is the loading at the start of the application boot
  * @author Zyun
  */
+@GraphicsUnit
 public class Loading extends JPanel{
     private String quote;
     @Override

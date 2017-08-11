@@ -24,6 +24,7 @@
 package MonsterQuest.gui.start;
 
 import MonsterQuest.MonsterQuestMain;
+import MonsterQuest.util.GraphicsUnit;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.FontMetrics;
@@ -40,6 +41,7 @@ import static MonsterQuest.MonsterQuestMain.systemLog;
  * This is the about scene, it will show the version, and other things.
  * @author Zyun
  */
+@GraphicsUnit
 public class About extends JPanel implements ActionListener{
 
     @Override
