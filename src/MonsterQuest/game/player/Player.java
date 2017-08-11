@@ -77,12 +77,17 @@ public class Player {
     public int Gold;
     
     /**
+     * 
+     */
+    public int HP;
+    public int HPOriginal;
+    /**
      * The ID of the map the player is in
      */
     public int mapHash;
 
     /**
-     * The position the player is
+     * The position the player is 0. 0 by default
      */
     public Point playerPos = new Point(0, 0);
     public PlayerType playerType;
@@ -115,6 +120,8 @@ public class Player {
         this.SpeedLv = 1;
         this.Speed = 10;
         this.Gold = 10;
+        this.HP = 100;
+        this.HPOriginal = 100;
     }
 
     /**

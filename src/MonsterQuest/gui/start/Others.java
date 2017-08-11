@@ -24,6 +24,7 @@
 package MonsterQuest.gui.start;
 
 import MonsterQuest.MonsterQuestMain;
+import MonsterQuest.util.GraphicsUnit;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.FontMetrics;
@@ -44,6 +45,7 @@ import static MonsterQuest.MonsterQuestMain.systemLog;
  * This shows the 'Others' scene, where you can select Credits and About part 
  * @author Zyun
  */
+@GraphicsUnit
 public class Others extends JPanel implements ActionListener{
     private JButton about, credits, exit;
     protected void paintComponent(Graphics g) {

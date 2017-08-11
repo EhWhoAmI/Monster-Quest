@@ -34,11 +34,13 @@ import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 import MonsterQuest.MonsterQuestMain;
 import static MonsterQuest.MonsterQuestMain.systemLog;
+import MonsterQuest.util.GraphicsUnit;
 
 /** This class shows the start splash screen on the application's start.
  *
  * @author Zyun
  */
+@GraphicsUnit
 public class StartIntroScreen extends JPanel{
 
     @Override
