@@ -24,6 +24,7 @@
 package MonsterQuest.gui.start;
 
 import MonsterQuest.MonsterQuestMain;
+import MonsterQuest.util.Logging;
 import java.awt.Color;
 import java.awt.FontMetrics;
 import java.awt.Graphics;
@@ -33,8 +34,11 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Scanner;
 import javax.imageio.ImageIO;
 import javax.swing.JPanel;
+import javax.swing.JOptionPane;
 import nu.xom.Attribute;
 import nu.xom.Builder;
 import nu.xom.Document;
@@ -174,21 +178,27 @@ public class Loading extends JPanel{
     }
     
     private String createNewQuote () {
-        //Array for quotes...
-        String[] quoteList = {"Tip: Tips go here :P", 
-                "This game is the best game in the world. Tell your mom that.",
-                "Kill monsters to get rewards!(I know you know this. Just killing time)", 
-                "Filling the world with monsters... Bwuwahahaha...",
-                "Please buy a beginner's handbook from the shop. It's free.",
-                "Welcome back to Monster Quest!",
-                "Monster Quest is in constant development! Yay!!",
-                "Always remember that you are absolutely unique. Just like everyone else.",
-                "You can buy many things from the shop, if you have the money."
-                };
-        int randomNo = ((int)(Math.random() * 1000) % quoteList.length);
-        systemLog.log("Random quote number: " + randomNo);
-        String randomQuote = quoteList[randomNo];
-        systemLog.log("Quote: " + randomQuote);
+        String randomQuote = "";
+        ArrayList<String> quoteList = new ArrayList<>();
+        //Read from quote file.
+        try {
+            File source = new File (System.getProperty("user.dir") + "/data/quotelist.txt");
+            Scanner scan = new Scanner(source);
+            while (scan.hasNext()) {
+                quoteList.add(scan.nextLine());
+            }
+            int randomNo = ((int)(Math.random() * 1000) % quoteList.size());
+            systemLog.log("Random quote number: " + randomNo);
+            randomQuote = quoteList.get(randomNo);
+            systemLog.log("Quote: " + randomQuote);
+        } catch (IOException ioe) {
+            //Unable to find file. Inform the user on it, but it is not fatal.
+            JOptionPane.showMessageDialog(MonsterQuestMain.MonsterQuestWindow, "Unable to find file /data"
+                    + "/quotelist.txt. It is not fatal, but we recommend you finding a copy of this file, somewhere"
+                    , "Unable to find file", JOptionPane.WARNING_MESSAGE);
+            systemLog.log("Unable to find quotelist file!", Logging.WARNING, ioe);
+                    randomQuote = "Welcome to Monster Quest!";
+        }
         return randomQuote;
     }
 }
