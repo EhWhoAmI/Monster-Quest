@@ -27,54 +27,67 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import static MonsterQuest.MonsterQuestMain.playerStats;
 import static MonsterQuest.MonsterQuestMain.systemLog;
+import MonsterQuest.MonsterQuestMain;
 /**
- *
+ * The keyboard events for the game.
  * @author Zyun
  */
 public class GameKeyListener implements KeyListener{
-
+    //Note: Put all your code for the game(as in the map) in the if statements.
     @Override
     public void keyPressed(KeyEvent e) {
-        //If keys are part of the wasd things
-        if (e.getKeyChar() == 'W' | e.getKeyChar() == 'w' | e.getKeyChar() == 'A' | e.getKeyChar() == 'a' | e.getKeyChar() == 'S' | e.getKeyChar() == 's' | e.getKeyChar() == 'D' | e.getKeyChar() == 'd') {
-            //Do not log in animations!
-            //systemLog.log("Person is moving");
-            switch (e.getKeyChar()) {
-                case 'W':
-                case 'w':
-                    playerStats.playerPos.y -= 68;
-                    //If position is out of bounds, change map.
-                    //Detect map
-                    //Change map to that map
-                    MonsterQuest.MonsterQuestMain.MonsterQuestWindow.repaint();
-                    break;
-                case 'A':
-                case 'a':
-                    playerStats.playerPos.x -= 68;
-                    MonsterQuest.MonsterQuestMain.MonsterQuestWindow.repaint();
-                    break;
-                case 'S':
-                case 's':
-                    playerStats.playerPos.y += 68;
-                    MonsterQuest.MonsterQuestMain.MonsterQuestWindow.repaint();
-                    break;
-                case 'D':
-                case 'd':
-                    playerStats.playerPos.x += 68;
-                    MonsterQuest.MonsterQuestMain.MonsterQuestWindow.repaint();
-                    break;
+        if (MonsterQuest.MonsterQuestMain.gameRunning) {
+            //If keys are part of the wasd things
+            if (e.getKeyChar() == 'W' | e.getKeyChar() == 'w' | e.getKeyChar() == 'A' | e.getKeyChar() == 'a' | e.getKeyChar() == 'S' | e.getKeyChar() == 's' | e.getKeyChar() == 'D' | e.getKeyChar() == 'd') {
+                //Do not log in animations!
+                //systemLog.log("Person is moving");
+                switch (e.getKeyChar()) {
+                    case 'W':
+                    case 'w':
+                        playerStats.playerPos.y -= 68;
+                        //If position is out of bounds, change map.
+                        //Detect map
+                        //Change map to that map
+                        MonsterQuest.MonsterQuestMain.MonsterQuestWindow.repaint();
+                        break;
+                    
+                    case 'A':
+                    case 'a':
+                        playerStats.playerPos.x -= 68;
+                        MonsterQuest.MonsterQuestMain.MonsterQuestWindow.repaint();
+                        break;
+                        
+                    case 'S':
+                    case 's':
+                        playerStats.playerPos.y += 68;
+                        MonsterQuest.MonsterQuestMain.MonsterQuestWindow.repaint();
+                        break;
+                        
+                    case 'D':
+                    case 'd':
+                        playerStats.playerPos.x += 68;
+                        MonsterQuest.MonsterQuestMain.MonsterQuestWindow.repaint();
+                        break;
+                }
+            } else if (e.getKeyChar() == 'z' | e.getKeyChar() == 'Z') {
+                systemLog.log ("Showing player details");
+                MonsterQuestMain.gameRunning = false;
+                MonsterQuestMain.cardLayout.show(MonsterQuestMain.MonsterQuestPanel, "playerStats");
             }
         }
-    }
-
-    @Override
-    public void keyReleased(KeyEvent e) {
         
     }
 
     @Override
+    public void keyReleased(KeyEvent e) {
+        if (MonsterQuest.MonsterQuestMain.gameRunning) {
+        }
+    }
+
+    @Override
     public void keyTyped(KeyEvent e) {
-            
+        if (MonsterQuest.MonsterQuestMain.gameRunning) {
+        }   
     }
     
 }

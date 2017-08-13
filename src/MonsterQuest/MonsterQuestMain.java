@@ -1,5 +1,3 @@
-package MonsterQuest;
-
 /*
  * The MIT License
  *
@@ -24,7 +22,7 @@ package MonsterQuest;
  * THE SOFTWARE.
  */
 
- 
+package MonsterQuest;
 
 import MonsterQuest.game.player.Player;
 import MonsterQuest.game.tutorial.CharacterChoose;
@@ -135,6 +133,10 @@ public class MonsterQuestMain implements Serializable{
      * solution in the future.
      */
     public static CharacterChoose choose;
+    /**
+     * To test wether the game is running or not, and tell wether to activate the listeners.
+     */
+    public static boolean gameRunning = false;
     /**
      * Serial version uid.
      */

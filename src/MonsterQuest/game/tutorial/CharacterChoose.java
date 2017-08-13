@@ -25,8 +25,11 @@ package MonsterQuest.game.tutorial;
 
 import MonsterQuest.MonsterQuestMain;
 import MonsterQuest.game.GameKeyListener;
+import MonsterQuest.game.GameMouseListener;
 import MonsterQuest.game.MainProcessor;
 import MonsterQuest.game.player.Player;
+import MonsterQuest.game.player.PlayerType;
+import MonsterQuest.game.UI.PlayerStats;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.FontMetrics;
@@ -256,7 +259,9 @@ public class CharacterChoose extends JPanel implements ActionListener {
         else if (source.equals(select)) {
             //Start game...
             systemLog.log("Start game!!!");
-            
+            //Set the character type
+            MonsterQuestMain.playerStats.playerType = parsePlayerType(characterShowing);
+            systemLog.log("Player Type is " + MonsterQuestMain.playerStats.playerType);
             //Show loading screen while the map loads.
             //Doesn't work, it only shows after the things load.
             MonsterQuestMain.cardLayout.show(MonsterQuestMain.MonsterQuestPanel, "loadScreen");
@@ -264,20 +269,38 @@ public class CharacterChoose extends JPanel implements ActionListener {
 
             Runnable thread = () -> {
                 MainProcessor mainProcesser = new MainProcessor();
-                MonsterQuestMain.MonsterQuestPanel.add(mainProcesser , "game");
-                systemLog.log("Done loading");
+                MonsterQuestMain.MonsterQuestPanel.add(mainProcesser, "game");
+                MonsterQuestMain.MonsterQuestPanel.add(new PlayerStats(), "playerStats");
             };
             new Thread(thread).run();
             //Add action listener
             MonsterQuestMain.MonsterQuestWindow.addKeyListener(new GameKeyListener());
+            MonsterQuestMain.MonsterQuestWindow.addMouseListener(new GameMouseListener());
             try {
                     Thread.sleep(10);
             } catch (InterruptedException ie) {
             }
             
-            //After done loading, show the map.
+            //After done loading, show the game.
+            MonsterQuestMain.gameRunning = true;
             MonsterQuestMain.cardLayout.show(MonsterQuestMain.MonsterQuestPanel, "game");
             MonsterQuestMain.MonsterQuestPanel.repaint();
         }
+    }
+    
+    private PlayerType parsePlayerType (int val) {
+        switch (val) {
+            case ARCHER:
+                return PlayerType.archer;
+            case SWORDS:
+                return PlayerType.swordsman;
+            case WARRIOR:
+                return PlayerType.warrior;
+            case MAGIC:
+                return PlayerType.wizard;
+            default:
+                return null;
+        }
+        
     }
 }
