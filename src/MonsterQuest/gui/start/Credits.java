@@ -82,18 +82,6 @@ public class Credits extends JPanel implements ActionListener{
     public Credits() {
         super();
         setLayout(null);
-        //Read from credits file
-        File creditsFile = new File (System.getProperty("user.dir") + "/data/CREDITS");
-        try {
-            Scanner scan = new Scanner(creditsFile);
-            //for (String read: ) {
-                //Object key = .getKey();
-                //Object value = .getValue();
-                
-            //}
-        } catch (FileNotFoundException ex) {
-            Logger.getLogger(Credits.class.getName()).log(Level.SEVERE, null, ex);
-        }
         //The exit button for exiting this scene
         exitButton = new JButton("X");
         exitButton.setBackground(Color.red);
