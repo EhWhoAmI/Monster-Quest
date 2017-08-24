@@ -73,7 +73,7 @@ public class MapPainter implements Paintable{
     
     public static void reloadMap (Map map)  {
         //Uncomment for debug
-        //systemLog.log("Loading map: " + map.getFilename());
+        systemLog.log("Loading map: " + map.getFilename());
         MapPainter.map = map;
         List<TileSet> tileSets = map.getTileSets();
         //systemLog.log("Tilesets: " + tileSets.size());
