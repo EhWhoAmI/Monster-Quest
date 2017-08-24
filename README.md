@@ -58,7 +58,10 @@ Technology               | What it's used for
   - This game is still in development :wink:
   - We are coming up with the images for the classes!
   - For you adventurous people who want to know how all this started, here are the commit hashes.
-    - First commit: af857a9825d0de752149213d718abd5ad959dd06 (No code)
-    - First commit with code: 671dd11b046872b9464a81e8af26d38c73e93e10 (Not the current code. The one that is around now has been totally rewritten)
-    - Current rewrite commit: 157285356af811420041f4c10d6f941a7bddac0d (This is the current code tree, though the original files from the old code 
+    - First commit: 
+        - af857a9825d0de752149213d718abd5ad959dd06 (No code)
+    - First commit with code: 
+        - 671dd11b046872b9464a81e8af26d38c73e93e10 (Not the current code. The one that is around now has been totally rewritten)
+    - Current rewrite commit: 
+        - 157285356af811420041f4c10d6f941a7bddac0d (This is the current code tree, though the original files from the old code 
 has not been deleted, and won't be until commit b5059ebcd682600b81508f6f66b701b99a109305)

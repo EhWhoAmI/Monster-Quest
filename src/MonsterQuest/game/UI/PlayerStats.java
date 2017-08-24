@@ -24,6 +24,8 @@
 package MonsterQuest.game.UI;
 
 import MonsterQuest.MonsterQuestMain;
+import static MonsterQuest.MonsterQuestMain.systemLog;
+import MonsterQuest.util.Logging;
 import MonsterQuest.game.player.PlayerType;
 import MonsterQuest.game.player.Player;
 import javax.swing.JPanel;
@@ -48,6 +50,7 @@ public class PlayerStats extends JPanel {
         super();
         
         this.setBackground(new Color(255, 153, 0));
+        this.setLayout(null);
         
         JLabel title = new JLabel("Your details");
         title.setFont(new Font("Minecraft", Font.PLAIN, 36));
@@ -56,7 +59,8 @@ public class PlayerStats extends JPanel {
         
         JButton exitButton = new JButton ("X");
         exitButton.setBackground(Color.RED);
-        exitButton.setBounds(10, 680, 60, 40);
+        exitButton.setFont(new Font("Minecraft", Font.PLAIN, 36));
+        exitButton.setBounds(1275, 20, 60, 40);
         exitButton.addActionListener(new ActionListener () {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -109,6 +113,8 @@ public class PlayerStats extends JPanel {
                     break;
             }
         } catch(IOException ioe) {
+            //Near impossible, because we hava already accessed these files before.
+            systemLog.log ("Unable to open player sprites.", Logging.ERROR, ioe);
         }
     }
 }
